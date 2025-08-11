@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/componenets/themeProvider";
+import { ModeToggle } from "@/componenets/themeToggle";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative max-w-screen max-h-screen`}
       >
         <ThemeProvider
           attribute="class"
@@ -34,7 +36,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="absolute right-5 top-5">
+            <ModeToggle />
+          </div>
+          <Toaster />
+          <div className="w-[60%] border-x mx-auto h-screen">{children}</div>
         </ThemeProvider>
       </body>
     </html>
