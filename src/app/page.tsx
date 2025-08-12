@@ -1,13 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 
 export default function Home() {
   return (
     <div>
-      <Button>Click me</Button>
       <Button
         variant="outline"
         onClick={() =>
