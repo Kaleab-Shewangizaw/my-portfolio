@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative max-w-screen max-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative max-w-screen max-h-screen not-dark:bg-[#887baf]`}
       >
         <ThemeProvider
           attribute="class"
@@ -40,7 +40,7 @@ export default function RootLayout({
             <ModeToggle />
           </div>
           <Toaster />
-          <div className="w-[60%] border-x mx-auto h-screen">{children}</div>
+          <div className="w-[90%] border-x  mx-auto h-screen">{children}</div>
         </ThemeProvider>
       </body>
     </html>
