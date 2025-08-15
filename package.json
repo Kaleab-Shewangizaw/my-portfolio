@@ -21,7 +21,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
-    "lucide-react": "^0.539.0",
+    "lucide-react": "file:../../offline-npm-packages/lucide-react-0.525.0.tgz",
     "motion": "^12.18.1",
     "next": "15.4.6",
     "next-themes": "^0.4.6",
