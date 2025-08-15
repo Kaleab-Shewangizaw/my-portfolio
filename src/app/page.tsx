@@ -11,7 +11,7 @@ export default function Home() {
       <div className="sticky top-3 z-100  w-fit left-full mr-5">
         <ModeToggle />
       </div>
-      <div className="-mt-8 w-[80%]  mx-auto relative">
+      <div className="-mt-8 w-[90%]  mx-auto relative">
         <Navbar />
         <HeroSection />
         <AboutMe />
