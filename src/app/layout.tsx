@@ -1,19 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/componenets/themeProvider";
-import { ModeToggle } from "@/componenets/themeToggle";
 import { Toaster } from "sonner";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,20 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative max-w-screen max-h-screen not-dark:bg-[#887baf]`}
-      >
+      <body className="antialiased not-dark:bg-[#887baf]">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="absolute right-5 top-5">
-            <ModeToggle />
-          </div>
           <Toaster />
-          <div className="w-[90%] border-x  mx-auto h-screen">{children}</div>
+
+          <div>{children}</div>
         </ThemeProvider>
       </body>
     </html>
