@@ -10,17 +10,22 @@ import EducationDesc from "./EducationDesc";
 import Hobbiesdesc from "./HobbiesDesc";
 import FunFactDesc from "./FunFactDesc";
 
+import { BadgeCheckIcon } from "lucide-react";
+
 export default function AboutMe() {
   const [content, setContent] = useState("AboutMe");
   return (
     <div
       id="aboutMe"
-      className="not-dark:bg-gray-100/90 dark:bg-[#41385d] py-5 px-7 rounded-md flex flex-col lg:flex-row md:gap-5 mb-500 gap-5"
+      className="not-dark:bg-gray-100/90 dark:bg-[#41385d] py-5 px-7 rounded-md flex flex-col lg:flex-row md:gap-5 mb-10  gap-5"
     >
       <div className="flex flex-col items-center lg:w-1/3">
         <Image src={Kal_X} alt="me" width={200} className="rounded-full " />
 
-        <h1 className="font-bold mt-3">Kaleab Shewangizaw [Kal_X]</h1>
+        <h1 className="font-bold mt-3 flex gap-2">
+          Kaleab Shewangizaw [Kal_X]{" "}
+          <BadgeCheckIcon className="text-blue-600  " />
+        </h1>
         <div className="flex h-5 items-center space-x-4 text-sm mt-3">
           <div className="min-w-fit">21 yo</div>
           <Separator orientation="vertical" />

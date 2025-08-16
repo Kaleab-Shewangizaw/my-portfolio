@@ -8,7 +8,6 @@ import {
   BiLogoInstagram,
   BiLogoLinkedin,
   BiLogoTelegram,
-  BiLogoTwitter,
 } from "react-icons/bi";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { CiAirportSign1 } from "react-icons/ci";
@@ -51,7 +50,12 @@ export default function HeroSection() {
           </div>
         </div>
         <div className="flex gap-10 mt-5">
-          <Button className="text-lg">See my Work</Button>
+          <Button
+            className="text-lg not-dark:bg-transparent not-dark:hover:bg-[#655a84] text-white hover:text-white"
+            variant="outline"
+          >
+            See my Work
+          </Button>
           <Button className="text-lg">Let&apos;s work together</Button>
         </div>
       </div>

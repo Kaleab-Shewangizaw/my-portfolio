@@ -3,6 +3,7 @@
 import AboutMe from "@/componenets/aboutMe";
 import HeroSection from "@/componenets/hero";
 import Navbar from "@/componenets/navbar";
+import SkillsSection from "@/componenets/Skills";
 import { ModeToggle } from "@/componenets/themeToggle";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <Navbar />
         <HeroSection />
         <AboutMe />
+        <SkillsSection />
       </div>
     </div>
   );

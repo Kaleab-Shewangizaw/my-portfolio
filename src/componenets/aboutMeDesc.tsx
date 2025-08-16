@@ -5,7 +5,7 @@ export default function AboutMeDesc() {
     <div className="flex flex-col gap-6 items-end">
       <p>
         Hi, I&apos;m Kaleab - but you can call me <b>Kal_X. </b> I&apos;m a
-        passionate <b>aspiring web designer</b> with strong background in
+        passionate <b>Developer</b> with strong background in
         <b> full-stack development</b>. My mission is simple: create web
         experiances that are visually striking, easy to use, and technically
         robust.
