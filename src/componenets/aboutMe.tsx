@@ -11,6 +11,7 @@ import Hobbiesdesc from "./HobbiesDesc";
 import FunFactDesc from "./FunFactDesc";
 
 import { BadgeCheckIcon } from "lucide-react";
+import { BiMale, BiMaleSign } from "react-icons/bi";
 
 export default function AboutMe() {
   const [content, setContent] = useState("AboutMe");
@@ -33,24 +34,24 @@ export default function AboutMe() {
         </h1>
 
         {/* Personal Info */}
-        <div className="flex flex-wrap justify-center items-center gap-2 mt-3 text-sm">
-          <div className="px-2 py-0.5 rounded bg-gray-700/50">21 yo</div>
-          <div className="px-2 py-0.5 rounded bg-gray-700/50">Male</div>
-          <div className="px-2 py-0.5 rounded bg-gray-700/50">🇪🇹 Ethiopian</div>
-          <div className="px-2 py-0.5 rounded bg-gray-700/50">
+        <div className="flex flex-wrap justify-center items-center gap-2 mt-3 mb-3 text-sm">
+          <div className="px-2 py-0.5 rounded bg-gray-500/50">21 yo</div>
+          <div className="px-2 py-0.5 rounded bg-gray-500/50 flex  gap-1">
+            M
+          </div>
+          <div className="px-2 py-0.5 rounded bg-gray-500/50">🇪🇹 Ethiopian</div>
+          <div className="px-2 py-0.5 rounded bg-gray-500/50">
             BSc Chemical Eng.
           </div>
-          <div className="px-2 py-0.5 rounded bg-gray-700/50">
-            MERN Stack Dev
+          <div className="px-2 py-0.5 rounded bg-gray-500/50">
+            Full Stack Dev
           </div>
-          <div className="px-2 py-0.5 rounded bg-gray-700/50">
+          <div className="px-2 py-0.5 rounded bg-gray-500/50">
             UI/UX Designer
           </div>
         </div>
-
-        {/* Separator */}
-        <Separator className="my-3 w-3/4" />
       </div>
+      <Separator className=" w-3/4 lg:hidden" />
 
       <div className="lg:w-2/3 h-full rounded-md px-1 md:px-3 py-3">
         <div className="flex flex-col  gap-3">
