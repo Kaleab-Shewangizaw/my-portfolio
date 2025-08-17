@@ -138,7 +138,7 @@ export default function SkillsSection() {
         {title}
       </motion.h2>
 
-      <div className="flex flex-wrap gap-5 items-center justify-center ">
+      <div className="flex flex-wrap gap-5 items-center">
         {items.map((item, index) => (
           <motion.div
             key={index}

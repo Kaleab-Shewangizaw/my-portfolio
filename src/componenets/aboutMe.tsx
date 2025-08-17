@@ -11,7 +11,6 @@ import Hobbiesdesc from "./HobbiesDesc";
 import FunFactDesc from "./FunFactDesc";
 
 import { BadgeCheckIcon } from "lucide-react";
-import { BiMale, BiMaleSign } from "react-icons/bi";
 
 export default function AboutMe() {
   const [content, setContent] = useState("AboutMe");
