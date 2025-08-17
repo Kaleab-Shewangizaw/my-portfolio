@@ -42,40 +42,58 @@ export default function SkillsSection() {
   }, [inView, controls]);
 
   const developmentSkills = [
-    { icon: <BiLogoHtml5 className="text-5xl" />, name: "HTML" },
-    { icon: <BiLogoCss3 className="text-5xl" />, name: "CSS" },
-    { icon: <BiLogoTailwindCss className="text-5xl" />, name: "TailwindCSS" },
-    { icon: <BiLogoJavascript className="text-5xl" />, name: "JavaScript" },
-    { icon: <BiLogoTypescript className="text-5xl" />, name: "TypeScript" },
-    { icon: <BiLogoReact className="text-5xl" />, name: "React" },
-    { icon: <SiNextdotjs className="text-5xl" />, name: "Next.js" },
-    { icon: <SiRedux className="text-5xl" />, name: "Redux" },
-    { icon: <BiLogoNodejs className="text-5xl" />, name: "Node.js" },
-    { icon: <SiExpress className="text-5xl" />, name: "Express.js" },
-    { icon: <SiMongodb className="text-5xl" />, name: "MongoDB" },
-    { icon: <SiPostgresql className="text-5xl" />, name: "PostgreSQL" },
-    { icon: <SiMysql className="text-5xl" />, name: "MySQL" },
-    { icon: <SiFirebase className="text-5xl" />, name: "Firebase" },
-    { icon: <SiGraphql className="text-5xl" />, name: "GraphQL" },
-    { icon: <SiPrisma className="text-5xl" />, name: "Prisma ORM" },
+    { icon: <BiLogoHtml5 className="text-2xl md:text-5xl" />, name: "HTML" },
+    { icon: <BiLogoCss3 className="text-2xl md:text-5xl" />, name: "CSS" },
+    {
+      icon: <BiLogoTailwindCss className="text-2xl md:text-5xl" />,
+      name: "TailwindCSS",
+    },
+    {
+      icon: <BiLogoJavascript className="text-2xl md:text-5xl" />,
+      name: "JavaScript",
+    },
+    {
+      icon: <BiLogoTypescript className="text-2xl md:text-5xl" />,
+      name: "TypeScript",
+    },
+    { icon: <BiLogoReact className="text-2xl md:text-5xl" />, name: "React" },
+    { icon: <SiNextdotjs className="text-2xl md:text-5xl" />, name: "Next.js" },
+    { icon: <SiRedux className="text-2xl md:text-5xl" />, name: "Redux" },
+    {
+      icon: <BiLogoNodejs className="text-2xl md:text-5xl" />,
+      name: "Node.js",
+    },
+    {
+      icon: <SiExpress className="text-2xl md:text-5xl" />,
+      name: "Express.js",
+    },
+    { icon: <SiMongodb className="text-2xl md:text-5xl" />, name: "MongoDB" },
+    {
+      icon: <SiPostgresql className="text-2xl md:text-5xl" />,
+      name: "PostgreSQL",
+    },
+    { icon: <SiMysql className="text-2xl md:text-5xl" />, name: "MySQL" },
+    { icon: <SiFirebase className="text-2xl md:text-5xl" />, name: "Firebase" },
+    { icon: <SiGraphql className="text-2xl md:text-5xl" />, name: "GraphQL" },
+    { icon: <SiPrisma className="text-2xl md:text-5xl" />, name: "Prisma ORM" },
   ];
 
   const developmentTools = [
-    { icon: <BiLogoGit className="text-5xl" />, name: "Git" },
-    { icon: <BiLogoGithub className="text-5xl" />, name: "GitHub" },
-    { icon: <SiDocker className="text-5xl" />, name: "Docker" },
-    { icon: <SiJest className="text-5xl" />, name: "Jest" },
-    { icon: <SiPostman className="text-5xl" />, name: "Postman" },
-    { icon: <SiLinux className="text-5xl" />, name: "Linux" },
+    { icon: <BiLogoGit className="text-2xl md:text-5xl" />, name: "Git" },
+    { icon: <BiLogoGithub className="text-2xl md:text-5xl" />, name: "GitHub" },
+    { icon: <SiDocker className="text-2xl md:text-5xl" />, name: "Docker" },
+    { icon: <SiJest className="text-2xl md:text-5xl" />, name: "Jest" },
+    { icon: <SiPostman className="text-2xl md:text-5xl" />, name: "Postman" },
+    { icon: <SiLinux className="text-2xl md:text-5xl" />, name: "Linux" },
   ];
 
   const designTools = [
-    { icon: <SiFigma className="text-5xl" />, name: "Figma" },
+    { icon: <SiFigma className="text-2xl md:text-5xl" />, name: "Figma" },
     {
-      icon: <SiAdobephotoshop className="text-5xl" />,
+      icon: <SiAdobephotoshop className="text-2xl md:text-5xl" />,
       name: "Adobe Photoshop",
     },
-    { icon: <SiCanva className="text-5xl" />, name: "Canva" },
+    { icon: <SiCanva className="text-2xl md:text-5xl" />, name: "Canva" },
   ];
 
   const renderSection = (
@@ -109,14 +127,14 @@ export default function SkillsSection() {
         {items.map((item, index) => (
           <motion.div
             key={index}
-            className="rounded px-5 py-3 flex gap-3 flex-col items-center bg-[#332d43] text-white hover:scale-110 transition-transform duration-300"
+            className="rounded px-3 py-3 flex gap-3 flex-col items-center bg-[#332d43] text-white hover:scale-110 transition-transform duration-300"
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 },
             }}
           >
             {item.icon}
-            <p>{item.name}</p>
+            <p className="text-sm md:text-lg">{item.name}</p>
           </motion.div>
         ))}
       </div>
