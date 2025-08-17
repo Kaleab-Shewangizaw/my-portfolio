@@ -1,4 +1,7 @@
-import { JSX } from "react";
+"use client";
+
+import { JSX, useRef, useEffect } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
 import {
   BiLogoCss3,
   BiLogoHtml5,
@@ -30,6 +33,14 @@ import {
 } from "react-icons/si";
 
 export default function SkillsSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: "-150px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) controls.start("visible");
+  }, [inView, controls]);
+
   const developmentSkills = [
     { icon: <BiLogoHtml5 className="text-5xl" />, name: "HTML" },
     { icon: <BiLogoCss3 className="text-5xl" />, name: "CSS" },
@@ -71,25 +82,62 @@ export default function SkillsSection() {
     title: string,
     items: { icon: JSX.Element; name: string }[]
   ) => (
-    <div className="mb-12">
-      <h2 className="text-2xl font-semibold text-center mb-5">{title}</h2>
+    <motion.div
+      initial="hidden"
+      animate={controls}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.1 } },
+      }}
+      className="mb-12"
+    >
+      {/* Animate Title */}
+      <motion.h2
+        className="text-2xl font-semibold text-center mb-5"
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        transition={{ duration: 0.6 }}
+      >
+        {title}
+      </motion.h2>
+
       <div className="flex flex-wrap gap-5 items-center justify-center">
         {items.map((item, index) => (
-          <div
+          <motion.div
             key={index}
             className="rounded px-5 py-3 flex gap-3 flex-col items-center bg-[#332d43] text-white hover:scale-110 transition-transform duration-300"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
           >
             {item.icon}
             <p>{item.name}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 
   return (
-    <div className="mb-50">
-      <h1 className="text-3xl font-bold text-center mb-8">My Skills & Tools</h1>
+    <div ref={sectionRef} className="mb-50">
+      <motion.h1
+        className="text-3xl font-bold text-center mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        transition={{ duration: 0.6 }}
+      >
+        My Skills & Tools
+      </motion.h1>
+
       {renderSection("Development Skills", developmentSkills)}
       {renderSection("Development Tools", developmentTools)}
       {renderSection("Design Tools", designTools)}
