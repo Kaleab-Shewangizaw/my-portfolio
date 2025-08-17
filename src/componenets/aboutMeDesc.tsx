@@ -20,18 +20,15 @@ export default function AboutMeDesc() {
         Hi, I&apos;m <b>Kaleab</b> — but you can call me <b>Kal_X</b>. I&apos;m
         a <b>Developer & Designer</b> passionate about crafting
         <b> full-stack applications</b> that are not only powerful, but also
-        beautiful and user-friendly.
-        <hr className="border-transparent mt-3" />
-        My journey started with the <b>MERN Stack</b>, where I mastered the
-        fundamentals of building scalable apps. But my curiosity pulled me into
-        the world of <b>UI/UX</b> — typography, color theory, layout, and design
-        systems. Now, I merge
+        beautiful and user-friendly. My journey started with the{" "}
+        <b>MERN Stack</b>, where I mastered the fundamentals of building
+        scalable apps. But my curiosity pulled me into the world of <b>UI/UX</b>{" "}
+        — typography, color theory, layout, and design systems. Now, I merge
         <b> technical expertise</b> with <b>design sensibility</b> to build
-        experiences that don’t just work — they <i>stand out</i>.
-        <hr className="border-transparent mt-3" />
-        Beyond code, I’m deeply curious, self-driven, and always eager to
-        explore new technologies, solve problems, and collaborate with
-        like-minded people. My goal is simple:
+        experiences that don’t just work — they <i>stand out</i>. Beyond code,
+        I’m deeply curious, self-driven, and always eager to explore new
+        technologies, solve problems, and collaborate with like-minded people.
+        My goal is simple:
         <b> turn ideas into impactful digital solutions. </b>
       </motion.p>
 

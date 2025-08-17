@@ -9,7 +9,7 @@ import { ModeToggle } from "@/componenets/themeToggle";
 export default function Home() {
   return (
     <div className="relative">
-      <div className="sticky top-3 z-100  w-fit left-full mr-5">
+      <div className="sticky top-3 z-100  w-fit left-full mr-5 hidden md:block">
         <ModeToggle />
       </div>
       <div className="-mt-8 w-[90%]  mx-auto relative">

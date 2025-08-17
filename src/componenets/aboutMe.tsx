@@ -9,17 +9,10 @@ import AboutMeDesc from "./aboutMeDesc";
 import EducationDesc from "./EducationDesc";
 import Hobbiesdesc from "./HobbiesDesc";
 import FunFactDesc from "./FunFactDesc";
-import { motion } from "framer-motion";
+
 import { BadgeCheckIcon } from "lucide-react";
 
 export default function AboutMe() {
-  const infoItems = [
-    { label: "21 yo", color: "bg-green-500" },
-    { label: "Male", color: "bg-blue-500" },
-    { label: "Developer", color: "bg-purple-500" },
-    { label: "Designer", color: "bg-pink-500" },
-    { label: "🇪🇹 Ethiopian", color: "bg-yellow-500" },
-  ];
   const [content, setContent] = useState("AboutMe");
   return (
     <div
