@@ -12,6 +12,8 @@ import {
   BiLogoTypescript,
   BiLogoGit,
   BiLogoGithub,
+  BiLogoBootstrap,
+  BiLogoPython,
 } from "react-icons/bi";
 import {
   SiExpress,
@@ -30,6 +32,8 @@ import {
   SiRedux,
   SiGraphql,
   SiPrisma,
+  SiNpm,
+  SiVite,
 } from "react-icons/si";
 
 export default function SkillsSection() {
@@ -49,6 +53,10 @@ export default function SkillsSection() {
       name: "TailwindCSS",
     },
     {
+      icon: <BiLogoBootstrap className="text-2xl md:text-5xl" />,
+      name: "Bootstrap",
+    },
+    {
       icon: <BiLogoJavascript className="text-2xl md:text-5xl" />,
       name: "JavaScript",
     },
@@ -56,7 +64,12 @@ export default function SkillsSection() {
       icon: <BiLogoTypescript className="text-2xl md:text-5xl" />,
       name: "TypeScript",
     },
+    {
+      icon: <BiLogoPython className="text-2xl md:text-5xl" />,
+      name: "Python",
+    },
     { icon: <BiLogoReact className="text-2xl md:text-5xl" />, name: "React" },
+
     { icon: <SiNextdotjs className="text-2xl md:text-5xl" />, name: "Next.js" },
     { icon: <SiRedux className="text-2xl md:text-5xl" />, name: "Redux" },
     {
@@ -83,6 +96,9 @@ export default function SkillsSection() {
     { icon: <BiLogoGithub className="text-2xl md:text-5xl" />, name: "GitHub" },
     { icon: <SiDocker className="text-2xl md:text-5xl" />, name: "Docker" },
     { icon: <SiJest className="text-2xl md:text-5xl" />, name: "Jest" },
+    { icon: <SiNpm className="text-2xl md:text-5xl" />, name: "NPM" },
+
+    { icon: <SiVite className="text-2xl md:text-5xl" />, name: "Vite" },
     { icon: <SiPostman className="text-2xl md:text-5xl" />, name: "Postman" },
     { icon: <SiLinux className="text-2xl md:text-5xl" />, name: "Linux" },
   ];
@@ -107,11 +123,10 @@ export default function SkillsSection() {
         hidden: {},
         visible: { transition: { staggerChildren: 0.1 } },
       }}
-      className="mb-12"
+      className="mb-7"
     >
-      {/* Animate Title */}
       <motion.h2
-        className="text-2xl font-semibold text-center mb-5"
+        className="text-2xl font-semibold text-gray-200 mb-5"
         initial={{ opacity: 0, y: 20 }}
         animate={controls}
         variants={{
@@ -123,7 +138,7 @@ export default function SkillsSection() {
         {title}
       </motion.h2>
 
-      <div className="flex flex-wrap gap-5 items-center justify-center">
+      <div className="flex flex-wrap gap-5 items-center justify-center ">
         {items.map((item, index) => (
           <motion.div
             key={index}
@@ -142,9 +157,9 @@ export default function SkillsSection() {
   );
 
   return (
-    <div ref={sectionRef} className="mb-50">
+    <div ref={sectionRef} className="mb-10">
       <motion.h1
-        className="text-3xl font-bold text-center mb-8"
+        className="text-3xl font-bold text-center mb-8 text-white"
         initial={{ opacity: 0, y: 20 }}
         animate={controls}
         variants={{
