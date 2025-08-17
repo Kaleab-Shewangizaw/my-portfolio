@@ -22,7 +22,7 @@ const inter = Inter({
 export default function HeroSection() {
   return (
     <div
-      className={`relative h-screen -mt-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between  px-5 ${inter.className}`}
+      className={`relative h-screen -mt-10  flex flex-col lg:flex-row items-center justify-center lg:justify-between  px-5 ${inter.className}`}
     >
       {/* Background Image */}
       <Image

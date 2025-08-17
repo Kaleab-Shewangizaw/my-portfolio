@@ -9,11 +9,17 @@ import { ModeToggle } from "./themeToggle";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = ["Home", "About", "Skills", "Projects", "Contact"];
+  const navItems = [
+    { label: "Home", id: "home" },
+    { label: "About", id: "about" },
+    { label: "Skills", id: "skills" },
+    { label: "Projects", id: "projects" },
+    { label: "Contact", id: "contact" },
+  ];
 
   return (
     <motion.nav
-      className="w-full sticky top-0 z-20 backdrop-blur-sm bg-black/10 text-white px-4 py-3 flex justify-between items-center"
+      className="w-full sticky top-0 z-20 backdrop-blur-sm bg-black/10 text-white px-4 py-1 flex justify-between items-center"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -23,13 +29,21 @@ export default function Navbar() {
       <ul className="hidden md:flex gap-8">
         {navItems.map((item, i) => (
           <motion.li
-            key={item}
+            key={item.label}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * i, duration: 0.5 }}
           >
-            <Button variant="link" className="text-white hover:text-purple-300">
-              {item}
+            <Button
+              variant="link"
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = "#" + item.id;
+                link.click();
+              }}
+              className="text-white hover:text-purple-300"
+            >
+              {item.label}
             </Button>
           </motion.li>
         ))}
@@ -53,7 +67,7 @@ export default function Navbar() {
         >
           {navItems.map((item, i) => (
             <motion.li
-              key={item}
+              key={item.label}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * i, duration: 0.4 }}
@@ -61,9 +75,14 @@ export default function Navbar() {
               <Button
                 variant="link"
                 className="text-white hover:text-purple-300"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  const link = document.createElement("a");
+                  link.href = "#" + item.id;
+                  link.click();
+                  setIsOpen(false);
+                }}
               >
-                {item}
+                {item.label}
               </Button>
             </motion.li>
           ))}

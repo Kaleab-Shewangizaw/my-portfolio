@@ -16,11 +16,21 @@ export default function Home() {
       </div>
       <div className="-mt-8  w-[100%] px-1 md:px-0 md:w-[90%]  mx-auto relative">
         <Navbar />
-        <HeroSection />
-        <AboutMe />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
+        <section id="home">
+          <HeroSection />
+        </section>
+        <section id="about">
+          <AboutMe />
+        </section>
+        <section id="skills">
+          <SkillsSection />
+        </section>
+        <section id="projects">
+          <ProjectsSection />
+        </section>
+        <section id="contact">
+          <ContactSection />
+        </section>
       </div>
     </div>
   );
