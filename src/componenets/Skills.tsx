@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import {
   BiLogoCss3,
   BiLogoHtml5,
