@@ -13,6 +13,10 @@ import { AiOutlineInstagram } from "react-icons/ai";
 import { CiAirportSign1 } from "react-icons/ci";
 import { CgInstagram } from "react-icons/cg";
 import { BsTelegram, BsTwitterX } from "react-icons/bs";
+import { Di } from "react-icons/di";
+import { Fa } from "react-icons/fa";
+import { Fa6 } from "react-icons/fa6";
+import { si } from "react-icons/si";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -59,13 +63,25 @@ export default function HeroSection() {
           <Button className="text-lg">Let&apos;s work together</Button>
         </div>
       </div>
-      <div className=" ml-auto flex items-center flex-col justify-center gap-10 text-white">
-        <BsTwitterX className=" text-xl" />
-        <BiLogoLinkedin className="text-xl" />
-        <BiLogoTelegram className=" text-xl" />
-        <BiLogoInstagram className=" text-xl" />
-        <BiLogoGithub className=" text-xl" />
-        <BiLogoDribbble className=" text-xl" />
+      <div className=" ml-auto flex items-center flex-col justify-center gap-10 text-white mr-5">
+        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
+          <BsTwitterX className=" text-xl" />
+        </button>
+        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
+          <BiLogoLinkedin className="text-xl" />
+        </button>
+        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
+          <BiLogoTelegram className=" text-xl" />
+        </button>
+        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
+          <BiLogoInstagram className=" text-xl" />
+        </button>
+        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
+          <BiLogoGithub className=" text-xl" />
+        </button>
+        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
+          <BiLogoDribbble className=" text-xl" />
+        </button>
       </div>
     </div>
   );
