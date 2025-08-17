@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Kal_X from "../../public/Kal_X.png";
 import { Inter } from "next/font/google";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import {
   BiLogoDribbble,
   BiLogoGithub,
@@ -9,14 +12,7 @@ import {
   BiLogoLinkedin,
   BiLogoTelegram,
 } from "react-icons/bi";
-import { AiOutlineInstagram } from "react-icons/ai";
-import { CiAirportSign1 } from "react-icons/ci";
-import { CgInstagram } from "react-icons/cg";
-import { BsTelegram, BsTwitterX } from "react-icons/bs";
-import { Di } from "react-icons/di";
-import { Fa } from "react-icons/fa";
-import { Fa6 } from "react-icons/fa6";
-import { si } from "react-icons/si";
+import { BsTwitterX } from "react-icons/bs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,64 +21,108 @@ const inter = Inter({
 
 export default function HeroSection() {
   return (
-    <div className={`h-screen relative  flex ${inter.className}  -mt-14`}>
+    <div
+      className={`relative h-screen -mt-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between px-5 ${inter.className}`}
+    >
+      {/* Background Image */}
       <Image
         src={Kal_X}
         alt="main img"
-        width={700}
-        className="absolute inset-0 -top-50 m-auto object-contain dark:brightness-[0.6] -z-10"
+        fill
+        className="absolute object-contain dark:brightness-[0.6] -z-10"
         priority
       />
 
-      {/* Hero content */}
-      <div className=" mt-65 ">
-        <p className="text-lg text-gray-200 z-10 tracking-widest">Hello,</p>
-        <div className="bg-black/25 px-8 z-2 pt-5 pb-10">
-          <h1 className="text-5xl font-light text-white tracking-wider">
-            I&apos;m{" "}
-            <span className="font-bold ">Kaleab Shewangizaw [Kal_X]</span>
-          </h1>
-          <div className="flex items-center gap-2 mt-2">
-            <div className="w-10 border-2 border-gray-300"></div>
+      {/* Hero Content */}
+      <motion.div
+        className="z-10 flex flex-col gap-5 lg:max-w-fit text-center lg:text-left  "
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.p
+          className="text-lg text-gray-200 tracking-widest"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          Hello,
+        </motion.p>
 
-            <p className="text-lg text-gray-300">
-              A{" "}
-              <span className="text-white font-bold">Full Stack Developer</span>
-              , <span className="text-white font-bold">Web Designer</span>, Tech
-              Enthusiast, and Open Source Contributor.
-            </p>
-          </div>
-        </div>
-        <div className="flex gap-10 mt-5">
-          <Button
-            className="text-lg not-dark:bg-transparent not-dark:hover:bg-[#655a84] text-white hover:text-white"
-            variant="outline"
-          >
+        <motion.h1
+          className="text-4xl sm:text-5xl font-light text-white tracking-wide "
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.7 }}
+        >
+          I&apos;m <span className="font-bold">Kaleab Shewangizaw [Kal_X]</span>
+        </motion.h1>
+
+        <motion.p
+          className="text-gray-300 mt-2 text-base sm:text-lg"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.7 }}
+        >
+          A <span className="text-white font-bold">Full Stack Developer</span>,{" "}
+          <span className="text-white font-bold">Web Designer</span>, Tech
+          Enthusiast, and Open Source Contributor.
+        </motion.p>
+        <motion.p
+          className="mt-5 text-gray-300 text-center lg:text-left text-sm sm:text-base"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2, duration: 0.7 }}
+        >
+          I love building clean, interactive web experiences and exploring new
+          tech trends.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 mt-5 justify-center lg:justify-start"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
+        >
+          <Button className="text-lg" variant="outline">
             See my Work
           </Button>
           <Button className="text-lg">Let&apos;s work together</Button>
-        </div>
-      </div>
-      <div className=" ml-auto flex items-center flex-col justify-center gap-10 text-white mr-5">
-        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
-          <BsTwitterX className=" text-xl" />
-        </button>
-        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
-          <BiLogoLinkedin className="text-xl" />
-        </button>
-        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
-          <BiLogoTelegram className=" text-xl" />
-        </button>
-        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
-          <BiLogoInstagram className=" text-xl" />
-        </button>
-        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
-          <BiLogoGithub className=" text-xl" />
-        </button>
-        <button className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer">
-          <BiLogoDribbble className=" text-xl" />
-        </button>
-      </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Social Buttons */}
+      <motion.div
+        className="absolute right-5 bottom-10 flex flex-col gap-3 lg:static lg:flex-row lg:mt-0 lg:ml-auto"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.2, duration: 0.7, staggerChildren: 0.1 }}
+      >
+        {[
+          BsTwitterX,
+          BiLogoLinkedin,
+          BiLogoTelegram,
+          BiLogoInstagram,
+          BiLogoGithub,
+          BiLogoDribbble,
+        ].map((Icon, i) => (
+          <motion.button
+            key={i}
+            className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer text-xl text-white"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Icon />
+          </motion.button>
+        ))}
+      </motion.div>
+      <motion.div
+        className="absolute bottom-15 left-20 -translate-x-1/2 text-white rounded-lg bg-[#483e6b] px-4 py-2 text-sm"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      >
+        ⬇ Scroll
+      </motion.div>
     </div>
   );
 }
