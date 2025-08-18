@@ -123,7 +123,7 @@ export default function SkillsSection() {
         hidden: {},
         visible: { transition: { staggerChildren: 0.1 } },
       }}
-      className="mb-7"
+      className="mb-7 "
     >
       <motion.h2
         className="text-2xl font-semibold text-gray-200 mb-5"
