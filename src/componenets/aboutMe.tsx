@@ -9,13 +9,18 @@ import AboutMeDesc from "./aboutMeDesc";
 import EducationDesc from "./EducationDesc";
 import Hobbiesdesc from "./HobbiesDesc";
 import FunFactDesc from "./FunFactDesc";
+import { motion } from "framer-motion";
 
 import { BadgeCheckIcon } from "lucide-react";
 
 export default function AboutMe() {
   const [content, setContent] = useState("AboutMe");
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, delay: 0.1 }}
       id="aboutMe"
       className="not-dark:bg-gray-300 dark:bg-[#41385d] py-5 md:py-7 px-3  md:px-7 rounded-md flex flex-col lg:flex-row md:gap-5 mb-10  gap-5"
     >
@@ -105,6 +110,6 @@ export default function AboutMe() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

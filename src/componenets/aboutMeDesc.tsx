@@ -19,29 +19,48 @@ export default function AboutMeDesc() {
       >
         Hi, I&apos;m <b>Kaleab</b> — but you can call me <b>Kal_X</b>. I&apos;m
         a <b>Developer & Designer</b> passionate about crafting
-        <b> full-stack applications</b> that are not only powerful, but also
-        beautiful and user-friendly.
+        <b> full-stack applications</b> that are powerful, beautiful and
+        user-friendly.
         <p></p> My journey started with the <b>MERN Stack</b>, where I mastered
         the fundamentals of building scalable apps. But my curiosity pulled me
         into the world of <b>UI/UX</b> — typography, color theory, layout, and
         design systems. Now, I merge
         <b> technical expertise</b> with <b>design sensibility</b> to build
-        experiences that don’t just work — they <i>stand out</i>. Beyond code,
-        I’m deeply curious, self-driven, and always eager to explore new
-        technologies, solve problems, and collaborate with like-minded people.
-        My goal is simple:
+        experiences that don&apos;t just work — they <i>stand out</i>. Beyond
+        code, I&apos;m deeply curious, self-driven, and always eager to explore
+        new technologies, solve problems, and collaborate with like-minded
+        people. My goal is simple:
         <b> turn ideas into impactful digital solutions. </b>
       </motion.p>
 
-      {/* CTA buttons */}
       <motion.div
         className="flex gap-2 md:gap-4 items-end"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.7 }}
       >
-        <Button>📬 Contact Me</Button>
-        <Button variant="outline">📄 View Resume</Button>
+        <Button
+          onClick={() => {
+            const contactSection = document.getElementById("contact");
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        >
+          Contact Me
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            const link = document.createElement("a");
+            link.href = "/KALEAB SHEWANGIZAW CV.pdf";
+            link.download = "Kaleab_Shewangizaw_CV.pdf";
+
+            link.click();
+          }}
+        >
+          View Resume
+        </Button>
       </motion.div>
     </motion.div>
   );
