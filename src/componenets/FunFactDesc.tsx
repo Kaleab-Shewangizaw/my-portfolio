@@ -1,21 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Coffee, Gamepad2, Music, Brain, Camera } from "lucide-react";
 
 export default function FunFactDesc() {
   const funFacts = [
-    { icon: <Coffee size={20} />, text: "Can code after 3 cups of coffee ☕" },
-    { icon: <Gamepad2 size={20} />, text: "Casual gamer on weekends 🎮" },
+    { text: "So handsome, but still single. 😅" },
+    { text: "Love Jeet Kune Doo 🥋, big fan of Bruce Lee." },
+    { text: "Coffee connoisseur ☕" },
+
     {
-      icon: <Music size={20} />,
-      text: "Lo-fi & Ethiopian music enthusiast 🎶",
-    },
-    {
-      icon: <Brain size={20} />,
       text: "Obsessed with puzzles & problem solving 🧩",
     },
-    { icon: <Camera size={20} />, text: "Photography & design hobbyist 📸" },
+    { text: "I forgot the rest 😅" },
   ];
 
   const container = {
@@ -41,8 +37,19 @@ export default function FunFactDesc() {
           variants={item}
           className="flex items-center gap-2 p-3 rounded-xl border border-gray-700/30 dark:border-white/10 bg-gray-800/30 dark:bg-gray-700/40 hover:bg-gray-800/50 transition cursor-default"
         >
-          <span className="text-green-400">{fact.icon}</span>
           <span className="text-sm">{fact.text}</span>
+          {fact.text.includes("Coffee") && (
+            <button
+              role="img"
+              aria-label="buy coffee"
+              className="text-sm not-dark:text-blue-800 dark:text-blue-400 hover:underline cursor-pointer"
+              onClick={() =>
+                window.open("https://buymeacoffee.com/kal_x", "_blank")
+              }
+            >
+              buy me a coffee{" "}
+            </button>
+          )}
         </motion.div>
       ))}
     </motion.div>
