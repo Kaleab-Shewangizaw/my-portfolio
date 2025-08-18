@@ -1,17 +1,9 @@
 "use client";
 
-import {
-  Music,
-  BookOpen,
-  Code2,
-  Globe,
-  Gamepad2,
-  Film,
-  Brain,
-} from "lucide-react";
+import { Code, Layout, Monitor, Database } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
-export default function Hobbiesdesc() {
+export default function ServicesDesc() {
   const prefersReducedMotion = useReducedMotion();
 
   const container = {
@@ -32,16 +24,12 @@ export default function Hobbiesdesc() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.35 } },
   };
 
-  const hobbies = [
-    { Icon: Music, label: "Music" },
-    { Icon: Code2, label: "Coding & Side Projects" },
-    { Icon: BookOpen, label: "Reading" },
+  const services = [
+    { Icon: Code, label: "Music" },
+    { Icon: Layout, label: "Coding & Side Projects" },
+    { Icon: Monitor, label: "Reading" },
 
-    { Icon: Film, label: "Movies & Documentaries" },
-    { Icon: Globe, label: "Exploring New Tech & Cultures" },
-    { Icon: Gamepad2, label: "Casual Gaming" },
-
-    { Icon: Brain, label: "Puzzles & Problem Solving" },
+    { Icon: Database, label: "Movies & Documentaries" },
   ];
 
   return (
@@ -51,7 +39,7 @@ export default function Hobbiesdesc() {
       animate="visible"
       className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4"
     >
-      {hobbies.map(({ Icon, label }, i) => (
+      {services.map(({ Icon, label }, i) => (
         <motion.div
           key={i}
           variants={item}

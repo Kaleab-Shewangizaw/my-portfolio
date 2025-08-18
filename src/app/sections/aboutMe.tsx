@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import AboutMeDesc from "../../componenets/aboutMeDesc";
 import EducationDesc from "../../componenets/EducationDesc";
-import Hobbiesdesc from "../../componenets/HobbiesDesc";
 import FunFactDesc from "../../componenets/FunFactDesc";
 import { motion } from "framer-motion";
 
 import { BadgeCheckIcon } from "lucide-react";
+import ServicesDesc from "../../componenets/ServicesDesc";
 
 export default function AboutMe() {
   const [content, setContent] = useState("AboutMe");
@@ -79,12 +79,12 @@ export default function AboutMe() {
             </Button>
             <Button
               className="text-[15px] px-3 "
-              variant={`${content === "Hobbies" ? "default" : "ghost"}`}
+              variant={`${content === "Services" ? "default" : "ghost"}`}
               onClick={() => {
-                setContent("Hobbies");
+                setContent("Services");
               }}
             >
-              Hobbies
+              Services
             </Button>
             <Button
               className="text-[15px] px-3 "
@@ -101,8 +101,8 @@ export default function AboutMe() {
               <AboutMeDesc />
             ) : content === "Education" ? (
               <EducationDesc />
-            ) : content === "Hobbies" ? (
-              <Hobbiesdesc />
+            ) : content === "Services" ? (
+              <ServicesDesc />
             ) : (
               <FunFactDesc />
             )}
