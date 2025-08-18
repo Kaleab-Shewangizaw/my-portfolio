@@ -10,16 +10,26 @@ import {
 import Hero from "../../../public/Hero.png";
 import Guava from "../../../public/Guava.webp";
 import { Button } from "@/components/ui/button";
-import { BsGithub } from "react-icons/bs";
-import { Star } from "lucide-react";
+import { BsGithub, BsPinterest } from "react-icons/bs";
+import { DribbbleIcon, FigmaIcon, Star } from "lucide-react";
 import { useState } from "react";
+import { BiRightArrow } from "react-icons/bi";
 
 const devProjects = [
   {
     name: "Guava Social Blog",
     description:
       "A social blogging platform with communities, posts, likes, and trends.",
-    tech: ["React", "Next.js", "Tailwind", "Node.js", "MongoDB"],
+    tech: [
+      "React",
+      "Next.js",
+      "Tailwind",
+      "Node.js",
+      "MongoDB",
+      "MongoDB",
+      "MongoDB",
+      "MongoDB",
+    ],
     img: Guava,
   },
   {
@@ -89,6 +99,26 @@ const designProjects = [
     description: "A visually engaging landing page design for marketing.",
     img: Hero,
   },
+  {
+    name: "Landing Page Concept",
+    description: "A visually engaging landing page design for marketing.",
+    img: Hero,
+  },
+  {
+    name: "Landing Page Concept",
+    description: "A visually engaging landing page design for marketing.",
+    img: Hero,
+  },
+  {
+    name: "Landing Page Concept",
+    description: "A visually engaging landing page design for marketing.",
+    img: Hero,
+  },
+  {
+    name: "Landing Page Concept",
+    description: "A visually engaging landing page design for marketing.",
+    img: Hero,
+  },
 ];
 
 export default function ProjectsSection() {
@@ -144,8 +174,22 @@ export default function ProjectsSection() {
                     </div>
                   </div>
                 </HoverCardTrigger>
-                <HoverCardContent className="w-64">
-                  <p>{proj.description}</p>
+                <HoverCardContent className="w-90 flex flex-col dark:bg-gray-950  dark:text-gray-300 text-[#030712]">
+                  <p>
+                    {proj.description}
+                    {proj.description}
+                    {proj.description}
+                  </p>
+                  <div className="flex gap-2 mt-5 w-full flex-wrap">
+                    {proj.tech.map((t, i) => (
+                      <span
+                        key={i}
+                        className="bg-purple-700 px-2 py-1 rounded text-xs text-white"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </HoverCardContent>
               </HoverCard>
             </motion.div>
@@ -176,7 +220,27 @@ export default function ProjectsSection() {
                       setHovered(false);
                     }}
                   >
-                    <Image src={proj.img} alt={proj.name} width={500} />
+                    <Image src={proj.img} alt={proj.name} width={450} />
+
+                    <div className="absolute bottom-0 flex flex-col px-2 py-2 w-full md:hidden">
+                      <h4 className="text-sm font-bold   text-gray-200 w-full bg-black/80 p-2">
+                        {proj.name}
+                      </h4>
+                      <div className="flex gap-3 mt-1">
+                        <Button variant="outline">
+                          <DribbbleIcon />
+                        </Button>
+                        <Button variant="outline">
+                          <FigmaIcon />{" "}
+                        </Button>
+                        <Button variant="outline">
+                          <BsPinterest />
+                        </Button>
+                        <Button className="ml-auto">
+                          See my collection <BiRightArrow />
+                        </Button>
+                      </div>
+                    </div>
 
                     {hovered && (
                       <AnimatePresence>
@@ -185,14 +249,14 @@ export default function ProjectsSection() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 20 }}
                           transition={{ duration: 0.3 }}
-                          className="absolute bottom-0 h-[50%]  bg-gradient-to-b hidden group-hover:flex from-black/50 via-black/80 to-black  w-full  flex-col px-4 py-4 justify-between"
+                          className="absolute bottom-0 h-[50%]  bg-gradient-to-b hidden group-hover:flex from-black/60 via-black/80 to-black  w-full  flex-col px-4 py-4 justify-between"
                         >
                           {" "}
                           <h4 className="text-lg font-bold   text-gray-200 w-full">
                             {proj.name}
                           </h4>
                           <div className="flex flex-wrap gap-2 w-full">
-                            <p className="text-gray-400 text-sm">
+                            <p className="text-gray-400 font-semibold text-sm">
                               {proj.description}
                               {proj.description}
                               {proj.description}
@@ -200,22 +264,23 @@ export default function ProjectsSection() {
                           </div>
                           <div className="flex gap-3 mt-1">
                             <Button>
-                              <BsGithub />
+                              <DribbbleIcon />
                             </Button>
                             <Button>
-                              <Star />{" "}
+                              <FigmaIcon />{" "}
                             </Button>
-                            <Button>Visit</Button>
+                            <Button>
+                              <BsPinterest />
+                            </Button>
+                            <Button className="ml-auto">
+                              See my collection <BiRightArrow />
+                            </Button>
                           </div>
                         </motion.div>
                       </AnimatePresence>
                     )}
                   </div>
                 </HoverCardTrigger>
-                <HoverCardContent className="w-64">
-                  <h4 className="text-lg font-bold mb-2">{proj.name}</h4>
-                  <p>{proj.description}</p>
-                </HoverCardContent>
               </HoverCard>
             </motion.div>
           ))}
