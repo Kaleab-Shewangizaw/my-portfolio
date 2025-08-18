@@ -63,6 +63,18 @@ const devProjects = [
     tech: ["React", "Express.js", "PostgreSQL"],
     img: Guava,
   },
+  {
+    name: "Service Booking System",
+    description: "Manage appointments and bookings with a dynamic dashboard.",
+    tech: ["React", "Express.js", "PostgreSQL"],
+    img: Guava,
+  },
+  {
+    name: "Service Booking System",
+    description: "Manage appointments and bookings with a dynamic dashboard.",
+    tech: ["React", "Express.js", "PostgreSQL"],
+    img: Guava,
+  },
 ];
 
 const designProjects = [

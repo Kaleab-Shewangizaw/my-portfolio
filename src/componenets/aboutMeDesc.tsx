@@ -34,7 +34,7 @@ export default function AboutMeDesc() {
       </motion.p>
 
       <motion.div
-        className="flex gap-2 md:gap-4 items-end"
+        className="flex gap-2 md:gap-4 items-end mt-3"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.7 }}
