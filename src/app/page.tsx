@@ -16,7 +16,7 @@ export default function Home() {
       </div>
       <div className="-mt-8  w-[100%] px-1 md:px-0 md:w-[90%]  mx-auto relative">
         <Navbar />
-        <section id="home">
+        <section id="home" className="mb-12 md:mb-0">
           <HeroSection />
         </section>
         <section id="about">

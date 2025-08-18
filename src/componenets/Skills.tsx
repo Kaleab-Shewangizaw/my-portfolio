@@ -105,11 +105,11 @@ export default function SkillsSection() {
 
   const designTools = [
     { icon: <SiFigma className="text-2xl md:text-5xl" />, name: "Figma" },
+    { icon: <SiCanva className="text-2xl md:text-5xl" />, name: "Canva" },
     {
       icon: <SiAdobephotoshop className="text-2xl md:text-5xl" />,
       name: "Adobe Photoshop",
     },
-    { icon: <SiCanva className="text-2xl md:text-5xl" />, name: "Canva" },
   ];
 
   const renderSection = (
@@ -123,7 +123,7 @@ export default function SkillsSection() {
         hidden: {},
         visible: { transition: { staggerChildren: 0.1 } },
       }}
-      className="mb-7 "
+      className="mb-5  "
     >
       <motion.h2
         className="text-2xl font-semibold text-gray-200 mb-5"
@@ -138,7 +138,7 @@ export default function SkillsSection() {
         {title}
       </motion.h2>
 
-      <div className="flex flex-wrap gap-5 items-center">
+      <div className="flex flex-wrap gap-2 items-center">
         {items.map((item, index) => (
           <motion.div
             key={index}
@@ -149,7 +149,7 @@ export default function SkillsSection() {
             }}
           >
             {item.icon}
-            <p className="text-sm md:text-lg">{item.name}</p>
+            <p className="text-sm md:text-lg text-center">{item.name}</p>
           </motion.div>
         ))}
       </div>
@@ -157,7 +157,7 @@ export default function SkillsSection() {
   );
 
   return (
-    <div ref={sectionRef} className="mb-10">
+    <div ref={sectionRef} className="mb-10 ">
       <motion.h1
         className="text-3xl font-bold text-center mb-8 text-white"
         initial={{ opacity: 0, y: 20 }}
@@ -171,9 +171,11 @@ export default function SkillsSection() {
         My Skills & Tools
       </motion.h1>
 
-      {renderSection("Development Skills", developmentSkills)}
-      {renderSection("Development Tools", developmentTools)}
-      {renderSection("Design Tools", designTools)}
+      <div className="flex items-start justify-between gap-3 flex-wrap">
+        {renderSection("Development Skills", developmentSkills)}
+        {renderSection("Development Tools", developmentTools)}
+        {renderSection("Design Tools", designTools)}
+      </div>
     </div>
   );
 }

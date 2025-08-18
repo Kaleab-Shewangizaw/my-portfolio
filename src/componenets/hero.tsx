@@ -24,7 +24,6 @@ export default function HeroSection() {
     <div
       className={`relative h-screen -mt-10  flex flex-col lg:flex-row items-center justify-center lg:justify-between  px-5 ${inter.className}`}
     >
-      {/* Background Image */}
       <Image
         src={Kal_X}
         alt="main img"
@@ -161,7 +160,7 @@ export default function HeroSection() {
         })}
       </motion.div>
       <motion.div
-        className="absolute bottom-10 md:bottom-15  left-20 -translate-x-1/2 text-white rounded-lg bg-[#483e6b] px-4 py-2 text-sm"
+        className="absolute bottom-0 md:bottom-15  left-20 -translate-x-1/2 text-white rounded-lg bg-[#483e6b] px-4 py-2 text-sm"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
