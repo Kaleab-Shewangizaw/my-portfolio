@@ -14,7 +14,7 @@ import { BsTwitterX } from "react-icons/bs";
 
 export default function ContactSection() {
   return (
-    <section className="py-16 px-4 lg:px-16  text-white">
+    <section className="pt-16 pb-25 px-4 lg:px-16  text-white">
       <motion.h2
         className="text-3xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: 30 }}
