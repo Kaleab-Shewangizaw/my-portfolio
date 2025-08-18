@@ -7,7 +7,6 @@ import Navbar from "@/componenets/navbar";
 import ProjectsSection from "@/app/sections/Projects";
 import SkillsSection from "@/app/sections/Skills";
 import { ModeToggle } from "@/componenets/themeToggle";
-import Footer from "./sections/Footer";
 
 export default function Home() {
   return (
