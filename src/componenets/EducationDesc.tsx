@@ -3,10 +3,9 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import AAULogo from "../../public/aauLogo.png";
-import ScrimbaLogo from "../../public/file.svg";
-import FreeCodeCampLogo from "../../public/file.svg";
-import GDSCLogo from "../../public/file.svg";
-import SCESLogo from "../../public/file.svg";
+import ScrimbaLogo from "../../public/scrimba.webp";
+import GDGLogo from "../../public/GDG.webp";
+import A2SV from "../../public/A2SV.png";
 
 export default function EducationDesc() {
   const container = {
@@ -33,50 +32,85 @@ export default function EducationDesc() {
       {/* Education */}
       <motion.ul
         variants={item}
-        className="flex flex-col gap-2 bg-gray-900/30 p-4 rounded-2xl shadow-md hover:shadow-lg transition"
+        className="flex flex-col gap-2 bg-gray-900/60 p-4 rounded-2xl shadow-md hover:shadow-lg transition"
       >
-        <li className="font-semibold text-green-400">🎓 Education</li>
-        <li className="flex items-center gap-2">
-          <Image src={AAULogo} alt="AAU Logo" width={22} height={22} />
-          BSc in Chemical Engineering (AAiT)
+        <li className="font-semibold text-white">Education</li>
+        <li className="text-gray-300 font-bold">
+          Self-Taught Full-Stack Developer
         </li>
-        <li className="text-gray-300">Self-Taught Full-Stack Developer</li>
+        <li className="flex items-center gap-2 text-gray-300">
+          <Image src={AAULogo} alt="AAU Logo" width={40} height={40} />
+          BSc in Engineering (AAiT)
+        </li>
+        <li className="flex items-center gap-2 text-gray-300">
+          <Image
+            src={A2SV}
+            alt="A2SV"
+            width={40}
+            height={40}
+            className="bg-gray-200 rounded-md"
+          />
+          A2SV dropout
+        </li>
       </motion.ul>
 
       {/* Certificates */}
       <motion.ul
         variants={item}
-        className="flex flex-col gap-2 bg-gray-900/30 p-4 rounded-2xl shadow-md hover:shadow-lg transition"
+        className="flex flex-col gap-2 bg-gray-900/60 p-4 rounded-2xl shadow-md hover:shadow-lg transition text-gray-300"
       >
-        <li className="font-semibold text-blue-400">📜 Certificates</li>
+        <li className="font-semibold text-white">Certificates</li>
         <li className="flex items-center gap-2">
-          <Image src={ScrimbaLogo} alt="Scrimba" width={20} height={20} />
+          <Image
+            src={ScrimbaLogo}
+            alt="Scrimba"
+            width={40}
+            height={40}
+            className="rounded-md"
+          />
           Scrimba Frontend Career Path
         </li>
         <li className="flex items-center gap-2">
           <Image
-            src={FreeCodeCampLogo}
-            alt="FreeCodeCamp"
-            width={20}
-            height={20}
+            src={ScrimbaLogo}
+            alt="Scrimba"
+            width={40}
+            height={40}
+            className="rounded-md"
           />
-          freeCodeCamp Responsive Web Design
+          Learn React
+        </li>
+        <li className="flex items-center gap-2">
+          <Image
+            src={ScrimbaLogo}
+            alt="Scrimba"
+            width={40}
+            height={40}
+            className="rounded-md"
+          />
+          Learn Typescript
+        </li>
+        <li className="flex items-center gap-2">
+          <Image
+            src={GDGLogo}
+            alt="GDG"
+            width={40}
+            height={40}
+            className="rounded-md"
+          />
+          Web Dev Bootcamp instructor
         </li>
       </motion.ul>
 
       {/* Clubs / Activities */}
       <motion.ul
         variants={item}
-        className="flex flex-col gap-2 bg-gray-900/30 p-4 rounded-2xl shadow-md hover:shadow-lg transition"
+        className="flex flex-col gap-2 bg-gray-900/60 p-4 rounded-2xl shadow-md hover:shadow-lg transition text-gray-300"
       >
-        <li className="font-semibold text-purple-400">🌟 Activities</li>
+        <li className="font-semibold text-white">Activities</li>
         <li className="flex items-center gap-2">
-          <Image src={GDSCLogo} alt="GDSC" width={20} height={20} />
-          Web Dev Instructor – GDSC AAiT
-        </li>
-        <li className="flex items-center gap-2">
-          <Image src={SCESLogo} alt="SCES" width={20} height={20} />
-          President – SCES (Chemical Eng. Club)
+          <Image src={GDGLogo} alt="GDG" width={40} height={40} />
+          Web Dev Instructor – GDG AAU
         </li>
       </motion.ul>
     </motion.div>

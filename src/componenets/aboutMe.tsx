@@ -44,9 +44,8 @@ export default function AboutMe() {
             M
           </div>
           <div className="px-2 py-0.5 rounded bg-gray-500/50">🇪🇹 Ethiopian</div>
-          <div className="px-2 py-0.5 rounded bg-gray-500/50">
-            BSc Chemical Eng.
-          </div>
+          <div className="px-2 py-0.5 rounded bg-gray-500/50">Stu.</div>
+          <div className="px-2 py-0.5 rounded bg-gray-500/50">BSc Eng.</div>
           <div className="px-2 py-0.5 rounded bg-gray-500/50">
             Full Stack Dev
           </div>

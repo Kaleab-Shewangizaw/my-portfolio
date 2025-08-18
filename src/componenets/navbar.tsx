@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className="w-full sticky top-0 z-20 backdrop-blur-sm bg-black/10 text-white px-4 py-1 flex justify-between items-center"
+      className="w-full sticky top-0 z-20 backdrop-blur-sm bg-black/10 rounded-md text-white px-4 py-1 flex justify-between items-center"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8 }}
