@@ -124,7 +124,7 @@ const designProjects = [
 export default function ProjectsSection() {
   const [hovered, setHovered] = useState(false);
   return (
-    <div className="py-5  px-4 lg:px-5">
+    <div className="py-5  px-4 lg:px-5 pt-15">
       <h2 className="text-3xl font-bold text-center mb-7 text-white">
         My Projects
       </h2>
@@ -220,7 +220,7 @@ export default function ProjectsSection() {
                       setHovered(false);
                     }}
                   >
-                    <Image src={proj.img} alt={proj.name} width={450} />
+                    <Image src={proj.img} alt={proj.name} width={400} />
 
                     <div className="absolute bottom-0 flex flex-col px-2 py-2 w-full md:hidden">
                       <h4 className="text-sm font-bold   text-gray-200 w-full bg-black/80 p-2">
@@ -236,8 +236,8 @@ export default function ProjectsSection() {
                         <Button variant="outline">
                           <BsPinterest />
                         </Button>
-                        <Button className="ml-auto">
-                          See my collection <BiRightArrow />
+                        <Button className="ml-auto flex items-center">
+                          +15 more <BiRightArrow />
                         </Button>
                       </div>
                     </div>
@@ -249,7 +249,7 @@ export default function ProjectsSection() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 20 }}
                           transition={{ duration: 0.3 }}
-                          className="absolute bottom-0 h-[50%]  bg-gradient-to-b hidden group-hover:flex from-black/60 via-black/80 to-black  w-full  flex-col px-4 py-4 justify-between"
+                          className="absolute bottom-0   bg-gradient-to-b hidden group-hover:flex from-black/60 via-black/80 to-black  w-full  flex-col px-4 py-4 justify-between"
                         >
                           {" "}
                           <h4 className="text-lg font-bold   text-gray-200 w-full">
@@ -273,7 +273,7 @@ export default function ProjectsSection() {
                               <BsPinterest />
                             </Button>
                             <Button className="ml-auto">
-                              See my collection <BiRightArrow />
+                              +15 More <BiRightArrow />
                             </Button>
                           </div>
                         </motion.div>

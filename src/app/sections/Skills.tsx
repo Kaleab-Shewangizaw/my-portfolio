@@ -173,7 +173,7 @@ export default function SkillsSection() {
   );
 
   return (
-    <div ref={sectionRef} className="mb-10 ">
+    <div ref={sectionRef} className="mb-10 pt-15">
       <motion.h1
         className="text-3xl font-bold text-center mb-8 text-white"
         initial={{ opacity: 0, y: 20 }}
