@@ -1,17 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import DevProjectImg from "../../../public/file.svg";
+import Hero from "../../../public/Hero.png";
 import Guava from "../../../public/Guava.webp";
 import { Button } from "@/components/ui/button";
 import { BsGithub } from "react-icons/bs";
 import { Star } from "lucide-react";
+import { useState } from "react";
 
 const devProjects = [
   {
@@ -81,16 +82,17 @@ const designProjects = [
   {
     name: "Portfolio Design 1",
     description: "Clean and modern UI design for portfolios.",
-    img: DevProjectImg,
+    img: Hero,
   },
   {
     name: "Landing Page Concept",
     description: "A visually engaging landing page design for marketing.",
-    img: DevProjectImg,
+    img: Hero,
   },
 ];
 
 export default function ProjectsSection() {
+  const [hovered, setHovered] = useState(false);
   return (
     <div className="py-5  px-4 lg:px-5">
       <h2 className="text-3xl font-bold text-center mb-7 text-white">
@@ -122,7 +124,7 @@ export default function ProjectsSection() {
                       />
                     </div>
                     <div className="py-3 px-3 border-t pt-3 border-gray-500 flex flex-col items-end gap-2">
-                      <h4 className="text-lg font-bold   text-gray-300 w-full">
+                      <h4 className="text-lg font-bold   text-gray-200 w-full">
                         {proj.name}
                       </h4>
                       <div className="flex flex-wrap gap-2 w-full">
@@ -154,7 +156,7 @@ export default function ProjectsSection() {
       {/* Design Projects */}
       <div>
         <h3 className="text-2xl font-semibold mb-6">Design Projects</h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex  gap-4 flex-wrap justify-center">
           {designProjects.map((proj, i) => (
             <motion.div
               key={i}
@@ -165,12 +167,49 @@ export default function ProjectsSection() {
             >
               <HoverCard>
                 <HoverCardTrigger asChild>
-                  <div className="rounded-lg overflow-hidden shadow-lg cursor-pointer">
-                    <Image
-                      src={proj.img}
-                      alt={proj.name}
-                      className="w-full h-48 object-cover"
-                    />
+                  <div
+                    className="rounded-md overflow-hidden shadow-lg cursor-pointer bg-[#332d43]   text-white group relative"
+                    onMouseEnter={() => {
+                      setHovered(true);
+                    }}
+                    onMouseLeave={() => {
+                      setHovered(false);
+                    }}
+                  >
+                    <Image src={proj.img} alt={proj.name} width={500} />
+
+                    {hovered && (
+                      <AnimatePresence>
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 20 }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute bottom-0 h-[50%]  bg-gradient-to-b hidden group-hover:flex from-black/50 via-black/80 to-black  w-full  flex-col px-4 py-4 justify-between"
+                        >
+                          {" "}
+                          <h4 className="text-lg font-bold   text-gray-200 w-full">
+                            {proj.name}
+                          </h4>
+                          <div className="flex flex-wrap gap-2 w-full">
+                            <p className="text-gray-400 text-sm">
+                              {proj.description}
+                              {proj.description}
+                              {proj.description}
+                            </p>
+                          </div>
+                          <div className="flex gap-3 mt-1">
+                            <Button>
+                              <BsGithub />
+                            </Button>
+                            <Button>
+                              <Star />{" "}
+                            </Button>
+                            <Button>Visit</Button>
+                          </div>
+                        </motion.div>
+                      </AnimatePresence>
+                    )}
                   </div>
                 </HoverCardTrigger>
                 <HoverCardContent className="w-64">
