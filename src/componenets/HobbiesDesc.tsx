@@ -35,14 +35,14 @@ export default function Hobbiesdesc() {
   };
 
   const hobbies = [
+    { Icon: Music, label: "Music" },
     { Icon: Code2, label: "Coding & Side Projects" },
-    { Icon: BookOpen, label: "Reading (Tech & Stories)" },
-    { Icon: Music, label: "Lo-fi & Ethiopian Music" },
-    { Icon: Dumbbell, label: "Fitness & Running" },
-    { Icon: Camera, label: "Photography & Design" },
+    { Icon: BookOpen, label: "Reading" },
+
+    { Icon: Film, label: "Movies & Documentaries" },
     { Icon: Globe, label: "Exploring New Tech & Cultures" },
     { Icon: Gamepad2, label: "Casual Gaming" },
-    { Icon: Film, label: "Movies & Documentaries" },
+
     { Icon: Brain, label: "Puzzles & Problem Solving" },
   ];
 
