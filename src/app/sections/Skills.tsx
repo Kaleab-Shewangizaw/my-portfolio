@@ -34,6 +34,9 @@ import {
   SiPrisma,
   SiNpm,
   SiVite,
+  SiShadcnui,
+  SiPhp,
+  SiLaravel,
 } from "react-icons/si";
 
 export default function SkillsSection() {
@@ -57,6 +60,10 @@ export default function SkillsSection() {
       name: "Bootstrap",
     },
     {
+      icon: <SiShadcnui className="text-2xl md:text-5xl" />,
+      name: "Shadcn Ui",
+    },
+    {
       icon: <BiLogoJavascript className="text-2xl md:text-5xl" />,
       name: "JavaScript",
     },
@@ -72,6 +79,7 @@ export default function SkillsSection() {
 
     { icon: <SiNextdotjs className="text-2xl md:text-5xl" />, name: "Next.js" },
     { icon: <SiRedux className="text-2xl md:text-5xl" />, name: "Redux" },
+
     {
       icon: <BiLogoNodejs className="text-2xl md:text-5xl" />,
       name: "Node.js",
@@ -84,6 +92,14 @@ export default function SkillsSection() {
     {
       icon: <SiPostgresql className="text-2xl md:text-5xl" />,
       name: "PostgreSQL",
+    },
+    {
+      icon: <SiPhp className="text-2xl md:text-5xl" />,
+      name: "PHP",
+    },
+    {
+      icon: <SiLaravel className="text-2xl md:text-5xl" />,
+      name: "Laravel",
     },
     { icon: <SiMysql className="text-2xl md:text-5xl" />, name: "MySQL" },
     { icon: <SiFirebase className="text-2xl md:text-5xl" />, name: "Firebase" },
@@ -123,7 +139,7 @@ export default function SkillsSection() {
         hidden: {},
         visible: { transition: { staggerChildren: 0.1 } },
       }}
-      className="mb-5  "
+      className="mb-5 "
     >
       <motion.h2
         className="text-2xl font-semibold text-gray-200 mb-5"
@@ -142,7 +158,7 @@ export default function SkillsSection() {
         {items.map((item, index) => (
           <motion.div
             key={index}
-            className="rounded px-3 py-3 flex gap-3 flex-col items-center bg-[#332d43] text-white hover:scale-110 transition-transform duration-300"
+            className="rounded px-4 py-3 flex gap-3 flex-col items-center bg-[#332d43] text-white hover:scale-110 transition-transform duration-300"
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 },

@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased not-dark:bg-[#887baf]">
+      <body className="antialiased not-dark:bg-[#5e557b]">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
