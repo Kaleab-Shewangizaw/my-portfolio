@@ -20,9 +20,9 @@ export default function AboutMe() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6, delay: 0.1 }}
+      transition={{ duration: 0.8, delay: 0.7 }}
       id="aboutMe"
-      className="not-dark:bg-gray-300 dark:bg-[#41385d] py-5 md:py-7 px-3  md:px-7 rounded-md flex flex-col lg:flex-row md:gap-5 mb-10  gap-5"
+      className="not-dark:bg-gray-100 dark:bg-[#41385d] py-5 md:py-7 px-3  md:px-7 rounded-md flex flex-col lg:flex-row md:gap-5 mb-10  gap-5"
     >
       <div className="flex flex-col items-center lg:w-1/3">
         <Image

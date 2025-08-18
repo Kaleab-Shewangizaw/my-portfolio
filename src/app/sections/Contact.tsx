@@ -9,10 +9,12 @@ import {
   BiLogoInstagram,
   BiLogoDribbble,
 } from "react-icons/bi";
+import { Input } from "@/components/ui/input";
+import { BsTwitterX } from "react-icons/bs";
 
 export default function ContactSection() {
   return (
-    <section className="py-16 px-4 lg:px-16 bg-gradient-to-b from-[#332d43] to-[#41385d] text-white">
+    <section className="py-16 px-4 lg:px-16  text-white">
       <motion.h2
         className="text-3xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: 30 }}
@@ -32,12 +34,12 @@ export default function ContactSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <input
+          <Input
             type="text"
             placeholder="Your Name"
             className="rounded-md p-3 bg-[#3c324f] placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
-          <input
+          <Input
             type="email"
             placeholder="Your Email"
             className="rounded-md p-3 bg-[#3c324f] placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600"
@@ -63,47 +65,40 @@ export default function ContactSection() {
             I’m always open to discussing new projects, creative ideas, or
             opportunities to be part of your visions. Feel free to reach out!
           </p>
+          <Button>Book a call</Button>
           <div className="flex gap-4 mt-4">
-            <a
-              href="https://github.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-[#574a7c] rounded-full hover:bg-purple-600 transition-colors"
-            >
-              <BiLogoGithub className="text-xl" />
-            </a>
-            <a
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-[#574a7c] rounded-full hover:bg-purple-600 transition-colors"
-            >
-              <BiLogoLinkedin className="text-xl" />
-            </a>
-            <a
-              href="https://t.me/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-[#574a7c] rounded-full hover:bg-purple-600 transition-colors"
-            >
-              <BiLogoTelegram className="text-xl" />
-            </a>
-            <a
-              href="https://dribbble.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-[#574a7c] rounded-full hover:bg-purple-600 transition-colors"
-            >
-              <BiLogoDribbble className="text-xl" />
-            </a>
-            <a
-              href="https://instagram.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-[#574a7c] rounded-full hover:bg-purple-600 transition-colors"
-            >
-              <BiLogoInstagram className="text-xl" />
-            </a>
+            {[
+              { icon: BsTwitterX, href: "https://x.com/KaleabShew27310" },
+              {
+                icon: BiLogoLinkedin,
+                href: "https://linkedin.com/in/your-profile",
+              },
+              { icon: BiLogoTelegram, href: "https://t.me/yourusername" },
+              {
+                icon: BiLogoInstagram,
+                href: "https://instagram.com/yourusername",
+              },
+              { icon: BiLogoGithub, href: "https://github.com/yourusername" },
+              {
+                icon: BiLogoDribbble,
+                href: "https://dribbble.com/yourusername",
+              },
+            ].map((ic, i) => {
+              const Icon = ic.icon;
+              return (
+                <motion.a
+                  key={i}
+                  href={ic.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer text-xl text-white flex items-center justify-center"
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Icon />
+                </motion.a>
+              );
+            })}
           </div>
         </motion.div>
       </div>
