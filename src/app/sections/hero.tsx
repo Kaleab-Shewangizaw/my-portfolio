@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Kal_X from "../../public/Kal_X.png";
+import Kal_X from "../../../public/Kal_X.png";
 import { Inter } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";

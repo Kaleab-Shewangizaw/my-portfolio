@@ -1,11 +1,11 @@
 "use client";
 
-import AboutMe from "@/componenets/aboutMe";
-import ContactSection from "@/componenets/Contact";
-import HeroSection from "@/componenets/hero";
+import AboutMe from "@/app/sections/aboutMe";
+import ContactSection from "@/app/sections/Contact";
+import HeroSection from "@/app/sections/hero";
 import Navbar from "@/componenets/navbar";
-import ProjectsSection from "@/componenets/Projects";
-import SkillsSection from "@/componenets/Skills";
+import ProjectsSection from "@/app/sections/Projects";
+import SkillsSection from "@/app/sections/Skills";
 import { ModeToggle } from "@/componenets/themeToggle";
 
 export default function Home() {

@@ -13,7 +13,7 @@ export default function AboutMeDesc() {
     >
       <motion.p
         className="text-base leading-relaxed text-justify"
-        initial={{ opacity: 0, x: -30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3, duration: 0.7 }}
       >

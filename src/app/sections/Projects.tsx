@@ -7,8 +7,8 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import DevProjectImg from "../../public/file.svg";
-import DesignProjectImg from "../../public/file.svg";
+import DevProjectImg from "../../../public/file.svg";
+import DesignProjectImg from "../../../public/file.svg";
 
 const devProjects = [
   {

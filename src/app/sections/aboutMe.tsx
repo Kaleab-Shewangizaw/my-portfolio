@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import Kal_X from "../../public/my.png";
+import Kal_X from "../../../public/my.png";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import AboutMeDesc from "./aboutMeDesc";
-import EducationDesc from "./EducationDesc";
-import Hobbiesdesc from "./HobbiesDesc";
-import FunFactDesc from "./FunFactDesc";
+import AboutMeDesc from "../../componenets/aboutMeDesc";
+import EducationDesc from "../../componenets/EducationDesc";
+import Hobbiesdesc from "../../componenets/HobbiesDesc";
+import FunFactDesc from "../../componenets/FunFactDesc";
 import { motion } from "framer-motion";
 
 import { BadgeCheckIcon } from "lucide-react";
@@ -60,7 +60,7 @@ export default function AboutMe() {
         <div className="flex flex-col  gap-3">
           <div className=" self-center flex gap-0  md:gap-5 ">
             <Button
-              className="text-[15px] px-3 font-normal"
+              className="text-[15px] px-3 "
               variant={`${content === "AboutMe" ? "default" : "ghost"}`}
               onClick={() => {
                 setContent("AboutMe");
@@ -69,7 +69,7 @@ export default function AboutMe() {
               About me
             </Button>
             <Button
-              className="text-[15px] px-3 font-normal"
+              className="text-[15px] px-3 "
               variant={`${content === "Education" ? "default" : "ghost"}`}
               onClick={() => {
                 setContent("Education");
@@ -78,7 +78,7 @@ export default function AboutMe() {
               Education
             </Button>
             <Button
-              className="text-[15px] px-3 font-normal"
+              className="text-[15px] px-3 "
               variant={`${content === "Hobbies" ? "default" : "ghost"}`}
               onClick={() => {
                 setContent("Hobbies");
@@ -87,7 +87,7 @@ export default function AboutMe() {
               Hobbies
             </Button>
             <Button
-              className="text-[15px] px-3 font-normal"
+              className="text-[15px] px-3 "
               variant={`${content === "FunFact" ? "default" : "ghost"}`}
               onClick={() => {
                 setContent("FunFact");
