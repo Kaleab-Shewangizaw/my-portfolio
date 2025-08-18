@@ -4,8 +4,6 @@ import {
   Music,
   BookOpen,
   Code2,
-  Dumbbell,
-  Camera,
   Globe,
   Gamepad2,
   Film,
