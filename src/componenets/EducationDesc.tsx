@@ -32,7 +32,7 @@ export default function EducationDesc() {
       {/* Education */}
       <motion.ul
         variants={item}
-        className="flex flex-col gap-2 bg-gray-900/60 p-4 rounded-2xl shadow-md hover:shadow-lg transition"
+        className="flex flex-col gap-4 bg-gray-900/60 p-4 rounded-2xl shadow-md hover:shadow-lg transition"
       >
         <li className="font-semibold text-white">Education</li>
         <li className="text-gray-300 font-bold">
@@ -57,7 +57,7 @@ export default function EducationDesc() {
       {/* Certificates */}
       <motion.ul
         variants={item}
-        className="flex flex-col gap-2 bg-gray-900/60 p-4 rounded-2xl shadow-md hover:shadow-lg transition text-gray-300"
+        className="flex flex-col gap-4 bg-gray-900/60 p-4 rounded-2xl shadow-md hover:shadow-lg transition text-gray-300"
       >
         <li className="font-semibold text-white">Certificates</li>
         <li className="flex items-center gap-2">

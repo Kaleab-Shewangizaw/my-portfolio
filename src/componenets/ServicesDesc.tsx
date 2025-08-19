@@ -67,7 +67,7 @@ export default function ServicesDesc() {
       className=""
     >
       <h1 className="font-bold text-lg mb-2">My services</h1>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         {services.map(({ Icon, label, description }, i) => (
           <motion.div
             key={i}
@@ -77,7 +77,7 @@ export default function ServicesDesc() {
             className="w-full"
           >
             <Card className="flex w-full items-center gap-2 rounded-xl border border-gray-700/30 dark:border-white/10 bg-white/60 dark:bg-gray-800/40 px-3 py-2 shadow-sm">
-              <CardHeader className="flex flex-col  w-full items-center justify-center p-6 py-3">
+              <CardHeader className="flex flex-col  w-full items-center justify-center px-2 py-3">
                 <Icon />
                 <CardTitle>{label}</CardTitle>
                 <CardDescription>{description}</CardDescription>

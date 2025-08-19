@@ -200,7 +200,7 @@ export default function ProjectsSection() {
       {/* Design Projects */}
       <div>
         <h3 className="text-2xl font-semibold mb-6">Design Projects</h3>
-        <div className="flex  gap-4 flex-wrap justify-center">
+        <div className="flex  gap-x-10 gap-y-5 flex-wrap justify-center">
           {designProjects.map((proj, i) => (
             <motion.div
               key={i}
@@ -220,7 +220,7 @@ export default function ProjectsSection() {
                       setHovered(false);
                     }}
                   >
-                    <Image src={proj.img} alt={proj.name} width={400} />
+                    <Image src={proj.img} alt={proj.name} width={450} />
 
                     <div className="absolute bottom-0 flex flex-col px-2 py-2 w-full md:hidden">
                       <h4 className="text-sm font-bold   text-gray-200 w-full bg-black/80 p-2">
