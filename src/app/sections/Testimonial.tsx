@@ -3,7 +3,13 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import {
+  ArrowDown,
+  ChevronLeft,
+  ChevronRight,
+  Quote,
+  Star,
+} from "lucide-react";
 
 export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -66,7 +72,7 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="py-20 px-4 lg:px-8 bg-muted/30 rounded-lg"
+      className="pt-20 pb-5 px-4 lg:px-8 bg-muted/30 rounded-t-lg "
     >
       <div className="max-w-6xl mx-auto">
         <div className="relative max-w-4xl mx-auto">
@@ -194,14 +200,17 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto not-dark:text-white">
             Let&apos;s discuss how I can help bring your project to life with
             clean code and innovative solutions.
           </p>
-          <Button size="lg" className="rounded-full gap-2">
-            Start a Project
-            <ChevronRight className="w-4 h-4" />
-          </Button>
+        </motion.div>
+        <motion.div
+          className=" rounded-full mt-2 mx-auto  text-center flex justify-center"
+          animate={{ y: [0, 12, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <ArrowDown size={30} />{" "}
         </motion.div>
       </div>
     </section>

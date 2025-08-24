@@ -16,7 +16,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative mt-20 bg-gradient-to-b from-background to-background/95 border-t border-border/50">
+    <footer className="relative mt-20 bg-gradient-to-b from-background to-background/35 border-t border-border/50">
       {/* Decorative elements */}
       <div className="absolute top-0 left-1/4 w-20 h-20 bg-purple-500/10 rounded-full blur-xl"></div>
       <div className="absolute top-0 right-1/4 w-16 h-16 bg-blue-500/10 rounded-full blur-xl"></div>

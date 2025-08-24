@@ -41,14 +41,14 @@ export default function ContactSection() {
     {
       icon: <Mail className="w-5 h-5" />,
       label: "Email",
-      value: "kaleab@example.com",
-      href: "mailto:kaleab@example.com",
+      value: "kaleab.stk@gmail.com",
+      href: "mailto:kaleab.stk@gmail.com",
     },
     {
       icon: <Phone className="w-5 h-5" />,
       label: "Phone",
-      value: "+251 9XX XXX XXX",
-      href: "tel:+251900000000",
+      value: "+251 906 983 178",
+      href: "tel:+251906983178",
     },
     {
       icon: <MapPin className="w-5 h-5" />,
@@ -92,7 +92,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 px-4 lg:px-8 bg-muted/30">
+    <section id="contact" className="pb-20 pt-5 mt-0 px-4 lg:px-8 bg-muted/30">
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -101,10 +101,10 @@ export default function ContactSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-purple-100 not-dark:to-blue-200 bg-clip-text text-transparent">
             Let&apos;s Work Together
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg not-dark:text-gray-200">
             I&apos;m always open to discussing new projects, creative ideas, or
             opportunities to be part of your visions.
           </p>
