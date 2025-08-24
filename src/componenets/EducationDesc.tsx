@@ -49,10 +49,25 @@ export default function EducationDesc() {
                   />
                 </div>
                 <div>
-                  <p className="font-medium">BSc in Engineering</p>
+                  <p className="font-medium">BSc in Chemical Engineering</p>
                   <p className="text-sm text-muted-foreground">
                     Addis Ababa University (AAiT)
                   </p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="mt-1.5">
+                  <Image
+                    src={A2SV}
+                    alt="AAU Logo"
+                    width={32}
+                    height={32}
+                    className="rounded bg-white"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium">A2SV</p>
+                  <p className="text-sm text-muted-foreground">ex-student</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">

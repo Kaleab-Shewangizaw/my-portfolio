@@ -37,7 +37,6 @@ export default function FunFactDesc() {
           <motion.div
             key={i}
             variants={item}
-            whileHover={{ y: -3 }}
             className="flex items-start gap-3 p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm hover:shadow-md transition-all"
           >
             <span className="text-2xl">{fact.emoji}</span>
@@ -45,7 +44,7 @@ export default function FunFactDesc() {
               <p className="text-sm">{fact.text}</p>
               {fact.text.includes("Coffee") && (
                 <button
-                  className="text-xs mt-2 text-primary hover:underline flex items-center gap-1"
+                  className="text-xs mt-2 text-primary hover:underline flex items-center gap-1 cursor-pointer"
                   onClick={() =>
                     window.open("https://buymeacoffee.com/kal_x", "_blank")
                   }
