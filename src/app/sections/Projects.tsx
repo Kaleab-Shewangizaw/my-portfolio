@@ -87,6 +87,7 @@ const designProjects = [
 ];
 
 export default function ProjectsSection() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<
     "development" | "design"
