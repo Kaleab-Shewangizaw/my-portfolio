@@ -106,10 +106,10 @@ export default function ProjectsSection() {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-white not-dark:to-blue-300 bg-clip-text text-transparent">
           Featured Projects
         </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-muted-foreground max-w-2xl mx-auto not-dark:text-gray-300">
           Here are some of my recent projects that showcase my skills in
           development and design
         </p>
@@ -144,8 +144,8 @@ export default function ProjectsSection() {
             transition={{ duration: 0.4 }}
             className="mb-20"
           >
-            <h3 className="text-2xl font-semibold mb-10 text-center flex items-center justify-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <h3 className="text-2xl font-semibold mb-10 text-center flex items-center justify-center gap-2 text-gray-200">
+              <div className="w-2 h-2 rounded-full bg-gray-200 animate-pulse "></div>
               Development Projects
             </h3>
 
@@ -236,8 +236,8 @@ export default function ProjectsSection() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
           >
-            <h3 className="text-2xl font-semibold mb-10 text-center flex items-center justify-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <h3 className="text-2xl font-semibold mb-10 text-center flex items-center text-gray-200 justify-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-gray-200 animate-pulse"></div>
               Design Projects
             </h3>
 
@@ -273,7 +273,7 @@ export default function ProjectsSection() {
                       <div className="flex gap-2">
                         <Button
                           size="sm"
-                          className="rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20"
+                          className="rounded-full bg-white/10 not-dark:bg-black/80 not-dark:hover:bg-black/60 backdrop-blur-sm text-white hover:bg-white/20"
                         >
                           <DribbbleIcon className="w-4 h-4 mr-1" />
                           Dribbble
@@ -281,7 +281,7 @@ export default function ProjectsSection() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="rounded-full border-white/30 text-white hover:bg-white/10"
+                          className="rounded-full border-white/30 text-white  hover:bg-black/10 not-dark:border-black/80 not-dark:bg-black/50"
                         >
                           <FigmaIcon className="w-4 h-4 mr-1" />
                           Figma

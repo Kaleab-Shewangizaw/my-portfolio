@@ -72,7 +72,7 @@ export default function SkillsSection() {
     {
       icon: <SiShadcnui className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Shadcn UI",
-      level: "Intermediate",
+      level: "Advanced",
     },
     {
       icon: <BiLogoJavascript className="w-6 h-6 md:w-8 md:h-8" />,
@@ -87,7 +87,7 @@ export default function SkillsSection() {
     {
       icon: <BiLogoPython className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Python",
-      level: "Intermediate",
+      level: "Advanced",
     },
     {
       icon: <BiLogoReact className="w-6 h-6 md:w-8 md:h-8" />,
@@ -244,7 +244,7 @@ export default function SkillsSection() {
       className="mb-10 w-full"
     >
       <motion.h2
-        className="text-2xl font-semibold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2"
+        className="text-2xl font-semibold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-white not-dark:to-blue-300 bg-clip-text text-transparent flex items-center gap-2"
         initial={{ opacity: 0, y: 20 }}
         animate={controls}
         variants={{
@@ -253,7 +253,7 @@ export default function SkillsSection() {
         }}
         transition={{ duration: 0.6 }}
       >
-        <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+        <div className="w-2 h-2 rounded-full bg-gray-100 animate-pulse"></div>
         {title}
       </motion.h2>
 
@@ -266,7 +266,6 @@ export default function SkillsSection() {
               hidden: { opacity: 0, y: 20, scale: 0.9 },
               visible: { opacity: 1, y: 0, scale: 1 },
             }}
-            whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
             <div className="text-primary mb-3 p-2 rounded-lg bg-primary/10 group-hover:scale-110 transition-transform duration-300">
               {item.icon}
@@ -314,10 +313,10 @@ export default function SkillsSection() {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-white not-dark:to-blue-300 bg-clip-text text-transparent">
           Skills & Technologies
         </h1>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-muted-foreground not-dark:text-gray-300 max-w-2xl mx-auto">
           Here are the technologies and tools I work with to bring ideas to life
         </p>
       </motion.div>
@@ -329,7 +328,7 @@ export default function SkillsSection() {
       </div>
 
       {/* Proficiency Legend */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={controls}
         variants={{
@@ -356,7 +355,7 @@ export default function SkillsSection() {
             <span className="text-sm">Basic</span>
           </div>
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

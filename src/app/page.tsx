@@ -17,7 +17,7 @@ export default function Home() {
           <HeroSection />
         </section>
         <div className="md:w-[90%] md:mt-10 mx-auto">
-          <section id="about">
+          <section id="about" className="pt-16">
             <AboutMe />
           </section>
           <section id="skills">
