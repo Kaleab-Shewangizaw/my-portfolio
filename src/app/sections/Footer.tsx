@@ -12,22 +12,22 @@ export default function Footer() {
   };
 
   const handleEmailClick = () => {
-    window.location.href = "mailto:kaleab@example.com";
+    window.location.href = "mailto:kaleab.stk@gmail.com";
   };
 
   return (
-    <footer className="relative mt-20 bg-gradient-to-b from-background to-background/35 border-t border-border/50">
+    <footer className="relative mt-20 bg-gradient-to-b from-transpatent to-background/20">
       {/* Decorative elements */}
       <div className="absolute top-0 left-1/4 w-20 h-20 bg-purple-500/10 rounded-full blur-xl"></div>
       <div className="absolute top-0 right-1/4 w-16 h-16 bg-blue-500/10 rounded-full blur-xl"></div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-3">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-6"
+          className="flex flex-col items-center gap-2"
         >
           {/* Main footer content */}
           <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-4xl gap-4">
@@ -35,13 +35,13 @@ export default function Footer() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
-                className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
+                className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-purple-800 not-dark:to-blue-800  bg-clip-text text-transparent"
               >
                 [Kal_X]
               </motion.div>
 
-              <div className="hidden md:flex items-center gap-1 text-sm text-muted-foreground">
-                <span>© {currentYear}</span>
+              <div className="hidden md:flex items-center gap-1 text-sm text-muted-foreground not-dark:text-gray-200">
+                <span>&copy; {currentYear}</span>
                 <span>•</span>
                 <span>Made with</span>
                 <motion.div
@@ -54,8 +54,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Mobile love message */}
-            <div className="md:hidden flex items-center gap-1 text-sm text-muted-foreground">
+            <div className="md:hidden flex items-center gap-1 text-sm text-muted-foreground not-dark:text-gray-200">
               <span>Made with</span>
               <Heart className="w-4 h-4 mx-1 text-red-500 fill-current" />
               <span>by Kaleab</span>
@@ -75,38 +74,25 @@ export default function Footer() {
 
               <Button
                 variant="ghost"
-                size="icon"
+                size="sm"
                 onClick={scrollToTop}
-                className="rounded-full"
+                className="rounded-full flex"
                 aria-label="Scroll to top"
               >
-                <ArrowUp className="w-4 h-4" />
+                <ArrowUp className="w-4 h-4" /> Back to top
               </Button>
             </div>
           </div>
 
           {/* Copyright for mobile */}
-          <div className="md:hidden text-xs text-muted-foreground">
+          <div className="md:hidden text-xs text-muted-foreground not-dark:text-gray-200">
             © {currentYear} Kal_X • All rights reserved
           </div>
 
           {/* Copyright for desktop */}
-          <div className="hidden md:block text-xs text-muted-foreground">
-            © {currentYear} Kal_X • All rights reserved • Built with Next.js &
-            Tailwind CSS
+          <div className="hidden md:block text-xs text-muted-foreground not-dark:text-gray-200">
+            © {currentYear} Kal_X • All rights reserved
           </div>
-
-          {/* Inspirational quote */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-xs text-muted-foreground text-center max-w-md italic"
-          >
-            &quot;Turning ideas into digital experiences, one line of code at a
-            time.&quot;
-          </motion.p>
         </motion.div>
       </div>
     </footer>
