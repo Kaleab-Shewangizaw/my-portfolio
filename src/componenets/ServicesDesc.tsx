@@ -1,7 +1,7 @@
 "use client";
 
-import { Code, Layout, Monitor, Database } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { Code, Layout, Monitor, Database, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   Card,
   CardDescription,
@@ -11,24 +11,19 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function ServicesDesc() {
-  const prefersReducedMotion = useReducedMotion();
-
   const container = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.5,
-        delayChildren: 0.15,
-        staggerChildren: prefersReducedMotion ? 0 : 0.06,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const item = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 12 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.35 } },
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
   };
 
   const services = [
@@ -36,26 +31,29 @@ export default function ServicesDesc() {
       Icon: Code,
       label: "Web Development",
       description:
-        "Building responsive high performance websites and web apps using modern tech stacks. ",
+        "Building responsive high performance websites and web apps using modern tech stacks.",
+      color: "from-blue-500 to-cyan-500",
     },
     {
       Icon: Layout,
-      label: "UI/UX design",
+      label: "UI/UX Design",
       description:
-        "Designing intuitive interfaces and seamless user experiances that captive and convert users.",
+        "Designing intuitive interfaces and seamless user experiences that captivate and convert users.",
+      color: "from-purple-500 to-pink-500",
     },
     {
       Icon: Monitor,
-      label: "Frontend Design",
+      label: "Frontend Development",
       description:
-        "Creating visually appealing and interactive frontends with React, TailwindCSS, and Modern design patterns.",
+        "Creating visually appealing and interactive frontends with React, TailwindCSS, and modern design patterns.",
+      color: "from-green-500 to-emerald-500",
     },
-
     {
       Icon: Database,
       label: "Backend Development",
       description:
-        "Designing Databases, APIs and Authentication systems for websites using modern and reailable technologies.",
+        "Designing databases, APIs and authentication systems using modern and reliable technologies.",
+      color: "from-orange-500 to-red-500",
     },
   ];
 
@@ -64,25 +62,39 @@ export default function ServicesDesc() {
       variants={container}
       initial="hidden"
       animate="visible"
-      className=""
+      className="space-y-5"
     >
-      <h1 className="font-bold text-lg mb-2">My services</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-        {services.map(({ Icon, label, description }, i) => (
+      <h1 className="font-bold text-xl mb-2 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+        My Services
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {services.map(({ Icon, label, description, color }, i) => (
           <motion.div
             key={i}
             variants={item}
-            whileHover={{ y: -2, scale: 1.01 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full"
+            whileHover={{ y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
-            <Card className="flex w-full items-center gap-2 rounded-xl border border-gray-700/30 dark:border-white/10 bg-white/60 dark:bg-gray-800/40 px-3 py-2 shadow-sm">
-              <CardHeader className="flex flex-col  w-full items-center justify-center px-2 py-3">
-                <Icon />
-                <CardTitle>{label}</CardTitle>
-                <CardDescription>{description}</CardDescription>
-                <Button className="self-end">Hire me</Button>
+            <Card className="h-full border-border/50 bg-background/50 backdrop-blur-sm overflow-hidden group hover:shadow-lg transition-all">
+              <CardHeader className="pb-3">
+                <div
+                  className={`w-12 h-12 rounded-lg bg-gradient-to-r ${color} flex items-center justify-center text-white mb-3`}
+                >
+                  <Icon className="w-6 h-6" />
+                </div>
+                <CardTitle className="text-lg">{label}</CardTitle>
+                <CardDescription className="mt-2">
+                  {description}
+                </CardDescription>
               </CardHeader>
+              <div className="px-6 pb-4">
+                <Button
+                  variant="ghost"
+                  className="px-3 group-hover:translate-x-1 transition-transform"
+                >
+                  Learn more <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </div>
             </Card>
           </motion.div>
         ))}

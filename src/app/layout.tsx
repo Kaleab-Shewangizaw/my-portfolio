@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/componenets/themeProvider";
-import { Toaster } from "sonner";
 import Footer from "./sections/Footer";
 
 export const metadata: Metadata = {
@@ -23,8 +22,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toaster />
-
           <div className="relative">
             {children} <Footer />
           </div>

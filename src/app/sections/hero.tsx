@@ -5,13 +5,7 @@ import Kal_X from "../../../public/Kal_X.png";
 import { Inter } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import {
-  BiLogoDribbble,
-  BiLogoGithub,
-  BiLogoInstagram,
-  BiLogoLinkedin,
-  BiLogoTelegram,
-} from "react-icons/bi";
+import { BiLogoGithub, BiLogoLinkedin, BiLogoTelegram } from "react-icons/bi";
 import { BsTwitterX } from "react-icons/bs";
 
 const inter = Inter({
@@ -22,149 +16,153 @@ const inter = Inter({
 export default function HeroSection() {
   return (
     <div
-      className={`relative h-screen -mt-10  flex flex-col lg:flex-row items-center justify-center lg:justify-between  px-5 ${inter.className}`}
+      className={`relative h-screen -mt-10 flex flex-col items-center justify-center px-5 overflow-hidden ${inter.className}`}
     >
+      {/* Background with gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background z-0" />
+
       <Image
         src={Kal_X}
-        alt="main img"
+        alt="Kaleab Shewangizaw"
         fill
-        className="absolute object-contain dark:brightness-[0.6] -z-10"
+        className="absolute object-cover dark:brightness-[0.2] brightness-[0.8] -z-10"
         priority
       />
 
-      <motion.div
-        className="z-10 flex flex-col gap-5 lg:max-w-fit text-center lg:text-left  "
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.p
-          className="text-lg text-gray-300 tracking-widest"
-          initial={{ opacity: 0, y: -10 }}
+      {/* Animated floating elements */}
+      <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-purple-500 opacity-20 animate-pulse"></div>
+      <div className="absolute top-1/3 right-1/4 w-6 h-6 rounded-full bg-blue-500 opacity-15 animate-bounce"></div>
+      <div className="absolute bottom-1/4 left-1/3 w-3 h-3 rounded-full bg-cyan-400 opacity-25 animate-ping"></div>
+
+      <div className="z-10 flex flex-col items-center text-center max-w-3xl space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border mb-4"
         >
-          Hello,
-        </motion.p>
+          <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></div>
+          <span className="text-sm font-medium">
+            Available for new projects
+          </span>
+        </motion.div>
 
         <motion.h1
-          className="text-4xl sm:text-5xl font-light text-white tracking-wide "
-          initial={{ opacity: 0, y: -20 }}
+          className="text-5xl md:text-6xl font-bold text-foreground"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.7 }}
+          transition={{ delay: 0.2, duration: 0.7 }}
         >
-          I&apos;m <span className="font-bold">Kaleab Shewangizaw [Kal_X]</span>
+          Creating Digital{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
+            Experiences
+          </span>
         </motion.h1>
 
-        <motion.p
-          className="text-gray-300 not-dark:text-gray-200 mt-2 text-base sm:text-lg"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.7 }}
-        >
-          A <span className="text-white font-bold">Full Stack Developer</span>,{" "}
-          <span className="text-white font-bold">Web Designer</span>, Tech
-          Enthusiast, and Open Source Contributor.
-        </motion.p>
-        <motion.p
-          className="mt-4 text-gray-100 text-center font-semibold lg:text-left text-sm sm:text-base"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 0.7 }}
-        >
-          I love building clean, interactive web experiences and exploring new
-          tech trends.
-        </motion.p>
         <motion.div
-          className=" md:hidden flex gap-3 "
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.2, duration: 0.7, staggerChildren: 0.1 }}
+          className="text-xl md:text-2xl text-muted-foreground font-light"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.7 }}
+        >
+          <span className="text-foreground font-medium">
+            Kaleab Shewangizaw
+          </span>{" "}
+          • Full Stack Developer
+        </motion.div>
+
+        <motion.p
+          className="text-lg text-muted-foreground max-w-2xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.7 }}
+        >
+          I build modern, responsive web applications with clean code and
+          intuitive user interfaces.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-wrap gap-4 mt-8 justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.7 }}
+        >
+          <Button size="lg" className="rounded-full px-8 shadow-lg">
+            View My Work
+          </Button>
+          <Button size="lg" variant="outline" className="rounded-full px-8">
+            Let&apos;s Connect
+          </Button>
+        </motion.div>
+
+        <motion.div
+          className="flex gap-4 mt-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.7 }}
         >
           {[
-            { icon: BsTwitterX, href: "https://x.com/KaleabShew27310" },
+            {
+              icon: BsTwitterX,
+              href: "https://x.com/KaleabShew27310",
+              label: "Twitter",
+            },
             {
               icon: BiLogoLinkedin,
               href: "https://linkedin.com/in/your-profile",
+              label: "LinkedIn",
             },
-            { icon: BiLogoTelegram, href: "https://t.me/yourusername" },
             {
-              icon: BiLogoInstagram,
-              href: "https://instagram.com/yourusername",
+              icon: BiLogoGithub,
+              href: "https://github.com/yourusername",
+              label: "GitHub",
             },
-            { icon: BiLogoGithub, href: "https://github.com/yourusername" },
-            { icon: BiLogoDribbble, href: "https://dribbble.com/yourusername" },
-          ].map((ic, i) => {
-            const Icon = ic.icon;
+            {
+              icon: BiLogoTelegram,
+              href: "https://t.me/yourusername",
+              label: "Telegram",
+            },
+          ].map((social, i) => {
+            const Icon = social.icon;
             return (
               <motion.a
                 key={i}
-                href={ic.href}
+                href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer text-xl text-white flex items-center justify-center"
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
+                className="p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                whileHover={{ scale: 1.1, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label={social.label}
               >
-                <Icon />
+                <Icon className="text-xl" />
               </motion.a>
             );
           })}
         </motion.div>
+      </div>
 
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+      >
+        <div className="text-sm text-muted-foreground mb-2">
+          Scroll to explore
+        </div>
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 mt-5 justify-center lg:justify-start"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.8 }}
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <Button className="text-lg" variant="outline">
-            See my Work
-          </Button>
-          <Button className="text-lg">Let&apos;s work together</Button>
+          <div className="w-6 h-10 border-2 border-border rounded-full flex justify-center">
+            <motion.div
+              className="w-1 h-3 bg-primary rounded-full mt-2"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
+          </div>
         </motion.div>
-      </motion.div>
-
-      {/* Social Buttons */}
-      <motion.div
-        className="absolute right-5 bottom-10 hidden md:flex flex-col gap-3 lg:static lg:flex-row lg:mt-0 lg:ml-auto"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.2, duration: 0.7, staggerChildren: 0.1 }}
-      >
-        {[
-          { icon: BsTwitterX, href: "https://x.com/KaleabShew27310" },
-          {
-            icon: BiLogoLinkedin,
-            href: "https://linkedin.com/in/your-profile",
-          },
-          { icon: BiLogoTelegram, href: "https://t.me/yourusername" },
-          { icon: BiLogoInstagram, href: "https://instagram.com/yourusername" },
-          { icon: BiLogoGithub, href: "https://github.com/yourusername" },
-          { icon: BiLogoDribbble, href: "https://dribbble.com/yourusername" },
-        ].map((ic, i) => {
-          const Icon = ic.icon;
-          return (
-            <motion.a
-              key={i}
-              href={ic.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-md hover:bg-[#574a7c] bg-[#483e6b] dark:bg-[#292047] cursor-pointer text-xl text-white flex items-center justify-center"
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Icon />
-            </motion.a>
-          );
-        })}
-      </motion.div>
-      <motion.div
-        className="absolute bottom-0 md:bottom-15  left-20 -translate-x-1/2 text-white rounded-lg bg-[#483e6b] px-4 py-2 text-sm"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
-      >
-        ⬇ Scroll
       </motion.div>
     </div>
   );

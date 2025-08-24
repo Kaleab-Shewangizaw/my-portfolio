@@ -1,17 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Coffee } from "lucide-react";
 
 export default function FunFactDesc() {
   const funFacts = [
-    { text: "So handsome, but still single. 😅" },
-    { text: "Love Jeet Kune Doo 🥋, big fan of Bruce Lee." },
-    { text: "Coffee connoisseur ☕" },
-
-    {
-      text: "Obsessed with puzzles & problem solving 🧩",
-    },
-    { text: "I forgot the rest 😅" },
+    { text: "So handsome, but still single. 😅", emoji: "😊" },
+    { text: "Love Jeet Kune Doo, big fan of Bruce Lee.", emoji: "🥋" },
+    { text: "Coffee connoisseur", emoji: "☕" },
+    { text: "Obsessed with puzzles & problem solving", emoji: "🧩" },
+    { text: "I forgot the rest 😅", emoji: "🤔" },
   ];
 
   const container = {
@@ -29,29 +27,37 @@ export default function FunFactDesc() {
       variants={container}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+      className="space-y-5"
     >
-      {funFacts.map((fact, i) => (
-        <motion.div
-          key={i}
-          variants={item}
-          className="flex items-center gap-2 p-3 rounded-xl border border-gray-700/30 dark:border-white/10 bg-gray-800/30 dark:bg-gray-700/40 hover:bg-gray-800/50 transition cursor-default"
-        >
-          <span className="text-sm">{fact.text}</span>
-          {fact.text.includes("Coffee") && (
-            <button
-              role="img"
-              aria-label="buy coffee"
-              className="text-sm not-dark:text-blue-800 dark:text-blue-400 hover:underline cursor-pointer"
-              onClick={() =>
-                window.open("https://buymeacoffee.com/kal_x", "_blank")
-              }
-            >
-              buy me a coffee{" "}
-            </button>
-          )}
-        </motion.div>
-      ))}
+      <h1 className="font-bold text-xl mb-2 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+        Fun Facts About Me
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {funFacts.map((fact, i) => (
+          <motion.div
+            key={i}
+            variants={item}
+            whileHover={{ y: -3 }}
+            className="flex items-start gap-3 p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm hover:shadow-md transition-all"
+          >
+            <span className="text-2xl">{fact.emoji}</span>
+            <div>
+              <p className="text-sm">{fact.text}</p>
+              {fact.text.includes("Coffee") && (
+                <button
+                  className="text-xs mt-2 text-primary hover:underline flex items-center gap-1"
+                  onClick={() =>
+                    window.open("https://buymeacoffee.com/kal_x", "_blank")
+                  }
+                >
+                  <Coffee className="w-3 h-3" />
+                  Buy me a coffee
+                </button>
+              )}
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </motion.div>
   );
 }
