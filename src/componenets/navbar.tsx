@@ -37,7 +37,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`w-full md:w-[90%]   fixed top-0 left-[5%] z-50 transition-all duration-300 ${
+      className={`w-full md:w-[90%]   fixed top-0 md:left-[5%] z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border/50 shadow-sm"
           : "bg-gray-050"

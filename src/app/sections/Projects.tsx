@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { BsGithub, BsPinterest } from "react-icons/bs";
 import { DribbbleIcon, ExternalLink, FigmaIcon, Star } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 const devProjects = [
   {
@@ -315,23 +316,29 @@ export default function ProjectsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-center mt-16 p-8 bg-muted/50 rounded-xl"
+        className="text-center mt-16 p-8 bg-muted/20 rounded-xl"
       >
-        <h3 className="text-2xl font-semibold mb-4">Want to see more?</h3>
-        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+        <h3 className="text-2xl font-semibold mb-4 not-dark:text-white">
+          Want to see more?
+        </h3>
+        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto not-dark:text-gray-200">
           I&apos;m constantly working on new projects and improving my skills.
           Check out my GitHub for more code or my design profiles for UI/UX
           work.
         </p>
         <div className="flex gap-4 justify-center flex-wrap">
-          <Button className="rounded-full gap-2">
-            <BsGithub className="w-4 h-4" />
-            GitHub Profile
-          </Button>
-          <Button variant="outline" className="rounded-full gap-2">
-            <DribbbleIcon className="w-4 h-4" />
-            Design Portfolio
-          </Button>
+          <Link href="https://github.com/Kaleab-Shewangizaw" target="_blank">
+            <Button className="rounded-full gap-2">
+              <BsGithub className="w-4 h-4" />
+              GitHub Profile
+            </Button>
+          </Link>
+          <Link href="" target="_blank">
+            <Button variant="outline" className="rounded-full gap-2">
+              <DribbbleIcon className="w-4 h-4" />
+              Design Portfolio
+            </Button>
+          </Link>
         </div>
       </motion.div>
     </section>
