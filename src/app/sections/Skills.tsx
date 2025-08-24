@@ -41,7 +41,7 @@ import {
 
 export default function SkillsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(sectionRef, { once: true, margin: "-150px" });
+  const inView = useInView(sectionRef, { once: true, margin: "-100px" });
   const controls = useAnimation();
 
   useEffect(() => {
@@ -49,100 +49,202 @@ export default function SkillsSection() {
   }, [inView, controls]);
 
   const developmentSkills = [
-    { icon: <BiLogoHtml5 className="text-2xl md:text-5xl" />, name: "HTML" },
-    { icon: <BiLogoCss3 className="text-2xl md:text-5xl" />, name: "CSS" },
     {
-      icon: <BiLogoTailwindCss className="text-2xl md:text-5xl" />,
+      icon: <BiLogoHtml5 className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "HTML",
+      level: "Advanced",
+    },
+    {
+      icon: <BiLogoCss3 className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "CSS",
+      level: "Advanced",
+    },
+    {
+      icon: <BiLogoTailwindCss className="w-6 h-6 md:w-8 md:h-8" />,
       name: "TailwindCSS",
+      level: "Advanced",
     },
     {
-      icon: <BiLogoBootstrap className="text-2xl md:text-5xl" />,
+      icon: <BiLogoBootstrap className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Bootstrap",
+      level: "Intermediate",
     },
     {
-      icon: <SiShadcnui className="text-2xl md:text-5xl" />,
-      name: "Shadcn Ui",
+      icon: <SiShadcnui className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Shadcn UI",
+      level: "Intermediate",
     },
     {
-      icon: <BiLogoJavascript className="text-2xl md:text-5xl" />,
+      icon: <BiLogoJavascript className="w-6 h-6 md:w-8 md:h-8" />,
       name: "JavaScript",
+      level: "Advanced",
     },
     {
-      icon: <BiLogoTypescript className="text-2xl md:text-5xl" />,
+      icon: <BiLogoTypescript className="w-6 h-6 md:w-8 md:h-8" />,
       name: "TypeScript",
+      level: "Intermediate",
     },
     {
-      icon: <BiLogoPython className="text-2xl md:text-5xl" />,
+      icon: <BiLogoPython className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Python",
+      level: "Intermediate",
     },
-    { icon: <BiLogoReact className="text-2xl md:text-5xl" />, name: "React" },
-
-    { icon: <SiNextdotjs className="text-2xl md:text-5xl" />, name: "Next.js" },
-    { icon: <SiRedux className="text-2xl md:text-5xl" />, name: "Redux" },
-
     {
-      icon: <BiLogoNodejs className="text-2xl md:text-5xl" />,
+      icon: <BiLogoReact className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "React",
+      level: "Advanced",
+    },
+    {
+      icon: <SiNextdotjs className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Next.js",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiRedux className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Redux",
+      level: "Intermediate",
+    },
+    {
+      icon: <BiLogoNodejs className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Node.js",
+      level: "Intermediate",
     },
     {
-      icon: <SiExpress className="text-2xl md:text-5xl" />,
+      icon: <SiExpress className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Express.js",
+      level: "Intermediate",
     },
-    { icon: <SiMongodb className="text-2xl md:text-5xl" />, name: "MongoDB" },
     {
-      icon: <SiPostgresql className="text-2xl md:text-5xl" />,
+      icon: <SiMongodb className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "MongoDB",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiPostgresql className="w-6 h-6 md:w-8 md:h-8" />,
       name: "PostgreSQL",
+      level: "Intermediate",
     },
     {
-      icon: <SiPhp className="text-2xl md:text-5xl" />,
+      icon: <SiPhp className="w-6 h-6 md:w-8 md:h-8" />,
       name: "PHP",
+      level: "Basic",
     },
     {
-      icon: <SiLaravel className="text-2xl md:text-5xl" />,
+      icon: <SiLaravel className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Laravel",
+      level: "Basic",
     },
-    { icon: <SiMysql className="text-2xl md:text-5xl" />, name: "MySQL" },
-    { icon: <SiFirebase className="text-2xl md:text-5xl" />, name: "Firebase" },
-    { icon: <SiGraphql className="text-2xl md:text-5xl" />, name: "GraphQL" },
-    { icon: <SiPrisma className="text-2xl md:text-5xl" />, name: "Prisma ORM" },
+    {
+      icon: <SiMysql className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "MySQL",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiFirebase className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Firebase",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiGraphql className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "GraphQL",
+      level: "Basic",
+    },
+    {
+      icon: <SiPrisma className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Prisma ORM",
+      level: "Intermediate",
+    },
   ];
 
   const developmentTools = [
-    { icon: <BiLogoGit className="text-2xl md:text-5xl" />, name: "Git" },
-    { icon: <BiLogoGithub className="text-2xl md:text-5xl" />, name: "GitHub" },
-    { icon: <SiDocker className="text-2xl md:text-5xl" />, name: "Docker" },
-    { icon: <SiJest className="text-2xl md:text-5xl" />, name: "Jest" },
-    { icon: <SiNpm className="text-2xl md:text-5xl" />, name: "NPM" },
-
-    { icon: <SiVite className="text-2xl md:text-5xl" />, name: "Vite" },
-    { icon: <SiPostman className="text-2xl md:text-5xl" />, name: "Postman" },
-    { icon: <SiLinux className="text-2xl md:text-5xl" />, name: "Linux" },
-  ];
-
-  const designTools = [
-    { icon: <SiFigma className="text-2xl md:text-5xl" />, name: "Figma" },
-    { icon: <SiCanva className="text-2xl md:text-5xl" />, name: "Canva" },
     {
-      icon: <SiAdobephotoshop className="text-2xl md:text-5xl" />,
-      name: "Adobe Photoshop",
+      icon: <BiLogoGit className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Git",
+      level: "Advanced",
+    },
+    {
+      icon: <BiLogoGithub className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "GitHub",
+      level: "Advanced",
+    },
+    {
+      icon: <SiDocker className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Docker",
+      level: "Basic",
+    },
+    {
+      icon: <SiJest className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Jest",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiNpm className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "NPM",
+      level: "Advanced",
+    },
+    {
+      icon: <SiVite className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Vite",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiPostman className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Postman",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiLinux className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Linux",
+      level: "Intermediate",
     },
   ];
 
+  const designTools = [
+    {
+      icon: <SiFigma className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Figma",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiCanva className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Canva",
+      level: "Advanced",
+    },
+    {
+      icon: <SiAdobephotoshop className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Photoshop",
+      level: "Basic",
+    },
+  ];
+
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case "Advanced":
+        return "from-green-400 to-emerald-600";
+      case "Intermediate":
+        return "from-blue-400 to-cyan-600";
+      case "Basic":
+        return "from-purple-400 to-indigo-600";
+      default:
+        return "from-gray-400 to-gray-600";
+    }
+  };
+
   const renderSection = (
     title: string,
-    items: { icon: JSX.Element; name: string }[]
+    items: { icon: JSX.Element; name: string; level: string }[]
   ) => (
     <motion.div
       initial="hidden"
       animate={controls}
       variants={{
         hidden: {},
-        visible: { transition: { staggerChildren: 0.1 } },
+        visible: { transition: { staggerChildren: 0.05 } },
       }}
-      className="mb-5 "
+      className="mb-10 w-full"
     >
       <motion.h2
-        className="text-2xl font-semibold text-gray-200 mb-5"
+        className="text-2xl font-semibold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2"
         initial={{ opacity: 0, y: 20 }}
         animate={controls}
         variants={{
@@ -151,21 +253,45 @@ export default function SkillsSection() {
         }}
         transition={{ duration: 0.6 }}
       >
+        <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
         {title}
       </motion.h2>
 
-      <div className="flex flex-wrap gap-2 items-center">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {items.map((item, index) => (
           <motion.div
             key={index}
-            className="rounded px-4 py-3 flex gap-3 flex-col items-center bg-[#332d43] text-white hover:scale-110 transition-transform duration-300"
+            className="group relative bg-card rounded-xl p-4 flex flex-col items-center justify-center border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
             variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
+              hidden: { opacity: 0, y: 20, scale: 0.9 },
+              visible: { opacity: 1, y: 0, scale: 1 },
             }}
+            whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
-            {item.icon}
-            <p className="text-sm md:text-lg text-center">{item.name}</p>
+            <div className="text-primary mb-3 p-2 rounded-lg bg-primary/10 group-hover:scale-110 transition-transform duration-300">
+              {item.icon}
+            </div>
+            <h3 className="font-medium text-sm text-center mb-1 group-hover:text-primary transition-colors">
+              {item.name}
+            </h3>
+            <div className="w-full bg-muted rounded-full h-1.5 mt-2">
+              <div
+                className={`h-1.5 rounded-full bg-gradient-to-r ${getLevelColor(
+                  item.level
+                )}`}
+                style={{
+                  width:
+                    item.level === "Advanced"
+                      ? "90%"
+                      : item.level === "Intermediate"
+                      ? "70%"
+                      : "50%",
+                }}
+              ></div>
+            </div>
+            <span className="text-xs text-muted-foreground mt-1">
+              {item.level}
+            </span>
           </motion.div>
         ))}
       </div>
@@ -173,9 +299,12 @@ export default function SkillsSection() {
   );
 
   return (
-    <div ref={sectionRef} className="mb-10 pt-15">
-      <motion.h1
-        className="text-3xl font-bold text-center mb-8 text-white"
+    <section
+      id="skills"
+      ref={sectionRef}
+      className="py-16 px-4 lg:px-8 max-w-7xl mx-auto"
+    >
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={controls}
         variants={{
@@ -183,15 +312,51 @@ export default function SkillsSection() {
           visible: { opacity: 1, y: 0 },
         }}
         transition={{ duration: 0.6 }}
+        className="text-center mb-16"
       >
-        My Skills & Tools
-      </motion.h1>
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          Skills & Technologies
+        </h1>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Here are the technologies and tools I work with to bring ideas to life
+        </p>
+      </motion.div>
 
-      <div className="flex items-start justify-between gap-3 flex-wrap">
+      <div className="space-y-12">
         {renderSection("Development Skills", developmentSkills)}
         {renderSection("Development Tools", developmentTools)}
         {renderSection("Design Tools", designTools)}
       </div>
-    </div>
+
+      {/* Proficiency Legend */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="mt-12 p-6 bg-muted/50 rounded-xl"
+      >
+        <h3 className="text-lg font-semibold mb-4 text-center">
+          Proficiency Levels
+        </h3>
+        <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-600"></div>
+            <span className="text-sm">Advanced</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-400 to-cyan-600"></div>
+            <span className="text-sm">Intermediate</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-purple-400 to-indigo-600"></div>
+            <span className="text-sm">Basic</span>
+          </div>
+        </div>
+      </motion.div>
+    </section>
   );
 }
