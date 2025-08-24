@@ -66,33 +66,36 @@ export default function ContactSection() {
     },
     {
       icon: BiLogoLinkedin,
-      href: "https://linkedin.com/in/your-profile",
+      href: "https://linkedin.com/in/kal-x",
       label: "LinkedIn",
     },
     {
       icon: BiLogoTelegram,
-      href: "https://t.me/yourusername",
+      href: "https://t.me/kal_ab_s",
       label: "Telegram",
     },
     {
       icon: BiLogoInstagram,
-      href: "https://instagram.com/yourusername",
+      href: "https://instagram.com/kal_ab.s",
       label: "Instagram",
     },
     {
       icon: BiLogoGithub,
-      href: "https://github.com/yourusername",
+      href: "https://github.com/Kaleab-Shewangizaw",
       label: "GitHub",
     },
     {
       icon: BiLogoDribbble,
-      href: "https://dribbble.com/yourusername",
+      href: "",
       label: "Dribbble",
     },
   ];
 
   return (
-    <section id="contact" className="pb-20 pt-5 mt-0 px-4 lg:px-8 bg-muted/30">
+    <section
+      id="contact"
+      className="pb-20 pt-5 mt-0 px-4 lg:px-8 bg-muted/30 rounded-b-lg"
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -199,6 +202,7 @@ export default function ContactSection() {
                   <motion.a
                     key={index}
                     href={info.href}
+                    target="_blank"
                     className="flex items-center gap-4 p-3 rounded-lg hover:bg-accent transition-colors group"
                     whileHover={{ x: 5 }}
                   >
