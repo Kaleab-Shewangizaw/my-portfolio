@@ -64,24 +64,11 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section id="testimonials" className="py-20 px-4 lg:px-8 bg-muted/30">
+    <section
+      id="testimonials"
+      className="py-20 px-4 lg:px-8 bg-muted/30 rounded-lg"
+    >
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            What Clients Say
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Don&apos;t just take my word for it. Here&apos;s what clients and
-            colleagues have to say about working with me.
-          </p>
-        </motion.div>
-
         <div className="relative max-w-4xl mx-auto">
           {/* Testimonial Card */}
           <motion.div
@@ -153,8 +140,8 @@ export default function TestimonialsSection() {
                   onClick={() => setCurrentIndex(index)}
                   className={`w-2 h-2 rounded-full transition-all ${
                     index === currentIndex
-                      ? "bg-primary w-6"
-                      : "bg-muted-foreground/30"
+                      ? "bg-primary not-dark:bg-white w-6"
+                      : "bg-muted-foreground/30 not-dark:bg-gray-200"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -189,7 +176,7 @@ export default function TestimonialsSection() {
           ].map((stat, index) => (
             <div
               key={index}
-              className="bg-card rounded-xl p-6 text-center border border-border"
+              className=" rounded-xl p-6 text-center border border-border bg-gray-900/90"
             >
               <p className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 {stat.number}
@@ -207,9 +194,6 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <h3 className="text-2xl font-semibold mb-4">
-            Ready to create something amazing?
-          </h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
             Let&apos;s discuss how I can help bring your project to life with
             clean code and innovative solutions.

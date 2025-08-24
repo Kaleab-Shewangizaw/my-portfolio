@@ -2,18 +2,12 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
 import Hero from "../../../public/Hero.png";
 import Guava from "../../../public/Guava.webp";
 import { Button } from "@/components/ui/button";
-import { BsGithub, BsPinterest, BsArrowRight } from "react-icons/bs";
+import { BsGithub, BsPinterest } from "react-icons/bs";
 import { DribbbleIcon, ExternalLink, FigmaIcon, Star } from "lucide-react";
 import { useState } from "react";
-import { BiRightArrow } from "react-icons/bi";
 
 const devProjects = [
   {
