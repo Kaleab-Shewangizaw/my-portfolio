@@ -37,7 +37,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`w-full fixed top-0 z-50 transition-all duration-300 ${
+      className={`w-full md:w-[90%] fixed top-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border/50 shadow-sm"
           : "bg-transparent"
@@ -110,7 +110,7 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
           >
             <motion.ul
-              className="flex flex-col items-center justify-center h-full gap-6 py-10"
+              className="flex flex-col items-center justify-center bg-background/95 backdrop-blur-lg  h-screen gap-6 py-10"
               initial={{ y: -20 }}
               animate={{ y: 0 }}
               exit={{ y: -20 }}
@@ -123,10 +123,11 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ delay: 0.1 * i, duration: 0.4 }}
+                  className="w-full"
                 >
                   <Button
                     variant="ghost"
-                    className="text-xl font-medium py-6 px-8 rounded-lg hover:bg-accent/50 transition-colors"
+                    className="text-xl font-medium py-6 px-8 rounded-lg hover:bg-accent/50 transition-colors w-full"
                     onClick={() => handleNavClick(item.id)}
                   >
                     {item.label}
@@ -136,14 +137,6 @@ export default function Navbar() {
             </motion.ul>
 
             {/* Close hint */}
-            <motion.div
-              className="absolute bottom-10 left-0 right-0 text-center text-muted-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              Click anywhere to close
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

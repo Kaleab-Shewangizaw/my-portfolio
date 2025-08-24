@@ -16,7 +16,7 @@ const inter = Inter({
 export default function HeroSection() {
   return (
     <div
-      className={`relative h-screen -mt-10 flex flex-col items-center justify-center px-5 overflow-hidden ${inter.className}`}
+      className={`relative h-screen mt-10 flex flex-col items-center justify-center px-5 overflow-hidden ${inter.className}`}
     >
       {/* Background with gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background z-0" />

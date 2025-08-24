@@ -8,9 +8,6 @@ import {
   BiLogoTelegram,
   BiLogoInstagram,
   BiLogoDribbble,
-  BiEnvelope,
-  BiPhone,
-  BiMap,
 } from "react-icons/bi";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -105,10 +102,10 @@ export default function ContactSection() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            I'm always open to discussing new projects, creative ideas, or
+            I&apos;m always open to discussing new projects, creative ideas, or
             opportunities to be part of your visions.
           </p>
         </motion.div>
@@ -262,7 +259,7 @@ export default function ContactSection() {
                 Ready to start your project?
               </h3>
               <p className="mb-4 opacity-90">
-                Let's schedule a call to discuss your ideas
+                Let&apos;s schedule a call to discuss your ideas
               </p>
               <Button variant="secondary" className="rounded-full gap-2">
                 <Calendar className="w-4 h-4" />
