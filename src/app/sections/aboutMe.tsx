@@ -40,7 +40,6 @@ export default function AboutMe() {
       <div className="flex flex-col items-center lg:w-2/5">
         <motion.div
           className="relative"
-          whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <Image
@@ -94,10 +93,8 @@ export default function AboutMe() {
             <motion.div
               key={index}
               className="px-3 py-1.5 rounded-full bg-background/70 border border-border text-sm flex items-center gap-1.5 backdrop-blur-sm"
-              whileHover={{ y: -2, scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
-              <span>{item.emoji}</span>
               <span>{item.text}</span>
             </motion.div>
           ))}

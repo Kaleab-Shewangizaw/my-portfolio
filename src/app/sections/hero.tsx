@@ -19,20 +19,20 @@ export default function HeroSection() {
       className={`relative h-screen mt-10 flex flex-col items-center justify-center px-5 overflow-hidden ${inter.className}`}
     >
       {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background   z-0" />
 
       <Image
         src={Kal_X}
         alt="Kaleab Shewangizaw"
         fill
-        className="absolute object-cover dark:brightness-[0.2] brightness-[0.8] -z-10"
+        className="absolute object-cover dark:brightness-[0.6] brightness-[0.8] -z-10"
         priority
       />
 
       {/* Animated floating elements */}
-      <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-purple-500 opacity-20 animate-pulse"></div>
-      <div className="absolute top-1/3 right-1/4 w-6 h-6 rounded-full bg-blue-500 opacity-15 animate-bounce"></div>
-      <div className="absolute bottom-1/4 left-1/3 w-3 h-3 rounded-full bg-cyan-400 opacity-25 animate-ping"></div>
+      <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-purple-500 opacity-20 not-dark:opacity-100 animate-pulse"></div>
+      <div className="absolute top-1/3 right-1/4 w-6 h-6 rounded-full bg-blue-500 opacity-15 not-dark:opacity-100 animate-bounce"></div>
+      <div className="absolute bottom-1/4 left-1/3 w-3 h-3 rounded-full bg-cyan-400 opacity-25 not-dark:opacity-100 animate-ping"></div>
 
       <div className="z-10 flex flex-col items-center text-center max-w-3xl space-y-6">
         <motion.div
@@ -46,33 +46,41 @@ export default function HeroSection() {
             Available for new projects
           </span>
         </motion.div>
-
-        <motion.h1
-          className="text-5xl md:text-6xl font-bold text-foreground"
+        <motion.p
+          className="text-lg font-bold text-white"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
-          Creating Digital{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
-            Experiences
+          Hello,
+        </motion.p>
+
+        <motion.h1
+          className="text-5xl md:text-6xl font-bold text-white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+        >
+          I&apos;m{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500 ">
+            Kaleab Shewangizaw [Kal_X]
           </span>
         </motion.h1>
 
         <motion.div
-          className="text-xl md:text-2xl text-muted-foreground font-light"
+          className="text-xl md:text-2xl text-muted-foreground  font-light not-dark:text-gray-700"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.7 }}
         >
           <span className="text-foreground font-medium">
-            Kaleab Shewangizaw
+            • Full Stack Developer
           </span>{" "}
-          • Full Stack Developer
+          • UI/UX designer
         </motion.div>
 
         <motion.p
-          className="text-lg text-muted-foreground max-w-2xl"
+          className="text-lg  text-gray-700 dark:text-gray-300 max-w-2xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.7 }}

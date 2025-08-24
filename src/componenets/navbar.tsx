@@ -37,17 +37,17 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`w-full md:w-[90%] fixed top-0 z-50 transition-all duration-300 ${
+      className={`w-full md:w-[90%]   fixed top-0 left-[5%] z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border/50 shadow-sm"
-          : "bg-transparent"
+          : "bg-gray-050"
       } px-4 py-3 flex justify-between items-center`}
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
       <motion.div
-        className="font-bold text-xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
+        className="font-bold text-xl bg-gradient-to-r from-purple-600 to-blue-600 not-dark:from-purple-800 not-dark:to-blue-800 bg-clip-text text-transparent"
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 400 }}
       >
