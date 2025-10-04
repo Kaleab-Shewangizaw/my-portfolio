@@ -21,34 +21,34 @@ export default function AboutMeDesc() {
           Hi, I&apos;m{" "}
           <span className="font-semibold text-primary">Kaleab</span> — but you
           can call me <span className="font-semibold text-primary">Kal_X</span>.
-          I&apos;m a <span className="font-semibold">Developer & Designer</span>{" "}
-          passionate about crafting{" "}
-          <span className="font-semibold">full-stack applications</span> that
-          are powerful, beautiful and user-friendly.
+          I&apos;m a <span className="font-semibold">Web Developer</span>{" "}
+          passionate about building{" "}
+          <span className="font-semibold">
+            scalable, fast, and user-friendly web applications
+          </span>
+          .
         </p>
 
         <p>
           My journey started with the{" "}
-          <span className="font-semibold">MERN Stack</span>, where I mastered
-          the fundamentals of building scalable apps. But my curiosity pulled me
-          into the world of <span className="font-semibold">UI/UX</span> —
-          typography, color theory, layout, and design systems.
+          <span className="font-semibold">MERN Stack</span>, where I learned to
+          take projects from database to deployment and mastered the
+          fundamentals of modern web development.
         </p>
 
         <p>
-          Now, I merge{" "}
-          <span className="font-semibold">technical expertise</span> with{" "}
-          <span className="font-semibold">design sensibility</span> to build
-          experiences that don&apos;t just work — they{" "}
-          <em className="text-primary">stand out</em>.
+          Over time, I&apos;ve honed my skills in{" "}
+          <span className="font-semibold">full-stack development</span>,
+          creating applications that not only work smoothly but also{" "}
+          <em className="text-primary">deliver real impact</em>.
         </p>
 
         <p>
-          Beyond code, I&apos;m deeply curious, self-driven, and always eager to
-          explore new technologies, solve problems, and collaborate with
-          like-minded people. My goal is simple:{" "}
+          Beyond code, I&apos;m self-driven, curious, and always eager to
+          explore new technologies, solve challenges, and collaborate with
+          others. My goal is simple:{" "}
           <span className="font-semibold">
-            turn ideas into impactful digital solutions.
+            turn ideas into powerful digital solutions.
           </span>
         </p>
       </motion.div>
@@ -66,7 +66,7 @@ export default function AboutMeDesc() {
               contactSection.scrollIntoView({ behavior: "smooth" });
             }
           }}
-          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+          className=""
         >
           Contact Me
         </Button>

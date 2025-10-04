@@ -31,7 +31,7 @@ export default function AboutMe() {
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.8, delay: 0.7 }}
       id="aboutMe"
-      className="relative not-dark:bg-gray-50 dark:bg-[#2a2342] py-8 md:py-12 px-4 md:px-8 rounded-xl flex flex-col lg:flex-row gap-8 mb-16 overflow-hidden"
+      className="relative not-dark:bg-[#aaa3be] dark:bg-[#232b42] py-8 md:py-12 px-4 md:px-8 rounded-xl flex flex-col lg:flex-row gap-8 mb-16 overflow-hidden"
     >
       {/* Decorative elements */}
       <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-xl"></div>
@@ -49,7 +49,7 @@ export default function AboutMe() {
             height={240}
             className="rounded-full border-4 border-white/10 shadow-lg"
           />
-          <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold py-1 px-3 rounded-full">
+          <div className="absolute -bottom-2 -right-2  border text-xs font-bold py-1 px-3 rounded-full">
             <SparklesIcon className="inline w-3 h-3 mr-1" />
             DEV
           </div>
@@ -66,12 +66,12 @@ export default function AboutMe() {
         </motion.h1>
 
         <motion.p
-          className="text-muted-foreground mt-1"
+          className="text-muted-foreground not-dark:text-gray-800 mt-1"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          Full Stack Developer & Designer
+          • Full Stack Web Developer
         </motion.p>
 
         {/* Personal Info */}
@@ -82,13 +82,13 @@ export default function AboutMe() {
           transition={{ delay: 0.5 }}
         >
           {[
-            { text: "21 yo", emoji: "🎂" },
-            { text: "Male", emoji: "👨" },
-            { text: "Ethiopian", emoji: "🇪🇹" },
-            { text: "Student", emoji: "🎓" },
-            { text: "BSc Eng.", emoji: "⚙️" },
-            { text: "Full Stack", emoji: "💻" },
-            { text: "UI/UX Design", emoji: "🎨" },
+            { text: "21 yo" },
+            { text: "Male" },
+            { text: "Ethiopian" },
+            { text: "Student" },
+            { text: "BSc Eng." },
+            { text: "Full Stack" },
+            { text: "UI/UX Design" },
           ].map((item, index) => (
             <motion.div
               key={index}
@@ -122,9 +122,9 @@ export default function AboutMe() {
                 {content === tab.id && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg"
+                    className="absolute inset-0 bg-gradient-to-r  rounded-lg"
                     initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
                   />
                 )}
                 <span className="relative z-10">{tab.label}</span>

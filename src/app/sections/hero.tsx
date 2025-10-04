@@ -73,9 +73,8 @@ export default function HeroSection() {
           transition={{ delay: 0.4, duration: 0.7 }}
         >
           <span className="text-foreground not-dark:text-gray-200 font-medium">
-            • Full Stack Developer
+            • Full Stack Web Developer
           </span>{" "}
-          • UI/UX designer
         </motion.div>
 
         <motion.p
@@ -157,7 +156,6 @@ export default function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
-                whileHover={{ scale: 1.1, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={social.label}
               >

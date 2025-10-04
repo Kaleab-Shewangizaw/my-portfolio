@@ -31,7 +31,7 @@ export default function EducationDesc() {
     >
       {/* Education */}
       <motion.div variants={item}>
-        <Card className="h-full bg-background/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-colors">
+        <Card className="h-full bg-background/50 backdrop-blur-sm border-border/50 ">
           <CardContent className="p-5">
             <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-primary"></div>
@@ -49,7 +49,7 @@ export default function EducationDesc() {
                   />
                 </div>
                 <div>
-                  <p className="font-medium">BSc in Chemical Engineering</p>
+                  <p className="font-medium">BSc in Engineering</p>
                   <p className="text-sm text-muted-foreground">
                     Addis Ababa University (AAiT)
                   </p>
@@ -90,7 +90,7 @@ export default function EducationDesc() {
 
       {/* Certificates */}
       <motion.div variants={item}>
-        <Card className="h-full bg-background/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-colors">
+        <Card className="h-full bg-background/50 backdrop-blur-sm border-border/50 ">
           <CardContent className="p-5">
             <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-primary"></div>
@@ -144,7 +144,7 @@ export default function EducationDesc() {
 
       {/* Activities */}
       <motion.div variants={item} className="md:col-span-2">
-        <Card className="bg-background/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-colors">
+        <Card className="bg-background/50 backdrop-blur-sm border-border/50 ">
           <CardContent className="p-5">
             <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-primary"></div>

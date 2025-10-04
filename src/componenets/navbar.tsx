@@ -39,7 +39,7 @@ export default function Navbar() {
     <motion.nav
       className={`w-full md:w-[90%]   fixed top-0 md:left-[5%] z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border/50 shadow-sm"
+          ? " backdrop-blur-md border-b border-border/50 shadow-sm"
           : "bg-gray-050"
       } px-4 py-3 flex justify-between items-center`}
       initial={{ y: -50, opacity: 0 }}

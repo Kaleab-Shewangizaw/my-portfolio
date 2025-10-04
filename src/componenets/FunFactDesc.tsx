@@ -29,15 +29,12 @@ export default function FunFactDesc() {
       animate="visible"
       className="space-y-5"
     >
-      <h1 className="font-bold text-xl mb-2 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-        Fun Facts About Me
-      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {funFacts.map((fact, i) => (
           <motion.div
             key={i}
             variants={item}
-            className="flex items-start gap-3 p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm hover:shadow-md transition-all"
+            className="flex items-center gap-3 p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm "
           >
             <span className="text-2xl">{fact.emoji}</span>
             <div>
