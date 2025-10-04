@@ -95,7 +95,7 @@ export default function ContactSection() {
     },
     {
       icon: BiLogoTelegram,
-      href: "https://t.me/kal_ab_s",
+      href: "https://t.me/kal_abX",
       label: "Telegram",
     },
     {
