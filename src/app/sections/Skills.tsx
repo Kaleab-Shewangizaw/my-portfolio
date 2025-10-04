@@ -49,6 +49,7 @@ export default function SkillsSection() {
   }, [inView, controls]);
 
   const developmentSkills = [
+    // --- High Demand + Your Strongest ---
     {
       icon: <BiLogoHtml5 className="w-6 h-6 md:w-8 md:h-8" />,
       name: "HTML",
@@ -65,16 +66,6 @@ export default function SkillsSection() {
       level: "Advanced",
     },
     {
-      icon: <BiLogoBootstrap className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Bootstrap",
-      level: "Intermediate",
-    },
-    {
-      icon: <SiShadcnui className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Shadcn UI",
-      level: "Advanced",
-    },
-    {
       icon: <BiLogoJavascript className="w-6 h-6 md:w-8 md:h-8" />,
       name: "JavaScript",
       level: "Advanced",
@@ -83,11 +74,6 @@ export default function SkillsSection() {
       icon: <BiLogoTypescript className="w-6 h-6 md:w-8 md:h-8" />,
       name: "TypeScript",
       level: "Intermediate",
-    },
-    {
-      icon: <BiLogoPython className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Python",
-      level: "Advanced",
     },
     {
       icon: <BiLogoReact className="w-6 h-6 md:w-8 md:h-8" />,
@@ -100,8 +86,8 @@ export default function SkillsSection() {
       level: "Intermediate",
     },
     {
-      icon: <SiRedux className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Redux",
+      icon: <SiShadcnui className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Shadcn UI",
       level: "Intermediate",
     },
     {
@@ -120,19 +106,14 @@ export default function SkillsSection() {
       level: "Intermediate",
     },
     {
-      icon: <SiPostgresql className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "PostgreSQL",
+      icon: <SiPrisma className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Prisma ORM",
       level: "Intermediate",
     },
     {
-      icon: <SiPhp className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "PHP",
-      level: "Basic",
-    },
-    {
-      icon: <SiLaravel className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Laravel",
-      level: "Basic",
+      icon: <SiPostgresql className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "PostgreSQL",
+      level: "Intermediate",
     },
     {
       icon: <SiMysql className="w-6 h-6 md:w-8 md:h-8" />,
@@ -144,15 +125,37 @@ export default function SkillsSection() {
       name: "Firebase",
       level: "Intermediate",
     },
+    // --- Secondary but Useful ---
+    {
+      icon: <SiRedux className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Redux",
+      level: "Intermediate",
+    },
+    {
+      icon: <BiLogoBootstrap className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Bootstrap",
+      level: "Intermediate",
+    },
+    {
+      icon: <BiLogoPython className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Python",
+      level: "Intermediate",
+    },
     {
       icon: <SiGraphql className="w-6 h-6 md:w-8 md:h-8" />,
       name: "GraphQL",
       level: "Basic",
     },
+    // --- Low Priority / Side Exploration ---
     {
-      icon: <SiPrisma className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Prisma ORM",
-      level: "Intermediate",
+      icon: <SiPhp className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "PHP",
+      level: "Basic",
+    },
+    {
+      icon: <SiLaravel className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Laravel",
+      level: "Basic",
     },
   ];
 
@@ -168,24 +171,9 @@ export default function SkillsSection() {
       level: "Advanced",
     },
     {
-      icon: <SiDocker className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Docker",
-      level: "Basic",
-    },
-    {
-      icon: <SiJest className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Jest",
-      level: "Intermediate",
-    },
-    {
       icon: <SiNpm className="w-6 h-6 md:w-8 md:h-8" />,
       name: "NPM",
       level: "Advanced",
-    },
-    {
-      icon: <SiVite className="w-6 h-6 md:w-8 md:h-8" />,
-      name: "Vite",
-      level: "Intermediate",
     },
     {
       icon: <SiPostman className="w-6 h-6 md:w-8 md:h-8" />,
@@ -193,9 +181,24 @@ export default function SkillsSection() {
       level: "Intermediate",
     },
     {
+      icon: <SiVite className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Vite",
+      level: "Intermediate",
+    },
+    {
+      icon: <SiJest className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Jest",
+      level: "Intermediate",
+    },
+    {
       icon: <SiLinux className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Linux",
       level: "Intermediate",
+    },
+    {
+      icon: <SiDocker className="w-6 h-6 md:w-8 md:h-8" />,
+      name: "Docker",
+      level: "Basic",
     },
   ];
 
@@ -208,7 +211,7 @@ export default function SkillsSection() {
     {
       icon: <SiCanva className="w-6 h-6 md:w-8 md:h-8" />,
       name: "Canva",
-      level: "Advanced",
+      level: "Intermediate",
     },
     {
       icon: <SiAdobephotoshop className="w-6 h-6 md:w-8 md:h-8" />,
@@ -313,10 +316,8 @@ export default function SkillsSection() {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-white not-dark:to-blue-300 bg-clip-text text-transparent">
-          Skills & Technologies
-        </h1>
-        <p className="text-muted-foreground not-dark:text-gray-300 max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold mb-4 ">Skills & Technologies</h1>
+        <p className="">
           Here are the technologies and tools I work with to bring ideas to life
         </p>
       </motion.div>
@@ -326,36 +327,6 @@ export default function SkillsSection() {
         {renderSection("Development Tools", developmentTools)}
         {renderSection("Design Tools", designTools)}
       </div>
-
-      {/* Proficiency Legend */}
-      {/* <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        variants={{
-          hidden: { opacity: 0, y: 20 },
-          visible: { opacity: 1, y: 0 },
-        }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        className="mt-12 p-6 bg-muted/50 rounded-xl"
-      >
-        <h3 className="text-lg font-semibold mb-4 text-center">
-          Proficiency Levels
-        </h3>
-        <div className="flex flex-wrap justify-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-600"></div>
-            <span className="text-sm">Advanced</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-400 to-cyan-600"></div>
-            <span className="text-sm">Intermediate</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-purple-400 to-indigo-600"></div>
-            <span className="text-sm">Basic</span>
-          </div>
-        </div>
-      </motion.div> */}
     </section>
   );
 }

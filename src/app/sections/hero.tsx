@@ -88,7 +88,7 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.div
-          className="flex flex-wrap gap-4 mt-8 justify-center"
+          className="flex flex-wrap gap-4 mt-0 sm:mt-8 justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.7 }}
@@ -121,7 +121,7 @@ export default function HeroSection() {
         </motion.div>
 
         <motion.div
-          className="flex gap-4 mt-12"
+          className="flex gap-4 mt-8 sm:mt-12 "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.7 }}
@@ -167,7 +167,7 @@ export default function HeroSection() {
       </div>
 
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2  flex-col items-center hidden sm:flex"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
