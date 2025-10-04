@@ -16,25 +16,43 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Calendar, Send } from "lucide-react";
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [status, setStatus] = useState<null | string>(null);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mzzjvdyq";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // Reset form
-    setFormData({ name: "", email: "", message: "" });
-  };
+    setLoading(true);
+    setStatus(null);
+    setMessage("");
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setStatus("Success");
+        setMessage("Message sent successfully!");
+        form.reset();
+      } else {
+        setStatus("Error");
+        setMessage("Failed to send. Please try again later.");
+      }
+    } catch (err) {
+      setStatus("Error");
+      setMessage("Network error. Please try again.");
+      console.error("Form submission error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactInfo = [
@@ -56,12 +74,18 @@ export default function ContactSection() {
       value: "Addis Ababa, Ethiopia",
       href: "#",
     },
+    {
+      icon: <Calendar className="w-5 h-5" />,
+      href: "https://calendly.com/kal_x", // ✅ Calendly
+      value: "Schedule a Call",
+      label: "Book a Call",
+    },
   ];
 
   const socialLinks = [
     {
       icon: BsTwitterX,
-      href: "https://x.com/KaleabShew27310",
+      href: "https://x.com/Kal_abX",
       label: "Twitter",
     },
     {
@@ -92,10 +116,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section
-      id="contact"
-      className="pb-20 pt-5 mt-0 px-4 lg:px-8 bg-muted/30 rounded-b-lg"
-    >
+    <section id="contact" className="pb-20 pt-5 mt-0 px-4 lg:px-8 rounded-b-lg">
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -104,10 +125,8 @@ export default function ContactSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-purple-100 not-dark:to-blue-200 bg-clip-text text-transparent">
-            Let&apos;s Work Together
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg not-dark:text-gray-200">
+          <h2 className="text-4xl font-bold mb-4">Let&apos;s Work Together</h2>
+          <p className="max-w-2xl mx-auto">
             I&apos;m always open to discussing new projects, creative ideas, or
             opportunities to be part of your visions.
           </p>
@@ -137,8 +156,6 @@ export default function ContactSection() {
                   name="name"
                   type="text"
                   placeholder="Enter your name"
-                  value={formData.name}
-                  onChange={handleInputChange}
                   required
                   className="rounded-lg h-12"
                 />
@@ -153,8 +170,6 @@ export default function ContactSection() {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleInputChange}
                   required
                   className="rounded-lg h-12"
                 />
@@ -168,17 +183,34 @@ export default function ContactSection() {
                   id="message"
                   name="message"
                   placeholder="Tell me about your project..."
-                  value={formData.message}
-                  onChange={handleInputChange}
                   required
                   className="rounded-lg min-h-32"
                 />
               </div>
 
-              <Button type="submit" className="w-full rounded-lg h-12 gap-2">
-                <Send className="w-4 h-4" />
-                Send Message
+              <Button
+                type="submit"
+                className="w-full rounded-lg h-12 gap-2"
+                disabled={loading}
+              >
+                {loading ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" /> Send Message
+                  </>
+                )}
               </Button>
+
+              {message && (
+                <p
+                  className={`text-center mt-4 ${
+                    status === "Success" ? "text-green-500" : "text-red-500"
+                  }`}
+                >
+                  {message}
+                </p>
+              )}
             </form>
           </motion.div>
 
@@ -249,27 +281,6 @@ export default function ContactSection() {
                 })}
               </div>
             </div>
-
-            {/* Call to Action */}
-            <motion.div
-              className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 text-center text-white"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Calendar className="w-8 h-8 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">
-                Ready to start your project?
-              </h3>
-              <p className="mb-4 opacity-90">
-                Let&apos;s schedule a call to discuss your ideas
-              </p>
-              <Button variant="secondary" className="rounded-full gap-2">
-                <Calendar className="w-4 h-4" />
-                Book a Call
-              </Button>
-            </motion.div>
           </motion.div>
         </div>
       </div>

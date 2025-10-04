@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { BadgeCheckIcon, SparklesIcon } from "lucide-react";
 import ServicesDesc from "../../componenets/ServicesDesc";
+import { text } from "stream/consumers";
 
 export default function AboutMe() {
   const [content, setContent] = useState("AboutMe");
@@ -88,7 +89,7 @@ export default function AboutMe() {
             { text: "Student" },
             { text: "BSc Eng." },
             { text: "Full Stack" },
-            { text: "UI/UX Design" },
+            { text: "Web Developer" },
           ].map((item, index) => (
             <motion.div
               key={index}

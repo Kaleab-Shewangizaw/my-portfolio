@@ -19,6 +19,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "emailjs": "^4.0.3",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
     "lucide-react": "file:../../offline-npm-packages/lucide-react-0.525.0.tgz",

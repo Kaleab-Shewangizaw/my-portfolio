@@ -26,9 +26,7 @@ export default function Home() {
           <section id="projects">
             <ProjectsSection />
           </section>
-          <section id="testimonials">
-            <TestimonialsSection />
-          </section>
+          <section id="testimonials"></section>
           <section id="contact">
             <ContactSection />
           </section>

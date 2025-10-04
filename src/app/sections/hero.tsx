@@ -129,7 +129,7 @@ export default function HeroSection() {
           {[
             {
               icon: BsTwitterX,
-              href: "https://x.com/KaleabShew27310",
+              href: "https://x.com/Kal_abX",
               label: "Twitter",
             },
             {

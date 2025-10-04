@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, ArrowUp, Mail } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HiFire } from "react-icons/hi";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -35,7 +36,7 @@ export default function Footer() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
-                className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-purple-800 not-dark:to-blue-800  bg-clip-text text-transparent"
+                className="text-lg font-semibold text-blue-700"
               >
                 [Kal_X]
               </motion.div>
@@ -48,7 +49,7 @@ export default function Footer() {
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  <Heart className="w-4 h-4 mx-1 text-red-500 fill-current" />
+                  <HiFire className="w-6 h-6 mx-1 text-green-500 fill-current" />
                 </motion.div>
                 <span>by Kaleab</span>
               </div>
@@ -56,7 +57,7 @@ export default function Footer() {
 
             <div className="md:hidden flex items-center gap-1 text-sm text-muted-foreground not-dark:text-gray-200">
               <span>Made with</span>
-              <Heart className="w-4 h-4 mx-1 text-red-500 fill-current" />
+              <HiFire className="w-4 h-4 mx-1 text-green-500 fill-current" />
               <span>by Kaleab</span>
             </div>
 
