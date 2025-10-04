@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import Hero from "../../../public/Hero.png";
-import Guava from "../../../public/Guava.webp";
+
+import Guava from "../../../public/Guava_logo.png";
 import { Button } from "@/components/ui/button";
 import { BsGithub, BsPinterest } from "react-icons/bs";
 import { DribbbleIcon, ExternalLink, FigmaIcon, Star } from "lucide-react";
@@ -51,40 +51,16 @@ const devProjects = [
   },
 ];
 
-const designProjects = [
-  {
-    name: "Portfolio Design 1",
-    description: "Clean and modern UI design for portfolios.",
-    img: Hero,
-    dribbble: "#",
-    figma: "#",
-    pinterest: "#",
-  },
-  {
-    name: "Landing Page Concept",
-    description: "A visually engaging landing page design for marketing.",
-    img: Hero,
-    dribbble: "#",
-    figma: "#",
-    pinterest: "#",
-  },
-  {
-    name: "Mobile App UI",
-    description: "User-friendly interface for a fitness tracking application.",
-    img: Hero,
-    dribbble: "#",
-    figma: "#",
-    pinterest: "#",
-  },
-  {
-    name: "Dashboard Design",
-    description: "Analytics dashboard with clean data visualization.",
-    img: Hero,
-    dribbble: "#",
-    figma: "#",
-    pinterest: "#",
-  },
-];
+interface DesignProject {
+  name: string;
+  description: string;
+  img: string;
+  dribbble: string;
+  figma: string;
+  pinterest: string;
+}
+
+const designProjects: DesignProject[] | [] = [];
 
 export default function ProjectsSection() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -94,18 +70,16 @@ export default function ProjectsSection() {
   >("development");
 
   return (
-    <section id="projects" className="py-16 px-4 lg:px-8 max-w-7xl mx-auto">
+    <section id="projects" className="py-16 px-4 lg:px-8 w-full mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-16"
+        className="text-center mb-16 "
       >
-        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 not-dark:from-white not-dark:to-blue-300 bg-clip-text text-transparent">
-          Featured Projects
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto not-dark:text-gray-300">
+        <h2 className="text-4xl font-bold mb-4 ">Featured Projects</h2>
+        <p className=" max-w-2xl mx-auto ">
           Here are some of my recent projects that showcase my skills in
           development and design
         </p>
@@ -169,7 +143,7 @@ export default function ProjectsSection() {
                       src={proj.img}
                       alt={proj.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-contain group-hover:scale-105 transition-transform duration-500"
                     />
 
                     {/* Overlay on hover */}
@@ -215,6 +189,20 @@ export default function ProjectsSection() {
                       )}
                     </div>
                   </div>
+                  <div className="flex gap-2 px-5 pb-5 md:hidden">
+                    <Button size="sm" className="rounded-full">
+                      <BsGithub className="w-4 h-4 mr-1" />
+                      Code
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="rounded-full"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-1" />
+                      Live Demo
+                    </Button>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -234,78 +222,86 @@ export default function ProjectsSection() {
           >
             <h3 className="text-2xl font-semibold mb-10 text-center flex items-center text-gray-200 justify-center gap-2">
               <div className="w-2 h-2 rounded-full bg-gray-200 animate-pulse"></div>
-              Design Projects
+              {designProjects.length > 0
+                ? "Design Projects"
+                : "No design projects for now... :("}
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {designProjects.map((proj, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="group relative bg-card rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
-                  onMouseEnter={() => setHoveredProject(i + devProjects.length)}
-                  onMouseLeave={() => setHoveredProject(null)}
-                >
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={proj.img}
-                      alt={proj.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+              {designProjects.length > 0 ? (
+                designProjects.map((proj, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                    className="group relative bg-card rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
+                    onMouseEnter={() =>
+                      setHoveredProject(i + devProjects.length)
+                    }
+                    onMouseLeave={() => setHoveredProject(null)}
+                  >
+                    <div className="relative h-64 overflow-hidden">
+                      <Image
+                        src={proj.img}
+                        alt={proj.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
 
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
-                      <h4 className="font-bold text-xl mb-2 text-white">
-                        {proj.name}
-                      </h4>
-                      <p className="text-gray-300 text-sm mb-4">
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+                        <h4 className="font-bold text-xl mb-2 text-white">
+                          {proj.name}
+                        </h4>
+                        <p className="text-gray-300 text-sm mb-4">
+                          {proj.description}
+                        </p>
+
+                        <div className="flex gap-2">
+                          <Button
+                            size="sm"
+                            className="rounded-full bg-white/10 not-dark:bg-black/80 not-dark:hover:bg-black/60 backdrop-blur-sm text-white hover:bg-white/20"
+                          >
+                            <DribbbleIcon className="w-4 h-4 mr-1" />
+                            Dribbble
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="rounded-full border-white/30 text-white  hover:bg-black/10 not-dark:border-black/80 not-dark:bg-black/50"
+                          >
+                            <FigmaIcon className="w-4 h-4 mr-1" />
+                            Figma
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-5 md:hidden">
+                      <h4 className="font-bold text-lg mb-2">{proj.name}</h4>
+                      <p className="text-muted-foreground text-sm mb-3">
                         {proj.description}
                       </p>
 
                       <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          className="rounded-full bg-white/10 not-dark:bg-black/80 not-dark:hover:bg-black/60 backdrop-blur-sm text-white hover:bg-white/20"
-                        >
-                          <DribbbleIcon className="w-4 h-4 mr-1" />
-                          Dribbble
+                        <Button size="sm" variant="outline">
+                          <DribbbleIcon className="w-4 h-4" />
                         </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="rounded-full border-white/30 text-white  hover:bg-black/10 not-dark:border-black/80 not-dark:bg-black/50"
-                        >
-                          <FigmaIcon className="w-4 h-4 mr-1" />
-                          Figma
+                        <Button size="sm" variant="outline">
+                          <FigmaIcon className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <BsPinterest className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="p-5 md:hidden">
-                    <h4 className="font-bold text-lg mb-2">{proj.name}</h4>
-                    <p className="text-muted-foreground text-sm mb-3">
-                      {proj.description}
-                    </p>
-
-                    <div className="flex gap-2">
-                      <Button size="sm" variant="outline">
-                        <DribbbleIcon className="w-4 h-4" />
-                      </Button>
-                      <Button size="sm" variant="outline">
-                        <FigmaIcon className="w-4 h-4" />
-                      </Button>
-                      <Button size="sm" variant="outline">
-                        <BsPinterest className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))
+              ) : (
+                <p></p>
+              )}
             </div>
           </motion.div>
         )}
@@ -319,10 +315,8 @@ export default function ProjectsSection() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="text-center mt-16 p-8 bg-muted/20 rounded-xl"
       >
-        <h3 className="text-2xl font-semibold mb-4 not-dark:text-white">
-          Want to see more?
-        </h3>
-        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto not-dark:text-gray-200">
+        <h3 className="text-2xl font-semibold mb-4 ">Want to see more?</h3>
+        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto not-dark:text-gray-900">
           I&apos;m constantly working on new projects and improving my skills.
           Check out my GitHub for more code or my design profiles for UI/UX
           work.
@@ -334,12 +328,12 @@ export default function ProjectsSection() {
               GitHub Profile
             </Button>
           </Link>
-          <Link href="" target="_blank">
+          {/* <Link href="" target="_blank">
             <Button variant="outline" className="rounded-full gap-2">
               <DribbbleIcon className="w-4 h-4" />
               Design Portfolio
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </motion.div>
     </section>
