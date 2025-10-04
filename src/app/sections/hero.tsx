@@ -18,7 +18,7 @@ export default function HeroSection() {
     <div
       className={`relative h-screen mt-10 flex flex-col items-center justify-center px-5 overflow-hidden ${inter.className}`}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background not-dark:from-transparent not-dark:via-transparent not-dark:to-background/30 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background not-dark:from-transparent  not-dark:to-[#887baf] z-0" />
 
       <Image
         src={Kal_X}
@@ -61,7 +61,7 @@ export default function HeroSection() {
           transition={{ delay: 0.2, duration: 0.7 }}
         >
           I&apos;m{" "}
-          <span className="bg-clip-text text-transparent bg-blue-950 dark:bg-blue-700 font-extrabold">
+          <span className="bg-clip-text text-transparent bg-blue-800 dark:bg-blue-700 font-extrabold">
             Kaleab Shewangizaw [Kal_X]
           </span>
         </motion.h1>

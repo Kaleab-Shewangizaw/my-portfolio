@@ -4,8 +4,12 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 import Guava from "../../../public/Guava_logo.png";
+import SummerPlanner from "../../../public/Summer_v1.png";
+import SummerPlanner2 from "../../../public/Summer_v2.png";
+import QLink from "../../../public/QLinkI.png";
+import GymConnect from "../../../public/GymConnect.png";
 import { Button } from "@/components/ui/button";
-import { BsGithub, BsPinterest } from "react-icons/bs";
+import { BsExclamation, BsGithub, BsPinterest } from "react-icons/bs";
 import { DribbbleIcon, ExternalLink, FigmaIcon, Star } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -17,37 +21,67 @@ const devProjects = [
       "A social blogging platform with communities, posts, likes, and trends.",
     tech: ["React", "Next.js", "Tailwind", "Node.js", "MongoDB"],
     img: Guava,
-    github: "#",
+    github: "https://github.com/Kaleab-Shewangizaw/Guava",
     live: "#",
     featured: true,
+    underDevelopment: false,
   },
   {
-    name: "Service Booking System",
-    description: "Manage appointments and bookings with a dynamic dashboard.",
-    tech: ["React", "Express.js", "PostgreSQL"],
-    img: Guava,
-    github: "#",
+    name: "Summer Planner",
+    description: "A web app to plan and organize your summer activities.",
+    tech: ["React", "Express.js", "MongoDB", "Node.js"],
+    img: SummerPlanner,
+    github: "https://github.com/Kaleab-Shewangizaw/Summer_Planner",
     live: "#",
     featured: false,
+    underDevelopment: false,
   },
   {
-    name: "E-Commerce Platform",
+    name: "Summer Planner V2",
     description:
-      "Full-featured online store with cart and payment integration.",
+      "A revamped version of Summer Planner with enhanced features and UI.",
     tech: ["Next.js", "Stripe", "Sanity", "Tailwind"],
-    img: Guava,
-    github: "#",
+    img: SummerPlanner2,
+    github: "https://github.com/Kaleab-Shewangizaw/Summer_planner_v2",
     live: "#",
     featured: true,
+    underDevelopment: false,
   },
   {
-    name: "Task Management App",
-    description: "Collaborative task management with real-time updates.",
-    tech: ["React", "Firebase", "Material UI"],
-    img: Guava,
-    github: "#",
+    name: "GymConnect",
+    description:
+      "A platform to connect gym enthusiasts, trainers, gyms with their clients, customers. and also to share workout routines and diet plans.",
+    tech: [
+      "NextJs",
+      "Better-auth",
+      "Shadcn UI",
+      "Tailwind",
+      "MongoDB",
+      "TypeScript",
+    ],
+    img: GymConnect,
+    github: "https://github.com/Kaleab-Shewangizaw/Gym-connect",
     live: "#",
-    featured: false,
+    featured: true,
+    underDevelopment: false,
+  },
+  {
+    name: "QLink",
+    description:
+      "Mini stackoverflow clone with question and answer features. and also to share links which allow users to upvote and downvote. and also ask questions.",
+    tech: [
+      "Next",
+      "Better-auth",
+      "Shadcn UI",
+      "Tailwind",
+      "MongoDB",
+      "TypeScript",
+    ],
+    img: QLink,
+    github: "https://github.com/Kaleab-Shewangizaw/QLink",
+    live: "#",
+    featured: true,
+    underDevelopment: false,
   },
 ];
 
@@ -127,7 +161,7 @@ export default function ProjectsSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="group relative bg-card rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
+                  className="group relative bg-card not-dark:bg-[#101828] rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
                   onMouseEnter={() => setHoveredProject(i)}
                   onMouseLeave={() => setHoveredProject(null)}
                 >
@@ -135,6 +169,12 @@ export default function ProjectsSection() {
                     <div className="absolute top-3 left-3 z-10 bg-primary text-primary-foreground text-xs font-medium px-2 py-1 rounded-full flex items-center gap-1">
                       <Star className="w-3 h-3 fill-current" />
                       Featured
+                    </div>
+                  )}
+                  {proj.underDevelopment && (
+                    <div className="absolute top-3 right-3 z-10 bg-yellow-200/10 text-gray-100/30 text-xs font-medium px-2 py-1 rounded-full flex items-center ">
+                      <BsExclamation className="w-5 h-5 fill-current" />
+                      Under Development
                     </div>
                   )}
 
@@ -147,16 +187,23 @@ export default function ProjectsSection() {
                     />
 
                     {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 not-dark:from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                       <div className="flex gap-2">
-                        <Button size="sm" className="rounded-full">
-                          <BsGithub className="w-4 h-4 mr-1" />
-                          Code
-                        </Button>
+                        <Link
+                          href={proj.github}
+                          target="_blank"
+                          className="w-full"
+                        >
+                          <Button size="sm" className="rounded-full">
+                            <BsGithub className="w-4 h-4 mr-1" />
+                            Code
+                          </Button>
+                        </Link>
                         <Button
                           size="sm"
                           variant="outline"
                           className="rounded-full"
+                          disabled={proj.live === "#"}
                         >
                           <ExternalLink className="w-4 h-4 mr-1" />
                           Live Demo
@@ -166,7 +213,7 @@ export default function ProjectsSection() {
                   </div>
 
                   <div className="p-5">
-                    <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">
+                    <h4 className="font-bold text-lg mb-2 not-dark:text-secondary transition-colors">
                       {proj.name}
                     </h4>
                     <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
@@ -177,7 +224,7 @@ export default function ProjectsSection() {
                       {proj.tech.slice(0, 4).map((tech, index) => (
                         <span
                           key={index}
-                          className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full"
+                          className="px-2 py-1 bg-primary/10 text-primary not-dark:text-primary-foreground not-dark:bg-secondary/10 text-xs rounded-full"
                         >
                           {tech}
                         </span>
@@ -190,14 +237,17 @@ export default function ProjectsSection() {
                     </div>
                   </div>
                   <div className="flex gap-2 px-5 pb-5 md:hidden">
-                    <Button size="sm" className="rounded-full">
-                      <BsGithub className="w-4 h-4 mr-1" />
-                      Code
-                    </Button>
+                    <Link href={proj.github} target="_blank" className="w-full">
+                      <Button size="sm" className="rounded-full">
+                        <BsGithub className="w-4 h-4 mr-1" />
+                        Code
+                      </Button>
+                    </Link>
                     <Button
                       size="sm"
                       variant="outline"
                       className="rounded-full"
+                      disabled={proj.live === "#"}
                     >
                       <ExternalLink className="w-4 h-4 mr-1" />
                       Live Demo
