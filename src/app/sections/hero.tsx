@@ -144,7 +144,7 @@ export default function HeroSection() {
             },
             {
               icon: BiLogoTelegram,
-              href: "https://t.me/kal_ab_s",
+              href: "https://t.me/kal_abX",
               label: "Telegram",
             },
           ].map((social, i) => {
