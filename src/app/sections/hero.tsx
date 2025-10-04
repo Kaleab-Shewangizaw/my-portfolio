@@ -18,8 +18,7 @@ export default function HeroSection() {
     <div
       className={`relative h-screen mt-10 flex flex-col items-center justify-center px-5 overflow-hidden ${inter.className}`}
     >
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background   z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background not-dark:from-transparent not-dark:via-transparent not-dark:to-background/30 z-0" />
 
       <Image
         src={Kal_X}
@@ -62,25 +61,25 @@ export default function HeroSection() {
           transition={{ delay: 0.2, duration: 0.7 }}
         >
           I&apos;m{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500 ">
+          <span className="bg-clip-text text-transparent bg-blue-950 dark:bg-blue-700 font-extrabold">
             Kaleab Shewangizaw [Kal_X]
           </span>
         </motion.h1>
 
         <motion.div
-          className="text-xl md:text-2xl text-muted-foreground  font-light not-dark:text-gray-700"
+          className="text-xl md:text-2xl text-muted-foreground  font-light not-dark:text-gray-300"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.7 }}
         >
-          <span className="text-foreground font-medium">
+          <span className="text-foreground not-dark:text-gray-200 font-medium">
             • Full Stack Developer
           </span>{" "}
           • UI/UX designer
         </motion.div>
 
         <motion.p
-          className="text-lg  text-gray-700 dark:text-gray-300 max-w-2xl"
+          className="text-lg  text-gray-200 dark:text-gray-300 max-w-2xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.7 }}
@@ -175,16 +174,16 @@ export default function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
       >
-        <div className="text-sm text-muted-foreground mb-2">
+        <div className="text-sm text-muted-foreground not-dark:text-gray-200 mb-2">
           Scroll to explore
         </div>
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <div className="w-6 h-10 border-2 border-border not-dark:border-primary rounded-full flex justify-center">
+          <div className="w-6 h-10 border-2 border-border not-dark:border-gray-300 rounded-full flex justify-center">
             <motion.div
-              className="w-1 h-3 bg-primary rounded-full mt-2"
+              className="w-1 h-3 bg-primary not-dark:bg-secondary rounded-full mt-2"
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             />

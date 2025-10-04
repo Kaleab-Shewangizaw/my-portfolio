@@ -47,7 +47,7 @@ export default function Navbar() {
       transition={{ duration: 0.6 }}
     >
       <motion.div
-        className="font-bold text-xl bg-gradient-to-r from-purple-600 to-blue-600 not-dark:from-purple-800 not-dark:to-blue-800 bg-clip-text text-transparent"
+        className="font-bold text-xl bg-blue-950 dark:bg-blue-700 bg-clip-text text-transparent"
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 400 }}
       >
