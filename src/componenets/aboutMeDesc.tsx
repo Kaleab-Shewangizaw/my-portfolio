@@ -74,7 +74,7 @@ export default function AboutMeDesc() {
           variant="outline"
           onClick={() => {
             const link = document.createElement("a");
-            link.href = "/KALEAB SHEWANGIZAW CV.pdf";
+            link.href = "/KALEAB SHEWANGIZAW CV2.pdf";
             link.download = "Kaleab_Shewangizaw_CV.pdf";
             link.click();
           }}
