@@ -79,7 +79,7 @@ const devProjects = [
     ],
     img: QLink,
     github: "https://github.com/Kaleab-Shewangizaw/QLink",
-    live: "#",
+    live: "https://qlink-one.vercel.app",
     featured: true,
     underDevelopment: false,
   },
