@@ -98,7 +98,7 @@ const devProjects = [
     ],
     img: QLink,
     github: "https://github.com/Kaleab-Shewangizaw/QLink",
-    live: "#",
+    live: "https://qlink-one.vercel.app",
     featured: true,
     underDevelopment: false,
   },
@@ -269,7 +269,7 @@ export default function ProjectsSection() {
                       disabled={proj.live === "#"}
                     >
                       <ExternalLink className="w-4 h-4 mr-1" />
-                      Live Demo
+                      <Link href={proj.live} target="_blank">Live Demo</Link>
                     </Button>
                   </div>
                 </motion.div>
