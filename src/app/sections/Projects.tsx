@@ -36,6 +36,24 @@ const devProjects = [
     underDevelopment: false,
   },
   {
+    name: "QLink",
+    description:
+      "Mini stackoverflow clone with question and answer features. and also to share links which allow users to upvote and downvote. and also ask questions.",
+    tech: [
+      "Next",
+      "Better-auth",
+      "Shadcn UI",
+      "Tailwind",
+      "MongoDB",
+      "TypeScript",
+    ],
+    img: QLink,
+    github: "https://github.com/Kaleab-Shewangizaw/QLink",
+    live: "https://qlink-one.vercel.app",
+    featured: true,
+    underDevelopment: false,
+  },
+  {
     name: "Guava Social Blog",
     description:
       "A social blogging platform with communities, posts, likes, and trends.",
@@ -82,24 +100,6 @@ const devProjects = [
     img: GymConnect,
     github: "https://github.com/Kaleab-Shewangizaw/Gym-connect",
     live: "#",
-    featured: true,
-    underDevelopment: false,
-  },
-  {
-    name: "QLink",
-    description:
-      "Mini stackoverflow clone with question and answer features. and also to share links which allow users to upvote and downvote. and also ask questions.",
-    tech: [
-      "Next",
-      "Better-auth",
-      "Shadcn UI",
-      "Tailwind",
-      "MongoDB",
-      "TypeScript",
-    ],
-    img: QLink,
-    github: "https://github.com/Kaleab-Shewangizaw/QLink",
-    live: "https://qlink-one.vercel.app",
     featured: true,
     underDevelopment: false,
   },
