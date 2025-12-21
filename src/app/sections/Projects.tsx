@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Guava from "../../../public/Guava_logo.png";
 import SummerPlanner from "../../../public/Summer_v1.png";
 import SummerPlanner2 from "../../../public/Summer_v2.png";
+import Pazimo from "../../../public/pazimo.png";
 import QLink from "../../../public/QLinkI.png";
 import GymConnect from "../../../public/GymConnect.png";
 import { Button } from "@/components/ui/button";
@@ -28,9 +29,9 @@ const devProjects = [
       "Tailwind",
       "TypeScript",
     ],
-    img: "https://pazimo.com/logo.png",
+    img: Pazimo,
     github: "https://github.com/Kaleab-Shewangizaw/Pazimo",
-    live: "https://www.pazimo.com",
+    live: "https://pazimo.com",
     featured: true,
     underDevelopment: false,
   },
@@ -269,7 +270,9 @@ export default function ProjectsSection() {
                       disabled={proj.live === "#"}
                     >
                       <ExternalLink className="w-4 h-4 mr-1" />
-                      <Link href={proj.live} target="_blank">Live Demo</Link>
+                      <Link href={proj.live} target="_blank">
+                        Live Demo
+                      </Link>
                     </Button>
                   </div>
                 </motion.div>
