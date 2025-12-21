@@ -16,6 +16,25 @@ import Link from "next/link";
 
 const devProjects = [
   {
+    name: "Pazimo",
+    description:
+      "Your one-stop destination for discovering and booking tickets for the best events.",
+    tech: [
+      "Next.js",
+      "SantimPay",
+      "Chapa",
+      "Node.js",
+      "MongoDB",
+      "Tailwind",
+      "TypeScript",
+    ],
+    img: "https://pazimo.com/logo.png",
+    github: "https://github.com/Kaleab-Shewangizaw/Pazimo",
+    live: "https://www.pazimo.com",
+    featured: true,
+    underDevelopment: false,
+  },
+  {
     name: "Guava Social Blog",
     description:
       "A social blogging platform with communities, posts, likes, and trends.",
