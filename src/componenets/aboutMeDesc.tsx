@@ -58,17 +58,21 @@ export default function AboutMeDesc() {
             />
           </div>
           <div>
-            <p className="font-medium flex items-center">
+            <p className="font-medium flex items-center gap-2 flex-wrap">
               Prime Software PLC
               <Link
                 href="https://primetechplc.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 inline-block"
+                className="inline-block"
               >
                 <Paperclip className="inline-block text-gray-300 w-4 h-4" />
               </Link>
+              <span className="text-xs px-2 py-0.5 rounded-full border border-primary/30 text-primary bg-primary/10">
+                Currently Working here
+              </span>
             </p>
+
             <p className="text-sm text-muted-foreground">
               Full-Stack Developer
             </p>
