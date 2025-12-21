@@ -198,7 +198,11 @@ export default function ProjectsSection() {
                     </div>
                   )}
 
-                  <div className="relative h-48 overflow-hidden">
+                  <div
+                    className={`relative h-48 overflow-hidden ${
+                      proj.name === "Pazimo" ? "bg-white" : ""
+                    }`}
+                  >
                     <Image
                       src={proj.img}
                       alt={proj.name}
@@ -219,15 +223,28 @@ export default function ProjectsSection() {
                             Code
                           </Button>
                         </Link>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="rounded-full"
-                          disabled={proj.live === "#"}
-                        >
-                          <ExternalLink className="w-4 h-4 mr-1" />
-                          Live Demo
-                        </Button>
+                        {proj.live !== "#" ? (
+                          <Link href={proj.live} target="_blank">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="rounded-full"
+                            >
+                              <ExternalLink className="w-4 h-4 mr-1" />
+                              Live Demo
+                            </Button>
+                          </Link>
+                        ) : (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="rounded-full"
+                            disabled
+                          >
+                            <ExternalLink className="w-4 h-4 mr-1" />
+                            Live Demo
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -263,17 +280,28 @@ export default function ProjectsSection() {
                         Code
                       </Button>
                     </Link>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="rounded-full"
-                      disabled={proj.live === "#"}
-                    >
-                      <ExternalLink className="w-4 h-4 mr-1" />
+                    {proj.live !== "#" ? (
                       <Link href={proj.live} target="_blank">
-                        Live Demo
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full"
+                        >
+                          <ExternalLink className="w-4 h-4 mr-1" />
+                          Live Demo
+                        </Button>
                       </Link>
-                    </Button>
+                    ) : (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="rounded-full"
+                        disabled
+                      >
+                        <ExternalLink className="w-4 h-4 mr-1" />
+                        Live Demo
+                      </Button>
+                    )}
                   </div>
                 </motion.div>
               ))}
