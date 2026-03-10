@@ -65,8 +65,8 @@ export default function ContactSection() {
     {
       icon: <Phone className="w-5 h-5" />,
       label: "Phone",
-      value: "+251 906 983 178",
-      href: "tel:+251906983178",
+      value: "+251 988 680 987",
+      href: "tel:+251988680987",
     },
     {
       icon: <MapPin className="w-5 h-5" />,
