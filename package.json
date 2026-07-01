@@ -5,7 +5,7 @@
   "scripts": {
     "predev": "node scripts/predev.mjs",
     "dev": "next dev --turbopack",
-    "prebuild": "rm -rf .next",
+    "prebuild": "rm -rf .next && rm -rf node_modules/.cache/next",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
