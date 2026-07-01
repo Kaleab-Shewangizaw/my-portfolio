@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/data";
+import ShareButton from "@/components/ShareButton";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -43,19 +44,25 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Post header */}
         <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "28px", marginBottom: "40px" }}>
-          {/* Date + read time */}
-          <div className="flex items-center gap-3" style={{ marginBottom: "16px" }}>
-            <span style={{ fontSize: "11px", color: "var(--muted-foreground)", fontFamily: "'Space Mono', monospace" }}>
-              {new Date(post.date).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </span>
-            <span style={{ color: "var(--border)", fontSize: "11px" }}>/</span>
-            <span style={{ fontSize: "11px", color: "var(--muted-foreground)", fontFamily: "'Space Mono', monospace" }}>
-              {post.readTime}
-            </span>
+          {/* Date + read time + share */}
+          <div className="flex items-center justify-between gap-4" style={{ marginBottom: "16px" }}>
+            <div className="flex items-center gap-3">
+              <span style={{ fontSize: "11px", color: "var(--muted-foreground)", fontFamily: "'Space Mono', monospace" }}>
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
+              <span style={{ color: "var(--border)", fontSize: "11px" }}>/</span>
+              <span style={{ fontSize: "11px", color: "var(--muted-foreground)", fontFamily: "'Space Mono', monospace" }}>
+                {post.readTime}
+              </span>
+            </div>
+            <ShareButton
+              title={post.title}
+              url={`https://kal-x.vercel.app/blog/${post.slug}`}
+            />
           </div>
 
           <h1 style={{

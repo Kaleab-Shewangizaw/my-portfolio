@@ -1,63 +1,58 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/componenets/themeProvider";
-import Footer from "./sections/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import LeftSidebar from "@/components/LeftSidebar";
+import MobileHeader from "@/components/MobileHeader";
 
 export const metadata: Metadata = {
-  title: "Kal_X",
+  title: "Kal_X — Kaleab Shewangizaw",
   description:
     "Kaleab Shewangizaw's Portfolio. Full-Stack Developer | React, Next.js, Node.js | Open to Opportunities",
-  icons: {
-    icon: "/favicon.ico",
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
+  icons: { icon: "/favicon.ico" },
   metadataBase: new URL("https://kal-x.vercel.app"),
   openGraph: {
-    title: "Kal_X",
+    title: "Kal_X — Kaleab Shewangizaw",
     description:
-      "Kaleab Shewangizaw's Portfolio. Full-Stack Developer | React, Next.js, Node.js | Open to Opportunities",
+      "Full-Stack Developer | React, Next.js, Node.js | Open to Opportunities",
     url: "https://kal-x.vercel.app",
     siteName: "Kal_X Portfolio",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Kal_X Portfolio",
-      },
-    ],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Kal_X Portfolio" }],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kal_X",
-    description:
-      "Kaleab Shewangizaw's Portfolio. Full-Stack Developer | React, Next.js, Node.js | Open to Opportunities",
+    title: "Kal_X — Kaleab Shewangizaw",
+    description: "Full-Stack Developer | React, Next.js, Node.js",
     images: ["/og-image.png"],
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className="antialiased not-dark:bg-[#887baf]">
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange={false}
         >
-          <div className="relative">
-            {children} <Footer />
+          {/* Mobile-only top bar */}
+          <MobileHeader />
+
+          <div className="flex" style={{ minHeight: "100dvh" }}>
+            {/* Persistent left sidebar — hidden on mobile */}
+            <LeftSidebar />
+
+            {/* Page content */}
+            <main className="flex-1 min-w-0 overflow-hidden">
+              {children}
+            </main>
           </div>
         </ThemeProvider>
       </body>

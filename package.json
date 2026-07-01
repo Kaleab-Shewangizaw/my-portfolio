@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/predev.mjs",
     "dev": "next dev --turbopack",
+    "prebuild": "rm -rf .next",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -17,6 +19,7 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@types/three": "^0.185.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "emailjs": "^4.0.3",
@@ -31,7 +34,8 @@
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
     "sonner": "^2.0.7",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "three": "^0.185.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

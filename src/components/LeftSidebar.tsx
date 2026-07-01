@@ -35,7 +35,7 @@ export default function LeftSidebar() {
     <aside
       className="hidden lg:flex flex-col sticky top-0 h-screen flex-shrink-0"
       style={{
-        width: "260px",
+        width: "350px",
         borderRight: "1px solid rgba(255,255,255,0.07)",
         zIndex: 10,
         position: "relative",
@@ -51,35 +51,28 @@ export default function LeftSidebar() {
         {/* Name / Logo */}
         <div className="mb-7">
           <Link href="/" style={{ textDecoration: "none" }}>
-            <p style={{
-              fontSize: "10px",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.38)",
-              marginBottom: "5px",
-              fontFamily: "'Space Mono', monospace",
-            }}>
-              Portfolio
-            </p>
+            {/* Alias — primary brand mark */}
             <h1 style={{
-              fontSize: "17px",
+              fontSize: "22px",
               fontWeight: 700,
               color: "#FFFFFF",
-              lineHeight: 1.25,
+              lineHeight: 1.15,
               fontFamily: "'Space Mono', monospace",
-              letterSpacing: "-0.01em",
-            }}>
-              {profile.name}
-            </h1>
-            <p style={{
-              fontSize: "10px",
-              letterSpacing: "0.1em",
+              letterSpacing: "0.04em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.38)",
-              marginTop: "3px",
-              fontFamily: "'Space Mono', monospace",
+              marginBottom: "5px",
             }}>
               {profile.alias}
+            </h1>
+            {/* Full name — secondary, humanising */}
+            <p style={{
+              fontSize: "11px",
+              color: "rgba(255,255,255,0.45)",
+              fontFamily: "Georgia, 'Times New Roman', serif",
+              fontStyle: "italic",
+              letterSpacing: "0.01em",
+            }}>
+              {profile.name}
             </p>
           </Link>
         </div>
