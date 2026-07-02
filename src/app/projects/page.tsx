@@ -7,10 +7,12 @@ import { BsGithub } from "react-icons/bs";
 import { projects } from "@/lib/data";
 
 const tabs = [
-  { key: "all",  label: "All" },
-  { key: "web",  label: "Web" },
-  { key: "app",  label: "Apps" },
-  { key: "fun",  label: "Fun" },
+  { key: "all",    label: "All" },
+  { key: "web",    label: "Web" },
+  { key: "mobile", label: "Mobile" },
+  { key: "api",    label: "API" },
+  { key: "tool",   label: "Tool" },
+  { key: "fun",    label: "Fun" },
 ] as const;
 
 type Tab = (typeof tabs)[number]["key"];
@@ -53,7 +55,7 @@ export default function ProjectsPage() {
         {/* Tabs */}
         <div
           className="flex items-center gap-1"
-          style={{ marginBottom: "40px" }}
+          style={{ marginBottom: "40px", overflowX: "auto", paddingBottom: "2px" }}
           role="tablist"
         >
           {tabs.map((tab) => (

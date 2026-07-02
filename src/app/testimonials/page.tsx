@@ -1,12 +1,13 @@
+import Image from "next/image";
 import { testimonials } from "@/lib/data";
 
 export default function TestimonialsPage() {
   return (
     <div className="h-[calc(100dvh-52px)] lg:h-screen overflow-y-auto">
-      <div style={{ maxWidth: "760px", margin: "0 auto", padding: "48px 32px 96px" }}>
+      <div style={{ maxWidth: "720px", margin: "0 auto", padding: "48px 32px 96px" }}>
 
         {/* Header */}
-        <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "28px", marginBottom: "48px" }}>
+        <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "28px", marginBottom: "8px" }}>
           <p
             style={{
               fontSize: "9px",
@@ -33,13 +34,7 @@ export default function TestimonialsPage() {
         </div>
 
         {testimonials.length === 0 ? (
-          <div
-            style={{
-              borderTop: "1px solid var(--border)",
-              paddingTop: "48px",
-              textAlign: "center",
-            }}
-          >
+          <div style={{ paddingTop: "64px", textAlign: "center" }}>
             <p
               style={{
                 fontSize: "12px",
@@ -52,55 +47,91 @@ export default function TestimonialsPage() {
             </p>
           </div>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+          <div>
             {testimonials.map((t, i) => (
               <div
                 key={i}
                 style={{
                   borderBottom: "1px solid var(--border)",
-                  padding: "40px 0",
+                  padding: "48px 0",
                 }}
               >
+                {/* Typographic opening quote */}
+                <p
+                  style={{
+                    fontFamily: "Georgia, 'Times New Roman', serif",
+                    fontSize: "72px",
+                    lineHeight: "0.6",
+                    color: "var(--accent)",
+                    marginBottom: "24px",
+                    opacity: 0.5,
+                    userSelect: "none",
+                  }}
+                  aria-hidden
+                >
+                  &ldquo;
+                </p>
+
+                {/* Quote text */}
                 <p
                   style={{
                     fontSize: "14px",
                     color: "var(--foreground)",
-                    lineHeight: 2,
+                    lineHeight: 2.1,
                     fontFamily: "'Space Mono', monospace",
-                    marginBottom: "28px",
+                    marginBottom: "36px",
                   }}
                 >
-                  &ldquo;{t.text}&rdquo;
+                  {t.text}
                 </p>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                  <div
-                    style={{
-                      width: "32px",
-                      height: "32px",
-                      borderRadius: "50%",
-                      backgroundColor: "var(--muted)",
-                      border: "1px solid var(--border)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "'Space Mono', monospace",
-                      fontSize: "11px",
-                      fontWeight: 700,
-                      color: "var(--muted-foreground)",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {t.name.charAt(0)}
-                  </div>
+                {/* Author row */}
+                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  {t.avatar ? (
+                    <Image
+                      src={t.avatar}
+                      alt={t.name}
+                      width={44}
+                      height={44}
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        border: "1px solid var(--border)",
+                        flexShrink: 0,
+                      }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "50%",
+                        backgroundColor: "var(--muted)",
+                        border: "1px solid var(--border)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontFamily: "'Space Mono', monospace",
+                        fontSize: "14px",
+                        fontWeight: 700,
+                        color: "var(--muted-foreground)",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {t.name.charAt(0)}
+                    </div>
+                  )}
+
                   <div>
                     <p
                       style={{
-                        fontSize: "12px",
+                        fontSize: "13px",
                         fontWeight: 700,
                         color: "var(--foreground)",
                         fontFamily: "'Space Mono', monospace",
-                        marginBottom: "2px",
+                        marginBottom: "3px",
                       }}
                     >
                       {t.name}
@@ -110,6 +141,7 @@ export default function TestimonialsPage() {
                         fontSize: "10px",
                         color: "var(--muted-foreground)",
                         fontFamily: "'Space Mono', monospace",
+                        letterSpacing: "0.04em",
                       }}
                     >
                       {t.role} · {t.company}

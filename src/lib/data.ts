@@ -162,9 +162,29 @@ export type Testimonial = {
   role: string;
   company: string;
   text: string;
+  avatar?: string;
 };
 
-export const testimonials: Testimonial[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    name: "Mihail Boyanov",
+    role: "CTO",
+    company: "Prime Software PLC",
+    text: "Kaleab consistently delivers clean, scalable solutions. His ability to grasp complex requirements quickly and translate them into working software is impressive. A reliable engineer who takes full ownership of the work.",
+  },
+  {
+    name: "Liya Tesfaye",
+    role: "Lead Designer",
+    company: "Prime Software PLC",
+    text: "Working with Kaleab on the frontend was seamless. He bridges the gap between design and engineering better than most developers I've worked with — he actually reads the design specs carefully.",
+  },
+  {
+    name: "Daniel Mekuria",
+    role: "Senior Developer",
+    company: "GDG AAU",
+    text: "Kaleab was one of our best bootcamp instructors. His explanations are clear, he handles hard questions with confidence, and the students consistently gave him the highest feedback.",
+  },
+];
 
 export const blogPosts = [
   {
