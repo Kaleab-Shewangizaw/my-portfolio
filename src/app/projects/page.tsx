@@ -1,25 +1,32 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { BsGithub } from "react-icons/bs";
 import { projects } from "@/lib/data";
-import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Projects — Kal_X",
-  description:
-    "A selection of projects built by Kaleab Shewangizaw — web apps, platforms, and tools.",
-};
+const tabs = [
+  { key: "all",  label: "All" },
+  { key: "web",  label: "Web" },
+  { key: "app",  label: "Apps" },
+  { key: "fun",  label: "Fun" },
+] as const;
+
+type Tab = (typeof tabs)[number]["key"];
 
 export default function ProjectsPage() {
-  const featured = projects.filter((p) => p.featured);
-  const others = projects.filter((p) => !p.featured);
+  const [active, setActive] = useState<Tab>("all");
+
+  const visible =
+    active === "all" ? projects : projects.filter((p) => p.category === active);
 
   return (
     <div className="h-[calc(100dvh-52px)] lg:h-screen overflow-y-auto">
       <div style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 32px 96px" }}>
 
-        {/* Page header */}
-        <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "28px", marginBottom: "48px" }}>
+        {/* Header */}
+        <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "28px", marginBottom: "36px" }}>
           <p className="label-sm" style={{ color: "var(--muted-foreground)", marginBottom: "8px" }}>
             Work
           </p>
@@ -39,24 +46,64 @@ export default function ProjectsPage() {
             lineHeight: 1.75,
             fontFamily: "'Space Mono', monospace",
           }}>
-            Things I&apos;ve built — from event platforms to social networks and developer tools.
+            A collection of things I&apos;ve built.
           </p>
         </div>
 
-        {/* Featured grid */}
-        <section className="mb-16">
-          <p className="label-sm" style={{ color: "var(--muted-foreground)", marginBottom: "28px" }}>
-            Featured
-          </p>
+        {/* Tabs */}
+        <div
+          className="flex items-center gap-1"
+          style={{ marginBottom: "40px" }}
+          role="tablist"
+        >
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              role="tab"
+              aria-selected={active === tab.key}
+              onClick={() => setActive(tab.key)}
+              style={{
+                fontSize: "10px",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                fontFamily: "'Space Mono', monospace",
+                padding: "6px 16px",
+                border: "1px solid var(--border)",
+                background: active === tab.key ? "var(--foreground)" : "transparent",
+                color: active === tab.key ? "var(--background)" : "var(--muted-foreground)",
+                cursor: "pointer",
+                transition: "background 0.15s, color 0.15s",
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
 
+        {/* Grid */}
+        {visible.length === 0 ? (
+          <p style={{
+            fontSize: "13px",
+            color: "var(--muted-foreground)",
+            fontFamily: "'Space Mono', monospace",
+            paddingTop: "24px",
+          }}>
+            Nothing here yet.
+          </p>
+        ) : (
           <div className="grid md:grid-cols-2 gap-6">
-            {featured.map((project) => (
+            {visible.map((project) => (
               <article
                 key={project.slug}
                 className="group"
                 style={{ border: "1px solid var(--border)" }}
               >
-                <div style={{ overflow: "hidden", aspectRatio: "16/9", backgroundColor: "var(--muted)" }}>
+                {/* Thumbnail */}
+                <div style={{
+                  overflow: "hidden",
+                  aspectRatio: "16/9",
+                  backgroundColor: "var(--muted)",
+                }}>
                   <Image
                     src={project.image}
                     alt={project.name}
@@ -68,6 +115,7 @@ export default function ProjectsPage() {
                 </div>
 
                 <div style={{ padding: "20px" }}>
+                  {/* Title row */}
                   <div className="flex items-start justify-between gap-3" style={{ marginBottom: "10px" }}>
                     <div>
                       <h2 style={{
@@ -79,12 +127,17 @@ export default function ProjectsPage() {
                       }}>
                         {project.name}
                       </h2>
-                      <span style={{ fontSize: "10px", color: "var(--muted-foreground)", fontFamily: "'Space Mono', monospace" }}>
+                      <span style={{
+                        fontSize: "9px",
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        color: "var(--muted-foreground)",
+                        fontFamily: "'Space Mono', monospace",
+                      }}>
                         {project.year}
                       </span>
                     </div>
 
-                    {/* Icon links — CSS class handles hover */}
                     <div className="flex gap-3 flex-shrink-0">
                       <a
                         href={project.github}
@@ -112,7 +165,7 @@ export default function ProjectsPage() {
                   <p style={{
                     fontSize: "12px",
                     color: "var(--muted-foreground)",
-                    lineHeight: 1.7,
+                    lineHeight: 1.75,
                     marginBottom: "14px",
                     fontFamily: "'Space Mono', monospace",
                   }}>
@@ -141,83 +194,6 @@ export default function ProjectsPage() {
               </article>
             ))}
           </div>
-        </section>
-
-        {/* Other projects — compact list */}
-        {others.length > 0 && (
-          <section>
-            <p className="label-sm" style={{ color: "var(--muted-foreground)", marginBottom: "28px" }}>
-              Other Projects
-            </p>
-
-            <div>
-              {others.map((project) => (
-                <div
-                  key={project.slug}
-                  className="flex items-start justify-between gap-6"
-                  style={{ borderBottom: "1px solid var(--border)", padding: "18px 0" }}
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 style={{
-                        fontSize: "13px",
-                        fontWeight: 700,
-                        color: "var(--foreground)",
-                        fontFamily: "'Space Mono', monospace",
-                      }}>
-                        {project.name}
-                      </h3>
-                      <span style={{ fontSize: "10px", color: "var(--muted-foreground)", fontFamily: "'Space Mono', monospace" }}>
-                        {project.year}
-                      </span>
-                    </div>
-                    <p style={{
-                      fontSize: "12px",
-                      color: "var(--muted-foreground)",
-                      marginBottom: "8px",
-                      lineHeight: 1.6,
-                      fontFamily: "'Space Mono', monospace",
-                    }}>
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-3">
-                      {project.tech.slice(0, 4).map((tech) => (
-                        <span
-                          key={tech}
-                          style={{ fontSize: "10px", color: "var(--muted-foreground)", fontFamily: "'Space Mono', monospace" }}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 flex-shrink-0 pt-1">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="GitHub"
-                      className="link-icon"
-                    >
-                      <BsGithub size={15} />
-                    </a>
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Live site"
-                        className="link-icon"
-                      >
-                        <ExternalLink size={15} />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
         )}
       </div>
     </div>

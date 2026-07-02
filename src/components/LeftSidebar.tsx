@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -31,31 +30,54 @@ export default function LeftSidebar() {
 
   useEffect(() => setMounted(true), []);
 
+  const dark = resolvedTheme === "dark";
+
+  // All sidebar colors in one place — swap entire palette with theme
+  const c = {
+    bg:           dark ? "#0D0D0D"              : "#F4F1EC",
+    border:       dark ? "rgba(255,255,255,0.07)" : "#E0DDD8",
+    alias:        dark ? "#FFFFFF"              : "#1A1A1A",
+    name:         dark ? "rgba(255,255,255,0.42)" : "#5A5A5A",
+    role:         dark ? "#5AAAA4"              : "#2D6A65",
+    bio:          dark ? "rgba(255,255,255,0.55)" : "#3D3D3D",
+    avail:        dark ? "rgba(255,255,255,0.6)"  : "#3D3D3D",
+    navLabel:     dark ? "rgba(255,255,255,0.22)" : "#AAAAAA",
+    navInactive:  dark ? "rgba(255,255,255,0.38)" : "#5A5A5A",
+    navActive:    dark ? "#FFFFFF"              : "#1A1A1A",
+    navHover:     dark ? "rgba(255,255,255,0.75)" : "#111111",
+    navAccent:    dark ? "#5AAAA4"              : "#2D6A65",
+    divider:      dark ? "rgba(255,255,255,0.07)" : "#E0DDD8",
+    social:       dark ? "rgba(255,255,255,0.36)" : "#888888",
+    socialHover:  dark ? "#FFFFFF"              : "#1A1A1A",
+    themeBtn:     dark ? "rgba(255,255,255,0.28)" : "#888888",
+    themeBtnHover:dark ? "rgba(255,255,255,0.68)" : "#1A1A1A",
+  };
+
   return (
     <aside
       className="hidden lg:flex flex-col sticky top-0 h-screen flex-shrink-0"
       style={{
         width: "350px",
-        borderRight: "1px solid rgba(255,255,255,0.07)",
+        borderRight: `1px solid ${c.border}`,
         zIndex: 10,
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#0D0D0D",
+        backgroundColor: c.bg,
+        transition: "background-color 0.3s ease",
       }}
     >
-      {/* WebGL marble shader background — always dark so white text stays visible */}
-      <ShaderCanvas forceDark />
+      {/* WebGL marble shader — responds to theme */}
+      <ShaderCanvas />
 
       <div className="flex flex-col h-full p-7 relative z-10">
 
         {/* Name / Logo */}
-        <div className="mb-7">
+        <div className="mb-8">
           <Link href="/" style={{ textDecoration: "none" }}>
-            {/* Alias — primary brand mark */}
             <h1 style={{
               fontSize: "22px",
               fontWeight: 700,
-              color: "#FFFFFF",
+              color: c.alias,
               lineHeight: 1.15,
               fontFamily: "'Space Mono', monospace",
               letterSpacing: "0.04em",
@@ -64,10 +86,10 @@ export default function LeftSidebar() {
             }}>
               {profile.alias}
             </h1>
-            {/* Full name — secondary, humanising */}
             <p style={{
-              fontSize: "11px",
-              color: "rgba(255,255,255,0.45)",
+              fontSize: "12px",
+              fontWeight: 400,
+              color: c.name,
               fontFamily: "Georgia, 'Times New Roman', serif",
               fontStyle: "italic",
               letterSpacing: "0.01em",
@@ -77,34 +99,15 @@ export default function LeftSidebar() {
           </Link>
         </div>
 
-        {/* Profile Photo */}
-        <div
-          className="mb-7"
-          style={{
-            border: "1px solid rgba(255,255,255,0.1)",
-            overflow: "hidden",
-            aspectRatio: "1 / 1",
-            width: "100%",
-          }}
-        >
-          <Image
-            src="/my.png"
-            alt={profile.name}
-            width={220}
-            height={220}
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            priority
-          />
-        </div>
-
         {/* Role */}
         <p style={{
           fontSize: "10px",
-          letterSpacing: "0.08em",
+          letterSpacing: "0.1em",
           textTransform: "uppercase",
-          color: "#5AAAA4",
-          marginBottom: "10px",
+          color: c.role,
+          marginBottom: "12px",
           fontFamily: "'Space Mono', monospace",
+          fontWeight: 700,
         }}>
           {profile.role}
         </p>
@@ -112,8 +115,8 @@ export default function LeftSidebar() {
         {/* Bio */}
         <p style={{
           fontSize: "12px",
-          lineHeight: 1.85,
-          color: "rgba(255,255,255,0.58)",
+          lineHeight: 1.9,
+          color: c.bio,
           fontFamily: "'Space Mono', monospace",
           marginBottom: "20px",
         }}>
@@ -123,10 +126,10 @@ export default function LeftSidebar() {
         {/* Availability */}
         {profile.availableForWork && (
           <div
-            className="inline-flex items-center gap-2 mb-7"
+            className="inline-flex items-center gap-2 mb-8"
             style={{
               fontSize: "10px",
-              color: "rgba(255,255,255,0.6)",
+              color: c.avail,
               fontFamily: "'Space Mono', monospace",
               letterSpacing: "0.04em",
             }}
@@ -150,10 +153,10 @@ export default function LeftSidebar() {
         <nav className="flex-1 min-h-0">
           <p style={{
             fontSize: "9px",
-            letterSpacing: "0.16em",
+            letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "rgba(255,255,255,0.25)",
-            marginBottom: "10px",
+            color: c.navLabel,
+            marginBottom: "12px",
             fontFamily: "'Space Mono', monospace",
           }}>
             Navigate
@@ -169,27 +172,25 @@ export default function LeftSidebar() {
                     style={{
                       display: "block",
                       fontSize: "12px",
-                      fontWeight: isActive ? 700 : 400,
-                      letterSpacing: "0.07em",
+                      fontWeight: isActive ? 700 : 500,
+                      letterSpacing: "0.08em",
                       textTransform: "uppercase",
-                      color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.4)",
+                      color: isActive ? c.navActive : c.navInactive,
                       textDecoration: "none",
-                      padding: "7px 0 7px 12px",
+                      padding: "8px 0 8px 14px",
                       borderLeft: isActive
-                        ? "2px solid #5AAAA4"
+                        ? `2px solid ${c.navAccent}`
                         : "2px solid transparent",
                       transition: "color 0.18s ease, border-color 0.18s ease",
                       fontFamily: "'Space Mono', monospace",
                     }}
                     onMouseEnter={(e) => {
-                      if (!isActive) {
-                        (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.72)";
-                      }
+                      if (!isActive)
+                        (e.currentTarget as HTMLAnchorElement).style.color = c.navHover;
                     }}
                     onMouseLeave={(e) => {
-                      if (!isActive) {
-                        (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.4)";
-                      }
+                      if (!isActive)
+                        (e.currentTarget as HTMLAnchorElement).style.color = c.navInactive;
                     }}
                   >
                     {item.label}
@@ -200,9 +201,8 @@ export default function LeftSidebar() {
           </ul>
         </nav>
 
-        {/* Bottom: social + theme */}
-        <div className="mt-auto pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-          {/* Social icons */}
+        {/* Bottom: social + theme toggle */}
+        <div className="mt-auto pt-6" style={{ borderTop: `1px solid ${c.divider}` }}>
           <div className="flex gap-4 mb-5">
             {socialLinks.map(({ icon: Icon, href, label }) => (
               <a
@@ -212,16 +212,16 @@ export default function LeftSidebar() {
                 rel="noopener noreferrer"
                 aria-label={label}
                 style={{
-                  color: "rgba(255,255,255,0.38)",
+                  color: c.social,
                   transition: "color 0.18s ease",
                   display: "flex",
                   alignItems: "center",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color = "#FFFFFF";
+                  (e.currentTarget as HTMLAnchorElement).style.color = c.socialHover;
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.38)";
+                  (e.currentTarget as HTMLAnchorElement).style.color = c.social;
                 }}
               >
                 <Icon size={15} />
@@ -229,14 +229,13 @@ export default function LeftSidebar() {
             ))}
           </div>
 
-          {/* Theme toggle */}
           <button
-            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(dark ? "light" : "dark")}
             style={{
               fontSize: "9px",
               letterSpacing: "0.14em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.3)",
+              color: c.themeBtn,
               background: "none",
               border: "none",
               cursor: "pointer",
@@ -245,13 +244,13 @@ export default function LeftSidebar() {
               transition: "color 0.18s ease",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.65)";
+              (e.currentTarget as HTMLButtonElement).style.color = c.themeBtnHover;
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.3)";
+              (e.currentTarget as HTMLButtonElement).style.color = c.themeBtn;
             }}
           >
-            {mounted ? (resolvedTheme === "dark" ? "Light Mode" : "Dark Mode") : "Theme"}
+            {mounted ? (dark ? "☀ Light Mode" : "☾ Dark Mode") : "Theme"}
           </button>
         </div>
 

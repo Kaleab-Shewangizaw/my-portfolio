@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { BsGithub } from "react-icons/bs";
@@ -20,45 +21,96 @@ export default function HomePage() {
 
           {/* ── Hero ── */}
           <section style={{ marginBottom: "56px" }}>
-            <p style={{
-              fontSize: "10px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: "var(--accent)",
+
+            {/* Photo + name badge */}
+            <div className="flex items-center gap-5" style={{ marginBottom: "32px" }}>
+              <div style={{
+                width: "80px",
+                height: "80px",
+                borderRadius: "50%",
+                overflow: "hidden",
+                border: "2px solid var(--border)",
+                flexShrink: 0,
+                backgroundColor: "var(--muted)",
+              }}>
+                <Image
+                  src="/my.png"
+                  alt={profile.name}
+                  width={80}
+                  height={80}
+                  priority
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </div>
+              <div>
+                <p style={{
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  color: "var(--foreground)",
+                  fontFamily: "'Space Mono', monospace",
+                  marginBottom: "3px",
+                }}>
+                  {profile.name}
+                </p>
+                <p style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  fontFamily: "'Space Mono', monospace",
+                }}>
+                  Addis Ababa, Ethiopia
+                </p>
+                {profile.availableForWork && (
+                  <div className="flex items-center gap-2" style={{ marginTop: "6px" }}>
+                    <span
+                      className="animate-pulse"
+                      style={{
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        backgroundColor: "#4ade80",
+                        display: "inline-block",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span style={{
+                      fontSize: "9px",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "var(--muted-foreground)",
+                      fontFamily: "'Space Mono', monospace",
+                    }}>
+                      Open to work
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <h1 style={{
+              fontSize: "clamp(22px, 3.5vw, 32px)",
+              fontWeight: 700,
+              color: "var(--foreground)",
+              lineHeight: 1.25,
+              letterSpacing: "-0.02em",
               fontFamily: "'Space Mono', monospace",
               marginBottom: "20px",
             }}>
-              Addis Ababa, Ethiopia
-            </p>
-
-            <h1 style={{
-              fontSize: "clamp(26px, 4vw, 38px)",
-              fontWeight: 700,
-              color: "var(--foreground)",
-              lineHeight: 1.2,
-              letterSpacing: "-0.025em",
-              fontFamily: "'Space Mono', monospace",
-              marginBottom: "24px",
-            }}>
-              I turn ideas into<br />
-              production-grade<br />
-              web products.
+              Software engineer.
             </h1>
 
             <p style={{
               fontSize: "13px",
               color: "var(--muted-foreground)",
-              lineHeight: 2.1,
+              lineHeight: 2,
               fontFamily: "'Space Mono', monospace",
               marginBottom: "32px",
-              maxWidth: "480px",
+              maxWidth: "460px",
             }}>
-              From event ticketing platforms serving thousands of users across Ethiopia,
-              to social networks and developer tools — I build full-stack applications
-              that are fast, maintainable, and built to last. Currently at{" "}
-              <span style={{ color: "var(--foreground)", fontWeight: 700 }}>Prime Software PLC</span>,
-              studying CS at{" "}
-              <span style={{ color: "var(--foreground)", fontWeight: 700 }}>AAU</span>.
+              At{" "}
+              <span style={{ color: "var(--foreground)" }}>Prime Software PLC</span>,
+              Addis Ababa. I work on web and mobile applications, system architecture, and databases.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">

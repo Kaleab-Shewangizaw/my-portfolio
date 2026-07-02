@@ -68,8 +68,9 @@ export const projects = [
   {
     slug: "pazimo",
     name: "Pazimo",
+    category: "web",
     description:
-      "Your one-stop destination for discovering and booking tickets for the best events in Ethiopia.",
+      "Event ticketing platform for the Ethiopian market, with local payment integration.",
     longDescription:
       "A full-featured event ticketing platform built for the Ethiopian market. Integrates with SantimPay and Chapa for local payment processing. Users can browse events, book seats, and manage their tickets.",
     tech: ["Next.js", "Node.js", "MongoDB", "SantimPay", "Chapa", "TypeScript", "Tailwind"],
@@ -82,8 +83,9 @@ export const projects = [
   {
     slug: "qlink",
     name: "QLink",
+    category: "web",
     description:
-      "Mini StackOverflow clone with Q&A, link sharing, and community voting features.",
+      "Developer Q&A and link-sharing community with voting, built with modern auth.",
     longDescription:
       "A community platform where developers ask questions, share links, and upvote/downvote content. Built with modern auth and full TypeScript type safety throughout the stack.",
     tech: ["Next.js", "Better-auth", "Shadcn UI", "MongoDB", "TypeScript"],
@@ -96,8 +98,9 @@ export const projects = [
   {
     slug: "guava",
     name: "Guava Social Blog",
+    category: "web",
     description:
-      "A social blogging platform with communities, posts, likes, and trending content discovery.",
+      "Social blogging platform with communities, long-form posts, and trending discovery.",
     longDescription:
       "Full-featured social blog platform inspired by Medium and Reddit. Users create communities, write long-form posts, like, comment, and discover trending content.",
     tech: ["React", "Next.js", "Tailwind", "Node.js", "MongoDB"],
@@ -110,8 +113,9 @@ export const projects = [
   {
     slug: "gymconnect",
     name: "GymConnect",
+    category: "web",
     description:
-      "Platform connecting gym enthusiasts, trainers, and gyms. Share workout routines and diet plans.",
+      "Fitness networking platform for gyms, trainers, and enthusiasts.",
     longDescription:
       "A networking platform for the fitness community. Trainers list services, gyms showcase facilities, and enthusiasts find workout partners and routines.",
     tech: ["Next.js", "Better-auth", "Shadcn UI", "MongoDB", "TypeScript"],
@@ -124,8 +128,9 @@ export const projects = [
   {
     slug: "summer-planner-v2",
     name: "Summer Planner V2",
+    category: "fun",
     description:
-      "A revamped trip and activity planner with payment integration and enhanced UI.",
+      "Trip and activity planner rebuilt with Stripe payments and a Sanity CMS backend.",
     longDescription:
       "Second version of Summer Planner rebuilt with Next.js, Stripe payment integration, and a Sanity CMS backend for content management.",
     tech: ["Next.js", "Stripe", "Sanity", "Tailwind"],
@@ -138,10 +143,11 @@ export const projects = [
   {
     slug: "summer-planner",
     name: "Summer Planner",
+    category: "fun",
     description:
-      "A web app to plan and organize your summer activities and trips.",
+      "My first MERN app — plan and organize summer activities and trips.",
     longDescription:
-      "My first full-stack MERN application. Users create and manage a list of summer activities with categories, priorities, and sharing features.",
+      "First full-stack MERN application. Users create and manage a list of summer activities with categories, priorities, and sharing features.",
     tech: ["React", "Express.js", "MongoDB", "Node.js"],
     image: "/Summer_v1.png",
     github: "https://github.com/Kaleab-Shewangizaw/Summer_Planner",
