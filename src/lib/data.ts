@@ -1,9 +1,9 @@
 export const profile = {
   name: "Kaleab Shewangizaw",
   alias: "[Kal_X]",
-  role: "Full Stack Web Developer",
+  role: "Developer & Software Engineer",
   location: "Addis Ababa, Ethiopia",
-  bio: "I build fast, modern web applications — from backend APIs to clean, responsive UIs. CS student at AAU, currently working at Prime Software PLC.",
+  bio: "I build fast, modern web applications — from backend APIs to clean, responsive UIs. currently working at Prime Software PLC.",
   email: "kaleab.stk@gmail.com",
   phone: "+251 988 680 987",
   availableForWork: true,

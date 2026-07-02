@@ -141,7 +141,7 @@ export default function ContactPage() {
               fontFamily: "'Space Mono', monospace",
             }}
           >
-            I&apos;m always open to new projects, collaborations, or a
+            I&apos;m always open to new projects, collabs, or a
             conversation about tech. Reach out however works best for you.
           </p>
         </div>

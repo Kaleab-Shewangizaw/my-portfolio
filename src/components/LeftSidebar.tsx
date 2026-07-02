@@ -75,8 +75,7 @@ export default function LeftSidebar() {
           </Link>
         </div>
 
-        {/* Role */}
-        <p style={{
+          <p style={{
           fontSize: "10px",
           letterSpacing: "0.1em",
           textTransform: "uppercase",
@@ -94,36 +93,10 @@ export default function LeftSidebar() {
           lineHeight: 1.9,
           color: "var(--sb-bio)",
           fontFamily: "'Space Mono', monospace",
-          marginBottom: "20px",
+          marginBottom: "28px",
         }}>
           {profile.bio}
         </p>
-
-        {/* Availability */}
-        {profile.availableForWork && (
-          <div
-            className="inline-flex items-center gap-2 mb-8"
-            style={{
-              fontSize: "10px",
-              color: "var(--sb-avail)",
-              fontFamily: "'Space Mono', monospace",
-              letterSpacing: "0.04em",
-            }}
-          >
-            <span
-              className="animate-pulse"
-              style={{
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                backgroundColor: "#4ade80",
-                display: "inline-block",
-                flexShrink: 0,
-              }}
-            />
-            Available for work
-          </div>
-        )}
 
         {/* Navigation */}
         <nav className="flex-1 min-h-0">
