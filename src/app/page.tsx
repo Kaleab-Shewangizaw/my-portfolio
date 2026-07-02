@@ -53,15 +53,7 @@ export default function HomePage() {
                 }}>
                   {profile.name}
                 </p>
-                <p style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  fontFamily: "'Space Mono', monospace",
-                }}>
-                  Addis Ababa, Ethiopia
-                </p>
+               
                 {profile.availableForWork && (
                   <div className="flex items-center gap-2" style={{ marginTop: "6px" }}>
                     <span
@@ -433,7 +425,7 @@ export default function HomePage() {
               lineHeight: 1.75,
               fontFamily: "'Space Mono', monospace",
             }}>
-              Available for full-stack roles, freelance projects, and interesting collaborations.
+              Available for full-stack roles, freelance projects, and interesting collabs.
             </p>
           </div>
 
