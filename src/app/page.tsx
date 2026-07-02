@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { BsGithub } from "react-icons/bs";
 import { projects, blogPosts, cv, profile } from "@/lib/data";
+import GitHubStreak from "@/components/GitHubStreak";
 
 export default function HomePage() {
   const selectedProjects = projects.slice(0, 5);
@@ -557,6 +558,21 @@ export default function HomePage() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* GitHub streak */}
+          <div style={{ marginBottom: "32px", paddingBottom: "28px", borderBottom: "1px solid var(--border)" }}>
+            <p style={{
+              fontSize: "9px",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--muted-foreground)",
+              fontFamily: "'Space Mono', monospace",
+              marginBottom: "14px",
+            }}>
+              GitHub
+            </p>
+            <GitHubStreak />
           </div>
 
           {/* CV download */}

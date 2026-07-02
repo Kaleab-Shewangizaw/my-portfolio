@@ -157,6 +157,15 @@ export const projects = [
   },
 ];
 
+export type Testimonial = {
+  name: string;
+  role: string;
+  company: string;
+  text: string;
+};
+
+export const testimonials: Testimonial[] = [];
+
 export const blogPosts = [
   {
     slug: "building-scalable-nextjs-apps",
