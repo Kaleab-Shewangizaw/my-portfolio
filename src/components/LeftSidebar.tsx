@@ -27,44 +27,20 @@ const socialLinks = [
 export default function LeftSidebar() {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
+  // mounted only to decide toggle button label — not for colors
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => setMounted(true), []);
-
-  const dark = resolvedTheme === "dark";
-
-  // All sidebar colors in one place — swap entire palette with theme
-  const c = {
-    bg:           dark ? "#0D0D0D"              : "#F4F1EC",
-    border:       dark ? "rgba(255,255,255,0.07)" : "#E0DDD8",
-    alias:        dark ? "#FFFFFF"              : "#1A1A1A",
-    name:         dark ? "rgba(255,255,255,0.42)" : "#5A5A5A",
-    role:         dark ? "#5AAAA4"              : "#2D6A65",
-    bio:          dark ? "rgba(255,255,255,0.55)" : "#3D3D3D",
-    avail:        dark ? "rgba(255,255,255,0.6)"  : "#3D3D3D",
-    navLabel:     dark ? "rgba(255,255,255,0.22)" : "#AAAAAA",
-    navInactive:  dark ? "rgba(255,255,255,0.38)" : "#5A5A5A",
-    navActive:    dark ? "#FFFFFF"              : "#1A1A1A",
-    navHover:     dark ? "rgba(255,255,255,0.75)" : "#111111",
-    navAccent:    dark ? "#5AAAA4"              : "#2D6A65",
-    divider:      dark ? "rgba(255,255,255,0.07)" : "#E0DDD8",
-    social:       dark ? "rgba(255,255,255,0.36)" : "#888888",
-    socialHover:  dark ? "#FFFFFF"              : "#1A1A1A",
-    themeBtn:     dark ? "rgba(255,255,255,0.28)" : "#888888",
-    themeBtnHover:dark ? "rgba(255,255,255,0.68)" : "#1A1A1A",
-  };
 
   return (
     <aside
       className="hidden lg:flex flex-col sticky top-0 h-screen flex-shrink-0"
       style={{
         width: "350px",
-        borderRight: `1px solid ${c.border}`,
+        borderRight: "1px solid var(--sb-border-color)",
         zIndex: 10,
         position: "relative",
         overflow: "hidden",
-        backgroundColor: c.bg,
-        transition: "background-color 0.3s ease",
+        backgroundColor: "var(--sb-bg)",
       }}
     >
       {/* WebGL marble shader — responds to theme */}
@@ -78,7 +54,7 @@ export default function LeftSidebar() {
             <h1 style={{
               fontSize: "22px",
               fontWeight: 700,
-              color: c.alias,
+              color: "var(--sb-alias)",
               lineHeight: 1.15,
               fontFamily: "'Space Mono', monospace",
               letterSpacing: "0.04em",
@@ -89,8 +65,7 @@ export default function LeftSidebar() {
             </h1>
             <p style={{
               fontSize: "12px",
-              fontWeight: 400,
-              color: c.name,
+              color: "var(--sb-name)",
               fontFamily: "Georgia, 'Times New Roman', serif",
               fontStyle: "italic",
               letterSpacing: "0.01em",
@@ -105,7 +80,7 @@ export default function LeftSidebar() {
           fontSize: "10px",
           letterSpacing: "0.1em",
           textTransform: "uppercase",
-          color: c.role,
+          color: "var(--sb-role)",
           marginBottom: "12px",
           fontFamily: "'Space Mono', monospace",
           fontWeight: 700,
@@ -117,7 +92,7 @@ export default function LeftSidebar() {
         <p style={{
           fontSize: "12px",
           lineHeight: 1.9,
-          color: c.bio,
+          color: "var(--sb-bio)",
           fontFamily: "'Space Mono', monospace",
           marginBottom: "20px",
         }}>
@@ -130,7 +105,7 @@ export default function LeftSidebar() {
             className="inline-flex items-center gap-2 mb-8"
             style={{
               fontSize: "10px",
-              color: c.avail,
+              color: "var(--sb-avail)",
               fontFamily: "'Space Mono', monospace",
               letterSpacing: "0.04em",
             }}
@@ -156,7 +131,7 @@ export default function LeftSidebar() {
             fontSize: "9px",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: c.navLabel,
+            color: "var(--sb-nav-label)",
             marginBottom: "12px",
             fontFamily: "'Space Mono', monospace",
           }}>
@@ -170,28 +145,15 @@ export default function LeftSidebar() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    className={`sb-nav-link${isActive ? " sb-active" : ""}`}
                     style={{
                       display: "block",
                       fontSize: "12px",
-                      fontWeight: isActive ? 700 : 500,
                       letterSpacing: "0.08em",
                       textTransform: "uppercase",
-                      color: isActive ? c.navActive : c.navInactive,
                       textDecoration: "none",
                       padding: "8px 0 8px 14px",
-                      borderLeft: isActive
-                        ? `2px solid ${c.navAccent}`
-                        : "2px solid transparent",
-                      transition: "color 0.18s ease, border-color 0.18s ease",
                       fontFamily: "'Space Mono', monospace",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isActive)
-                        (e.currentTarget as HTMLAnchorElement).style.color = c.navHover;
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive)
-                        (e.currentTarget as HTMLAnchorElement).style.color = c.navInactive;
                     }}
                   >
                     {item.label}
@@ -202,8 +164,8 @@ export default function LeftSidebar() {
           </ul>
         </nav>
 
-        {/* Bottom: social + theme toggle */}
-        <div className="mt-auto pt-6" style={{ borderTop: `1px solid ${c.divider}` }}>
+        {/* Bottom: social icons + theme toggle */}
+        <div className="mt-auto pt-6" style={{ borderTop: "1px solid var(--sb-divider)" }}>
           <div className="flex gap-4 mb-5">
             {socialLinks.map(({ icon: Icon, href, label }) => (
               <a
@@ -212,18 +174,7 @@ export default function LeftSidebar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                style={{
-                  color: c.social,
-                  transition: "color 0.18s ease",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color = c.socialHover;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color = c.social;
-                }}
+                className="sb-social-icon"
               >
                 <Icon size={15} />
               </a>
@@ -231,27 +182,22 @@ export default function LeftSidebar() {
           </div>
 
           <button
-            onClick={() => setTheme(dark ? "light" : "dark")}
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            className="sb-theme-btn"
             style={{
               fontSize: "9px",
               letterSpacing: "0.14em",
               textTransform: "uppercase",
-              color: c.themeBtn,
               background: "none",
               border: "none",
               cursor: "pointer",
               fontFamily: "'Space Mono', monospace",
               padding: 0,
-              transition: "color 0.18s ease",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = c.themeBtnHover;
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = c.themeBtn;
             }}
           >
-            {mounted ? (dark ? "☀ Light Mode" : "☾ Dark Mode") : "Theme"}
+            {mounted
+              ? resolvedTheme === "dark" ? "☀ Light Mode" : "☾ Dark Mode"
+              : "Theme"}
           </button>
         </div>
 

@@ -47,7 +47,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
-          disableTransitionOnChange={false}
+          disableTransitionOnChange
         >
           <MobileHeader />
           <div className="flex" style={{ minHeight: "100dvh" }}>

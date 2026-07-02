@@ -75,6 +75,25 @@
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(0.22 0 0);
   --sidebar-ring: oklch(0.43 0.075 180);
+
+  /* ── Sidebar component tokens (light) ── */
+  --sb-bg: #F4F1EC;
+  --sb-border-color: #E0DDD8;
+  --sb-alias: #1A1A1A;
+  --sb-name: #5A5A5A;
+  --sb-role: #2D6A65;
+  --sb-bio: #3D3D3D;
+  --sb-avail: #3D3D3D;
+  --sb-nav-label: #AAAAAA;
+  --sb-nav-inactive: #5A5A5A;
+  --sb-nav-active: #1A1A1A;
+  --sb-nav-hover: #111111;
+  --sb-nav-accent: #2D6A65;
+  --sb-divider: #E0DDD8;
+  --sb-social: #888888;
+  --sb-social-hover: #1A1A1A;
+  --sb-theme-btn: #888888;
+  --sb-theme-btn-hover: #1A1A1A;
 }
 
 /* ─── Dark Mode ────────────────────────────────────────────────── */
@@ -112,6 +131,25 @@
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(0.2 0 0);
   --sidebar-ring: oklch(0.655 0.075 188);
+
+  /* ── Sidebar component tokens (dark) ── */
+  --sb-bg: #0D0D0D;
+  --sb-border-color: rgba(255,255,255,0.07);
+  --sb-alias: #FFFFFF;
+  --sb-name: rgba(255,255,255,0.42);
+  --sb-role: #5AAAA4;
+  --sb-bio: rgba(255,255,255,0.55);
+  --sb-avail: rgba(255,255,255,0.6);
+  --sb-nav-label: rgba(255,255,255,0.22);
+  --sb-nav-inactive: rgba(255,255,255,0.38);
+  --sb-nav-active: #FFFFFF;
+  --sb-nav-hover: rgba(255,255,255,0.75);
+  --sb-nav-accent: #5AAAA4;
+  --sb-divider: rgba(255,255,255,0.07);
+  --sb-social: rgba(255,255,255,0.36);
+  --sb-social-hover: #FFFFFF;
+  --sb-theme-btn: rgba(255,255,255,0.28);
+  --sb-theme-btn-hover: rgba(255,255,255,0.68);
 }
 
 /* ─── Base Styles ──────────────────────────────────────────────── */
@@ -236,3 +274,32 @@ html {
 a {
   color: inherit;
 }
+
+/* ─── Sidebar hover utilities (CSS-variable-driven) ────────────── */
+.sb-nav-link {
+  color: var(--sb-nav-inactive);
+  border-left: 2px solid transparent;
+  font-weight: 500;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.sb-nav-link:hover { color: var(--sb-nav-hover); }
+.sb-nav-link.sb-active {
+  color: var(--sb-nav-active);
+  border-left-color: var(--sb-nav-accent);
+  font-weight: 700;
+}
+.sb-nav-link.sb-active:hover { color: var(--sb-nav-active); }
+
+.sb-social-icon {
+  color: var(--sb-social);
+  display: flex;
+  align-items: center;
+  transition: color 0.18s ease;
+}
+.sb-social-icon:hover { color: var(--sb-social-hover); }
+
+.sb-theme-btn {
+  color: var(--sb-theme-btn);
+  transition: color 0.18s ease;
+}
+.sb-theme-btn:hover { color: var(--sb-theme-btn-hover); }
