@@ -22,7 +22,11 @@ export const metadata: Metadata = {
     "Kaleab Shewangizaw (Kal_X) — CTO at Pazimo. I build web and mobile products, design systems, and lead engineering teams in Addis Ababa.",
   keywords: [
     "Kaleab Shewangizaw",
+    "Kaleab",
     "Kal_X",
+    "kal-x",
+    "kalx",
+    "Kal_abX",
     "CTO",
     "Pazimo",
     "software engineer",
