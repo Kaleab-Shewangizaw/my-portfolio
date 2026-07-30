@@ -1,9 +1,9 @@
 export const profile = {
   name: "Kaleab Shewangizaw",
   alias: "[Kal_X]",
-  role: "Developer & Software Engineer",
+  role: "CTO, Pazimo",
   location: "Addis Ababa, Ethiopia",
-  bio: "I build fast, modern web applications — from backend APIs to clean, responsive UIs. currently working at Prime Software PLC.",
+  bio: "CTO at Pazimo, Addis Ababa. I build web and mobile products, design systems, and lead engineering.",
   email: "kaleab.stk@gmail.com",
   phone: "+251 988 680 987",
   availableForWork: true,
@@ -19,10 +19,16 @@ export const profile = {
 export const cv = {
   experience: [
     {
+      role: "CTO",
+      company: "Pazimo",
+      period: "2025 — Present",
+      current: true,
+    },
+    {
       role: "Full Stack Developer",
       company: "Prime Software PLC",
-      period: "2024 — Present",
-      current: true,
+      period: "2024 — 2025",
+      current: false,
     },
     {
       role: "Web Dev Bootcamp Instructor",
@@ -155,6 +161,15 @@ export const projects = [
     featured: false,
     year: "2023",
   },
+];
+
+export const funFacts = [
+  { label: "Years coding", value: "4+" },
+  { label: "Projects shipped", value: "10+" },
+  { label: "Commits pushed", value: "2k+" },
+  { label: "Home base", value: "Addis Ababa" },
+  { label: "Favourite stack", value: "Next.js + Mongo" },
+  { label: "Coffee level", value: "critical" },
 ];
 
 export type Testimonial = {

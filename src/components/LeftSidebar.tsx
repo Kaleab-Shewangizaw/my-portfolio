@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react";
 import { BiLogoGithub, BiLogoLinkedin, BiLogoTelegram } from "react-icons/bi";
 import { BsTwitterX } from "react-icons/bs";
 import { profile } from "@/lib/data";
@@ -48,9 +49,9 @@ export default function LeftSidebar() {
 
       <div className="flex flex-col h-full p-7 relative z-10">
 
-        {/* Name / Logo */}
-        <div className="mb-8">
-          <Link href="/" style={{ textDecoration: "none" }}>
+        {/* Name / Logo + Theme Toggle */}
+        <div className="mb-8 flex items-start justify-between gap-3">
+          <Link href="/" style={{ textDecoration: "none", minWidth: 0 }}>
             <h1 style={{
               fontSize: "22px",
               fontWeight: 700,
@@ -64,7 +65,7 @@ export default function LeftSidebar() {
               {profile.alias}
             </h1>
             <p style={{
-              fontSize: "12px",
+              fontSize: "13px",
               color: "var(--sb-name)",
               fontFamily: "Georgia, 'Times New Roman', serif",
               fontStyle: "italic",
@@ -73,11 +74,36 @@ export default function LeftSidebar() {
               {profile.name}
             </p>
           </Link>
+
+          {mounted && (
+            <button
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              aria-label="Toggle theme"
+              className="sb-theme-btn"
+              style={{
+                background: "none",
+                border: "1px solid var(--sb-divider)",
+                cursor: "pointer",
+                padding: "8px",
+                borderRadius: "4px",
+                flexShrink: 0,
+                marginTop: "2px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "border-color 0.18s, color 0.18s",
+              }}
+            >
+              {resolvedTheme === "dark"
+                ? <Sun size={15} strokeWidth={1.5} />
+                : <Moon size={15} strokeWidth={1.5} />}
+            </button>
+          )}
         </div>
 
           <p style={{
-          fontSize: "10px",
-          letterSpacing: "0.1em",
+          fontSize: "12px",
+          letterSpacing: "0.08em",
           textTransform: "uppercase",
           color: "var(--sb-role)",
           marginBottom: "12px",
@@ -89,7 +115,7 @@ export default function LeftSidebar() {
 
         {/* Bio */}
         <p style={{
-          fontSize: "12px",
+          fontSize: "13px",
           lineHeight: 1.9,
           color: "var(--sb-bio)",
           fontFamily: "'Space Mono', monospace",
@@ -101,8 +127,8 @@ export default function LeftSidebar() {
         {/* Navigation */}
         <nav className="flex-1 min-h-0">
           <p style={{
-            fontSize: "9px",
-            letterSpacing: "0.18em",
+            fontSize: "11px",
+            letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "var(--sb-nav-label)",
             marginBottom: "12px",
@@ -121,11 +147,11 @@ export default function LeftSidebar() {
                     className={`sb-nav-link${isActive ? " sb-active" : ""}`}
                     style={{
                       display: "block",
-                      fontSize: "12px",
-                      letterSpacing: "0.08em",
+                      fontSize: "13px",
+                      letterSpacing: "0.06em",
                       textTransform: "uppercase",
                       textDecoration: "none",
-                      padding: "8px 0 8px 14px",
+                      padding: "9px 0 9px 14px",
                       fontFamily: "'Space Mono', monospace",
                     }}
                   >
@@ -137,9 +163,9 @@ export default function LeftSidebar() {
           </ul>
         </nav>
 
-        {/* Bottom: social icons + theme toggle */}
+        {/* Bottom: social icons */}
         <div className="mt-auto pt-6" style={{ borderTop: "1px solid var(--sb-divider)" }}>
-          <div className="flex gap-4 mb-5">
+          <div className="flex gap-4">
             {socialLinks.map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
@@ -149,29 +175,10 @@ export default function LeftSidebar() {
                 aria-label={label}
                 className="sb-social-icon"
               >
-                <Icon size={15} />
+                <Icon size={18} />
               </a>
             ))}
           </div>
-
-          <button
-            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="sb-theme-btn"
-            style={{
-              fontSize: "9px",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "'Space Mono', monospace",
-              padding: 0,
-            }}
-          >
-            {mounted
-              ? resolvedTheme === "dark" ? "☀ Light Mode" : "☾ Dark Mode"
-              : "Theme"}
-          </button>
         </div>
 
       </div>

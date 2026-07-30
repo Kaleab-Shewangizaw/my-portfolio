@@ -4,14 +4,14 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const LIGHT =
-  "background=F4F1EC&stroke=E0DDD8&ring=2D6A65&fire=2D6A65" +
-  "&currStreakNum=1A1A1A&sideNums=1A1A1A" +
-  "&currStreakLabel=6B6B6B&sideLabels=6B6B6B&dates=6B6B6B";
+  "background=F5F0E8&stroke=D5CCBF&ring=A8652E&fire=A8652E" +
+  "&currStreakNum=1A1410&sideNums=1A1410" +
+  "&currStreakLabel=6B5F55&sideLabels=6B5F55&dates=6B5F55";
 
 const DARK =
-  "background=0D0D0D&stroke=2A2A2A&ring=5AAAA4&fire=5AAAA4" +
-  "&currStreakNum=F0F0F0&sideNums=F0F0F0" +
-  "&currStreakLabel=888888&sideLabels=888888&dates=888888";
+  "background=080808&stroke=1E1915&ring=D97E3A&fire=D97E3A" +
+  "&currStreakNum=EDE9E1&sideNums=EDE9E1" +
+  "&currStreakLabel=8A7F76&sideLabels=8A7F76&dates=8A7F76";
 
 const BASE = "https://github-readme-streak-stats.herokuapp.com/?user=Kaleab-Shewangizaw&hide_border=true&border_radius=8";
 
