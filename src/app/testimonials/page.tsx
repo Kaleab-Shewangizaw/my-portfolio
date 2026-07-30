@@ -1,5 +1,16 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { testimonials } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Testimonials",
+  description:
+    "What colleagues and collaborators say about working with Kaleab Shewangizaw (Kal_X) — CTO at Pazimo.",
+  openGraph: {
+    title: "Testimonials · Kal_X",
+    description: "What people say about working with Kal_X.",
+  },
+};
 
 export default function TestimonialsPage() {
   return (
