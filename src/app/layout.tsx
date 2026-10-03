@@ -30,7 +30,6 @@ export const metadata: Metadata = {
     description,
     url: site.url,
     siteName: site.alias,
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: site.name }],
     locale: "en_US",
     type: "website",
   },
@@ -39,7 +38,6 @@ export const metadata: Metadata = {
     title: `${site.name} — ${site.role}`,
     description,
     creator: "@Kal_abX",
-    images: ["/og-image.png"],
   },
 };
 
