@@ -3,12 +3,23 @@ import { ArrowUpRight, Download } from "lucide-react";
 import { now, projects, site, stack, timeline } from "@/content/site";
 import { getGitHub } from "@/lib/github";
 import { Terminal } from "@/components/Terminal";
+import { HeroLens } from "@/components/HeroLens";
 import { Architecture } from "@/components/Architecture";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Contributions } from "@/components/Contributions";
 import { CountUp } from "@/components/CountUp";
 import { Reveal } from "@/components/Reveal";
 import { CopyEmail } from "@/components/CopyEmail";
+
+function Headline({ as: Tag }: { as: "h1" | "div" }) {
+  return (
+    <Tag className="py-2 text-[clamp(2.5rem,5.2vw,4rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
+      Hi, I&apos;m Kaleab.
+      <br />
+      <span className="text-[var(--muted)]">I build apps people use every day.</span>
+    </Tag>
+  );
+}
 
 function SectionHead({ index, title, action }: { index: string; title: string; action?: React.ReactNode }) {
   return (
@@ -41,11 +52,11 @@ export default async function Home() {
       <section className="shell grid items-center gap-8 pb-10 pt-24 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pt-28">
         <Reveal>
           <p className="label">~/kaleab · {site.role.toLowerCase()} · {site.city.toLowerCase()}</p>
-          <h1 className="mt-4 text-[clamp(2.5rem,5.2vw,4rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
-            Hi, I&apos;m Kaleab.
-            <br />
-            <span className="text-[var(--muted)]">I build apps people use every day.</span>
-          </h1>
+          <div className="mt-4">
+            <HeroLens clone={<Headline as="div" />}>
+              <Headline as="h1" />
+            </HeroLens>
+          </div>
           <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-[var(--muted)]">{site.intro}</p>
           <div className="mt-7 flex flex-wrap items-center gap-2.5">
             <Link href="/work" className="inline-flex h-11 items-center gap-2 rounded-full bg-[var(--fg)] px-5 text-sm font-medium text-[var(--bg)] transition-transform active:scale-95">

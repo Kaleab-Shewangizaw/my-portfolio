@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Download } from "lucide-react";
 import { site, stack, timeline } from "@/content/site";
 import { Reveal } from "@/components/Reveal";
+import { Builds } from "@/components/Builds";
 
 export const metadata: Metadata = {
   title: "About",
@@ -21,14 +22,14 @@ export default function AboutPage() {
     <section className="shell pt-24 lg:pt-28">
       <div className="grid gap-3 lg:grid-cols-[340px_1fr]">
         <Reveal className="card overflow-hidden p-2">
-          <div className="group relative aspect-square overflow-hidden rounded-2xl bg-[var(--surface-2)]">
+          <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--surface-2)]">
             <Image
-              src="/me.png"
+              src="/me.jpg"
               alt={`Portrait of ${site.name}`}
               fill
               sizes="340px"
               priority
-              className="object-cover grayscale contrast-[1.05] transition-[filter] duration-700 group-hover:grayscale-0"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
           </div>
           <dl className="space-y-3 p-4 text-sm">
@@ -83,6 +84,7 @@ export default function AboutPage() {
                   {t.title} <span className="text-[var(--muted)]">· {t.org}</span>
                 </p>
                 <p className="mt-0.5 text-sm text-[var(--muted)]">{t.note}</p>
+                {t.builds && <Builds items={t.builds} />}
               </li>
             ))}
           </ol>

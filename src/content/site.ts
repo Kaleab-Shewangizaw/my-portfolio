@@ -219,9 +219,39 @@ export const stack = [
   { group: "Infra", items: ["Linux", "Nginx", "PM2", "Docker", "Vercel", "GitHub Actions"] },
 ];
 
-export const timeline = [
+export type Build = { name: string; client: string; href: string; body: string; stack: string[] };
+
+export const timeline: { period: string; title: string; org: string; note: string; builds?: Build[] }[] = [
   { period: "2025 — now", title: "CTO", org: "Pazimo", note: "Leading engineering across the web app, two mobile apps and the API." },
-  { period: "2024 — 2025", title: "Full-stack Developer", org: "Prime Software", note: "Built client products end to end, from database design to deployment." },
+  {
+    period: "2024 — 2025",
+    title: "Full-stack Developer",
+    org: "Prime Software",
+    note: "Built client products end to end, from database design to deployment.",
+    builds: [
+      {
+        name: "Proforma system",
+        client: "Shrubs Marble & Granite",
+        href: "https://proforma.shrubsmarble.com",
+        body: "Internal tool for creating and approving proforma invoices. React and Vite frontend, Express and PostgreSQL API, JWT auth with refresh-token rotation, and user, manager and admin roles with an approval flow.",
+        stack: ["React", "Vite", "Express", "PostgreSQL", "JWT"],
+      },
+      {
+        name: "Customer order tracking",
+        client: "Shrubs Marble & Granite",
+        href: "https://customer.shrubsmarble.com",
+        body: "Customers enter an order number and phone number to follow their marble and granite order through fabrication, from cutting to delivery.",
+        stack: [],
+      },
+      {
+        name: "GojoHost support bot",
+        client: "GojoHost",
+        href: "https://gojo-tg-bot.vercel.app",
+        body: "A Telegram bot and Mini App that answers hosting questions, runs DNS checks, walks users through setup guides and hands off to an AI assistant. Sessions are stored in Redis.",
+        stack: ["Node.js", "Telegram Bot API", "Next.js", "Redis", "LLM API"],
+      },
+    ],
+  },
   { period: "2023 — 2024", title: "Bootcamp Instructor", org: "GDG · AAU", note: "Taught web development to new engineers. Teaching made me a better engineer." },
   { period: "2023", title: "Problem Solving Track", org: "A2SV", note: "Africa to Silicon Valley: data structures, algorithms and a lot of LeetCode." },
   { period: "2022 — now", title: "BSc Computer Science & Engineering", org: "Addis Ababa University", note: "Addis Ababa Institute of Technology (AAiT)." },
