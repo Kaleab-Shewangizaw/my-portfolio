@@ -3,7 +3,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { site } from "@/content/site";
-import { LiquidGlass } from "./LiquidGlass";
 
 const topics = ["Full-time role", "Contract", "Collaboration", "Just saying hi"];
 
@@ -20,10 +19,10 @@ export function ContactForm() {
   };
 
   const field =
-    "w-full rounded-2xl border hairline bg-[var(--bg)]/40 px-4 py-3.5 text-[15px] outline-none transition-colors placeholder:text-[var(--faint)] focus:border-[var(--accent)]";
+    "w-full rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3.5 text-[15px] outline-none transition-colors placeholder:text-[var(--faint)] focus:border-[var(--accent)]";
 
   return (
-    <LiquidGlass radius={32} bezel={26} depth={48} frost={18} className="p-6 sm:p-8">
+    <div className="card p-6 sm:p-8">
       <form onSubmit={submit} className="space-y-6">
         <fieldset>
           <legend className="label mb-3">What&apos;s this about?</legend>
@@ -36,7 +35,7 @@ export function ContactForm() {
                 aria-pressed={topic === t}
                 className={
                   "rounded-full border px-4 py-2 text-sm transition-colors " +
-                  (topic === t ? "border-transparent bg-[var(--fg)] text-[var(--bg)]" : "hairline text-[var(--muted)] hover:text-[var(--fg)]")
+                  (topic === t ? "border-transparent bg-[var(--fg)] text-[var(--bg)]" : "border-[var(--line)] text-[var(--muted)] hover:text-[var(--fg)]")
                 }
               >
                 {t}
@@ -64,6 +63,6 @@ export function ContactForm() {
           <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </button>
       </form>
-    </LiquidGlass>
+    </div>
   );
 }

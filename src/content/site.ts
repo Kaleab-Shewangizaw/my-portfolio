@@ -3,22 +3,21 @@
 
 export const site = {
   name: "Kaleab Shewangizaw",
+  first: "Kaleab",
   alias: "Kal_X",
   url: "https://kal-x.vercel.app",
-  role: "Product Engineer",
-  location: "Addis Ababa",
+  role: "Software Engineer",
+  location: "Addis Ababa, Ethiopia",
+  city: "Addis Ababa",
   timezone: "Africa/Addis_Ababa",
   email: "kaleab.stk@gmail.com",
+  github: "Kaleab-Shewangizaw",
   cv: "/kaleab-shewangizaw-cv.pdf",
+  startedCoding: 2022,
   available: true,
-  availability: "Open to new roles & select projects",
-  headline: {
-    lead: "I design and build",
-    emphasis: "software that feels",
-    tail: "inevitable.",
-  },
+  availability: "Open to full-time roles and freelance work",
   intro:
-    "Full-stack engineer working across product, interface and infrastructure. I take ideas from a blank file to a product people rely on — and sweat the details nobody asks for.",
+    "I build web and mobile apps, and the backends that keep them running. Right now I lead engineering at Pazimo, where one API powers a ticketing website and two mobile apps.",
   socials: [
     { label: "GitHub", href: "https://github.com/Kaleab-Shewangizaw", handle: "Kaleab-Shewangizaw" },
     { label: "LinkedIn", href: "https://linkedin.com/in/kal-x", handle: "in/kal-x" },
@@ -31,14 +30,15 @@ export type Project = {
   slug: string;
   name: string;
   year: string;
-  kind: "Product" | "Tool" | "Open source";
+  platform: "web" | "mobile" | "tool";
+  kind: string;
   role: string;
   summary: string;
-  tagline: string;
-  hue: number; // drives the generated cover art
   stack: string[];
   links: { live?: string; code?: string };
+  highlights: string[];
   story: { heading: string; body: string }[];
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -46,26 +46,98 @@ export const projects: Project[] = [
     slug: "pazimo",
     name: "Pazimo",
     year: "2025",
-    kind: "Product",
-    role: "Technical lead · Full stack",
-    tagline: "Event ticketing, rebuilt for a local market.",
+    platform: "web",
+    kind: "Web platform",
+    role: "CTO · Full stack",
+    featured: true,
     summary:
-      "A ticketing platform for discovering, managing and booking events in Ethiopia — web, attendee mobile app and an organizer app on one backend.",
-    hue: 262,
-    stack: ["Next.js", "TypeScript", "Node.js", "React Native", "MongoDB"],
+      "Pazimo is an event ticketing, invitation and RSVP platform for Ethiopia. The web app covers the public site, customer accounts and the organizer and admin dashboards.",
+    stack: ["Next.js", "TypeScript", "Node.js", "Express", "MongoDB", "Socket.IO", "Tailwind"],
     links: { live: "https://pazimo.com", code: "https://github.com/Kaleab-Shewangizaw/pazimo" },
+    highlights: [
+      "Local payments through Chapa and SantimPay behind one checkout",
+      "QR tickets, check-in and live sales over Socket.IO",
+      "Organizer and admin dashboards, invitations and custom RSVP forms",
+      "Runs on an Ubuntu VPS with Nginx, PM2 and Let's Encrypt",
+    ],
     story: [
       {
         heading: "The problem",
-        body: "Global ticketing tools assume card payments and English-first audiences. Local organizers needed checkout that works with the payment rails people actually use, and tooling simple enough to run an event from a phone.",
+        body: "Global ticketing tools don't support the payment methods people in Ethiopia actually use, and they aren't built for how local events run, from invitations and RSVPs to cinema box offices.",
+      },
+      {
+        heading: "What we built",
+        body: "One Express and MongoDB API serves every client: the Next.js site, the attendee app and the organizer app. Payments, email, SMS and media each live in their own service layer, so adding a payment provider means writing one adapter instead of changing checkout.",
+      },
+      {
+        heading: "What I learned",
+        body: "Payment callbacks on unreliable networks taught me to make every write idempotent. Running production on our own VPS taught me more about Linux, Nginx and on-call than any course.",
+      },
+    ],
+  },
+  {
+    slug: "pazimo-mobile",
+    name: "Pazimo Mobile",
+    year: "2026",
+    platform: "mobile",
+    kind: "iOS & Android app",
+    role: "Lead · Mobile",
+    featured: true,
+    summary:
+      "The attendee app. People find events, buy tickets, book cinema seats, order concessions, RSVP to invitations and keep every QR ticket in one wallet.",
+    stack: ["React Native", "Expo SDK 57", "Expo Router", "TanStack Query", "NativeWind", "Reanimated"],
+    links: { code: "https://github.com/Kaleab-Shewangizaw/pazimo-mobile" },
+    highlights: [
+      "Event discovery, checkout and a QR ticket wallet",
+      "Cinema bookings, concessions orders and wallet top-ups",
+      "Invitations, RSVPs and in-app conversations",
+      "Native glass effects, haptics and push notifications",
+    ],
+    story: [
+      {
+        heading: "The problem",
+        body: "The first app was built in Flutter by an outside agency and was hard to change. The web team worked in TypeScript every day, but nobody could ship to the mobile app quickly.",
       },
       {
         heading: "What I built",
-        body: "A three-surface system: a public web app for discovery and checkout, an attendee mobile app with offline-friendly tickets, and an organizer app for scanning and live sales. All three share one typed API.",
+        body: "I rebuilt it in React Native with Expo so web and mobile share one language, one set of API types and one team. Server data goes through TanStack Query, so loading, caching and refetching work the same way on every screen.",
       },
       {
-        heading: "Under the hood",
-        body: "Local payment providers are integrated behind a single payment interface so new providers are a configuration change, not a rewrite. Ticket issuance is idempotent, so retries from flaky networks never double-charge.",
+        heading: "Details I care about",
+        body: "Animations run on the UI thread with Reanimated, so they stay smooth on cheaper phones. Auth tokens are kept in SecureStore, never in plain storage, and every tap that matters gives haptic feedback.",
+      },
+    ],
+  },
+  {
+    slug: "pazimo-organizer",
+    name: "Pazimo Organizer",
+    year: "2026",
+    platform: "mobile",
+    kind: "iOS & Android app",
+    role: "Solo · Mobile",
+    featured: true,
+    summary:
+      "The app event staff use. Organizers track revenue, ushers scan tickets at the door and cashiers run the cinema box office. Each role gets its own app experience after signing in.",
+    stack: ["React Native", "Expo", "TypeScript", "Zustand", "TanStack Query", "Zod", "expo-camera"],
+    links: { code: "https://github.com/Kaleab-Shewangizaw/pazimo-organizer-mobile" },
+    highlights: [
+      "Three roles with route guards, and the role always comes from the server",
+      "Camera QR scanner that checks each ticket against the right event",
+      "Per-event dashboards and paginated ticket and sales lists",
+      "Animated sign-in that takes over from the native splash screen",
+    ],
+    story: [
+      {
+        heading: "The problem",
+        body: "Organizers, door staff and box-office cashiers each need different tools, and giving the wrong person access means lost money or a long line at the door.",
+      },
+      {
+        heading: "What I built",
+        body: "A single app where the server decides the role. Expo Router's protected stacks route each person to their own tabs, and signing in on the wrong screen still takes you to the right place. Unsupported accounts see a clear dead end instead of getting in by accident.",
+      },
+      {
+        heading: "Working with the backend",
+        body: "The usher role didn't exist on the API yet, so the unlock-code flow (POST /ushers/unlock-event) was designed together with the backend before the scanner was built on top of it. Each scan is checked against the event it belongs to.",
       },
     ],
   },
@@ -73,26 +145,22 @@ export const projects: Project[] = [
     slug: "creator-workspace",
     name: "Creator Workspace",
     year: "2026",
+    platform: "tool",
     kind: "Open source",
-    role: "Solo · Design & engineering",
-    tagline: "A local-first writing studio for video scripts.",
+    role: "Solo",
     summary:
-      "A writing studio for YouTube scripts with a pipeline board, inline delivery cues and in-browser voice-over generation. Your machine, your data, your repo.",
-    hue: 168,
-    stack: ["JavaScript", "Local-first", "Web Audio", "IndexedDB"],
+      "A local-first writing studio for YouTube scripts. It has a pipeline board, inline delivery cues and voice-over previews generated in the browser.",
+    stack: ["JavaScript", "IndexedDB", "Web Audio", "Git sync"],
     links: { code: "https://github.com/Kaleab-Shewangizaw/creator-workspace" },
+    highlights: ["No accounts and no server", "Everything stays on your machine", "Syncs to a git repo you own"],
     story: [
       {
-        heading: "The problem",
-        body: "Script writing lives in scattered docs, the pipeline lives in a separate board, and the creator's data lives on someone else's server.",
+        heading: "Why",
+        body: "A friend wrote scripts in one app, tracked them in another and recorded in a third. I wanted one place for all of it, where the data stays with the person who wrote it.",
       },
       {
-        heading: "What I built",
-        body: "One workspace where a script moves from idea to recorded. Delivery cues sit inline with the text, and a voice-over preview is generated right in the browser so pacing can be heard before recording.",
-      },
-      {
-        heading: "Under the hood",
-        body: "Local-first by design: everything persists on-device and syncs to a git repo the creator owns. There's no account, no server and nothing to lose.",
+        heading: "How",
+        body: "Everything is saved on the device first and synced to a git repo the creator owns. A voice preview generated in the browser lets you hear the pacing before you record.",
       },
     ],
   },
@@ -100,53 +168,22 @@ export const projects: Project[] = [
     slug: "yoinker",
     name: "Yoinker",
     year: "2025",
-    kind: "Tool",
-    role: "Solo · Design & engineering",
-    tagline: "Capture a job posting in one click.",
+    platform: "tool",
+    kind: "Chrome extension",
+    role: "Solo",
     summary:
-      "A Chrome extension and AI dashboard for job hunters. Save postings in one click and track applications, notes, salaries and interviews privately.",
-    hue: 28,
+      "Save any job posting with one click, then track applications, salaries, notes and interviews in a private dashboard.",
     stack: ["TypeScript", "Chrome Extensions", "React", "LLM APIs"],
     links: { code: "https://github.com/Kaleab-Shewangizaw/Yoinker" },
+    highlights: ["One-click capture from any job board", "AI pulls out the fields so you don't type them", "Private by default"],
     story: [
       {
-        heading: "The problem",
-        body: "Job hunting means dozens of tabs, a spreadsheet that's always out of date, and details lost between the posting and the interview.",
+        heading: "Why",
+        body: "I was job hunting with forty open tabs and a spreadsheet that was always out of date, so I built the tool I wanted.",
       },
       {
-        heading: "What I built",
-        body: "An extension that captures any posting in a click and a dashboard that structures it: role, salary, stage and notes, with AI-assisted extraction so nothing is typed twice.",
-      },
-      {
-        heading: "Under the hood",
-        body: "Extraction runs on the page's content and is normalized into one schema regardless of the job board, so tracking stays consistent everywhere.",
-      },
-    ],
-  },
-  {
-    slug: "curon",
-    name: "Curon",
-    year: "2025",
-    kind: "Product",
-    role: "Solo · Design & engineering",
-    tagline: "A second brain that acts, not just stores.",
-    summary:
-      "A personal assistant that helps you capture, organize and act on your thoughts, tasks and ideas.",
-    hue: 210,
-    stack: ["TypeScript", "Next.js", "LLM APIs", "PostgreSQL"],
-    links: { code: "https://github.com/Kaleab-Shewangizaw/Curon" },
-    story: [
-      {
-        heading: "The problem",
-        body: "Notes apps are great at storing thoughts and bad at turning them into action. Ideas pile up and nothing moves.",
-      },
-      {
-        heading: "What I built",
-        body: "Fast capture that triages itself: an entry becomes a task, an idea or a reference, and Curon surfaces what needs attention next.",
-      },
-      {
-        heading: "Under the hood",
-        body: "A structured data model sits under a conversational surface, so the assistant's suggestions are always backed by real records you can edit.",
+        heading: "How",
+        body: "The extension reads the posting, an LLM turns it into one consistent format, and the dashboard tracks each application from saved to offer.",
       },
     ],
   },
@@ -154,60 +191,44 @@ export const projects: Project[] = [
     slug: "oweme",
     name: "OweMe",
     year: "2025",
-    kind: "Product",
-    role: "Solo · Design & engineering",
-    tagline: "Clarity for money between people.",
-    summary:
-      "A simple, modern tracker for money you owe, lend and repay, built to make informal debts unambiguous.",
-    hue: 140,
+    platform: "tool",
+    kind: "Telegram Mini App",
+    role: "Solo",
+    summary: "A simple tracker for money you lend, borrow and pay back, built into Telegram where these conversations already happen.",
     stack: ["TypeScript", "Telegram Mini Apps", "Node.js"],
     links: { live: "https://t.me/kal_abX/591", code: "https://github.com/Kaleab-Shewangizaw/OweMe" },
+    highlights: ["Running balance per person", "Append-only ledger, so history never changes", "Gentle repayment reminders"],
     story: [
       {
-        heading: "The problem",
-        body: "Informal lending runs on memory and goodwill, and both fail eventually.",
+        heading: "Why",
+        body: "Lending money between friends usually works on memory, and memory isn't always reliable.",
       },
       {
-        heading: "What I built",
-        body: "A focused tracker that lives where people already talk, with balances per person, repayment history and gentle reminders.",
-      },
-      {
-        heading: "Under the hood",
-        body: "A ledger model where entries are append-only, so balances can always be explained and history is never rewritten.",
+        heading: "How",
+        body: "Every entry is append-only, so any balance can be explained line by line. It runs inside Telegram, so nobody has to install anything.",
       },
     ],
   },
 ];
 
-export const principles = [
-  {
-    title: "Ship the whole thing",
-    body: "Interface, API, data and deploy. I own a feature end to end and care how it behaves in production.",
-  },
-  {
-    title: "Taste is a feature",
-    body: "Craft compounds. Motion, copy, empty states and error paths are where products earn trust.",
-  },
-  {
-    title: "Boring where it counts",
-    body: "Proven tools for the foundation and a strong typed core, so the parts that should be new can be.",
-  },
-  {
-    title: "Write it down",
-    body: "Clear PRs, decisions on paper and code the next person can read. Speed comes from shared context.",
-  },
-];
-
-export const toolkit = [
-  { group: "Interface", items: ["TypeScript", "React", "Next.js", "React Native", "Tailwind", "Framer Motion"] },
-  { group: "Systems", items: ["Node.js", "PostgreSQL", "MongoDB", "REST & tRPC", "Redis", "Docker"] },
-  { group: "Craft", items: ["Figma", "Design systems", "Accessibility", "Performance", "Testing"] },
-  { group: "Curious about", items: ["Rust", "C++", "Local-first", "LLM tooling"] },
+export const stack = [
+  { group: "Languages", items: ["TypeScript", "JavaScript", "Dart", "C++", "Python", "SQL"] },
+  { group: "Frontend", items: ["React", "Next.js", "Tailwind", "Framer Motion"] },
+  { group: "Mobile", items: ["React Native", "Expo", "Flutter", "Reanimated"] },
+  { group: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Socket.IO", "REST"] },
+  { group: "Infra", items: ["Linux", "Nginx", "PM2", "Docker", "Vercel", "GitHub Actions"] },
 ];
 
 export const timeline = [
-  { period: "2025 — Now", title: "CTO", org: "Pazimo", note: "Leading product engineering across web and mobile." },
-  { period: "2024 — 2025", title: "Full-stack Developer", org: "Prime Software", note: "Shipped client products end to end." },
-  { period: "2023 — 2024", title: "Bootcamp Instructor", org: "GDG · AAU", note: "Taught modern web development to new engineers." },
-  { period: "2022 — Now", title: "BSc Computer Science & Engineering", org: "Addis Ababa University", note: "Addis Ababa Institute of Technology (AAiT)." },
+  { period: "2025 — now", title: "CTO", org: "Pazimo", note: "Leading engineering across the web app, two mobile apps and the API." },
+  { period: "2024 — 2025", title: "Full-stack Developer", org: "Prime Software", note: "Built client products end to end, from database design to deployment." },
+  { period: "2023 — 2024", title: "Bootcamp Instructor", org: "GDG · AAU", note: "Taught web development to new engineers. Teaching made me a better engineer." },
+  { period: "2023", title: "Problem Solving Track", org: "A2SV", note: "Africa to Silicon Valley: data structures, algorithms and a lot of LeetCode." },
+  { period: "2022 — now", title: "BSc Computer Science & Engineering", org: "Addis Ababa University", note: "Addis Ababa Institute of Technology (AAiT)." },
+];
+
+export const now = [
+  "Shipping Pazimo's new mobile apps",
+  "Learning Rust, one small project at a time",
+  "Writing more tests than I used to",
 ];

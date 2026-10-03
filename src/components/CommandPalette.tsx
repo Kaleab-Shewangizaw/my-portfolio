@@ -7,6 +7,7 @@ import { ArrowUpRight, CornerDownLeft, Search } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { projects, site } from "@/content/site";
 import { LiquidGlass } from "./LiquidGlass";
+import { SECRETS, unlock, useSecrets } from "@/lib/secrets";
 
 type Item = { group: string; label: string; hint?: string; run: () => void };
 
@@ -16,6 +17,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const found = useSecrets();
 
   const items = useMemo<Item[]>(() => {
     const go = (href: string) => () => router.push(href);
@@ -36,11 +38,20 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       {
         group: "Actions",
         label: `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`,
-        run: () => setTheme(resolvedTheme === "dark" ? "light" : "dark"),
+        run: () => {
+          setTheme(resolvedTheme === "dark" ? "light" : "dark");
+          unlock("theme");
+        },
       },
       ...site.socials.map((s) => ({ group: "Elsewhere", label: s.label, hint: s.handle, run: ext(s.href) })),
+      ...SECRETS.map((s) => ({
+        group: `Secrets · ${found.length}/${SECRETS.length} found`,
+        label: found.includes(s.id) ? `✓ ${s.title}` : "Locked",
+        hint: found.includes(s.id) ? "found" : s.hint,
+        run: () => {},
+      })),
     ];
-  }, [router, resolvedTheme, setTheme]);
+  }, [router, resolvedTheme, setTheme, found]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -50,6 +61,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
 
   useEffect(() => {
     if (open) {
+      unlock("palette");
       setQuery("");
       setIndex(0);
       requestAnimationFrame(() => inputRef.current?.focus());
@@ -105,7 +117,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             onMouseDown={(e) => e.stopPropagation()}
           >
             <LiquidGlass radius={22} bezel={20} depth={36} frost={14} className="overflow-hidden">
-              <div className="flex items-center gap-3 border-b hairline px-4">
+              <div className="flex items-center gap-3 border-b border-[var(--line)] px-4">
                 <Search size={16} className="text-[var(--muted)]" />
                 <input
                   ref={inputRef}
@@ -119,7 +131,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
                   aria-controls="palette-list"
                   aria-activedescendant={filtered[index] ? `palette-${index}` : undefined}
                 />
-                <kbd className="label rounded-md border hairline px-1.5 py-0.5 !text-[10px]">Esc</kbd>
+                <kbd className="label rounded-md border border-[var(--line)] px-1.5 py-0.5 !text-[10px]">Esc</kbd>
               </div>
               <ul id="palette-list" role="listbox" className="max-h-[52vh] overflow-y-auto p-2">
                 {filtered.length === 0 && (
@@ -129,7 +141,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
                   const header = item.group !== lastGroup ? item.group : null;
                   lastGroup = item.group;
                   return (
-                    <li key={item.group + item.label} role="presentation">
+                    <li key={item.group + item.label + item.hint} role="presentation">
                       {header && <div className="label px-3 pb-1.5 pt-3">{header}</div>}
                       <div
                         id={`palette-${i}`}

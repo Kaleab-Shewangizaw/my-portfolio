@@ -20,7 +20,7 @@ export function CopyEmail({ className }: { className?: string }) {
   return (
     <button onClick={copy} className={cn("group inline-flex items-center gap-3", className)} aria-label="Copy email address">
       <span className="link-underline">{site.email}</span>
-      <span className="glass grid size-9 shrink-0 place-items-center rounded-full">
+      <span className="grid size-8 shrink-0 place-items-center rounded-full border border-[var(--line)]">
         <AnimatePresence mode="wait" initial={false}>
           <motion.span key={copied ? "y" : "n"} initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.5, opacity: 0 }}>
             {copied ? <Check size={14} /> : <Copy size={14} />}

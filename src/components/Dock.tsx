@@ -8,6 +8,7 @@ import { Command, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { LiquidGlass } from "./LiquidGlass";
 import { CommandPalette } from "./CommandPalette";
+import { unlock } from "@/lib/secrets";
 
 export const nav = [
   { href: "/", label: "Home" },
@@ -43,7 +44,7 @@ export function Dock() {
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
-        className="fixed inset-x-0 bottom-5 z-50 flex justify-center px-4 pointer-events-none"
+        className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 pointer-events-none"
       >
         <LiquidGlass radius={999} bezel={18} depth={40} className="pointer-events-auto flex items-center gap-1 p-1.5">
           {nav.map((item) => (
@@ -79,7 +80,10 @@ export function Dock() {
             <Command size={15} />
           </button>
           <button
-            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            onClick={() => {
+              setTheme(resolvedTheme === "dark" ? "light" : "dark");
+              unlock("theme");
+            }}
             className="grid size-9 place-items-center rounded-full text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
             aria-label="Toggle theme"
           >

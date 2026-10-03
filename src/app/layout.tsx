@@ -1,30 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { Ambient } from "@/components/Ambient";
+import { Toaster } from "@/components/Toaster";
+import { Discoveries } from "@/components/Discoveries";
 import { TopBar } from "@/components/TopBar";
 import { Dock } from "@/components/Dock";
 import { Footer } from "@/components/Footer";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
-const instrument = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument",
-  display: "swap",
-});
 
-const description = `${site.name} (${site.alias}) — ${site.role}. ${site.intro}`;
+const description = `${site.name} (${site.alias}), ${site.role} in ${site.city}. ${site.intro}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: `${site.name} — ${site.role}`, template: `%s · ${site.alias}` },
   description,
-  keywords: [site.name, "Kaleab", site.alias, "Kal_abX", "software engineer", "product engineer", "full-stack", "Next.js", "React", "TypeScript", site.location],
+  keywords: [site.name, "Kaleab", site.alias, "Kal_abX", "software engineer", "mobile developer", "React Native", "full-stack", "Next.js", "React", "TypeScript", site.location],
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   alternates: { canonical: "/" },
@@ -49,8 +43,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3f2ee" },
-    { media: "(prefers-color-scheme: dark)", color: "#08090b" },
+    { media: "(prefers-color-scheme: light)", color: "#ede9e1" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };
 
@@ -67,18 +61,19 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable} ${instrument.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <ThemeProvider>
           <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-[var(--fg)] focus:px-4 focus:py-2 focus:text-sm focus:text-[var(--bg)]">
             Skip to content
           </a>
-          <Ambient />
           <TopBar />
           <main id="main">{children}</main>
           <Footer />
           <Dock />
+          <Toaster />
+          <Discoveries />
         </ThemeProvider>
       </body>
     </html>

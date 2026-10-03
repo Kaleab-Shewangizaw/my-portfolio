@@ -4,189 +4,167 @@
 
 @theme inline {
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-faint: var(--faint);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
 }
 
-/* ---------- Tokens ---------- */
+/* Palette comes straight from the Kal_X mark: black, bone, ember. Flat only. */
 :root {
-  --bg: #f3f2ee;
-  --fg: #0d0e10;
-  --muted: #5d5f66;
-  --faint: #9a9ba1;
-  --line: rgb(13 14 16 / 0.09);
-  --accent: #4b5bff;
+  --bg: #ede9e1;
+  --surface: #f5f2ec;
+  --surface-2: #e2ddd3;
+  --fg: #0b0b0b;
+  --muted: #5c5851;
+  --faint: #9a958c;
+  --line: rgb(11 11 11 / 0.1);
+  --accent: #d97e3a;
+  --accent-text: #a4531a;
 
-  --glass-fill: rgb(255 255 255 / 0.42);
-  --glass-edge: rgb(255 255 255 / 0.85);
-  --glass-edge-low: rgb(255 255 255 / 0.25);
-  --glass-shadow: 0 1px 1px rgb(0 0 0 / 0.04), 0 12px 40px -12px rgb(20 20 40 / 0.18);
-  --glass-tint: rgb(255 255 255 / 0.6);
-
-  --orb-a: #b9c2ff;
-  --orb-b: #ffd3b0;
-  --orb-c: #a8e6d8;
-  --grain-opacity: 0.05;
+  --glass-fill: rgb(245 242 236 / 0.55);
+  --glass-rim: rgb(255 255 255 / 0.9);
+  --glass-rim-low: rgb(11 11 11 / 0.08);
+  --glass-shadow: 0 10px 30px -12px rgb(11 11 11 / 0.25);
   color-scheme: light;
 }
 
 .dark {
-  --bg: #08090b;
-  --fg: #f2f2f0;
-  --muted: #9a9ca3;
-  --faint: #5c5e65;
-  --line: rgb(255 255 255 / 0.08);
-  --accent: #8b97ff;
+  --bg: #000000;
+  --surface: #0d0d0c;
+  --surface-2: #171715;
+  --fg: #ede9e1;
+  --muted: #8f8a81;
+  --faint: #57534d;
+  --line: rgb(237 233 225 / 0.09);
+  --accent: #d97e3a;
+  --accent-text: #e8955a;
 
-  --glass-fill: rgb(255 255 255 / 0.045);
-  --glass-edge: rgb(255 255 255 / 0.28);
-  --glass-edge-low: rgb(255 255 255 / 0.06);
-  --glass-shadow: 0 1px 1px rgb(0 0 0 / 0.3), 0 24px 60px -20px rgb(0 0 0 / 0.7);
-  --glass-tint: rgb(255 255 255 / 0.08);
-
-  --orb-a: #2b2f86;
-  --orb-b: #6b3417;
-  --orb-c: #0f4a44;
-  --grain-opacity: 0.07;
+  --glass-fill: rgb(23 23 21 / 0.5);
+  --glass-rim: rgb(237 233 225 / 0.22);
+  --glass-rim-low: rgb(237 233 225 / 0.07);
+  --glass-shadow: 0 16px 40px -16px rgb(0 0 0 / 0.9);
   color-scheme: dark;
 }
 
-/* ---------- Base ---------- */
+@layer base {
 html {
   background: var(--bg);
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
   color: var(--fg);
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 ::selection {
   background: var(--accent);
-  color: white;
+  color: #000;
 }
 
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 2px;
   border-radius: 6px;
 }
 
-.font-serif {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  letter-spacing: -0.01em;
+}
+
+@layer components {
+.mono {
+  font-family: var(--font-mono);
 }
 
 .label {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
   color: var(--muted);
 }
 
 .shell {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1200px;
   margin-inline: auto;
   padding-inline: 16px;
 }
 @media (min-width: 640px) {
-  .shell { padding-inline: 32px; }
+  .shell { padding-inline: 24px; }
 }
 
-/* ---------- Ambient field ---------- */
-.ambient {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-}
-.ambient .orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.85;
-  will-change: transform;
-}
-.ambient .orb-a { width: 46vmax; height: 46vmax; background: var(--orb-a); top: -18vmax; left: -10vmax; animation: drift-a 28s ease-in-out infinite alternate; }
-.ambient .orb-b { width: 38vmax; height: 38vmax; background: var(--orb-b); bottom: -16vmax; right: -8vmax; animation: drift-b 34s ease-in-out infinite alternate; }
-.ambient .orb-c { width: 30vmax; height: 30vmax; background: var(--orb-c); top: 40%; left: 45%; animation: drift-c 40s ease-in-out infinite alternate; opacity: 0.6; }
-.ambient .grain {
-  position: absolute;
-  inset: -50%;
-  opacity: var(--grain-opacity);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.ambient .vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 30%, transparent 40%, var(--bg) 100%);
+/* Flat content surface. */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
 }
 
-@keyframes drift-a { to { transform: translate(14vw, 10vh) scale(1.1); } }
-@keyframes drift-b { to { transform: translate(-12vw, -14vh) scale(0.95); } }
-@keyframes drift-c { to { transform: translate(-20vw, -10vh) scale(1.2); } }
+}
 
-/* ---------- Glass ----------
-   Frosted base for every browser. Chromium additionally gets true edge
-   refraction from <LiquidGlass> via an SVG displacement backdrop-filter. */
+/* ---------- Liquid glass ----------
+   Reserved for floating layers. Frosted + rim light everywhere; Chromium also
+   gets true edge refraction from <LiquidGlass>. No gradients. */
 .glass {
   position: relative;
   isolation: isolate;
   background: var(--glass-fill);
-  -webkit-backdrop-filter: blur(18px) saturate(170%);
-  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
   box-shadow:
-    inset 0 1px 0 0 var(--glass-edge),
-    inset 0 -1px 0 0 var(--glass-edge-low),
-    inset 0 0 0 1px var(--glass-edge-low),
+    inset 0 1px 0 0 var(--glass-rim),
+    inset 0 0 0 1px var(--glass-rim-low),
     var(--glass-shadow);
 }
-/* Specular sheen: a soft highlight that sits on the upper rim. */
-.glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: -1;
-  background:
-    radial-gradient(120% 60% at 20% 0%, var(--glass-tint), transparent 55%),
-    linear-gradient(180deg, var(--glass-tint), transparent 40%);
-  opacity: 0.7;
-}
-
-/* ---------- Utilities ---------- */
-.hairline { border-color: var(--line); }
 
 .link-underline {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 1px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  transition: background-size 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.25s;
 }
-.link-underline:hover { background-size: 100% 1px; }
+.link-underline:hover { text-decoration-color: currentColor; }
+
+/* Terminal caret */
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Architecture diagram: data flowing along edges */
+.flow {
+  stroke-dasharray: 4 8;
+  animation: flow 1.2s linear infinite;
+}
+@keyframes flow { to { stroke-dashoffset: -24; } }
+
+/* Contribution cells pop in column by column */
+.cell {
+  opacity: 0;
+  transform: scale(0.4);
+  animation: cell-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+.paused .cell { animation-play-state: paused; }
+@keyframes cell-in { to { opacity: 1; transform: scale(1); } }
 
 .marquee {
   display: flex;
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee 50s linear infinite;
 }
+.marquee:hover { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -194,25 +172,23 @@ body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
 }
 
-/* ---------- Hero lens ---------- */
-.lens {
-  -webkit-backdrop-filter: blur(10px) saturate(160%);
-  backdrop-filter: blur(10px) saturate(160%);
-  background: color-mix(in srgb, var(--bg) 22%, transparent);
-  box-shadow: var(--glass-shadow);
+/* Logo blades rotate around the mark's centre, not their own. */
+.blade {
+  transform-box: view-box;
+  transform-origin: 50px 50px;
+  transform: rotate(var(--r));
 }
-.lens-rim {
-  box-shadow:
-    inset 0 0 0 1px var(--glass-edge-low),
-    inset 0 2px 1px -1px var(--glass-edge),
-    inset 0 -10px 24px -12px rgb(255 255 255 / 0.25),
-    inset 6px 0 14px -10px rgb(255 80 120 / 0.35),
-    inset -6px 0 14px -10px rgb(80 160 255 / 0.35);
-  background:
-    radial-gradient(60% 40% at 32% 18%, rgb(255 255 255 / 0.35), transparent 70%),
-    radial-gradient(100% 100% at 50% 50%, transparent 62%, rgb(255 255 255 / 0.08) 100%);
+.blade-intro {
+  animation: blade-in 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
+@keyframes blade-in {
+  from { transform: rotate(calc(var(--r) - 200deg)) scale(0.2); opacity: 0; }
+  to { transform: rotate(var(--r)) scale(1); opacity: 1; }
+}
+
+/* Organizer mockup scanner line */
+.scanline { animation: scan 2.2s ease-in-out infinite alternate; top: 4px; }
+@keyframes scan { to { top: calc(100% - 6px); } }

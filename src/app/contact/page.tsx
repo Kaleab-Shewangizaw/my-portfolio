@@ -13,18 +13,16 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="shell pt-40">
-      <div className="grid gap-16 lg:grid-cols-[1.1fr_1fr] lg:items-start">
-        <Reveal>
-          <p className="label">Contact</p>
-          <h1 className="mt-6 text-[clamp(3.5rem,10vw,8.5rem)] font-medium leading-[0.88] tracking-[-0.055em]">
-            Say <span className="font-serif italic">hello.</span>
-          </h1>
-          <p className="mt-8 max-w-md text-lg leading-relaxed text-[var(--muted)]">
-            Hiring, building something ambitious, or just curious? I reply to every message, usually within a day.
+    <section className="shell pt-24 lg:pt-28">
+      <div className="grid gap-3 lg:grid-cols-[1fr_1fr] lg:items-start">
+        <Reveal className="card p-6 sm:p-8">
+          <p className="label">~/contact</p>
+          <h1 className="mt-3 text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">Say hello</h1>
+          <p className="mt-4 max-w-md text-[17px] leading-relaxed text-[var(--muted)]">
+            Hiring, starting a project, or just want to talk code? Send me a message. I read everything and usually reply within a day.
           </p>
-          <CopyEmail className="mt-10 text-xl sm:text-2xl" />
-          <dl className="mt-14 grid grid-cols-2 gap-8 border-t hairline pt-8">
+          <CopyEmail className="mt-6 text-lg" />
+          <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-[var(--line)] pt-6">
             <div>
               <dt className="label">Local time</dt>
               <dd className="mt-2 text-[15px]"><LocalTime /></dd>
@@ -34,9 +32,9 @@ export default function ContactPage() {
               <dd className="mt-2 text-[15px]">{site.availability}</dd>
             </div>
           </dl>
-          <ul className="mt-12 border-t hairline">
+          <ul className="mt-8 border-t border-[var(--line)]">
             {site.socials.map((s) => (
-              <li key={s.label} className="border-b hairline">
+              <li key={s.label} className="border-b border-[var(--line)] last:border-0">
                 <a href={s.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between py-4">
                   <span className="font-medium">{s.label}</span>
                   <span className="flex items-center gap-3 text-sm text-[var(--muted)] group-hover:text-[var(--fg)]">
@@ -48,7 +46,7 @@ export default function ContactPage() {
             ))}
           </ul>
         </Reveal>
-        <Reveal delay={0.15} className="lg:sticky lg:top-28">
+        <Reveal delay={0.1} className="lg:sticky lg:top-6">
           <ContactForm />
         </Reveal>
       </div>

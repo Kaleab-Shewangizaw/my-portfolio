@@ -1,102 +1,110 @@
 import type { Metadata } from "next";
-import { principles, site, timeline, toolkit } from "@/content/site";
-import { LiquidGlass } from "@/components/LiquidGlass";
+import Image from "next/image";
+import { Download } from "lucide-react";
+import { site, stack, timeline } from "@/content/site";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `About ${site.name} — how I think about building software.`,
+  description: `About ${site.name}, a software engineer in ${site.city}.`,
 };
+
+const facts = [
+  ["Based in", site.location],
+  ["Writing code since", String(site.startedCoding)],
+  ["Currently", "CTO at Pazimo"],
+  ["Looking for", site.availability],
+];
 
 export default function AboutPage() {
   return (
-    <>
-      <section className="shell pt-40">
-        <Reveal>
-          <p className="label">About</p>
-          <h1 className="mt-6 max-w-5xl text-[clamp(2.5rem,6.5vw,6rem)] font-medium leading-[0.98] tracking-[-0.045em]">
-            Engineer by trade, <span className="font-serif italic">designer by temperament.</span>
-          </h1>
+    <section className="shell pt-24 lg:pt-28">
+      <div className="grid gap-3 lg:grid-cols-[340px_1fr]">
+        <Reveal className="card overflow-hidden p-2">
+          <div className="group relative aspect-square overflow-hidden rounded-2xl bg-[var(--surface-2)]">
+            <Image
+              src="/me.png"
+              alt={`Portrait of ${site.name}`}
+              fill
+              sizes="340px"
+              priority
+              className="object-cover grayscale contrast-[1.05] transition-[filter] duration-700 group-hover:grayscale-0"
+            />
+          </div>
+          <dl className="space-y-3 p-4 text-sm">
+            {facts.map(([k, v]) => (
+              <div key={k} className="flex justify-between gap-4">
+                <dt className="text-[var(--muted)]">{k}</dt>
+                <dd className="text-right">{v}</dd>
+              </div>
+            ))}
+          </dl>
         </Reveal>
-        <div className="mt-20 grid gap-12 md:grid-cols-[1fr_2fr]">
-          <Reveal>
-            <LiquidGlass radius={28} className="p-6">
-              <dl className="space-y-5 text-[15px]">
-                <div><dt className="label">Based in</dt><dd className="mt-1.5">{site.location}</dd></div>
-                <div><dt className="label">Focus</dt><dd className="mt-1.5">{site.role}</dd></div>
-                <div><dt className="label">Status</dt><dd className="mt-1.5">{site.availability}</dd></div>
-              </dl>
-              <a href={site.cv} target="_blank" rel="noopener" className="mt-8 inline-flex h-10 w-full items-center justify-center rounded-full bg-[var(--fg)] text-sm font-medium text-[var(--bg)]">
-                Download résumé
-              </a>
-            </LiquidGlass>
-          </Reveal>
-          <Reveal delay={0.1} className="space-y-6 text-[clamp(1.1rem,1.6vw,1.3rem)] leading-[1.7] text-[var(--muted)]">
+
+        <Reveal delay={0.1} className="card p-6 sm:p-10">
+          <p className="label">~/about</p>
+          <h1 className="mt-3 text-[clamp(2.2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+            I like building things that work, and then making them better.
+          </h1>
+          <div className="mt-6 max-w-2xl space-y-4 text-[17px] leading-relaxed text-[var(--muted)]">
             <p>
-              <span className="text-[var(--fg)]">I like the whole problem.</span> The database schema and the hover state, the
-              deploy pipeline and the empty-state copy. Products feel good when every layer was built by someone who cared about the
-              layer next to it.
+              I&apos;m Kaleab, a software engineer from Addis Ababa. I started coding in {site.startedCoding} with a Scrimba course and a lot of
+              late nights, and I haven&apos;t stopped since. Today I lead engineering at Pazimo, where we run a ticketing platform
+              with a web app, two mobile apps and the API behind all of them.
             </p>
             <p>
-              I work fast without being careless: small PRs, typed boundaries and decisions written down. I&apos;d rather ship a sharp
-              version of the right thing than a polished version of the wrong one, and then iterate in the open.
+              Most of my work is full stack. I&apos;m comfortable designing a MongoDB schema in the morning, fixing a React Native
+              animation after lunch, and debugging an Nginx config at night. I care about the parts users never see: clear errors, fast
+              loading and code the next person can read.
             </p>
             <p>
-              Outside of product work I teach, contribute to open source and dig into lower-level systems in C++ and Rust, mostly to
-              understand the tools I rely on every day.
+              I also study Computer Science at AAiT, I went through A2SV&apos;s problem-solving track, and I taught web development at
+              GDG. Teaching taught me that if I can&apos;t explain something simply, I don&apos;t really understand it yet.
             </p>
-          </Reveal>
-        </div>
-      </section>
+            <p className="text-[var(--fg)]">
+              I&apos;m looking for a team that ships often and cares about quality. If that sounds like yours, I&apos;d love to talk.
+            </p>
+          </div>
+          <a href={site.cv} target="_blank" rel="noopener" className="mt-8 inline-flex h-11 items-center gap-2 rounded-full bg-[var(--fg)] px-5 text-sm font-medium text-[var(--bg)]">
+            <Download size={15} /> Download résumé
+          </a>
+        </Reveal>
+      </div>
 
-      <section className="shell mt-36">
-        <Reveal><h2 className="label">Path</h2></Reveal>
-        <ol className="mt-8 border-t hairline">
-          {timeline.map((t, i) => (
-            <li key={t.title + t.org} className="border-b hairline">
-              <Reveal delay={i * 0.05} className="grid gap-2 py-8 sm:grid-cols-[10rem_1fr_1fr] sm:gap-8">
-                <span className="label pt-1.5">{t.period}</span>
-                <span>
-                  <span className="block text-xl font-medium tracking-tight">{t.title}</span>
-                  <span className="font-serif text-lg italic text-[var(--muted)]">{t.org}</span>
-                </span>
-                <span className="text-[15px] leading-relaxed text-[var(--muted)] sm:pt-1">{t.note}</span>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="shell mt-36">
-        <Reveal><h2 className="label">Toolkit</h2></Reveal>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {toolkit.map((g, i) => (
-            <Reveal key={g.group} delay={i * 0.06}>
-              <LiquidGlass radius={24} className="h-full p-6">
-                <h3 className="font-serif text-2xl italic">{g.group}</h3>
-                <ul className="mt-6 space-y-2 text-[15px] text-[var(--muted)]">
-                  {g.items.map((it) => <li key={it}>{it}</li>)}
-                </ul>
-              </LiquidGlass>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="shell mt-36">
-        <Reveal><h2 className="label">Principles</h2></Reveal>
-        <div className="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2">
-          {principles.map((p, i) => (
-            <Reveal key={p.title} className="border-t hairline pt-6">
-              <h3 className="text-2xl font-medium tracking-tight">
-                <span className="mr-3 font-serif italic text-[var(--faint)]">{String(i + 1).padStart(2, "0")}</span>
-                {p.title}
-              </h3>
-              <p className="mt-3 text-[16px] leading-relaxed text-[var(--muted)]">{p.body}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-    </>
+      <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_1fr]">
+        <Reveal className="card p-6">
+          <p className="label">Experience & education</p>
+          <ol className="mt-5 space-y-5 border-l border-[var(--line)] pl-5">
+            {timeline.map((t, i) => (
+              <li key={t.title + t.org} className="relative">
+                <span className={"absolute -left-[25px] top-1.5 size-2.5 rounded-full border-2 border-[var(--surface)] " + (i === 0 ? "bg-[var(--accent)]" : "bg-[var(--faint)]")} />
+                <p className="mono text-xs text-[var(--muted)]">{t.period}</p>
+                <p className="mt-0.5 font-medium">
+                  {t.title} <span className="text-[var(--muted)]">· {t.org}</span>
+                </p>
+                <p className="mt-0.5 text-sm text-[var(--muted)]">{t.note}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+        <Reveal delay={0.08} className="card p-6">
+          <p className="label">What I work with</p>
+          <dl className="mt-5 divide-y divide-[var(--line)]">
+            {stack.map((s) => (
+              <div key={s.group} className="grid gap-2 py-3 first:pt-0 sm:grid-cols-[100px_1fr]">
+                <dt className="label pt-1">{s.group}</dt>
+                <dd className="flex flex-wrap gap-1.5">
+                  {s.items.map((it) => (
+                    <span key={it} className="rounded-md bg-[var(--surface-2)] px-2 py-1 text-[13px]">
+                      {it}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+      </div>
+    </section>
   );
 }
