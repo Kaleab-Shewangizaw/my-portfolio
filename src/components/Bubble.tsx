@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { unlock } from "@/lib/secrets";
 
@@ -47,6 +48,7 @@ function lensMap(size: number) {
  * Chromium gets true refraction; other browsers get frosted glass.
  */
 export function Bubble() {
+  const pathname = usePathname();
   const el = useRef<HTMLDivElement>(null);
   const id = "bubble" + useId().replace(/:/g, "");
   const [map, setMap] = useState<string | null>(null);
@@ -156,7 +158,8 @@ export function Bubble() {
     setTimeout(() => setAlive(false), 450);
   };
 
-  if (!alive) return null;
+  // Stay out of the way on forms and admin screens.
+  if (!alive || pathname.startsWith("/admin") || pathname === "/testimonials/new") return null;
 
   const filter = map ? `blur(0.4px) url(#${id}) saturate(130%)` : "blur(3px) saturate(150%)";
 

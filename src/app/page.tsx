@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight, Download } from "lucide-react";
 import { now, projects, site, stack, timeline } from "@/content/site";
 import { getGitHub } from "@/lib/github";
+import { getApproved } from "@/lib/testimonials";
+import { TestimonialCard } from "@/components/testimonials/TestimonialCard";
 import { Terminal } from "@/components/Terminal";
 import { Architecture } from "@/components/Architecture";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -32,8 +34,12 @@ function SectionHead({ index, title, action }: { index: string; title: string; a
   );
 }
 
+export const revalidate = 3600;
+
 export default async function Home() {
-  const gh = await getGitHub();
+  const [gh, kind] = await Promise.all([getGitHub(), getApproved(6)]);
+  let n = 2;
+  const next = () => String(++n).padStart(2, "0");
   const pazimo = projects.filter((p) => p.slug.startsWith("pazimo"));
   const others = projects.filter((p) => !p.slug.startsWith("pazimo"));
   const years = new Date().getFullYear() - site.startedCoding;
@@ -129,9 +135,23 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Testimonials (only once some are approved) */}
+      {kind.length > 0 && (
+        <section className="shell mt-16">
+          <SectionHead index={next()} title="Kind words" action={<Link href="/testimonials" className="label link-underline hover:text-[var(--fg)]">Read all</Link>} />
+          <div className="columns-1 gap-3 md:columns-2 lg:columns-3 [&>*]:mb-3">
+            {kind.map((t, i) => (
+              <Reveal key={t.id} delay={(i % 3) * 0.06} className="break-inside-avoid">
+                <TestimonialCard t={{ ...t, avatarSrc: t.hasAvatar ? `/api/testimonials/${t.id}/avatar` : null }} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Activity + now */}
       <section className="shell mt-16">
-        <SectionHead index="03" title="What I've been up to" />
+        <SectionHead index={next()} title="What I've been up to" />
         <div className="grid gap-3 lg:grid-cols-[1fr_320px]">
           {gh && (
             <Reveal className="card min-w-0 p-5">
@@ -162,7 +182,7 @@ export default async function Home() {
 
       {/* Stack + experience */}
       <section className="shell mt-16">
-        <SectionHead index="04" title="Tools and experience" action={<Link href="/about" className="label link-underline hover:text-[var(--fg)]">More about me</Link>} />
+        <SectionHead index={next()} title="Tools and experience" action={<Link href="/about" className="label link-underline hover:text-[var(--fg)]">More about me</Link>} />
         <div className="grid gap-3 lg:grid-cols-2">
           <Reveal className="card p-5">
             <dl className="divide-y divide-[var(--line)]">

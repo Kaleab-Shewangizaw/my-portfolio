@@ -27,6 +27,8 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       { group: "Navigate", label: "Work", run: go("/work") },
       { group: "Navigate", label: "About", run: go("/about") },
       { group: "Navigate", label: "Contact", run: go("/contact") },
+      { group: "Navigate", label: "Testimonials", run: go("/testimonials") },
+      { group: "Navigate", label: "Leave a testimonial", hint: "worked with me?", run: go("/testimonials/new") },
       ...projects.map((p) => ({ group: "Case studies", label: p.name, hint: p.kind, run: go(`/work/${p.slug}`) })),
       {
         group: "Actions",

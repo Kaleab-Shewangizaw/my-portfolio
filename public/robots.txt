@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api
 
 Sitemap: https://kal-x.vercel.app/sitemap.xml
