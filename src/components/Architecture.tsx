@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { unlock } from "@/lib/secrets";
 
 type Node = { id: string; label: string; sub: string; x: number; y: number; w: number; detail: string };
 
@@ -40,7 +41,14 @@ function edgePath(a: Node, b: Node) {
 }
 
 export function Architecture({ focus }: { focus?: string }) {
-  const [hover, setHover] = useState<string | null>(null);
+  const [hover, setHoverState] = useState<string | null>(null);
+  const explored = useRef(new Set<string>());
+  const setHover = (id: string | null) => {
+    setHoverState(id);
+    if (!id) return;
+    explored.current.add(id);
+    if (explored.current.size === nodes.length) unlock("architect");
+  };
   const active = hover ?? focus ?? null;
   const lit = (id: string) => !active || active === id || edges.some(([a, b]) => (a === active && b === id) || (b === active && a === id));
   const edgeLit = (a: string, b: string) => !active || a === active || b === active;

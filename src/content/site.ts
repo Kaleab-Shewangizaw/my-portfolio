@@ -34,7 +34,7 @@ export type Project = {
   role: string;
   summary: string;
   stack: string[];
-  links: { live?: string; code?: string };
+  links: { live?: string; liveLabel?: string; code?: string };
   highlights: string[];
   story: { heading: string; body: string }[];
   featured?: boolean;
@@ -217,12 +217,12 @@ export const projects: Project[] = [
     slug: "oweme",
     name: "OweMe",
     year: "2025",
-    platform: "tool",
-    kind: "Telegram Mini App",
+    platform: "mobile",
+    kind: "Android app",
     role: "Solo",
-    summary: "A simple tracker for money you lend, borrow and pay back, built into Telegram where these conversations already happen.",
-    stack: ["TypeScript", "Telegram Mini Apps", "Node.js"],
-    links: { live: "https://t.me/kal_abX/591", code: "https://github.com/Kaleab-Shewangizaw/OweMe" },
+    summary: "A simple mobile app for tracking money you lend, borrow and pay back. Android only for now; the APK is on my Telegram channel.",
+    stack: ["TypeScript", "Android"],
+    links: { live: "https://t.me/kal_abX/591", liveLabel: "Download APK", code: "https://github.com/Kaleab-Shewangizaw/OweMe" },
     highlights: ["Running balance per person", "Append-only ledger, so history never changes", "Gentle repayment reminders"],
     story: [
       {
@@ -231,7 +231,7 @@ export const projects: Project[] = [
       },
       {
         heading: "How",
-        body: "Every entry is append-only, so any balance can be explained line by line. It runs inside Telegram, so nobody has to install anything.",
+        body: "Every entry is append-only, so any balance can be explained line by line. It's built for Android for now, and the APK ships through my Telegram channel.",
       },
     ],
   },

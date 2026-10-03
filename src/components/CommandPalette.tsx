@@ -8,6 +8,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { projects, site } from "@/content/site";
 import { LiquidGlass } from "./LiquidGlass";
 import { SECRETS, unlock, useSecrets } from "@/lib/secrets";
+import { openReward } from "./Reward";
 
 type Item = { group: string; label: string; hint?: string; run: () => void };
 
@@ -46,6 +47,9 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
         },
       },
       ...site.socials.map((s) => ({ group: "Elsewhere", label: s.label, hint: s.handle, run: ext(s.href) })),
+      ...(found.length >= SECRETS.length
+        ? [{ group: `Secrets · ${found.length}/${SECRETS.length} found`, label: "🏆 Claim your reward", hint: "you found them all", run: openReward }]
+        : []),
       ...SECRETS.map((s) => ({
         group: `Secrets · ${found.length}/${SECRETS.length} found`,
         label: found.includes(s.id) ? `✓ ${s.title}` : "Locked",

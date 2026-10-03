@@ -45,8 +45,8 @@ export default async function Home() {
   const years = new Date().getFullYear() - site.startedCoding;
 
   const stats = [
-    { value: gh?.total ?? 1385, label: "GitHub contributions in the last year" },
-    { value: gh?.repos ?? 59, label: "public repositories" },
+    { value: gh?.total || 1385, label: "GitHub contributions in the last year" },
+    { value: gh?.repos || 59, label: "public repositories" },
     { value: 4, label: "Pazimo products running on one API" },
     { value: years, suffix: "+", label: "years of writing code every day" },
   ];

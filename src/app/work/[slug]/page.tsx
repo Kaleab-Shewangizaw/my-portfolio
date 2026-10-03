@@ -56,7 +56,7 @@ export default async function CaseStudy({ params }: Params) {
           <div className="mt-auto flex flex-wrap gap-2 pt-6">
             {p.links.live && (
               <a href={p.links.live} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center gap-1.5 rounded-full bg-[var(--fg)] px-4 text-sm font-medium text-[var(--bg)]">
-                Visit live <ArrowUpRight size={14} />
+                {p.links.liveLabel ?? "Visit live"} <ArrowUpRight size={14} />
               </a>
             )}
             {p.links.code && (

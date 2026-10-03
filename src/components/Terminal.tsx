@@ -136,6 +136,7 @@ export function Terminal() {
         return out(
           `Found ${found.length} of ${SECRETS.length}:`,
           ...SECRETS.map((s) => (found.includes(s.id) ? `  ✓ ${s.title}` : `  · ${s.hint}`)),
+          ...(found.length >= SECRETS.length ? [{ kind: "accent" as const, text: "All found. Open ⌘K and claim your reward." }] : []),
         );
       }
       case "neofetch": {
@@ -160,6 +161,17 @@ export function Terminal() {
         unlock("sudo");
         if (/sandwich/.test(arg)) return out({ kind: "accent", text: "Okay." });
         return out("kaleab is not in the sudoers file. This incident will be reported.", { kind: "muted", text: "(Even root can't do everything. It can make a sandwich, though.)" });
+      case "cargo":
+        if (!/^(run|build)/.test(arg)) return out("Usage: cargo run");
+        unlock("rust");
+        return out(
+          { kind: "muted", text: "   Compiling kalx-proxy v0.1.0 (~/code/kalx-proxy)" },
+          { kind: "muted", text: "    Finished `dev` profile [unoptimized + debuginfo] in 2.41s" },
+          { kind: "muted", text: "     Running `target/debug/kalx-proxy`" },
+          "[config] loaded proxy.conf: 3 backends, max 1024 connections",
+          "[registry] backends: 10.0.0.2:3000 ✓  10.0.0.3:3000 ✓  10.0.0.4:3000 ✗",
+          { kind: "accent", text: "[proxy] listening on 0.0.0.0:8080 (round-robin over 2 healthy backends)" },
+        );
       case "rm":
         return out("Not today. This site has no undo button.");
       case "date":
@@ -216,7 +228,7 @@ export function Terminal() {
       }
     } else if (e.key === "Tab") {
       e.preventDefault();
-      const all = ["help", "about", "projects", "open ", "stack", "contact", "email", "cv", "theme", "secrets", "clear", "neofetch"];
+      const all = ["help", "about", "projects", "open ", "stack", "contact", "email", "cv", "theme", "secrets", "clear", "neofetch", "cargo run"];
       const match = all.find((c) => c.startsWith(input));
       if (match && input) setInput(match);
     } else if (e.key === "l" && e.ctrlKey) {

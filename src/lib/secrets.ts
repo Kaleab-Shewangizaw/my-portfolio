@@ -14,7 +14,17 @@ export const SECRETS = [
   { id: "explorer", title: "Explorer", hint: "Visit every page." },
   { id: "night", title: "Night owl", hint: "Drop by between midnight and 5am." },
   { id: "regular", title: "Regular", hint: "Come back a third time." },
+  { id: "lost", title: "Lost", hint: "Get lost. Literally." },
+  { id: "architect", title: "Architect", hint: "Inspect every box in the Pazimo diagram." },
+  { id: "rust", title: "Rustacean", hint: "Build and run something in the terminal, the Rust way." },
+  { id: "console", title: "Inspector", hint: "Developers always check the console first." },
 ] as const;
+
+export const CLAIM_KEY = "kalx:claimed";
+
+export function readFound(): SecretId[] {
+  return read();
+}
 
 export type SecretId = (typeof SECRETS)[number]["id"];
 

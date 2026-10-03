@@ -97,6 +97,34 @@ function OrganizerScreen() {
   );
 }
 
+function OweMeScreen() {
+  const people: [string, number][] = [["Abel", -500], ["Hana", 1200], ["Dawit", -250]];
+  return (
+    <div className="flex h-full flex-col px-3 pb-3 pt-9 text-[9px]">
+      <span className="text-[#8f8a81]">OweMe</span>
+      <span className="text-[11px] font-semibold">Balances</span>
+      <div className="mt-2.5 rounded-xl bg-[#d97e3a] p-2.5 text-black">
+        <p className="opacity-70">Net</p>
+        <p className="text-[14px] font-semibold">+450 ETB</p>
+        <p className="opacity-70">You're owed more than you owe</p>
+      </div>
+      <div className="mt-2 space-y-1.5">
+        {people.map(([name, amt]) => (
+          <div key={name} className="flex items-center gap-2 rounded-lg bg-[#1d1d1b] p-1.5">
+            <span className="grid size-6 shrink-0 place-items-center rounded-full bg-[#2a2a27] text-[9px] font-semibold">{name[0]}</span>
+            <span className="flex-1">{name}</span>
+            <span className={"mono " + (amt < 0 ? "text-[#8f8a81]" : "text-[#d97e3a]")}>{amt > 0 ? "+" : ""}{amt} ETB</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto grid grid-cols-2 gap-1.5">
+        <span className="rounded-full bg-[#ede9e1] py-1.5 text-center font-semibold text-black">I lent</span>
+        <span className="rounded-full bg-[#1d1d1b] py-1.5 text-center">I borrowed</span>
+      </div>
+    </div>
+  );
+}
+
 function Browser({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={cn("overflow-hidden rounded-xl border border-[#2a2a27] bg-[#0d0d0c] text-[#ede9e1] shadow-[0_20px_50px_-20px_rgba(0,0,0,.6)]", className)}>
@@ -152,7 +180,6 @@ function CodeScreen({ project }: { project: Project }) {
     "creator-workspace": ["const doc = await local.open(id)", "doc.cues.add({ at: 42, cue: 'pause' })", "await voice.preview(doc)", "await git.commit('draft 3')"],
     yoinker: ["chrome.action.onClicked(save)", "const job = await extract(page)", "// { role, company, salary }", "await board.add(job, 'saved')"],
     "rust-proxy": ["let cfg = Config::load(\"proxy.conf\")?;", "let pool = Registry::from(&cfg.backends);", "// round-robin over healthy backends", "let up = pool.next().expect(\"no backend\");"],
-    oweme: ["ledger.append({", "  from: 'abel', amount: 500,", "})", "balance('abel') // → -500 ETB"],
   };
   const code = lines[project.slug] ?? ["// todo"];
   return (
@@ -184,6 +211,11 @@ export function Mockup({ project, className }: { project: Project; className?: s
       {project.slug === "pazimo-organizer" && (
         <Phone>
           <OrganizerScreen />
+        </Phone>
+      )}
+      {project.slug === "oweme" && (
+        <Phone>
+          <OweMeScreen />
         </Phone>
       )}
       {project.platform === "tool" && <CodeScreen project={project} />}

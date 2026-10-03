@@ -8,7 +8,12 @@ export async function getGitHub(): Promise<GitHubStats> {
   try {
     const [c, u] = await Promise.all([
       fetch(`https://github-contributions-api.jogruber.de/v4/${site.github}?y=last`, { next: { revalidate: 86400 } }),
-      fetch(`https://api.github.com/users/${site.github}`, { next: { revalidate: 86400 }, headers: { Accept: "application/vnd.github+json" } }),
+      fetch(`https://api.github.com/users/${site.github}`, { next: { revalidate: 86400 }, headers: {
+          Accept: "application/vnd.github+json",
+          // Optional: avoids the 60 requests/hour anonymous limit.
+          ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
+        },
+      }),
     ]);
     if (!c.ok) return null;
     const cj = await c.json();

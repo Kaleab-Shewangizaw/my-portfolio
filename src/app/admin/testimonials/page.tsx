@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { isAdmin } from "@/lib/auth";
 import { listAll } from "@/lib/testimonials";
+import { listChampions } from "@/lib/champions";
 import { AdminLogin, AdminDashboard } from "@/components/testimonials/Admin";
 
 export const metadata: Metadata = {
@@ -12,9 +13,9 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   if (!(await isAdmin())) return <AdminLogin />;
-  let items;
+  let items, champions;
   try {
-    items = await listAll();
+    [items, champions] = await Promise.all([listAll(), listChampions()]);
   } catch {
     return (
       <section className="shell pt-28">
@@ -22,5 +23,5 @@ export default async function AdminPage() {
       </section>
     );
   }
-  return <AdminDashboard items={items} />;
+  return <AdminDashboard items={items} champions={champions} />;
 }

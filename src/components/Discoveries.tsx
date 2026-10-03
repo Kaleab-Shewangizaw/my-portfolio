@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { unlock } from "@/lib/secrets";
+import { unlock, visitCount } from "@/lib/secrets";
 import { Logo } from "./Logo";
 
 const KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
@@ -23,6 +23,24 @@ export function Discoveries() {
       if (PAGES.every((p) => seen.has(p))) unlock("explorer");
     } catch {}
   }, [pathname]);
+
+  // Time- and visit-based secrets, checked on any page.
+  useEffect(() => {
+    if (visitCount() >= 3) unlock("regular");
+    if (new Date().getHours() < 5) unlock("night");
+
+    // A note for people who open DevTools.
+    const w = window as unknown as { kalx?: () => string };
+    w.kalx = () => {
+      unlock("console");
+      return "Found you. Most people never open the console. You're my kind of person.";
+    };
+    console.log(
+      "%c Kal_X %c Hey, curious one. Type kalx() and press Enter.",
+      "background:#d97e3a;color:#000;font-weight:700;padding:2px 6px;border-radius:4px",
+      "color:#d97e3a",
+    );
+  }, []);
 
   useEffect(() => {
     let pos = 0;

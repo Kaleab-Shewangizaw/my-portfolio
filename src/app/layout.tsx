@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/Toaster";
 import { Discoveries } from "@/components/Discoveries";
 import { Bubble } from "@/components/Bubble";
+import { Reward } from "@/components/Reward";
 import { TopBar } from "@/components/TopBar";
 import { Dock } from "@/components/Dock";
 import { Footer } from "@/components/Footer";
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Toaster />
           <Discoveries />
           <Bubble />
+          <Reward />
         </ThemeProvider>
       </body>
     </html>

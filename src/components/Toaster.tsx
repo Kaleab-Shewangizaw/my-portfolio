@@ -23,7 +23,10 @@ export function Toaster() {
     };
     const offSecret = onSecret((id, count) => {
       const s = SECRETS.find((x) => x.id === id)!;
-      push(`Secret found: ${s.title}`, `${count} of ${SECRETS.length}. Press ⌘K to see your list.`);
+      push(
+        `Secret found: ${s.title}`,
+        count >= SECRETS.length ? "That's all of them. You've earned something." : `${count} of ${SECRETS.length}. Press ⌘K to see your list.`,
+      );
     });
     const onToast = (e: Event) => {
       const { title, body } = (e as CustomEvent).detail;
