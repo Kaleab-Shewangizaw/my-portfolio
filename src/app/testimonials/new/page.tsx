@@ -4,6 +4,8 @@ import { TestimonialForm } from "@/components/testimonials/TestimonialForm";
 export const metadata: Metadata = {
   title: "Leave a testimonial",
   description: "Worked with Kaleab? Share a few words about it.",
+  openGraph: { title: "Leave a testimonial for Kaleab", description: "Worked with Kaleab? Share a few words about it." },
+  twitter: { title: "Leave a testimonial for Kaleab", description: "Worked with Kaleab? Share a few words about it." },
   robots: { index: false, follow: false },
 };
 
