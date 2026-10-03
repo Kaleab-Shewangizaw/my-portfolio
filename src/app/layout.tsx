@@ -1,118 +1,84 @@
-import type { Metadata } from "next";
-import { Space_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import LeftSidebar from "@/components/LeftSidebar";
-import MobileHeader from "@/components/MobileHeader";
+import { Ambient } from "@/components/Ambient";
+import { TopBar } from "@/components/TopBar";
+import { Dock } from "@/components/Dock";
+import { Footer } from "@/components/Footer";
 
-const spaceMono = Space_Mono({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
+const instrument = Instrument_Serif({
   subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
   display: "swap",
-  variable: "--font-space-mono",
 });
 
+const description = `${site.name} (${site.alias}) — ${site.role}. ${site.intro}`;
+
 export const metadata: Metadata = {
-  title: {
-    default: "Kal_X",
-    template: "%s · Kal_X",
-  },
-  description:
-    "Kaleab Shewangizaw (Kal_X) — CTO at Pazimo. I build web and mobile products, design systems, and lead engineering teams in Addis Ababa.",
-  keywords: [
-    "Kaleab Shewangizaw",
-    "Kaleab",
-    "Kal_X",
-    "kal-x",
-    "kalx",
-    "Kal_abX",
-    "CTO",
-    "Pazimo",
-    "software engineer",
-    "web developer",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Addis Ababa",
-    "Ethiopia",
-  ],
-  authors: [{ name: "Kaleab Shewangizaw", url: "https://kal-x.vercel.app" }],
-  creator: "Kaleab Shewangizaw",
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
-  alternates: { canonical: "https://kal-x.vercel.app" },
-  metadataBase: new URL("https://kal-x.vercel.app"),
+  metadataBase: new URL(site.url),
+  title: { default: `${site.name} — ${site.role}`, template: `%s · ${site.alias}` },
+  description,
+  keywords: [site.name, "Kaleab", site.alias, "Kal_abX", "software engineer", "product engineer", "full-stack", "Next.js", "React", "TypeScript", site.location],
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "Kal_X",
-    description: "CTO at Pazimo. I build web and mobile products, design systems, and lead engineering.",
-    url: "https://kal-x.vercel.app",
-    siteName: "Kal_X",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Kal_X — Kaleab Shewangizaw" }],
+    title: `${site.name} — ${site.role}`,
+    description,
+    url: site.url,
+    siteName: site.alias,
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: site.name }],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kal_X",
-    description: "CTO at Pazimo. I build web and mobile products.",
+    title: `${site.name} — ${site.role}`,
+    description,
     creator: "@Kal_abX",
     images: ["/og-image.png"],
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Kaleab Shewangizaw",
-  alternateName: "Kal_X",
-  jobTitle: "Chief Technology Officer",
-  worksFor: { "@type": "Organization", name: "Pazimo" },
-  url: "https://kal-x.vercel.app",
-  email: "kaleab.stk@gmail.com",
-  sameAs: [
-    "https://github.com/Kaleab-Shewangizaw",
-    "https://linkedin.com/in/kal-x",
-    "https://x.com/Kal_abX",
-  ],
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Addis Ababa",
-    addressCountry: "ET",
-  },
-  knowsAbout: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Node.js",
-    "Mobile Development",
-    "System Design",
-    "Engineering Leadership",
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f3f2ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#08090b" },
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  alternateName: site.alias,
+  jobTitle: site.role,
+  url: site.url,
+  email: site.email,
+  sameAs: site.socials.map((s) => s.href),
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={spaceMono.variable}>
-      <body className="antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <MobileHeader />
-          <div className="flex" style={{ minHeight: "100dvh" }}>
-            <LeftSidebar />
-            <main className="flex-1 min-w-0 overflow-hidden">{children}</main>
-          </div>
+    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable} ${instrument.variable}`}>
+      <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <ThemeProvider>
+          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-[var(--fg)] focus:px-4 focus:py-2 focus:text-sm focus:text-[var(--bg)]">
+            Skip to content
+          </a>
+          <Ambient />
+          <TopBar />
+          <main id="main">{children}</main>
+          <Footer />
+          <Dock />
         </ThemeProvider>
       </body>
     </html>
