@@ -141,6 +141,38 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "chop",
+    name: "Chop",
+    year: "2026",
+    platform: "tool",
+    kind: "AI content tool",
+    role: "Solo",
+    summary:
+      "Drop in an idea, a PDF, a Word doc, a screenshot or a link, and Chop turns it into posts written for each platform: X threads, LinkedIn posts, Reddit posts, YouTube scripts and Telegram updates.",
+    stack: ["Next.js", "TypeScript", "Groq · Llama 3.3 70B", "Tesseract OCR", "pdf-parse", "Mammoth"],
+    links: { live: "https://chop-content.vercel.app", code: "https://github.com/Kaleab-Shewangizaw/chop" },
+    highlights: [
+      "Reads PDFs, Word docs and images (with OCR), not just pasted text",
+      "One input, five platform-native outputs in a single request",
+      "Model fallback chain, so a provider outage never means an empty result",
+      "Searchable local history of everything you've generated",
+    ],
+    story: [
+      {
+        heading: "Why",
+        body: "Good ideas usually start as long notes or documents, and rewriting each one by hand for X, LinkedIn, Reddit and YouTube is slow. I wanted to go from raw material to ready-to-post drafts in one step.",
+      },
+      {
+        heading: "How it works",
+        body: "Uploads are parsed on the server: PDFs with pdf-parse, Word files with Mammoth and images with OCR. The extracted text goes to Llama 3.3 70B on Groq with a strict output schema for each platform, and the results are validated before they reach the UI.",
+      },
+      {
+        heading: "Making it reliable",
+        body: "LLM APIs fail in surprising ways, so generation runs through a chain: Groq first, an optional Gemini fallback, then a deterministic generator. Any missing platform is filled in, so you always get a complete set of drafts.",
+      },
+    ],
+  },
+  {
     slug: "rust-proxy",
     name: "My own NGINX, in Rust",
     year: "2026",

@@ -195,6 +195,46 @@ function CodeScreen({ project }: { project: Project }) {
   );
 }
 
+function ChopScreen() {
+  const inputs = [
+    ["PDF", "pitch-deck.pdf"],
+    ["DOCX", "notes.docx"],
+    ["IMG", "whiteboard.png"],
+  ];
+  const outputs = [
+    ["X", "1/ Most ideas die in a notes app. Here's how…"],
+    ["in", "Three things I learned shipping a ticketing…"],
+    ["r/", "We built a local-first writing tool. AMA"],
+    ["▶", "Intro: hook in 5s, then the problem…"],
+  ];
+  return (
+    <div className="grid w-full max-w-[460px] grid-cols-[1fr_auto_1.35fr] items-center gap-3 text-[10px] text-[#ede9e1]">
+      <div className="space-y-1.5">
+        <p className="mono text-[9px] text-[#8f8a81]">raw input</p>
+        {inputs.map(([t, n]) => (
+          <div key={n} className="flex items-center gap-2 rounded-lg border border-[#2a2a27] bg-[#0d0d0c] px-2 py-1.5">
+            <span className="mono rounded bg-[#1d1d1b] px-1 text-[8px] text-[#8f8a81]">{t}</span>
+            <span className="truncate">{n}</span>
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <span className="grid size-8 place-items-center rounded-full bg-[#d97e3a] text-[11px] font-bold text-black">AI</span>
+        <span className="mono text-[8px] text-[#8f8a81]">chop.</span>
+      </div>
+      <div className="space-y-1.5">
+        <p className="mono text-[9px] text-[#8f8a81]">ready to post</p>
+        {outputs.map(([p, t], i) => (
+          <div key={p} className={"flex items-center gap-2 rounded-lg px-2 py-1.5 " + (i === 0 ? "bg-[#ede9e1] text-black" : "border border-[#2a2a27] bg-[#0d0d0c]")}>
+            <span className={"grid size-4 shrink-0 place-items-center rounded text-[8px] font-bold " + (i === 0 ? "bg-black text-[#ede9e1]" : "bg-[#1d1d1b] text-[#d97e3a]")}>{p}</span>
+            <span className="truncate">{t}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Mockup({ project, className }: { project: Project; className?: string }) {
   return (
     <div className={cn("grid place-items-center overflow-hidden rounded-2xl bg-[var(--surface-2)] p-6", className)}>
@@ -218,7 +258,8 @@ export function Mockup({ project, className }: { project: Project; className?: s
           <OweMeScreen />
         </Phone>
       )}
-      {project.platform === "tool" && <CodeScreen project={project} />}
+      {project.slug === "chop" && <ChopScreen />}
+      {project.platform === "tool" && !["oweme", "chop"].includes(project.slug) && <CodeScreen project={project} />}
     </div>
   );
 }
