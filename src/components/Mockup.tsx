@@ -106,7 +106,7 @@ function OweMeScreen() {
       <div className="mt-2.5 rounded-xl bg-[#d97e3a] p-2.5 text-black">
         <p className="opacity-70">Net</p>
         <p className="text-[14px] font-semibold">+450 ETB</p>
-        <p className="opacity-70">You're owed more than you owe</p>
+        <p className="opacity-70">You&apos;re owed more than you owe</p>
       </div>
       <div className="mt-2 space-y-1.5">
         {people.map(([name, amt]) => (
