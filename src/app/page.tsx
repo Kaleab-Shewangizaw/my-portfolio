@@ -41,7 +41,7 @@ export default async function Home() {
   let n = 2;
   const next = () => String(++n).padStart(2, "0");
   const pazimo = projects.filter((p) => p.slug.startsWith("pazimo"));
-  const others = projects.filter((p) => !p.slug.startsWith("pazimo"));
+  const others = projects.filter((p) => !p.slug.startsWith("pazimo")).slice(0, 4);
   const years = new Date().getFullYear() - site.startedCoding;
 
   const stats = [
