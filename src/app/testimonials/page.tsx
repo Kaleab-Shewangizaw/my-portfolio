@@ -1,169 +1,40 @@
-import Image from "next/image";
 import type { Metadata } from "next";
-import { testimonials } from "@/lib/data";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { getApproved } from "@/lib/testimonials";
+import { TestimonialCard } from "@/components/testimonials/TestimonialCard";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Testimonials",
-  description:
-    "What colleagues and collaborators say about working with Kaleab Shewangizaw (Kal_X) — CTO at Pazimo.",
-  openGraph: {
-    title: "Testimonials · Kal_X",
-    description: "What people say about working with Kal_X.",
-  },
+  description: "What clients and colleagues say about working with Kaleab.",
 };
 
-export default function TestimonialsPage() {
+export const revalidate = 3600;
+
+export default async function TestimonialsPage() {
+  const items = await getApproved();
   return (
-    <div className="h-[calc(100dvh-52px)] lg:h-screen overflow-y-auto">
-      <div style={{ maxWidth: "720px", margin: "0 auto", padding: "48px 32px 96px" }}>
-
-        {/* Header */}
-        <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "28px", marginBottom: "8px" }}>
-          <p
-            style={{
-              fontSize: "9px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: "var(--muted-foreground)",
-              fontFamily: "'Space Mono', monospace",
-              marginBottom: "8px",
-            }}
-          >
-            From People I&apos;ve Worked With
-          </p>
-          <h1
-            style={{
-              fontSize: "26px",
-              fontWeight: 700,
-              color: "var(--foreground)",
-              fontFamily: "'Space Mono', monospace",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Testimonials
-          </h1>
+    <section className="shell pt-24 lg:pt-28">
+      <Reveal className="mb-8 max-w-2xl">
+        <p className="label">~/testimonials</p>
+        <h1 className="mt-3 text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">Kind words</h1>
+        <p className="mt-4 text-[17px] leading-relaxed text-[var(--muted)]">From the people I&apos;ve built things with. Every one was written by them, in their own words.</p>
+      </Reveal>
+      {items.length === 0 ? (
+        <div className="card p-10 text-center text-[var(--muted)]">Nothing here yet. Check back soon.</div>
+      ) : (
+        <div className="columns-1 gap-3 md:columns-2 lg:columns-3 [&>*]:mb-3">
+          {items.map((t, i) => (
+            <Reveal key={t.id} delay={(i % 3) * 0.06} className="break-inside-avoid">
+              <TestimonialCard t={{ ...t, avatarSrc: t.hasAvatar ? `/api/testimonials/${t.id}/avatar` : null }} />
+            </Reveal>
+          ))}
         </div>
-
-        {testimonials.length === 0 ? (
-          <div style={{ paddingTop: "64px", textAlign: "center" }}>
-            <p
-              style={{
-                fontSize: "12px",
-                color: "var(--muted-foreground)",
-                fontFamily: "'Space Mono', monospace",
-                lineHeight: 1.9,
-              }}
-            >
-              None collected yet. Check back soon.
-            </p>
-          </div>
-        ) : (
-          <div>
-            {testimonials.map((t, i) => (
-              <div
-                key={i}
-                style={{
-                  borderBottom: "1px solid var(--border)",
-                  padding: "48px 0",
-                }}
-              >
-                {/* Typographic opening quote */}
-                <p
-                  style={{
-                    fontFamily: "Georgia, 'Times New Roman', serif",
-                    fontSize: "72px",
-                    lineHeight: "0.6",
-                    color: "var(--accent)",
-                    marginBottom: "24px",
-                    opacity: 0.5,
-                    userSelect: "none",
-                  }}
-                  aria-hidden
-                >
-                  &ldquo;
-                </p>
-
-                {/* Quote text */}
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "var(--foreground)",
-                    lineHeight: 2.1,
-                    fontFamily: "'Space Mono', monospace",
-                    marginBottom: "36px",
-                  }}
-                >
-                  {t.text}
-                </p>
-
-                {/* Author row */}
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  {t.avatar ? (
-                    <Image
-                      src={t.avatar}
-                      alt={t.name}
-                      width={44}
-                      height={44}
-                      style={{
-                        width: "44px",
-                        height: "44px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        border: "1px solid var(--border)",
-                        flexShrink: 0,
-                      }}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        width: "44px",
-                        height: "44px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--muted)",
-                        border: "1px solid var(--border)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontFamily: "'Space Mono', monospace",
-                        fontSize: "14px",
-                        fontWeight: 700,
-                        color: "var(--muted-foreground)",
-                        flexShrink: 0,
-                      }}
-                    >
-                      {t.name.charAt(0)}
-                    </div>
-                  )}
-
-                  <div>
-                    <p
-                      style={{
-                        fontSize: "13px",
-                        fontWeight: 700,
-                        color: "var(--foreground)",
-                        fontFamily: "'Space Mono', monospace",
-                        marginBottom: "3px",
-                      }}
-                    >
-                      {t.name}
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "10px",
-                        color: "var(--muted-foreground)",
-                        fontFamily: "'Space Mono', monospace",
-                        letterSpacing: "0.04em",
-                      }}
-                    >
-                      {t.role} · {t.company}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
+      )}
+      <Link href="/testimonials/new" className="mono mt-6 inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--fg)]">
+        Worked with me? Leave a testimonial <ArrowUpRight size={14} />
+      </Link>
+    </section>
   );
 }

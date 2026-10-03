@@ -1,528 +1,221 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
-import { BsGithub } from "react-icons/bs";
-import { projects, blogPosts, cv, profile, funFacts } from "@/lib/data";
-import GitHubStreak from "@/components/GitHubStreak";
+import { ArrowUpRight, Download } from "lucide-react";
+import { now, projects, site, stack, timeline } from "@/content/site";
+import { getGitHub } from "@/lib/github";
+import { getApproved } from "@/lib/testimonials";
+import { TestimonialCard } from "@/components/testimonials/TestimonialCard";
+import { Terminal } from "@/components/Terminal";
+import { Architecture } from "@/components/Architecture";
+import { ProjectCard } from "@/components/ProjectCard";
+import { Contributions } from "@/components/Contributions";
+import { CountUp } from "@/components/CountUp";
+import { Reveal } from "@/components/Reveal";
+import { CopyEmail } from "@/components/CopyEmail";
 
-const LABEL: React.CSSProperties = {
-  fontSize: "10px",
-  letterSpacing: "0.18em",
-  textTransform: "uppercase",
-  color: "var(--muted-foreground)",
-  fontFamily: "'Space Mono', monospace",
-  flexShrink: 0,
-};
+function Headline({ as: Tag }: { as: "h1" }) {
+  return (
+    <Tag className="py-2 text-[clamp(2.5rem,5.2vw,4rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
+      Hi, I&apos;m Kaleab.
+      <br />
+      <span className="text-[var(--muted)]">I build apps people use every day.</span>
+    </Tag>
+  );
+}
 
-const DIVIDER = (label: string, href?: string) => (
-  <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
-    <p style={LABEL}>{label}</p>
-    <div style={{ flex: 1, height: "1px", backgroundColor: "var(--border)" }} />
-    {href && (
-      <Link href={href} className="nav-back" style={{ ...LABEL, flexShrink: 0 }}>
-        All →
-      </Link>
-    )}
-  </div>
-);
+function SectionHead({ index, title, action }: { index: string; title: string; action?: React.ReactNode }) {
+  return (
+    <div className="mb-4 flex items-end justify-between gap-4">
+      <h2 className="flex items-baseline gap-3 text-xl font-semibold tracking-tight sm:text-2xl">
+        <span className="mono text-sm font-normal text-[var(--accent-text)]">{index}</span>
+        {title}
+      </h2>
+      {action}
+    </div>
+  );
+}
 
-export default function HomePage() {
-  const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
-  const latestPosts = blogPosts.slice(0, 3);
+export const revalidate = 3600;
+
+export default async function Home() {
+  const [gh, kind] = await Promise.all([getGitHub(), getApproved(6)]);
+  let n = 2;
+  const next = () => String(++n).padStart(2, "0");
+  const pazimo = projects.filter((p) => p.slug.startsWith("pazimo"));
+  const others = projects.filter((p) => !p.slug.startsWith("pazimo"));
+  const years = new Date().getFullYear() - site.startedCoding;
+
+  const stats = [
+    { value: gh?.total || 1385, label: "GitHub contributions in the last year" },
+    { value: gh?.repos || 59, label: "public repositories" },
+    { value: 4, label: "Pazimo products running on one API" },
+    { value: years, suffix: "+", label: "years of writing code every day" },
+  ];
 
   return (
-    <div className="flex h-[calc(100dvh-52px)] lg:h-screen">
+    <>
+      {/* Hero */}
+      <section className="shell grid items-center gap-8 pb-10 pt-24 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pt-28">
+        <Reveal>
+          <p className="label">~/kaleab · {site.role.toLowerCase()} · {site.city.toLowerCase()}</p>
+          <div className="mt-4">
+            <Headline as="h1" />
+          </div>
+          <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-[var(--muted)]">{site.intro}</p>
+          <div className="mt-7 flex flex-wrap items-center gap-2.5">
+            <Link href="/work" className="inline-flex h-11 items-center gap-2 rounded-full bg-[var(--fg)] px-5 text-sm font-medium text-[var(--bg)] transition-transform active:scale-95">
+              See my work <ArrowUpRight size={15} />
+            </Link>
+            <a href={site.cv} target="_blank" rel="noopener" className="inline-flex h-11 items-center gap-2 rounded-full border border-[var(--line)] px-5 text-sm font-medium transition-colors hover:bg-[var(--surface-2)]">
+              <Download size={15} /> Résumé
+            </a>
+          </div>
+          <CopyEmail className="mt-6 text-sm text-[var(--muted)]" />
+        </Reveal>
+        <Reveal delay={0.15}>
+          <Terminal />
+        </Reveal>
+      </section>
 
-      {/* ── Middle column ── */}
-      <div
-        className="flex-1 overflow-y-auto min-w-0"
-        style={{ borderRight: "1px solid var(--border)" }}
-      >
-        <div style={{ maxWidth: "600px", margin: "0 auto", padding: "52px 36px 96px" }}>
-
-          {/* ── Hero ── */}
-          <section style={{ marginBottom: "60px" }}>
-            <div className="flex items-center gap-5" style={{ marginBottom: "32px" }}>
-              <div style={{
-                width: "80px",
-                height: "80px",
-                borderRadius: "50%",
-                overflow: "hidden",
-                border: "2px solid var(--border)",
-                flexShrink: 0,
-                backgroundColor: "var(--muted)",
-              }}>
-                <Image
-                  src="/brand/kalx-avatar-black.svg"
-                  alt={profile.name}
-                  width={80}
-                  height={80}
-                  priority
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
-              </div>
-              <div>
-                <p style={{
-                  fontSize: "15px",
-                  fontWeight: 700,
-                  color: "var(--foreground)",
-                  fontFamily: "'Space Mono', monospace",
-                  marginBottom: "3px",
-                }}>
-                  {profile.name}
-                </p>
-                <p style={{
-                  fontSize: "12px",
-                  color: "var(--muted-foreground)",
-                  fontFamily: "'Space Mono', monospace",
-                }}>
-                  {profile.role} · {profile.location}
-                </p>
-              </div>
-            </div>
-
-            <h1 style={{
-              fontSize: "clamp(22px, 3.5vw, 32px)",
-              fontWeight: 700,
-              color: "var(--foreground)",
-              lineHeight: 1.25,
-              letterSpacing: "-0.02em",
-              fontFamily: "'Space Mono', monospace",
-              marginBottom: "20px",
-            }}>
-              I build products.
-            </h1>
-
-            <p style={{
-              fontSize: "15px",
-              color: "var(--muted-foreground)",
-              lineHeight: 2,
-              fontFamily: "'Space Mono', monospace",
-              marginBottom: "32px",
-              maxWidth: "460px",
-            }}>
-              CTO at{" "}
-              <span style={{ color: "var(--foreground)" }}>Pazimo</span>,
-              Addis Ababa. Web, mobile, and the systems behind them.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="/projects"
-                style={{
-                  display: "inline-block",
-                  fontSize: "10px",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--foreground)",
-                  border: "1px solid var(--foreground)",
-                  padding: "10px 20px",
-                  textDecoration: "none",
-                  fontFamily: "'Space Mono', monospace",
-                }}
-              >
-                View My Work
-              </Link>
-              <Link
-                href="/contact"
-                style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  textDecoration: "none",
-                  fontFamily: "'Space Mono', monospace",
-                }}
-                className="nav-back"
-              >
-                Say Hello →
-              </Link>
-            </div>
-          </section>
-
-          {/* ── Experience ── */}
-          {DIVIDER("Experience")}
-          <section style={{ marginBottom: "52px" }}>
-            {cv.experience.map((exp, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr auto",
-                  gap: "0 16px",
-                  borderBottom: "1px solid var(--border)",
-                  padding: "20px 0",
-                  alignItems: "start",
-                }}
-              >
-                <div>
-                  <div className="flex items-center gap-3" style={{ marginBottom: "4px" }}>
-                    <p style={{
-                      fontSize: "14px",
-                      fontWeight: 700,
-                      color: "var(--foreground)",
-                      fontFamily: "'Space Mono', monospace",
-                    }}>
-                      {exp.role}
-                    </p>
-                    {exp.current && (
-                      <span style={{
-                        fontSize: "8px",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        color: "var(--accent)",
-                        border: "1px solid var(--accent)",
-                        padding: "2px 6px",
-                        fontFamily: "'Space Mono', monospace",
-                      }}>
-                        Now
-                      </span>
-                    )}
-                  </div>
-                  <p style={{
-                    fontSize: "13px",
-                    color: "var(--muted-foreground)",
-                    fontFamily: "'Space Mono', monospace",
-                  }}>
-                    {exp.company}
-                  </p>
-                </div>
-                <p style={{
-                  fontSize: "12px",
-                  color: "var(--muted-foreground)",
-                  fontFamily: "'Space Mono', monospace",
-                  opacity: 0.7,
-                  paddingTop: "3px",
-                  whiteSpace: "nowrap",
-                }}>
-                  {exp.period}
-                </p>
-              </div>
-            ))}
-          </section>
-
-          {/* ── Education ── */}
-          {DIVIDER("Education")}
-          <section style={{ marginBottom: "52px" }}>
-            {cv.education.map((edu, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr auto",
-                  gap: "0 16px",
-                  borderBottom: "1px solid var(--border)",
-                  padding: "18px 0",
-                  alignItems: "start",
-                }}
-              >
-                <div>
-                  <p style={{
-                    fontSize: "14px",
-                    fontWeight: 700,
-                    color: "var(--foreground)",
-                    fontFamily: "'Space Mono', monospace",
-                    marginBottom: "4px",
-                    lineHeight: 1.4,
-                  }}>
-                    {edu.degree}
-                  </p>
-                  <p style={{
-                    fontSize: "13px",
-                    color: "var(--muted-foreground)",
-                    fontFamily: "'Space Mono', monospace",
-                  }}>
-                    {edu.school}
-                  </p>
-                </div>
-                <p style={{
-                  fontSize: "12px",
-                  color: "var(--muted-foreground)",
-                  fontFamily: "'Space Mono', monospace",
-                  opacity: 0.7,
-                  paddingTop: "3px",
-                  whiteSpace: "nowrap",
-                }}>
-                  {edu.period}
-                </p>
-              </div>
-            ))}
-          </section>
-
-          {/* ── Stack ── */}
-          {DIVIDER("Stack")}
-          <section style={{ marginBottom: "52px" }}>
-            {cv.skills.map((group, i) => (
-              <div
-                key={group.category}
-                style={{
-                  borderBottom: "1px solid var(--border)",
-                  padding: "16px 0",
-                  display: "grid",
-                  gridTemplateColumns: "100px 1fr",
-                  gap: "0 20px",
-                  alignItems: "start",
-                }}
-              >
-                <p style={{
-                  fontSize: "11px",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "var(--foreground)",
-                  fontFamily: "'Space Mono', monospace",
-                  paddingTop: "2px",
-                }}>
-                  {group.category}
-                </p>
-                <p style={{
-                  fontSize: "13px",
-                  color: "var(--muted-foreground)",
-                  lineHeight: 1.8,
-                  fontFamily: "'Space Mono', monospace",
-                }}>
-                  {group.items.join(" · ")}
-                </p>
-              </div>
-            ))}
-          </section>
-
-          {/* ── Latest Writing ── */}
-          {DIVIDER("Latest Writing", "/blog")}
-          <section>
-            {latestPosts.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                style={{ display: "block", textDecoration: "none" }}
-              >
-                <article style={{ borderBottom: "1px solid var(--border)", padding: "20px 0" }}>
-                  <div className="flex items-start justify-between gap-6" style={{ marginBottom: "10px" }}>
-                    <h3
-                      className="post-link-title"
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: 700,
-                        color: "var(--foreground)",
-                        lineHeight: 1.4,
-                        fontFamily: "'Space Mono', monospace",
-                      }}
-                    >
-                      {post.title}
-                    </h3>
-                    <span style={{
-                      fontSize: "11px",
-                      color: "var(--muted-foreground)",
-                      flexShrink: 0,
-                      paddingTop: "3px",
-                      fontFamily: "'Space Mono', monospace",
-                    }}>
-                      {new Date(post.date).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
-                    </span>
-                  </div>
-                  <p style={{
-                    fontSize: "13px",
-                    color: "var(--muted-foreground)",
-                    lineHeight: 1.85,
-                    marginBottom: "10px",
-                    fontFamily: "'Space Mono', monospace",
-                  }}>
-                    {post.excerpt}
-                  </p>
-                  <span style={{
-                    fontSize: "10px",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "var(--muted-foreground)",
-                    fontFamily: "'Space Mono', monospace",
-                    opacity: 0.7,
-                  }}>
-                    {post.readTime}
-                  </span>
-                </article>
-              </Link>
-            ))}
-          </section>
-
+      {/* Stats */}
+      <section className="shell">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.06} className="card p-5">
+              <p className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-[-0.04em]">
+                <CountUp to={s.value} suffix={s.suffix} />
+              </p>
+              <p className="mt-1 text-sm text-[var(--muted)]">{s.label}</p>
+            </Reveal>
+          ))}
         </div>
-      </div>
+      </section>
 
-      {/* ── Right column ── */}
-      <div
-        className="hidden lg:flex flex-col overflow-y-auto flex-shrink-0"
-        style={{ width: "350px" }}
-      >
-        <div style={{ padding: "52px 28px 80px" }}>
+      {/* Pazimo */}
+      <section className="shell mt-16">
+        <SectionHead index="01" title="Pazimo: one backend, three apps" action={<Link href="/work/pazimo" className="label link-underline hover:text-[var(--fg)]">Read the case study</Link>} />
+        <div className="grid gap-3 lg:grid-cols-[1fr_1.35fr]">
+          <Reveal className="card flex flex-col p-6">
+            <p className="text-[17px] leading-relaxed">
+              Pazimo is a ticketing, invitation and RSVP platform for Ethiopia. I&apos;m the CTO. I lead the engineering team and own the API, the web app, both mobile apps, and the servers and deploys that keep them running.
+            </p>
+            <ul className="mt-6 space-y-3 text-sm text-[var(--muted)]">
+              {pazimo[0].highlights.map((h) => (
+                <li key={h} className="flex gap-3">
+                  <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                  {h}
+                </li>
+              ))}
+            </ul>
+            <a href="https://pazimo.com" target="_blank" rel="noopener noreferrer" className="mono mt-auto inline-flex items-center gap-1.5 pt-6 text-sm text-[var(--accent-text)] hover:underline">
+              pazimo.com <ArrowUpRight size={14} />
+            </a>
+          </Reveal>
+          <Reveal delay={0.1} className="card p-5">
+            <Architecture />
+          </Reveal>
+        </div>
+        <div className="mt-3 grid gap-3 md:grid-cols-3">
+          {pazimo.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 0.08} className="h-full">
+              <ProjectCard project={p} className="h-full" />
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-          {/* GitHub streak */}
-          <div style={{ marginBottom: "36px", paddingBottom: "32px", borderBottom: "1px solid var(--border)" }}>
-            <p style={{ ...LABEL, marginBottom: "14px" }}>GitHub</p>
-            <GitHubStreak />
-          </div>
+      {/* Side projects */}
+      <section className="shell mt-16">
+        <SectionHead index="02" title="Things I build on the side" action={<Link href="/work" className="label link-underline hover:text-[var(--fg)]">All projects</Link>} />
+        <div className="grid gap-3 md:grid-cols-2">
+          {others.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 0.08} className="h-full">
+              <ProjectCard project={p} className="h-full" />
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-          {/* Featured projects */}
-          <div style={{ marginBottom: "36px" }}>
-            <p style={{ ...LABEL, marginBottom: "20px" }}>Featured Builds</p>
-
-            {featuredProjects.map((project, i) => (
-              <div
-                key={project.slug}
-                style={{
-                  marginBottom: i < featuredProjects.length - 1 ? "28px" : 0,
-                  paddingBottom: i < featuredProjects.length - 1 ? "28px" : 0,
-                  borderBottom: i < featuredProjects.length - 1 ? "1px solid var(--border)" : "none",
-                }}
-              >
-                <div className="flex items-start justify-between gap-2" style={{ marginBottom: "8px" }}>
-                  <h3 style={{
-                    fontSize: "14px",
-                    fontWeight: 700,
-                    color: "var(--foreground)",
-                    fontFamily: "'Space Mono', monospace",
-                  }}>
-                    {project.name}
-                  </h3>
-                  <span style={{
-                    fontSize: "10px",
-                    color: "var(--muted-foreground)",
-                    fontFamily: "'Space Mono', monospace",
-                    paddingTop: "2px",
-                    flexShrink: 0,
-                  }}>
-                    {project.year}
-                  </span>
-                </div>
-
-                <p style={{
-                  fontSize: "12px",
-                  color: "var(--muted-foreground)",
-                  lineHeight: 1.75,
-                  fontFamily: "'Space Mono', monospace",
-                  marginBottom: "12px",
-                }}>
-                  {project.longDescription ?? project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-x-2 gap-y-1" style={{ marginBottom: "12px" }}>
-                  {project.tech.slice(0, 5).map((tech) => (
-                    <span
-                      key={tech}
-                      style={{
-                        fontSize: "9px",
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: "var(--muted-foreground)",
-                        fontFamily: "'Space Mono', monospace",
-                        border: "1px solid var(--border)",
-                        padding: "2px 6px",
-                      }}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-icon"
-                    style={{
-                      fontSize: "10px",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      fontFamily: "'Space Mono', monospace",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "5px",
-                      textDecoration: "none",
-                    }}
-                  >
-                    <BsGithub size={12} /> Code
-                  </a>
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-icon"
-                      style={{
-                        fontSize: "10px",
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        fontFamily: "'Space Mono', monospace",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                        textDecoration: "none",
-                      }}
-                    >
-                      <ExternalLink size={12} /> Live
-                    </a>
-                  )}
-                </div>
-              </div>
+      {/* Testimonials (only once some are approved) */}
+      {kind.length > 0 && (
+        <section className="shell mt-16">
+          <SectionHead index={next()} title="Kind words" action={<Link href="/testimonials" className="label link-underline hover:text-[var(--fg)]">Read all</Link>} />
+          <div className="columns-1 gap-3 md:columns-2 lg:columns-3 [&>*]:mb-3">
+            {kind.map((t, i) => (
+              <Reveal key={t.id} delay={(i % 3) * 0.06} className="break-inside-avoid">
+                <TestimonialCard t={{ ...t, avatarSrc: t.hasAvatar ? `/api/testimonials/${t.id}/avatar` : null }} />
+              </Reveal>
             ))}
           </div>
+        </section>
+      )}
 
-          {/* Fun facts */}
-          <div style={{ marginBottom: "36px", paddingTop: "32px", borderTop: "1px solid var(--border)" }}>
-            <p style={{ ...LABEL, marginBottom: "18px" }}>Quick Facts</p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px 8px" }}>
-              {funFacts.map((fact) => (
-                <div key={fact.label}>
-                  <p style={{
-                    fontSize: "15px",
-                    fontWeight: 700,
-                    color: "var(--foreground)",
-                    fontFamily: "'Space Mono', monospace",
-                    marginBottom: "3px",
-                  }}>
-                    {fact.value}
-                  </p>
-                  <p style={{
-                    fontSize: "10px",
-                    color: "var(--muted-foreground)",
-                    fontFamily: "'Space Mono', monospace",
-                    letterSpacing: "0.04em",
-                  }}>
-                    {fact.label}
-                  </p>
+      {/* Activity + now */}
+      <section className="shell mt-16">
+        <SectionHead index={next()} title="What I've been up to" />
+        <div className="grid gap-3 lg:grid-cols-[1fr_320px]">
+          {gh && (
+            <Reveal className="card min-w-0 p-5">
+              <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+                <p className="font-medium">
+                  {gh.total.toLocaleString()} contributions <span className="text-[var(--muted)]">in the last year</span>
+                </p>
+                <a href={`https://github.com/${site.github}`} target="_blank" rel="noopener noreferrer" className="mono text-xs text-[var(--muted)] hover:text-[var(--fg)]">
+                  github.com/{site.github} ↗
+                </a>
+              </div>
+              <Contributions days={gh.contributions} />
+            </Reveal>
+          )}
+          <Reveal delay={0.08} className="card p-5">
+            <p className="label">now.txt</p>
+            <ul className="mt-4 space-y-3">
+              {now.map((n) => (
+                <li key={n} className="flex gap-3 text-[15px]">
+                  <span className="mono text-[var(--accent-text)]">→</span>
+                  {n}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Stack + experience */}
+      <section className="shell mt-16">
+        <SectionHead index={next()} title="Tools and experience" action={<Link href="/about" className="label link-underline hover:text-[var(--fg)]">More about me</Link>} />
+        <div className="grid gap-3 lg:grid-cols-2">
+          <Reveal className="card p-5">
+            <dl className="divide-y divide-[var(--line)]">
+              {stack.map((s) => (
+                <div key={s.group} className="grid gap-2 py-3 first:pt-0 last:pb-0 sm:grid-cols-[110px_1fr]">
+                  <dt className="label pt-1">{s.group}</dt>
+                  <dd className="flex flex-wrap gap-1.5">
+                    {s.items.map((it) => (
+                      <span key={it} className="rounded-md bg-[var(--surface-2)] px-2 py-1 text-[13px] transition-colors hover:bg-[var(--accent)] hover:text-black">
+                        {it}
+                      </span>
+                    ))}
+                  </dd>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* CV download */}
-          <div style={{ paddingTop: "24px", borderTop: "1px solid var(--border)" }}>
-            <a
-              href={profile.cvPath}
-              download
-              style={{
-                display: "block",
-                fontSize: "10px",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "var(--muted-foreground)",
-                textDecoration: "underline",
-                textUnderlineOffset: "4px",
-                fontFamily: "'Space Mono', monospace",
-                marginBottom: "10px",
-              }}
-            >
-              Download CV →
-            </a>
-            <p style={{
-              fontSize: "10px",
-              color: "var(--muted-foreground)",
-              fontFamily: "'Space Mono', monospace",
-              opacity: 0.5,
-            }}>
-              Updated Jun 2025
-            </p>
-          </div>
-
+            </dl>
+          </Reveal>
+          <Reveal delay={0.08} className="card p-5">
+            <ol className="relative space-y-5 border-l border-[var(--line)] pl-5">
+              {timeline.slice(0, 4).map((t, i) => (
+                <li key={t.title + t.org} className="relative">
+                  <span className={"absolute -left-[25px] top-1.5 size-2.5 rounded-full border-2 border-[var(--surface)] " + (i === 0 ? "bg-[var(--accent)]" : "bg-[var(--faint)]")} />
+                  <p className="mono text-xs text-[var(--muted)]">{t.period}</p>
+                  <p className="mt-0.5 font-medium">
+                    {t.title} <span className="text-[var(--muted)]">· {t.org}</span>
+                  </p>
+                  <p className="mt-0.5 text-sm text-[var(--muted)]">{t.note}</p>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
