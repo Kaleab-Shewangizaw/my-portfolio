@@ -3,7 +3,6 @@ import { ArrowUpRight, Download } from "lucide-react";
 import { now, projects, site, stack, timeline } from "@/content/site";
 import { getGitHub } from "@/lib/github";
 import { Terminal } from "@/components/Terminal";
-import { HeroLens } from "@/components/HeroLens";
 import { Architecture } from "@/components/Architecture";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Contributions } from "@/components/Contributions";
@@ -11,7 +10,7 @@ import { CountUp } from "@/components/CountUp";
 import { Reveal } from "@/components/Reveal";
 import { CopyEmail } from "@/components/CopyEmail";
 
-function Headline({ as: Tag }: { as: "h1" | "div" }) {
+function Headline({ as: Tag }: { as: "h1" }) {
   return (
     <Tag className="py-2 text-[clamp(2.5rem,5.2vw,4rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
       Hi, I&apos;m Kaleab.
@@ -53,9 +52,7 @@ export default async function Home() {
         <Reveal>
           <p className="label">~/kaleab · {site.role.toLowerCase()} · {site.city.toLowerCase()}</p>
           <div className="mt-4">
-            <HeroLens clone={<Headline as="div" />}>
-              <Headline as="h1" />
-            </HeroLens>
+            <Headline as="h1" />
           </div>
           <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-[var(--muted)]">{site.intro}</p>
           <div className="mt-7 flex flex-wrap items-center gap-2.5">
@@ -93,7 +90,7 @@ export default async function Home() {
         <div className="grid gap-3 lg:grid-cols-[1fr_1.35fr]">
           <Reveal className="card flex flex-col p-6">
             <p className="text-[17px] leading-relaxed">
-              Pazimo is a ticketing, invitation and RSVP platform for Ethiopia. I lead the engineering team, so I&apos;m responsible for the API, the web app and both mobile apps, and for keeping all of them in production.
+              Pazimo is a ticketing, invitation and RSVP platform for Ethiopia. I&apos;m the CTO. I lead the engineering team and own the API, the web app, both mobile apps, and the servers and deploys that keep them running.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-[var(--muted)]">
               {pazimo[0].highlights.map((h) => (
@@ -122,8 +119,8 @@ export default async function Home() {
 
       {/* Side projects */}
       <section className="shell mt-16">
-        <SectionHead index="02" title="Things I build for fun" action={<Link href="/work" className="label link-underline hover:text-[var(--fg)]">All projects</Link>} />
-        <div className="grid gap-3 md:grid-cols-3">
+        <SectionHead index="02" title="Things I build on the side" action={<Link href="/work" className="label link-underline hover:text-[var(--fg)]">All projects</Link>} />
+        <div className="grid gap-3 md:grid-cols-2">
           {others.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.08} className="h-full">
               <ProjectCard project={p} className="h-full" />

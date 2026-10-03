@@ -14,7 +14,7 @@ const facts = [
   ["Based in", site.location],
   ["Writing code since", String(site.startedCoding)],
   ["Currently", "CTO at Pazimo"],
-  ["Looking for", site.availability],
+  ["Focus", "Full stack, mobile & infra"],
 ];
 
 export default function AboutPage() {
@@ -55,7 +55,7 @@ export default function AboutPage() {
             </p>
             <p>
               Most of my work is full stack. I&apos;m comfortable designing a MongoDB schema in the morning, fixing a React Native
-              animation after lunch, and debugging an Nginx config at night. I care about the parts users never see: clear errors, fast
+              animation after lunch, and shipping a deploy at night. I care about the parts users never see: clear errors, fast
               loading and code the next person can read.
             </p>
             <p>
@@ -63,7 +63,8 @@ export default function AboutPage() {
               GDG. Teaching taught me that if I can&apos;t explain something simply, I don&apos;t really understand it yet.
             </p>
             <p className="text-[var(--fg)]">
-              I&apos;m looking for a team that ships often and cares about quality. If that sounds like yours, I&apos;d love to talk.
+              Outside of Pazimo I like going one layer deeper. Right now that means building my own NGINX in Rust, to understand
+              what really happens between a request coming in and a response going out.
             </p>
           </div>
           <a href={site.cv} target="_blank" rel="noopener" className="mt-8 inline-flex h-11 items-center gap-2 rounded-full bg-[var(--fg)] px-5 text-sm font-medium text-[var(--bg)]">

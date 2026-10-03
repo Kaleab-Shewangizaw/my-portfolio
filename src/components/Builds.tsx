@@ -46,7 +46,7 @@ export function Builds({ items }: { items: Build[] }) {
                     rel="noopener noreferrer"
                     className="mono inline-flex shrink-0 items-center gap-1 text-xs text-[var(--accent-text)] hover:underline"
                   >
-                    {new URL(b.href).hostname} <ArrowUpRight size={12} />
+                    {b.label ?? new URL(b.href).hostname} <ArrowUpRight size={12} />
                   </a>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{b.body}</p>

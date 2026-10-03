@@ -151,6 +151,7 @@ function CodeScreen({ project }: { project: Project }) {
   const lines: Record<string, string[]> = {
     "creator-workspace": ["const doc = await local.open(id)", "doc.cues.add({ at: 42, cue: 'pause' })", "await voice.preview(doc)", "await git.commit('draft 3')"],
     yoinker: ["chrome.action.onClicked(save)", "const job = await extract(page)", "// { role, company, salary }", "await board.add(job, 'saved')"],
+    "rust-proxy": ["let cfg = Config::load(\"proxy.conf\")?;", "let pool = Registry::from(&cfg.backends);", "// round-robin over healthy backends", "let up = pool.next().expect(\"no backend\");"],
     oweme: ["ledger.append({", "  from: 'abel', amount: 500,", "})", "balance('abel') // → -500 ETB"],
   };
   const code = lines[project.slug] ?? ["// todo"];

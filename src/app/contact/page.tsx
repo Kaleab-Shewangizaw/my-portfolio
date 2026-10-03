@@ -19,7 +19,7 @@ export default function ContactPage() {
           <p className="label">~/contact</p>
           <h1 className="mt-3 text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">Say hello</h1>
           <p className="mt-4 max-w-md text-[17px] leading-relaxed text-[var(--muted)]">
-            Hiring, starting a project, or just want to talk code? Send me a message. I read everything and usually reply within a day.
+            Questions about something I built, an interesting problem, or just want to talk code? Send me a message.
           </p>
           <CopyEmail className="mt-6 text-lg" />
           <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-[var(--line)] pt-6">
@@ -28,8 +28,8 @@ export default function ContactPage() {
               <dd className="mt-2 text-[15px]"><LocalTime /></dd>
             </div>
             <div>
-              <dt className="label">Status</dt>
-              <dd className="mt-2 text-[15px]">{site.availability}</dd>
+              <dt className="label">Currently</dt>
+              <dd className="mt-2 text-[15px]">{site.current}</dd>
             </div>
           </dl>
           <ul className="mt-8 border-t border-[var(--line)]">

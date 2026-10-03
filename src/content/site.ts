@@ -14,10 +14,9 @@ export const site = {
   github: "Kaleab-Shewangizaw",
   cv: "/kaleab-shewangizaw-cv.pdf",
   startedCoding: 2022,
-  available: true,
-  availability: "Open to full-time roles and freelance work",
+  current: "CTO at Pazimo",
   intro:
-    "I build web and mobile apps, and the backends that keep them running. Right now I lead engineering at Pazimo, where one API powers a ticketing website and two mobile apps.",
+    "I build web and mobile apps, the backends behind them and the servers they run on. I'm the CTO of Pazimo, a startup in Addis Ababa, where I lead engineering and own our infrastructure and deployments.",
   socials: [
     { label: "GitHub", href: "https://github.com/Kaleab-Shewangizaw", handle: "Kaleab-Shewangizaw" },
     { label: "LinkedIn", href: "https://linkedin.com/in/kal-x", handle: "in/kal-x" },
@@ -48,7 +47,7 @@ export const projects: Project[] = [
     year: "2025",
     platform: "web",
     kind: "Web platform",
-    role: "CTO · Full stack",
+    role: "CTO · Full stack & infrastructure",
     featured: true,
     summary:
       "Pazimo is an event ticketing, invitation and RSVP platform for Ethiopia. The web app covers the public site, customer accounts and the organizer and admin dashboards.",
@@ -58,7 +57,7 @@ export const projects: Project[] = [
       "Local payments through Chapa and SantimPay behind one checkout",
       "QR tickets, check-in and live sales over Socket.IO",
       "Organizer and admin dashboards, invitations and custom RSVP forms",
-      "Runs on an Ubuntu VPS with Nginx, PM2 and Let's Encrypt",
+      "I run deployment: Ubuntu servers, Nginx, PM2 and Let's Encrypt",
     ],
     story: [
       {
@@ -142,6 +141,33 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "rust-proxy",
+    name: "My own NGINX, in Rust",
+    year: "2026",
+    platform: "tool",
+    kind: "Systems · in progress",
+    role: "Solo",
+    summary:
+      "I'm learning Rust by writing a web server and reverse proxy from scratch, the kind of thing NGINX does. No frameworks, just the standard library and a lot of reading.",
+    stack: ["Rust", "std::net", "Threads", "TCP"],
+    links: { code: "https://github.com/Kaleab-Shewangizaw/RUST" },
+    highlights: [
+      "Parses its own config file: host, port, connection limits and backends",
+      "Backend registry with round-robin selection and health status",
+      "Structured request logging to file",
+    ],
+    story: [
+      {
+        heading: "Why",
+        body: "I configure NGINX for Pazimo all the time and wanted to understand what actually happens between a request arriving and a backend answering. Building one is the best way I know to learn both Rust and how web servers work.",
+      },
+      {
+        heading: "How it's going",
+        body: "Each step is a small crate: config parsing first, then the backend registry and round-robin picking, then logging. Next up is accepting real TCP connections and forwarding them upstream.",
+      },
+    ],
+  },
+  {
     slug: "creator-workspace",
     name: "Creator Workspace",
     year: "2026",
@@ -212,17 +238,17 @@ export const projects: Project[] = [
 ];
 
 export const stack = [
-  { group: "Languages", items: ["TypeScript", "JavaScript", "Dart", "C++", "Python", "SQL"] },
+  { group: "Languages", items: ["TypeScript", "JavaScript", "Rust", "Dart", "C++", "SQL"] },
   { group: "Frontend", items: ["React", "Next.js", "Tailwind", "Framer Motion"] },
   { group: "Mobile", items: ["React Native", "Expo", "Flutter", "Reanimated"] },
   { group: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Socket.IO", "REST"] },
-  { group: "Infra", items: ["Linux", "Nginx", "PM2", "Docker", "Vercel", "GitHub Actions"] },
+  { group: "Infra", items: ["Linux", "Nginx", "Docker", "PM2", "CI/CD", "GitHub Actions", "Vercel"] },
 ];
 
-export type Build = { name: string; client: string; href: string; body: string; stack: string[] };
+export type Build = { name: string; client: string; href: string; label?: string; body: string; stack: string[] };
 
 export const timeline: { period: string; title: string; org: string; note: string; builds?: Build[] }[] = [
-  { period: "2025 — now", title: "CTO", org: "Pazimo", note: "Leading engineering across the web app, two mobile apps and the API." },
+  { period: "2025 — now", title: "CTO", org: "Pazimo", note: "Pazimo is a ticketing startup in Addis Ababa. I lead engineering and own infrastructure and deployment for the web app, both mobile apps and the API." },
   {
     period: "2024 — 2025",
     title: "Full-stack Developer",
@@ -246,7 +272,8 @@ export const timeline: { period: string; title: string; org: string; note: strin
       {
         name: "GojoHost support bot",
         client: "GojoHost",
-        href: "https://gojo-tg-bot.vercel.app",
+        href: "https://t.me/Gojo_hostBot",
+        label: "@Gojo_hostBot",
         body: "A Telegram bot and Mini App that answers hosting questions, runs DNS checks, walks users through setup guides and hands off to an AI assistant. Sessions are stored in Redis.",
         stack: ["Node.js", "Telegram Bot API", "Next.js", "Redis", "LLM API"],
       },
@@ -258,7 +285,7 @@ export const timeline: { period: string; title: string; org: string; note: strin
 ];
 
 export const now = [
+  "Building my own NGINX from scratch in Rust",
   "Shipping Pazimo's new mobile apps",
-  "Learning Rust, one small project at a time",
-  "Writing more tests than I used to",
+  "Running Pazimo's servers and deploys",
 ];

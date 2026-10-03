@@ -8,6 +8,7 @@ export const SECRETS = [
   { id: "sudo", title: "Root access", hint: "Try to get superuser powers." },
   { id: "logo", title: "Dizzy", hint: "The logo doesn't like being clicked. Five times." },
   { id: "konami", title: "Old school", hint: "↑ ↑ ↓ ↓ ← → ← → B A" },
+  { id: "bubble", title: "Pop!", hint: "That floating bubble looks fragile." },
   { id: "palette", title: "Power user", hint: "Every good tool has a ⌘K." },
   { id: "theme", title: "Lights", hint: "Flip the lights." },
   { id: "explorer", title: "Explorer", hint: "Visit every page." },

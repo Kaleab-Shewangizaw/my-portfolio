@@ -193,32 +193,27 @@ body {
 .scanline { animation: scan 2.2s ease-in-out infinite alternate; top: 4px; }
 @keyframes scan { to { top: calc(100% - 6px); } }
 
-/* ---------- Hero bubble ----------
-   A liquid-glass lens that drifts over the headline and magnifies it.
-   Rim light and a faint chromatic edge, all done with flat shadows. */
-.lens {
-  -webkit-backdrop-filter: blur(6px) saturate(150%);
-  backdrop-filter: blur(6px) saturate(150%);
-  background: rgb(0 0 0 / 0.04);
-  box-shadow: var(--glass-shadow);
-}
-.dark .lens { background: rgb(255 255 255 / 0.03); }
-.lens-rim {
+/* ---------- Floating bubble ----------
+   Rim light and a faint chromatic edge, all flat shadows. */
+.bubble { will-change: transform; }
+.bubble-rim {
   box-shadow:
     inset 0 0 0 1px var(--glass-rim-low),
     inset 0 2px 0 -0.5px var(--glass-rim),
-    inset 0 -2px 0 -0.5px rgb(217 126 58 / 0.45),
-    inset 5px 0 10px -8px rgb(217 126 58 / 0.6),
-    inset -5px 0 10px -8px rgb(120 160 255 / 0.45);
+    inset 0 -2px 0 -0.5px rgb(217 126 58 / 0.5),
+    inset 6px 0 12px -9px rgb(217 126 58 / 0.7),
+    inset -6px 0 12px -9px rgb(120 160 255 / 0.55),
+    0 14px 30px -14px rgb(0 0 0 / 0.45);
 }
-.lens-glint {
+.bubble-glint {
   position: absolute;
-  top: 14%;
-  left: 22%;
+  top: 15%;
+  left: 23%;
   width: 26%;
-  height: 12%;
+  height: 11%;
   border-radius: 9999px;
-  background: rgb(255 255 255 / 0.55);
-  filter: blur(3px);
-  transform: rotate(-28deg);
+  background: rgb(255 255 255 / 0.6);
+  filter: blur(2.5px);
+  transform: rotate(-30deg);
+  pointer-events: none;
 }

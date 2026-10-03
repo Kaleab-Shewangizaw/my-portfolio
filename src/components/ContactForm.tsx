@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { site } from "@/content/site";
 
-const topics = ["Full-time role", "Contract", "Collaboration", "Just saying hi"];
+const topics = ["A project", "Collaboration", "A question", "Just saying hi"];
 
 export function ContactForm() {
   const [topic, setTopic] = useState(topics[0]);

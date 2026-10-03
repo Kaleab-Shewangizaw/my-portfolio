@@ -148,6 +148,7 @@ export function Terminal() {
           `Location: ${site.city}`,
           `Uptime:   ${years} years writing code`,
           `Shell:    zsh + way too many aliases`,
+          `Learning: Rust (writing my own NGINX)`,
           `Editor:   VS Code (vim keys)`,
           `Stack:    TypeScript, React, Node, Expo`,
         ];
@@ -157,11 +158,8 @@ export function Terminal() {
       }
       case "sudo":
         unlock("sudo");
-        if (/hire/.test(arg)) {
-          setTimeout(() => router.push("/contact"), 900);
-          return out({ kind: "accent", text: "Permission granted. Sending you to the contact page…" });
-        }
-        return out("kaleab is not in the sudoers file. This incident will be reported.", { kind: "muted", text: "(Maybe try 'sudo hire kaleab'.)" });
+        if (/sandwich/.test(arg)) return out({ kind: "accent", text: "Okay." });
+        return out("kaleab is not in the sudoers file. This incident will be reported.", { kind: "muted", text: "(Even root can't do everything. It can make a sandwich, though.)" });
       case "rm":
         return out("Not today. This site has no undo button.");
       case "date":

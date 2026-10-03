@@ -6,7 +6,6 @@ import { site } from "@/content/site";
 import { unlock } from "@/lib/secrets";
 import { LocalTime } from "./LocalTime";
 import { Logo } from "./Logo";
-import { toast } from "./Toaster";
 
 export function TopBar() {
   const [spin, setSpin] = useState(0);
@@ -36,18 +35,15 @@ export function TopBar() {
         </Link>
         <div className="flex items-center gap-4 text-[13px]">
           <LocalTime className="mono hidden text-xs text-[var(--muted)] sm:inline" />
-          {site.available && (
-            <button
-              onClick={() => toast("Yes, really available", site.availability + ". Say hi on the contact page.")}
-              className="flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-1.5 text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
-            >
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-[var(--accent)] opacity-60" />
-                <span className="relative inline-flex size-2 rounded-full bg-[var(--accent)]" />
-              </span>
-              Available for work
-            </button>
-          )}
+          <a
+            href="https://pazimo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-1.5 text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
+          >
+            <span className="size-2 rounded-full bg-[var(--accent)]" />
+            {site.current}
+          </a>
         </div>
       </div>
     </header>

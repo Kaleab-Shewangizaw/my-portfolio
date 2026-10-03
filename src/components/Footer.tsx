@@ -9,9 +9,9 @@ export function Footer() {
     <footer className="shell mt-16 pb-28">
       <div className="card grid gap-8 p-6 sm:p-10 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
-          <p className="label">Got a project or a role in mind?</p>
+          <p className="label">~/contact</p>
           <h2 className="mt-3 text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
-            Let&apos;s talk. I reply within a day.
+            Always happy to talk about software.
           </h2>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link href="/contact" className="inline-flex h-11 items-center gap-2 rounded-full bg-[var(--fg)] px-5 text-sm font-medium text-[var(--bg)]">
