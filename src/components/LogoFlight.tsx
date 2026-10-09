@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Logo } from "./Logo";
+import { world } from "@/lib/bubbles";
 
 const SIZE = 30;
 const SCALE = 2.2; // how big it gets while loose
@@ -12,8 +13,9 @@ const RETURN_MS = 3000;
 const LINES = ["okay… okay, I'm coming", "who put walls everywhere?", "I can taste colours", "never. again.", "worth it.", "is the room still spinning?", "my blades are in the wrong order", "I'm fine. totally fine."];
 const BIG_LINES = (n: number) => [`${n} clicks?! really?`, "I think I saw my code compile", "I left a blade somewhere back there", `${n} clicks. I'm telling HR.`];
 const BONKS = ["bonk", "ow", "oof", "wheee", "boing"];
+const POPS = ["pop!", "pop!", "plip", "splash", "gotcha"];
 
-type Impact = { id: number; x: number; y: number; word?: string; side: "x" | "y" };
+type Impact = { id: number; x: number; y: number; word?: string; side: "x" | "y" | "bubble"; r?: number };
 
 function pick<T>(arr: T[], n: number) {
   return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
@@ -63,6 +65,8 @@ export function LogoFlight({ from, charge, spin, onDone }: { from: DOMRect; char
     let back: { x: number; y: number; rot: number; t: number } | null = null;
 
     const paint = (x: number, y: number, rot: number, scale: number, squash = 1) => {
+      // Tell the bubbles where we are, so we burst any we fly through.
+      world.logo = { x: x + SIZE / 2, y: y + SIZE / 2, r: (SIZE * scale) / 2 };
       if (outer.current) outer.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       if (inner.current) inner.current.style.transform = `rotate(${rot}deg) scale(${scale * squash}, ${scale / squash})`;
     };
@@ -75,6 +79,16 @@ export function LogoFlight({ from, charge, spin, onDone }: { from: DOMRect; char
       const word = v > 1600 && Math.random() < 0.35 ? BONKS[Math.floor(Math.random() * BONKS.length)] : undefined;
       setImpacts((list) => [...list.slice(-6), { id, x, y, word, side }]);
       setTimeout(() => setImpacts((list) => list.filter((i) => i.id !== id)), 700);
+    };
+
+    // Bursting a bubble costs a little momentum and adds a little spin.
+    world.onLogoHit = (b) => {
+      const id = ++impactId;
+      setImpacts((list) => [...list.slice(-6), { id, x: b.x, y: b.y, word: POPS[Math.floor(Math.random() * POPS.length)], side: "bubble", r: b.r }]);
+      setTimeout(() => setImpacts((list) => list.filter((i) => i.id !== id)), 700);
+      s.vx *= 0.93;
+      s.vy *= 0.93;
+      s.vr *= 1.12;
     };
 
     const loop = (t: number) => {
@@ -150,13 +164,18 @@ export function LogoFlight({ from, charge, spin, onDone }: { from: DOMRect; char
         paint(x, y, rot, SCALE - (SCALE - 1) * e);
       } else {
         paint(home.x, home.y, 0, 1);
+        world.logo = null;
         setPhase("tired");
         return;
       }
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      world.logo = null;
+      world.onLogoHit = null;
+    };
   }, [from, charge, spin]);
 
   // Mutter a line or two on the way home.
@@ -196,19 +215,25 @@ export function LogoFlight({ from, charge, spin, onDone }: { from: DOMRect; char
       {/* Impact rings where it hits an edge */}
       {impacts.map((i) => (
         <div key={i.id} className="pointer-events-none fixed z-[94]" style={{ left: i.x, top: i.y }} aria-hidden>
-          <motion.span
-            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[var(--accent)]"
-            initial={{ width: 8, height: 8, opacity: 0.9 }}
-            animate={{ width: 70, height: 70, opacity: 0 }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-          />
+          {i.side !== "bubble" && (
+            <motion.span
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[var(--accent)]"
+              initial={{ width: 8, height: 8, opacity: 0.9 }}
+              animate={{ width: 70, height: 70, opacity: 0 }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+            />
+          )}
           {i.word && (
             <motion.span
               className="mono absolute whitespace-nowrap text-xs font-semibold text-[var(--accent-text)]"
-              style={{
-                left: i.side === "x" ? (i.x < 50 ? 14 : -50) : -14,
-                top: i.side === "y" ? (i.y < 50 ? 12 : -28) : -8,
-              }}
+              style={
+                i.side === "bubble"
+                  ? { left: -16, top: -(i.r ?? 20) - 18 }
+                  : {
+                      left: i.side === "x" ? (i.x < 50 ? 14 : -50) : -14,
+                      top: i.side === "y" ? (i.y < 50 ? 12 : -28) : -8,
+                    }
+              }
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: [0, 1, 0], scale: [0.6, 1.1, 1], y: -10 }}
               transition={{ duration: 0.7 }}

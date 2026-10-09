@@ -9,6 +9,7 @@ import { site, type ProjectLink } from "@/content/site";
 import { LiquidGlass } from "./LiquidGlass";
 import { SECRETS, unlock, useSecrets } from "@/lib/secrets";
 import { openReward } from "./Reward";
+import { setGun, useBubbleWorld, world } from "@/lib/bubbles";
 
 type Item = { group: string; label: string; hint?: string; run: () => void };
 
@@ -19,6 +20,8 @@ export function CommandPalette({ projects, open, onClose }: { projects: ProjectL
   const [index, setIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const found = useSecrets();
+  useBubbleWorld();
+  const gun = world.gun;
 
   const items = useMemo<Item[]>(() => {
     const go = (href: string) => () => router.push(href);
@@ -38,6 +41,9 @@ export function CommandPalette({ projects, open, onClose }: { projects: ProjectL
         run: () => navigator.clipboard?.writeText(site.email),
       },
       { group: "Actions", label: "Download CV", hint: "PDF", run: ext(site.cv) },
+      gun
+        ? { group: "Actions", label: "Put the bubble gun away", hint: "Esc", run: () => setGun(false) }
+        : { group: "Actions", label: "Bubble gun", hint: "tap to shoot, hold to blow", run: () => setGun(true) },
       {
         group: "Actions",
         label: `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`,
@@ -57,7 +63,7 @@ export function CommandPalette({ projects, open, onClose }: { projects: ProjectL
         run: () => {},
       })),
     ];
-  }, [router, resolvedTheme, setTheme, found, projects]);
+  }, [router, resolvedTheme, setTheme, found, projects, gun]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

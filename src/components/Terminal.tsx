@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { now, site, stack, type ProjectLink } from "@/content/site";
 import { SECRETS, unlock, visitCount } from "@/lib/secrets";
 import { LiquidGlass } from "./LiquidGlass";
+import { setGun } from "@/lib/bubbles";
 
 type Line = { kind: "in" | "out" | "accent" | "muted"; text: string };
 
@@ -90,6 +91,7 @@ export function Terminal({ projects }: { projects: ProjectLink[] }) {
           "  email        copy my email address",
           "  cv           download my résumé",
           "  theme        switch light / dark",
+          "  bubbles      arm the bubble gun",
           "  secrets      how many have you found?",
           "  clear        clean the screen",
           { kind: "muted", text: "There are a few more. Old habits." },
@@ -116,6 +118,10 @@ export function Terminal({ projects }: { projects: ProjectLink[] }) {
       case "email":
         navigator.clipboard?.writeText(site.email);
         return out(`Copied ${site.email} to your clipboard.`);
+      case "bubbles":
+      case "bubble":
+        setGun(true);
+        return out("Bubble gun armed. Tap anywhere to shoot, hold to blow a big one, flick to throw.", { kind: "muted", text: "Esc puts it away. Now go click the logo five times." });
       case "cv":
       case "resume":
         window.open(site.cv, "_blank", "noopener");
@@ -226,7 +232,7 @@ export function Terminal({ projects }: { projects: ProjectLink[] }) {
       }
     } else if (e.key === "Tab") {
       e.preventDefault();
-      const all = ["help", "about", "projects", "open ", "stack", "contact", "email", "cv", "theme", "secrets", "clear", "neofetch", "cargo run"];
+      const all = ["help", "about", "projects", "open ", "stack", "contact", "email", "cv", "theme", "bubbles", "secrets", "clear", "neofetch", "cargo run"];
       const match = all.find((c) => c.startsWith(input));
       if (match && input) setInput(match);
     } else if (e.key === "l" && e.ctrlKey) {

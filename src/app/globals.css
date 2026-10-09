@@ -207,3 +207,62 @@ body {
   transform: rotate(-30deg);
   pointer-events: none;
 }
+.bubble-glint-2 {
+  position: absolute;
+  bottom: 16%;
+  right: 20%;
+  width: 9%;
+  height: 9%;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.45);
+  filter: blur(1.5px);
+  pointer-events: none;
+}
+
+/* Soap film: a slowly turning band of thin-film colours, strongest at the rim. */
+.bubble-film {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: conic-gradient(from 0deg, #ff8fc8, #ffd27a, #8fffd0, #8cc4ff, #c79bff, #ff8fc8);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 62%, #000 84%, #000 94%, transparent 100%);
+  mask: radial-gradient(circle closest-side, transparent 62%, #000 84%, #000 94%, transparent 100%);
+  opacity: 0.38;
+  filter: blur(1.5px);
+  animation: bubble-film 9s linear infinite;
+}
+.dark .bubble-film {
+  opacity: 0.5;
+}
+@keyframes bubble-film {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* New bubbles pop into existence with a little overshoot. */
+.bubble-in {
+  animation: bubble-in 0.55s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+@keyframes bubble-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.bubble-burst-ring {
+  border: 1.5px solid transparent;
+  background: conic-gradient(from 0deg, #ff8fc8, #ffd27a, #8fffd0, #8cc4ff, #c79bff, #ff8fc8) border-box;
+  -webkit-mask: linear-gradient(#000 0 0) padding-box exclude, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) padding-box exclude, linear-gradient(#000 0 0);
+}
+
+/* The wand ring of the bubble gun. */
+.bubble-wand {
+  background: conic-gradient(from 0deg, #ff8fc8, #ffd27a, #8fffd0, #8cc4ff, #c79bff, #ff8fc8);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 68%, #000 72%);
+  mask: radial-gradient(circle closest-side, transparent 68%, #000 72%);
+  animation: bubble-film 4s linear infinite;
+}

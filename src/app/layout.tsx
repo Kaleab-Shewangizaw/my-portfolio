@@ -5,7 +5,7 @@ import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/Toaster";
 import { Discoveries } from "@/components/Discoveries";
-import { Bubble } from "@/components/Bubble";
+import { Bubbles } from "@/components/Bubbles";
 import { Reward } from "@/components/Reward";
 import { TopBar } from "@/components/TopBar";
 import { Dock } from "@/components/Dock";
@@ -76,7 +76,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Dock projects={projects} />
           <Toaster />
           <Discoveries />
-          <Bubble />
+          <Bubbles />
           <Reward />
         </ThemeProvider>
       </body>

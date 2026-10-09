@@ -9,7 +9,19 @@ import { useEffect, useState } from "react";
 import { LiquidGlass } from "./LiquidGlass";
 import { CommandPalette } from "./CommandPalette";
 import { unlock } from "@/lib/secrets";
+import { setGun, useBubbleWorld, world } from "@/lib/bubbles";
 import type { ProjectLink } from "@/content/site";
+
+function BubblesIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+      <circle cx="6" cy="9.5" r="4.25" />
+      <circle cx="12.25" cy="4.5" r="2.5" />
+      <circle cx="12.5" cy="12.25" r="1.25" />
+      <path d="M4 8.2a2.2 2.2 0 0 1 1.6-1.4" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 export const nav = [
   { href: "/", label: "Home" },
@@ -23,6 +35,7 @@ export function Dock({ projects }: { projects: ProjectLink[] }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  useBubbleWorld();
 
   useEffect(() => setMounted(true), []);
   useEffect(() => {
@@ -73,6 +86,18 @@ export function Dock({ projects }: { projects: ProjectLink[] }) {
             </Link>
           ))}
           <span className="mx-1 h-5 w-px bg-[var(--line)]" aria-hidden />
+          <button
+            onClick={() => setGun(!world.gun)}
+            className={
+              "hidden size-9 place-items-center rounded-full transition-colors sm:grid " +
+              (world.gun ? "bg-[var(--fg)] text-[var(--bg)]" : "text-[var(--muted)] hover:text-[var(--fg)]")
+            }
+            aria-label={world.gun ? "Put the bubble gun away" : "Bubble gun"}
+            aria-pressed={world.gun}
+            title={world.gun ? "Put the bubble gun away (Esc)" : "Bubble gun"}
+          >
+            <BubblesIcon />
+          </button>
           <button
             onClick={() => setPaletteOpen(true)}
             className="grid size-9 place-items-center rounded-full text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
