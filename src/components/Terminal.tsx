@@ -43,8 +43,6 @@ export function Terminal() {
   useEffect(() => {
     const visits = visitCount();
     if (visits >= 3) unlock("regular");
-    const h = new Date().getHours();
-    if (h < 5) unlock("night");
 
     const script: Line[] = [
       { kind: "muted", text: visits > 1 ? `Welcome back. This is visit #${visits}.` : `Last login: ${new Date().toDateString()} on ttys001` },
