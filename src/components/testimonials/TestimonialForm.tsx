@@ -104,7 +104,7 @@ export function TestimonialForm({ defaults }: { defaults?: { company?: string; p
   }
 
   return (
-    <div className="grid gap-3 lg:grid-cols-[1.15fr_1fr] lg:items-start">
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1.15fr_1fr] lg:items-start">
       <form onSubmit={submit} className="card space-y-6 p-6 sm:p-8">
         {/* Photo */}
         <div className="flex items-center gap-4">
@@ -146,10 +146,10 @@ export function TestimonialForm({ defaults }: { defaults?: { company?: string; p
           <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <label className="block sm:col-span-2">
             <span className="label mb-2 block">Name *</span>
-            <input required value={f.name} onChange={(e) => set("name", e.target.value)} className={field} placeholder="Abebe Kebede" autoComplete="name" maxLength={80} />
+            <input required value={f.name} onChange={(e) => set("name", e.target.value)} className={field} placeholder="Your name" autoComplete="name" maxLength={80} />
           </label>
           <label className="block">
             <span className="label mb-2 block">Your role</span>
@@ -157,7 +157,7 @@ export function TestimonialForm({ defaults }: { defaults?: { company?: string; p
           </label>
           <label className="block">
             <span className="label mb-2 block">Company</span>
-            <input value={f.company} onChange={(e) => set("company", e.target.value)} className={field} placeholder="Acme PLC" autoComplete="organization" maxLength={80} />
+            <input value={f.company} onChange={(e) => set("company", e.target.value)} className={field} placeholder="Company name" autoComplete="organization" maxLength={80} />
           </label>
         </div>
 
@@ -183,7 +183,7 @@ export function TestimonialForm({ defaults }: { defaults?: { company?: string; p
 
         <label className="block">
           <span className="label mb-2 block">What did we work on?</span>
-          <input value={f.project} onChange={(e) => set("project", e.target.value)} className={field} placeholder="e.g. Proforma system" maxLength={80} />
+          <input value={f.project} onChange={(e) => set("project", e.target.value)} className={field} placeholder="project name" maxLength={80} />
         </label>
 
         <div>

@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, Copy, Loader2, LogOut, RotateCcw, Trash2, X } from "lucide-react";
+import { Check, Copy, Image as ImageIcon, Loader2, LogOut, RotateCcw, Trash2, X } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Status, Testimonial } from "@/lib/testimonials";
@@ -30,7 +31,7 @@ export function AdminLogin() {
       <form onSubmit={submit} className="card w-full max-w-sm p-8">
         <Logo size={40} intro />
         <h1 className="mt-5 text-2xl font-semibold tracking-tight">Admin</h1>
-        <p className="mt-1 text-sm text-[var(--muted)]">Review testimonials before they go live.</p>
+        <p className="mt-1 text-sm text-[var(--muted)]">Testimonials and project images.</p>
         <input
           type="password"
           value={pw}
@@ -70,7 +71,7 @@ function Checkbox({ checked, onChange, label }: { checked: boolean; onChange: ()
       onClick={onChange}
       className={
         "grid size-6 shrink-0 place-items-center rounded-md border transition-colors " +
-        (checked ? "border-[var(--accent)] bg-[var(--accent)] text-black" : "border-[var(--line)] bg-[var(--surface)] hover:border-[var(--faint)]")
+        (checked ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--on-accent)]" : "border-[var(--line)] bg-[var(--surface)] hover:border-[var(--faint)]")
       }
     >
       {checked && <Check size={14} strokeWidth={3} />}
@@ -157,6 +158,9 @@ export function AdminDashboard({ items: initial, champions: initialChampions }: 
           <h1 className="mt-3 text-[clamp(2rem,4.5vw,3rem)] font-semibold leading-[1] tracking-[-0.04em]">Testimonials</h1>
         </div>
         <div className="flex flex-wrap gap-2">
+          <Link href="/admin/projects" className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--line)] px-4 text-sm text-[var(--muted)] hover:text-[var(--fg)]">
+            <ImageIcon size={15} /> Project images
+          </Link>
           <button onClick={copyInvite} className="inline-flex h-10 items-center gap-2 rounded-full bg-[var(--fg)] px-4 text-sm font-medium text-[var(--bg)]">
             {copied ? <Check size={15} /> : <Copy size={15} />} {copied ? "Copied" : "Copy invite link"}
           </button>
@@ -227,7 +231,7 @@ export function AdminDashboard({ items: initial, champions: initialChampions }: 
             <div className="flex flex-wrap items-center gap-1.5">
               {busy === "bulk" && <Loader2 size={16} className="mr-1 animate-spin text-[var(--muted)]" />}
               {tab !== "approved" && (
-                <button disabled={!selected.size || !!busy} onClick={() => bulk("approve", ids)} className="inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--accent)] px-3.5 text-sm font-medium text-black disabled:opacity-40">
+                <button disabled={!selected.size || !!busy} onClick={() => bulk("approve", ids)} className="inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--accent)] px-3.5 text-sm font-medium text-[var(--on-accent)] disabled:opacity-40">
                   <Check size={14} /> Approve
                 </button>
               )}
@@ -247,7 +251,7 @@ export function AdminDashboard({ items: initial, champions: initialChampions }: 
             </div>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence mode="popLayout">
               {shown.map((t) => {
                 const on = selected.has(t.id);
@@ -264,7 +268,7 @@ export function AdminDashboard({ items: initial, champions: initialChampions }: 
                       <span className="mono text-xs text-[var(--muted)]">{new Date(t.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                       <div className="flex gap-1.5">
                         {t.status !== "approved" && (
-                          <button onClick={() => bulk("approve", [t.id])} disabled={!!busy} className="inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--accent)] px-3.5 text-sm font-medium text-black disabled:opacity-50">
+                          <button onClick={() => bulk("approve", [t.id])} disabled={!!busy} className="inline-flex h-9 items-center gap-1.5 rounded-full bg-[var(--accent)] px-3.5 text-sm font-medium text-[var(--on-accent)] disabled:opacity-50">
                             <Check size={14} /> Approve
                           </button>
                         )}

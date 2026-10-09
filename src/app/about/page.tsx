@@ -4,6 +4,7 @@ import { Download } from "lucide-react";
 import { site, stack, timeline } from "@/content/site";
 import { Reveal } from "@/components/Reveal";
 import { Builds } from "@/components/Builds";
+import { ToolChip } from "@/components/ToolChip";
 
 export const metadata: Metadata = {
   title: "About",
@@ -20,7 +21,7 @@ const facts = [
 export default function AboutPage() {
   return (
     <section className="shell pt-24 lg:pt-28">
-      <div className="grid gap-3 lg:grid-cols-[340px_1fr]">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-[340px_1fr]">
         <Reveal className="card overflow-hidden p-2">
           <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--surface-2)]">
             <Image
@@ -73,13 +74,13 @@ export default function AboutPage() {
         </Reveal>
       </div>
 
-      <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_1fr]">
+      <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-[1fr_1fr]">
         <Reveal className="card p-6">
           <p className="label">Experience & education</p>
           <ol className="mt-5 space-y-5 border-l border-[var(--line)] pl-5">
             {timeline.map((t, i) => (
               <li key={t.title + t.org} className="relative">
-                <span className={"absolute -left-[25px] top-1.5 size-2.5 rounded-full border-2 border-[var(--surface)] " + (i === 0 ? "bg-[var(--accent)]" : "bg-[var(--faint)]")} />
+                <span className={"absolute -left-[25px] top-1.5 size-2.5 rounded-full border-2 border-[var(--surface)] " + (i === 0 ? "bg-[var(--fg)]" : "bg-[var(--faint)]")} />
                 <p className="mono text-xs text-[var(--muted)]">{t.period}</p>
                 <p className="mt-0.5 font-medium">
                   {t.title} <span className="text-[var(--muted)]">· {t.org}</span>
@@ -94,13 +95,11 @@ export default function AboutPage() {
           <p className="label">What I work with</p>
           <dl className="mt-5 divide-y divide-[var(--line)]">
             {stack.map((s) => (
-              <div key={s.group} className="grid gap-2 py-3 first:pt-0 sm:grid-cols-[100px_1fr]">
+              <div key={s.group} className="grid grid-cols-1 gap-2 py-3 first:pt-0 sm:grid-cols-[100px_1fr]">
                 <dt className="label pt-1">{s.group}</dt>
                 <dd className="flex flex-wrap gap-1.5">
                   {s.items.map((it) => (
-                    <span key={it} className="rounded-md bg-[var(--surface-2)] px-2 py-1 text-[13px]">
-                      {it}
-                    </span>
+                    <ToolChip key={it} name={it} />
                   ))}
                 </dd>
               </div>

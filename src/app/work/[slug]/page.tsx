@@ -3,9 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects } from "@/content/site";
-import { Mockup } from "@/components/Mockup";
+import { ProjectCover } from "@/components/ProjectCover";
+import { getProjectImages } from "@/lib/projectImages";
 import { Architecture } from "@/components/Architecture";
 import { Reveal } from "@/components/Reveal";
+
+export const revalidate = 3600;
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -29,6 +32,7 @@ export default async function CaseStudy({ params }: Params) {
   const p = projects[i];
   const next = projects[(i + 1) % projects.length];
   const focus = archFocus[p.slug];
+  const image = (await getProjectImages())[p.slug];
 
   return (
     <article className="shell pt-24 lg:pt-28">
@@ -36,7 +40,7 @@ export default async function CaseStudy({ params }: Params) {
         <ArrowLeft size={13} /> All work
       </Link>
 
-      <div className="mt-5 grid gap-3 lg:grid-cols-[1fr_1.1fr]">
+      <div className="mt-5 grid grid-cols-1 gap-3 lg:grid-cols-[1fr_1.1fr]">
         <Reveal className="card flex flex-col p-6 sm:p-8">
           <p className="label">
             {p.kind} · {p.year}
@@ -67,17 +71,17 @@ export default async function CaseStudy({ params }: Params) {
           </div>
         </Reveal>
         <Reveal delay={0.1} className="card p-2">
-          <Mockup project={p} className="h-full min-h-[380px]" />
+          <ProjectCover project={p} image={image} className="h-full min-h-[280px] sm:min-h-[380px]" />
         </Reveal>
       </div>
 
-      <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_1.1fr]">
+      <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-[1fr_1.1fr]">
         <Reveal className="card p-6">
           <p className="label">Highlights</p>
           <ul className="mt-4 space-y-3">
             {p.highlights.map((h) => (
               <li key={h} className="flex gap-3 text-[15px]">
-                <span className="mt-[8px] size-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                <span className="mt-[8px] size-1.5 shrink-0 rounded-full bg-[var(--faint)]" />
                 {h}
               </li>
             ))}
@@ -104,10 +108,10 @@ export default async function CaseStudy({ params }: Params) {
         )}
       </div>
 
-      <div className="mt-3 grid gap-3 md:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3">
         {p.story.map((s, n) => (
           <Reveal key={s.heading} delay={n * 0.08} className="card p-6">
-            <p className="mono text-sm text-[var(--accent-text)]">0{n + 1}</p>
+            <p className="mono text-sm text-[var(--faint)]">0{n + 1}</p>
             <h2 className="mt-2 text-lg font-semibold tracking-tight">{s.heading}</h2>
             <p className="mt-3 text-[15px] leading-relaxed text-[var(--muted)]">{s.body}</p>
           </Reveal>
@@ -119,7 +123,7 @@ export default async function CaseStudy({ params }: Params) {
           <span className="label">Next project</span>
           <span className="mt-1 block text-2xl font-semibold tracking-tight">{next.name}</span>
         </span>
-        <span className="grid size-12 place-items-center rounded-full bg-[var(--surface-2)] transition-colors group-hover:bg-[var(--accent)] group-hover:text-black">
+        <span className="grid size-12 place-items-center rounded-full bg-[var(--surface-2)] transition-colors group-hover:bg-[var(--fg)] group-hover:text-[var(--bg)]">
           <ArrowRight size={18} />
         </span>
       </Link>

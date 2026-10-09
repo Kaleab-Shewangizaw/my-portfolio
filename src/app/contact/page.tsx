@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <section className="shell pt-24 lg:pt-28">
-      <div className="grid gap-3 lg:grid-cols-[1fr_1fr] lg:items-start">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1fr_1fr] lg:items-start">
         <Reveal className="card p-6 sm:p-8">
           <p className="label">~/contact</p>
           <h1 className="mt-3 text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">Say hello</h1>

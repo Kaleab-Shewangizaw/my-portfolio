@@ -129,7 +129,7 @@ export function Reward() {
                     <textarea value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="Which secret was the hardest? (optional)" rows={2} className={field + " resize-none"} maxLength={500} />
                     <input tabIndex={-1} aria-hidden className="hidden" value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} />
                     {error && <p className="text-sm text-[var(--accent-text)]">{error}</p>}
-                    <button disabled={state === "sending"} className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] text-sm font-semibold text-black disabled:opacity-60">
+                    <button disabled={state === "sending"} className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] text-sm font-semibold text-[var(--on-accent)] disabled:opacity-60">
                       {state === "sending" && <Loader2 size={15} className="animate-spin" />} Claim my reward
                     </button>
                   </form>

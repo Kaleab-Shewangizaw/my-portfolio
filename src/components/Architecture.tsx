@@ -57,18 +57,12 @@ export function Architecture({ focus }: { focus?: string }) {
   return (
     <div>
       <svg viewBox="0 0 640 400" className="w-full select-none" role="img" aria-label="Pazimo architecture: three clients share one REST API, which talks to MongoDB, payment gateways, real-time sockets and media and messaging services.">
-        {edges.map(([a, b], i) => {
+        {edges.map(([a, b]) => {
           const d = edgePath(byId[a], byId[b]);
           const on = edgeLit(a, b);
           return (
             <g key={a + b} style={{ opacity: on ? 1 : 0.15, transition: "opacity .3s" }}>
-              <path id={`e-${a}-${b}`} d={d} fill="none" stroke="var(--line)" strokeWidth={1.5} />
-              <path d={d} fill="none" stroke={active && on ? "var(--accent)" : "var(--faint)"} strokeWidth={1.5} className="flow" />
-              <circle r={3.5} fill="var(--accent)">
-                <animateMotion dur={`${2.2 + (i % 3) * 0.5}s`} repeatCount="indefinite" begin={`${i * 0.3}s`}>
-                  <mpath href={`#e-${a}-${b}`} />
-                </animateMotion>
-              </circle>
+              <path d={d} fill="none" stroke={active && on ? "var(--fg)" : "var(--faint)"} strokeWidth={1.5} />
             </g>
           );
         })}
@@ -97,10 +91,10 @@ export function Architecture({ focus }: { focus?: string }) {
                 stroke={isActive ? "var(--accent)" : "var(--line)"}
                 style={{ transition: "fill .25s" }}
               />
-              <text x={n.x} y={n.y - 3} textAnchor="middle" fontSize={16} fontWeight={600} fill={isActive ? "#000" : "var(--fg)"}>
+              <text x={n.x} y={n.y - 3} textAnchor="middle" fontSize={16} fontWeight={600} fill={isActive ? "var(--on-accent)" : "var(--fg)"}>
                 {n.label}
               </text>
-              <text x={n.x} y={n.y + 16} textAnchor="middle" fontSize={12} className="mono" fill={isActive ? "#000" : "var(--muted)"}>
+              <text x={n.x} y={n.y + 16} textAnchor="middle" fontSize={12} className="mono" fill={isActive ? "var(--on-accent)" : "var(--muted)"}>
                 {n.sub}
               </text>
             </g>
@@ -123,7 +117,7 @@ export function Architecture({ focus }: { focus?: string }) {
                 {shown.detail}
               </>
             ) : (
-              "Hover or tap a box to see what it does. The dots are requests moving through the system."
+              "Tap or hover over a box to see what it does."
             )}
           </motion.p>
         </AnimatePresence>

@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 export function Footer() {
   return (
     <footer className="shell mt-16 pb-28">
-      <div className="card grid gap-8 p-6 sm:p-10 md:grid-cols-[1.4fr_1fr] md:items-end">
+      <div className="card grid grid-cols-1 gap-8 p-6 sm:p-10 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
           <p className="label">~/contact</p>
           <h2 className="mt-3 text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">

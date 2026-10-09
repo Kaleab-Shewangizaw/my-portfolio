@@ -1,15 +1,22 @@
 "use client";
 
 import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Day } from "@/lib/github";
 
-const shade = ["var(--surface-2)", "rgb(217 126 58 / .3)", "rgb(217 126 58 / .55)", "rgb(217 126 58 / .8)", "rgb(217 126 58)"];
+const mix = (n: number) => `color-mix(in srgb, var(--fg) ${n}%, var(--surface-2))`;
+const shade = ["var(--surface-2)", mix(25), mix(50), mix(75), "var(--fg)"];
 
 export function Contributions({ days }: { days: Day[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const [hover, setHover] = useState<Day | null>(null);
+  const scroller = useRef<HTMLDivElement>(null);
+
+  // On narrow screens the year doesn't fit; start at the latest weeks.
+  useEffect(() => {
+    if (scroller.current) scroller.current.scrollLeft = scroller.current.scrollWidth;
+  }, []);
 
   // Pad the start so columns are full weeks (Sunday first).
   const pad = new Date(days[0].date).getDay();
@@ -20,7 +27,7 @@ export function Contributions({ days }: { days: Day[] }) {
 
   return (
     <div ref={ref}>
-      <div className="overflow-x-auto pb-1">
+      <div ref={scroller} className="overflow-x-auto pb-1">
         <div className={"flex w-max gap-[3px] " + (inView ? "" : "paused")}>
           {weeks.map((w, wi) => (
             <div key={wi} className="flex flex-col gap-[3px]">

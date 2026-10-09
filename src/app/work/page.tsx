@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import { projects } from "@/content/site";
 import { WorkGrid } from "@/components/WorkGrid";
 import { Reveal } from "@/components/Reveal";
+import { getProjectImages } from "@/lib/projectImages";
 
 export const metadata: Metadata = {
   title: "Work",
   description: "Web platforms, mobile apps and side projects I've designed, built and shipped.",
 };
 
-export default function WorkPage() {
+export const revalidate = 3600;
+
+export default async function WorkPage() {
+  const images = await getProjectImages();
   return (
     <section className="shell pt-24 lg:pt-28">
       <Reveal className="mb-8 max-w-2xl">
@@ -18,7 +22,7 @@ export default function WorkPage() {
           Production apps for Pazimo, plus the side projects I build to scratch my own itch. Each page covers the problem, what I built and what I learned.
         </p>
       </Reveal>
-      <WorkGrid items={projects}>
+      <WorkGrid items={projects} images={images}>
         <span className="label">{projects.length} projects</span>
       </WorkGrid>
     </section>

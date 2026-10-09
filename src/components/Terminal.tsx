@@ -9,7 +9,7 @@ import { LiquidGlass } from "./LiquidGlass";
 
 type Line = { kind: "in" | "out" | "accent" | "muted"; text: string };
 
-const PROMPT = "kaleab@addis ~ %";
+const PROMPT = "dev@kaleab ~ %";
 
 const NEOFETCH_ART = [
   "      ▄▄▄▄      ",
@@ -141,7 +141,7 @@ export function Terminal() {
         unlock("neofetch");
         const years = new Date().getFullYear() - site.startedCoding;
         const info = [
-          `kaleab@addis`,
+          `dev@kaleab`,
           `────────────`,
           `Role:     ${site.role}`,
           `Location: ${site.city}`,
@@ -245,21 +245,21 @@ export function Terminal() {
   return (
     <LiquidGlass radius={18} bezel={16} depth={30} frost={10} className="overflow-hidden" onClick={() => field.current?.focus()}>
       <div className="flex items-center gap-2 border-b border-[var(--line)] px-4 py-3">
-        <span className="size-3 rounded-full bg-[var(--accent)]" />
-        <span className="size-3 rounded-full bg-[var(--faint)]" />
-        <span className="size-3 rounded-full bg-[var(--surface-2)]" />
-        <span className="label ml-2 truncate">kaleab@addis — zsh — 80×24</span>
+        <span className="size-3 rounded-full bg-[#ff5f57]" />
+        <span className="size-3 rounded-full bg-[#febc2e]" />
+        <span className="size-3 rounded-full bg-[#28c840]" />
+        <span className="label ml-2 truncate">dev@kaleab — zsh — 80×24</span>
       </div>
       <div ref={body} className="mono h-[340px] overflow-y-auto px-4 py-3 text-[13px] leading-[1.65] sm:h-[380px]">
         {lines.map((l, i) => (
           <div key={i} className={"whitespace-pre-wrap break-words " + color[l.kind]}>
-            {l.kind === "in" && <span className="text-[var(--accent-text)]">{PROMPT} </span>}
+            {l.kind === "in" && <span className="text-[var(--prompt)]">{PROMPT} </span>}
             {l.text}
           </div>
         ))}
         {booted && (
           <form onSubmit={submit} className="flex items-center">
-            <label htmlFor="term" className="shrink-0 text-[var(--accent-text)]">
+            <label htmlFor="term" className="shrink-0 text-[var(--prompt)]">
               {PROMPT}&nbsp;
             </label>
             <span className="relative min-w-0 flex-1">
