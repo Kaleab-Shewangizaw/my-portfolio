@@ -14,21 +14,24 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
 }
 
-/* Palette comes straight from the Kal_X mark: black, bone, ember. Flat only. */
+/* Plain black and white. The accent is the foreground colour, so nothing shouts. */
 :root {
-  --bg: #ede9e1;
-  --surface: #f5f2ec;
-  --surface-2: #e2ddd3;
-  --fg: #0b0b0b;
-  --muted: #5c5851;
-  --faint: #9a958c;
-  --line: rgb(11 11 11 / 0.1);
-  --accent: #d97e3a;
-  --accent-text: #a4531a;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --fg: #0a0a0a;
+  --muted: #5f5f66;
+  --faint: #a1a1aa;
+  --line: rgb(10 10 10 / 0.1);
+  --accent: #0a0a0a;
+  --accent-text: #0a0a0a;
+  --on-accent: #ffffff;
+  --prompt: #15803d;
 
-  --glass-fill: rgb(245 242 236 / 0.55);
+  --glass-fill: rgb(255 255 255 / 0.7);
   --glass-rim: rgb(255 255 255 / 0.9);
   --glass-rim-low: rgb(11 11 11 / 0.08);
   --glass-shadow: 0 10px 30px -12px rgb(11 11 11 / 0.25);
@@ -37,18 +40,20 @@
 
 .dark {
   --bg: #000000;
-  --surface: #0d0d0c;
-  --surface-2: #171715;
-  --fg: #ede9e1;
-  --muted: #8f8a81;
-  --faint: #57534d;
-  --line: rgb(237 233 225 / 0.09);
-  --accent: #d97e3a;
-  --accent-text: #e8955a;
+  --surface: #000000;
+  --surface-2: #18181b;
+  --fg: #fafafa;
+  --muted: #a1a1aa;
+  --faint: #52525b;
+  --line: rgb(255 255 255 / 0.12);
+  --accent: #fafafa;
+  --accent-text: #fafafa;
+  --on-accent: #000000;
+  --prompt: #4ade80;
 
-  --glass-fill: rgb(23 23 21 / 0.5);
-  --glass-rim: rgb(237 233 225 / 0.22);
-  --glass-rim-low: rgb(237 233 225 / 0.07);
+  --glass-fill: rgb(10 10 10 / 0.7);
+  --glass-rim: rgb(255 255 255 / 0.14);
+  --glass-rim-low: rgb(255 255 255 / 0.08);
   --glass-shadow: 0 16px 40px -16px rgb(0 0 0 / 0.9);
   color-scheme: dark;
 }
@@ -67,8 +72,8 @@ body {
 }
 
 ::selection {
-  background: var(--accent);
-  color: #000;
+  background: var(--fg);
+  color: var(--bg);
 }
 
 :focus-visible {
@@ -137,18 +142,9 @@ body {
   display: inline-block;
   width: 0.55em;
   height: 1.1em;
-  background: var(--accent);
+  background: var(--muted);
   vertical-align: text-bottom;
-  animation: blink 1s steps(1) infinite;
 }
-@keyframes blink { 50% { opacity: 0; } }
-
-/* Architecture diagram: data flowing along edges */
-.flow {
-  stroke-dasharray: 4 8;
-  animation: flow 1.2s linear infinite;
-}
-@keyframes flow { to { stroke-dashoffset: -24; } }
 
 /* Contribution cells pop in column by column */
 .cell {
@@ -189,10 +185,6 @@ body {
   to { transform: rotate(var(--r)) scale(1); opacity: 1; }
 }
 
-/* Organizer mockup scanner line */
-.scanline { animation: scan 2.2s ease-in-out infinite alternate; top: 4px; }
-@keyframes scan { to { top: calc(100% - 6px); } }
-
 /* ---------- Floating bubble ----------
    Rim light and a faint chromatic edge, all flat shadows. */
 .bubble { will-change: transform; }
@@ -200,9 +192,7 @@ body {
   box-shadow:
     inset 0 0 0 1px var(--glass-rim-low),
     inset 0 2px 0 -0.5px var(--glass-rim),
-    inset 0 -2px 0 -0.5px rgb(217 126 58 / 0.5),
-    inset 6px 0 12px -9px rgb(217 126 58 / 0.7),
-    inset -6px 0 12px -9px rgb(120 160 255 / 0.55),
+    inset 0 -2px 0 -0.5px var(--glass-rim-low),
     0 14px 30px -14px rgb(0 0 0 / 0.45);
 }
 .bubble-glint {
@@ -216,4 +206,63 @@ body {
   filter: blur(2.5px);
   transform: rotate(-30deg);
   pointer-events: none;
+}
+.bubble-glint-2 {
+  position: absolute;
+  bottom: 16%;
+  right: 20%;
+  width: 9%;
+  height: 9%;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.45);
+  filter: blur(1.5px);
+  pointer-events: none;
+}
+
+/* Soap film: a slowly turning band of thin-film colours, strongest at the rim. */
+.bubble-film {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: conic-gradient(from 0deg, #ff8fc8, #ffd27a, #8fffd0, #8cc4ff, #c79bff, #ff8fc8);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 62%, #000 84%, #000 94%, transparent 100%);
+  mask: radial-gradient(circle closest-side, transparent 62%, #000 84%, #000 94%, transparent 100%);
+  opacity: 0.38;
+  filter: blur(1.5px);
+  animation: bubble-film 9s linear infinite;
+}
+.dark .bubble-film {
+  opacity: 0.5;
+}
+@keyframes bubble-film {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* New bubbles pop into existence with a little overshoot. */
+.bubble-in {
+  animation: bubble-in 0.55s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+@keyframes bubble-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.bubble-burst-ring {
+  border: 1.5px solid transparent;
+  background: conic-gradient(from 0deg, #ff8fc8, #ffd27a, #8fffd0, #8cc4ff, #c79bff, #ff8fc8) border-box;
+  -webkit-mask: linear-gradient(#000 0 0) padding-box exclude, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) padding-box exclude, linear-gradient(#000 0 0);
+}
+
+/* The wand ring of the bubble gun. */
+.bubble-wand {
+  background: conic-gradient(from 0deg, #ff8fc8, #ffd27a, #8fffd0, #8cc4ff, #c79bff, #ff8fc8);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 68%, #000 72%);
+  mask: radial-gradient(circle closest-side, transparent 68%, #000 72%);
+  animation: bubble-film 4s linear infinite;
 }

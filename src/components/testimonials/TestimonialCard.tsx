@@ -62,7 +62,7 @@ export function TestimonialCard({ t, className }: { t: CardData; className?: str
           // eslint-disable-next-line @next/next/no-img-element
           <img src={t.avatarSrc} alt="" className="size-11 shrink-0 rounded-full object-cover" loading="lazy" />
         ) : (
-          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-[var(--accent)] text-sm font-semibold text-black">
+          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-[var(--surface-2)] text-sm font-semibold text-[var(--fg)]">
             {initials(t.name)}
           </span>
         )}

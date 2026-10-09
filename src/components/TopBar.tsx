@@ -101,7 +101,7 @@ export function TopBar() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-1.5 text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
           >
-            <span className="size-2 rounded-full bg-[var(--accent)]" />
+            <span className="size-2 rounded-full bg-[var(--faint)]" />
             {site.current}
           </a>
         </div>

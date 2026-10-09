@@ -3,13 +3,14 @@
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
-import { now, projects, site, stack } from "@/content/site";
+import { now, site, stack, type ProjectLink } from "@/content/site";
 import { SECRETS, unlock, visitCount } from "@/lib/secrets";
 import { LiquidGlass } from "./LiquidGlass";
+import { setGun } from "@/lib/bubbles";
 
 type Line = { kind: "in" | "out" | "accent" | "muted"; text: string };
 
-const PROMPT = "kaleab@addis ~ %";
+const PROMPT = "dev@kaleab ~ %";
 
 const NEOFETCH_ART = [
   "      ▄▄▄▄      ",
@@ -28,7 +29,7 @@ function greeting() {
   return "Good evening.";
 }
 
-export function Terminal() {
+export function Terminal({ projects }: { projects: ProjectLink[] }) {
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
   const [lines, setLines] = useState<Line[]>([]);
@@ -43,8 +44,6 @@ export function Terminal() {
   useEffect(() => {
     const visits = visitCount();
     if (visits >= 3) unlock("regular");
-    const h = new Date().getHours();
-    if (h < 5) unlock("night");
 
     const script: Line[] = [
       { kind: "muted", text: visits > 1 ? `Welcome back. This is visit #${visits}.` : `Last login: ${new Date().toDateString()} on ttys001` },
@@ -92,6 +91,7 @@ export function Terminal() {
           "  email        copy my email address",
           "  cv           download my résumé",
           "  theme        switch light / dark",
+          "  bubbles      arm the bubble gun",
           "  secrets      how many have you found?",
           "  clear        clean the screen",
           { kind: "muted", text: "There are a few more. Old habits." },
@@ -118,6 +118,10 @@ export function Terminal() {
       case "email":
         navigator.clipboard?.writeText(site.email);
         return out(`Copied ${site.email} to your clipboard.`);
+      case "bubbles":
+      case "bubble":
+        setGun(true);
+        return out("Bubble gun armed. Tap anywhere to shoot, hold to blow a big one, flick to throw.", { kind: "muted", text: "Esc puts it away. Now go click the logo five times." });
       case "cv":
       case "resume":
         window.open(site.cv, "_blank", "noopener");
@@ -143,7 +147,7 @@ export function Terminal() {
         unlock("neofetch");
         const years = new Date().getFullYear() - site.startedCoding;
         const info = [
-          `kaleab@addis`,
+          `dev@kaleab`,
           `────────────`,
           `Role:     ${site.role}`,
           `Location: ${site.city}`,
@@ -228,7 +232,7 @@ export function Terminal() {
       }
     } else if (e.key === "Tab") {
       e.preventDefault();
-      const all = ["help", "about", "projects", "open ", "stack", "contact", "email", "cv", "theme", "secrets", "clear", "neofetch", "cargo run"];
+      const all = ["help", "about", "projects", "open ", "stack", "contact", "email", "cv", "theme", "bubbles", "secrets", "clear", "neofetch", "cargo run"];
       const match = all.find((c) => c.startsWith(input));
       if (match && input) setInput(match);
     } else if (e.key === "l" && e.ctrlKey) {
@@ -247,21 +251,21 @@ export function Terminal() {
   return (
     <LiquidGlass radius={18} bezel={16} depth={30} frost={10} className="overflow-hidden" onClick={() => field.current?.focus()}>
       <div className="flex items-center gap-2 border-b border-[var(--line)] px-4 py-3">
-        <span className="size-3 rounded-full bg-[var(--accent)]" />
-        <span className="size-3 rounded-full bg-[var(--faint)]" />
-        <span className="size-3 rounded-full bg-[var(--surface-2)]" />
-        <span className="label ml-2 truncate">kaleab@addis — zsh — 80×24</span>
+        <span className="size-3 rounded-full bg-[#ff5f57]" />
+        <span className="size-3 rounded-full bg-[#febc2e]" />
+        <span className="size-3 rounded-full bg-[#28c840]" />
+        <span className="label ml-2 truncate">dev@kaleab — zsh — 80×24</span>
       </div>
       <div ref={body} className="mono h-[340px] overflow-y-auto px-4 py-3 text-[13px] leading-[1.65] sm:h-[380px]">
         {lines.map((l, i) => (
           <div key={i} className={"whitespace-pre-wrap break-words " + color[l.kind]}>
-            {l.kind === "in" && <span className="text-[var(--accent-text)]">{PROMPT} </span>}
+            {l.kind === "in" && <span className="text-[var(--prompt)]">{PROMPT} </span>}
             {l.text}
           </div>
         ))}
         {booted && (
           <form onSubmit={submit} className="flex items-center">
-            <label htmlFor="term" className="shrink-0 text-[var(--accent-text)]">
+            <label htmlFor="term" className="shrink-0 text-[var(--prompt)]">
               {PROMPT}&nbsp;
             </label>
             <span className="relative min-w-0 flex-1">

@@ -5,11 +5,12 @@ import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/Toaster";
 import { Discoveries } from "@/components/Discoveries";
-import { Bubble } from "@/components/Bubble";
+import { Bubbles } from "@/components/Bubbles";
 import { Reward } from "@/components/Reward";
 import { TopBar } from "@/components/TopBar";
 import { Dock } from "@/components/Dock";
 import { Footer } from "@/components/Footer";
+import { getProjects } from "@/lib/projects";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ede9e1" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };
@@ -59,7 +60,8 @@ const jsonLd = {
   sameAs: site.socials.map((s) => s.href),
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const projects = (await getProjects()).map(({ slug, name, kind }) => ({ slug, name, kind }));
   return (
     <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable}`}>
       <body>
@@ -71,10 +73,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <TopBar />
           <main id="main">{children}</main>
           <Footer />
-          <Dock />
+          <Dock projects={projects} />
           <Toaster />
           <Discoveries />
-          <Bubble />
+          <Bubbles />
           <Reward />
         </ThemeProvider>
       </body>

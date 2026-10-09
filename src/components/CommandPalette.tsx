@@ -5,20 +5,23 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { ArrowUpRight, CornerDownLeft, Search } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { projects, site } from "@/content/site";
+import { site, type ProjectLink } from "@/content/site";
 import { LiquidGlass } from "./LiquidGlass";
 import { SECRETS, unlock, useSecrets } from "@/lib/secrets";
 import { openReward } from "./Reward";
+import { setGun, useBubbleWorld, world } from "@/lib/bubbles";
 
 type Item = { group: string; label: string; hint?: string; run: () => void };
 
-export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function CommandPalette({ projects, open, onClose }: { projects: ProjectLink[]; open: boolean; onClose: () => void }) {
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const found = useSecrets();
+  useBubbleWorld();
+  const gun = world.gun;
 
   const items = useMemo<Item[]>(() => {
     const go = (href: string) => () => router.push(href);
@@ -38,6 +41,9 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
         run: () => navigator.clipboard?.writeText(site.email),
       },
       { group: "Actions", label: "Download CV", hint: "PDF", run: ext(site.cv) },
+      gun
+        ? { group: "Actions", label: "Put the bubble gun away", hint: "Esc", run: () => setGun(false) }
+        : { group: "Actions", label: "Bubble gun", hint: "tap to shoot, hold to blow", run: () => setGun(true) },
       {
         group: "Actions",
         label: `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`,
@@ -57,7 +63,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
         run: () => {},
       })),
     ];
-  }, [router, resolvedTheme, setTheme, found]);
+  }, [router, resolvedTheme, setTheme, found, projects, gun]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

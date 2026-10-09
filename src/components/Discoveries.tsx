@@ -24,10 +24,19 @@ export function Discoveries() {
     } catch {}
   }, [pathname]);
 
-  // Time- and visit-based secrets, checked on any page.
+  // Reading the About page to the bottom.
+  useEffect(() => {
+    if (pathname !== "/about") return;
+    const onScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80) unlock("reader");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [pathname]);
+
+  // Visit-based secrets, checked on any page.
   useEffect(() => {
     if (visitCount() >= 3) unlock("regular");
-    if (new Date().getHours() < 5) unlock("night");
 
     // A note for people who open DevTools.
     const w = window as unknown as { kalx?: () => string };

@@ -12,7 +12,7 @@ export const SECRETS = [
   { id: "palette", title: "Power user", hint: "Every good tool has a ⌘K." },
   { id: "theme", title: "Lights", hint: "Flip the lights." },
   { id: "explorer", title: "Explorer", hint: "Visit every page." },
-  { id: "night", title: "Night owl", hint: "Drop by between midnight and 5am." },
+  { id: "reader", title: "Bookworm", hint: "Read the About page all the way to the end." },
   { id: "regular", title: "Regular", hint: "Come back a third time." },
   { id: "lost", title: "Lost", hint: "Get lost. Literally." },
   { id: "architect", title: "Architect", hint: "Inspect every box in the Pazimo diagram." },
@@ -33,7 +33,9 @@ const EVENT = "kalx:secret";
 
 function read(): SecretId[] {
   try {
-    return JSON.parse(localStorage.getItem(KEY) || "[]");
+    // Drop ids of secrets that have since been retired.
+    const ids: string[] = JSON.parse(localStorage.getItem(KEY) || "[]");
+    return ids.filter((id): id is SecretId => SECRETS.some((s) => s.id === id));
   } catch {
     return [];
   }
