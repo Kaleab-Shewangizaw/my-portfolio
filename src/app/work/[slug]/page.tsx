@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { projects } from "@/content/site";
 import { ProjectCover } from "@/components/ProjectCover";
 import { getProjectImages } from "@/lib/projectImages";
+import { getProjects } from "@/lib/projects";
 import { Architecture } from "@/components/Architecture";
 import { Reveal } from "@/components/Reveal";
 
@@ -14,19 +14,20 @@ type Params = { params: Promise<{ slug: string }> };
 
 const archFocus: Record<string, string> = { pazimo: "web", "pazimo-mobile": "attendee", "pazimo-organizer": "organizer" };
 
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getProjects()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = (await getProjects()).find((p) => p.slug === slug);
   if (!project) return {};
   return { title: project.name, description: project.summary };
 }
 
 export default async function CaseStudy({ params }: Params) {
   const { slug } = await params;
+  const projects = await getProjects();
   const i = projects.findIndex((p) => p.slug === slug);
   if (i === -1) notFound();
   const p = projects[i];
@@ -103,7 +104,7 @@ export default async function CaseStudy({ params }: Params) {
         ) : (
           <Reveal delay={0.1} className="card p-6">
             <p className="label">In one sentence</p>
-            <p className="mt-4 text-[clamp(1.3rem,2.4vw,1.75rem)] font-medium leading-snug tracking-tight">{p.story[0].body}</p>
+            <p className="mt-4 text-[clamp(1.3rem,2.4vw,1.75rem)] font-medium leading-snug tracking-tight">{p.story[0]?.body ?? p.summary}</p>
           </Reveal>
         )}
       </div>

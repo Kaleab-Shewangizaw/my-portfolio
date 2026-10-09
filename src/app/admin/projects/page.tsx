@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { isAdmin } from "@/lib/auth";
-import { projects } from "@/content/site";
+import { getAllProjects } from "@/lib/projects";
 import { getProjectImages } from "@/lib/projectImages";
 import { AdminLogin } from "@/components/testimonials/Admin";
-import { ProjectImages } from "@/components/admin/ProjectImages";
+import { ProjectList } from "@/components/admin/ProjectList";
 
 export const metadata: Metadata = {
-  title: "Project images",
+  title: "Projects admin",
   robots: { index: false, follow: false },
 };
 
@@ -14,5 +14,6 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminProjectsPage() {
   if (!(await isAdmin())) return <AdminLogin />;
-  return <ProjectImages projects={projects} images={await getProjectImages()} />;
+  const [projects, images] = await Promise.all([getAllProjects(), getProjectImages()]);
+  return <ProjectList projects={projects} images={images} />;
 }

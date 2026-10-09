@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { projects } from "@/content/site";
 import { WorkGrid } from "@/components/WorkGrid";
 import { Reveal } from "@/components/Reveal";
 import { getProjectImages } from "@/lib/projectImages";
+import { getProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function WorkPage() {
-  const images = await getProjectImages();
+  const [images, projects] = await Promise.all([getProjectImages(), getProjects()]);
   return (
     <section className="shell pt-24 lg:pt-28">
       <Reveal className="mb-8 max-w-2xl">

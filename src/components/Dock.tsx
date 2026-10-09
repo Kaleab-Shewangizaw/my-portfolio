@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { LiquidGlass } from "./LiquidGlass";
 import { CommandPalette } from "./CommandPalette";
 import { unlock } from "@/lib/secrets";
+import type { ProjectLink } from "@/content/site";
 
 export const nav = [
   { href: "/", label: "Home" },
@@ -17,7 +18,7 @@ export const nav = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function Dock() {
+export function Dock({ projects }: { projects: ProjectLink[] }) {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -91,7 +92,7 @@ export function Dock() {
           </button>
         </LiquidGlass>
       </motion.nav>
-      <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
+      <CommandPalette projects={projects} open={paletteOpen} onClose={() => setPaletteOpen(false)} />
     </>
   );
 }

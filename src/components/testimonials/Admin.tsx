@@ -31,7 +31,7 @@ export function AdminLogin() {
       <form onSubmit={submit} className="card w-full max-w-sm p-8">
         <Logo size={40} intro />
         <h1 className="mt-5 text-2xl font-semibold tracking-tight">Admin</h1>
-        <p className="mt-1 text-sm text-[var(--muted)]">Testimonials and project images.</p>
+        <p className="mt-1 text-sm text-[var(--muted)]">Projects and testimonials.</p>
         <input
           type="password"
           value={pw}
@@ -159,7 +159,7 @@ export function AdminDashboard({ items: initial, champions: initialChampions }: 
         </div>
         <div className="flex flex-wrap gap-2">
           <Link href="/admin/projects" className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--line)] px-4 text-sm text-[var(--muted)] hover:text-[var(--fg)]">
-            <ImageIcon size={15} /> Project images
+            <ImageIcon size={15} /> Projects
           </Link>
           <button onClick={copyInvite} className="inline-flex h-10 items-center gap-2 rounded-full bg-[var(--fg)] px-4 text-sm font-medium text-[var(--bg)]">
             {copied ? <Check size={15} /> : <Copy size={15} />} {copied ? "Copied" : "Copy invite link"}

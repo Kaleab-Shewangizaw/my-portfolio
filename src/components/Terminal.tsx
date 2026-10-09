@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
-import { now, projects, site, stack } from "@/content/site";
+import { now, site, stack, type ProjectLink } from "@/content/site";
 import { SECRETS, unlock, visitCount } from "@/lib/secrets";
 import { LiquidGlass } from "./LiquidGlass";
 
@@ -28,7 +28,7 @@ function greeting() {
   return "Good evening.";
 }
 
-export function Terminal() {
+export function Terminal({ projects }: { projects: ProjectLink[] }) {
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
   const [lines, setLines] = useState<Line[]>([]);

@@ -124,14 +124,14 @@ function OweMeScreen() {
   );
 }
 
-function Browser({ children, className }: { children: React.ReactNode; className?: string }) {
+function Browser({ children, className, url = "pazimo.com/organizer" }: { children: React.ReactNode; className?: string; url?: string }) {
   return (
     <div className={cn("overflow-hidden rounded-xl border border-[#27272a] bg-[#0a0a0a] text-[#fafafa] shadow-[0_20px_50px_-20px_rgba(0,0,0,.6)]", className)}>
       <div className="flex items-center gap-1.5 border-b border-[#27272a] bg-[#111113] px-3 py-2">
         <span className="size-2 rounded-full bg-[#e4e4e7]" />
         <span className="size-2 rounded-full bg-[#52525b]" />
         <span className="size-2 rounded-full bg-[#27272a]" />
-        <span className="mono ml-3 rounded bg-[#18181b] px-2 py-0.5 text-[9px] text-[#a1a1aa]">pazimo.com/organizer</span>
+        <span className="mono ml-3 rounded bg-[#18181b] px-2 py-0.5 text-[9px] text-[#a1a1aa]">{url}</span>
       </div>
       {children}
     </div>
@@ -180,7 +180,10 @@ function CodeScreen({ project }: { project: Project }) {
     yoinker: ["chrome.action.onClicked(save)", "const job = await extract(page)", "// { role, company, salary }", "await board.add(job, 'saved')"],
     "rust-proxy": ["let cfg = Config::load(\"proxy.conf\")?;", "let pool = Registry::from(&cfg.backends);", "// round-robin over healthy backends", "let up = pool.next().expect(\"no backend\");"],
   };
-  const code = lines[project.slug] ?? ["// todo"];
+  const code = lines[project.slug] ?? [
+    `$ ${project.slug} --run`,
+    ...project.highlights.slice(0, 3).map((h) => `// ${h.length > 44 ? h.slice(0, 43).trimEnd() + "…" : h}`),
+  ];
   return (
     <div className="mono h-full w-full min-w-0 overflow-hidden rounded-xl border border-[#27272a] bg-[#0a0a0a] p-4 text-[11px] leading-[1.8] text-[#a1a1aa]">
       {code.map((l, i) => (
@@ -235,6 +238,79 @@ function ChopScreen() {
 }
 
 
+/* Projects added from the admin get a drawn cover built from their own content. */
+
+function host(project: Project) {
+  const link = project.links.live ?? project.links.code;
+  if (!link) return `${project.slug}.app`;
+  try {
+    const u = new URL(link);
+    return (u.host + u.pathname).replace(/\/$/, "");
+  } catch {
+    return `${project.slug}.app`;
+  }
+}
+
+function Bullets({ items, dense }: { items: string[]; dense?: boolean }) {
+  return (
+    <div className={dense ? "space-y-1.5" : "space-y-2"}>
+      {items.slice(0, 3).map((h, i) => (
+        <div key={h} className={"flex items-center gap-2 rounded-lg p-1.5 " + (i === 0 ? "bg-[#e4e4e7] text-black" : "bg-[#18181b]")}>
+          <span className={"grid size-5 shrink-0 place-items-center rounded-md text-[8px] font-bold " + (i === 0 ? "bg-black text-[#e4e4e7]" : "bg-[#27272a]")}>{i + 1}</span>
+          <span className="line-clamp-2">{h}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function GenericWebScreen({ project }: { project: Project }) {
+  return (
+    <div className="p-4 text-[9px]">
+      <div className="flex items-center justify-between">
+        <span className="text-[11px] font-semibold">{project.name}</span>
+        <span className="flex gap-2 text-[#a1a1aa]">
+          <span>Docs</span>
+          <span>Pricing</span>
+          <span className="rounded-full bg-[#fafafa] px-2 text-black">Sign in</span>
+        </span>
+      </div>
+      <p className="mt-4 line-clamp-2 max-w-[85%] text-[13px] font-semibold leading-tight">{project.summary}</p>
+      <div className="mt-3 flex flex-wrap gap-1">
+        {project.stack.slice(0, 4).map((t) => (
+          <span key={t} className="mono rounded bg-[#18181b] px-1.5 py-0.5 text-[8px] text-[#a1a1aa]">{t}</span>
+        ))}
+      </div>
+      <div className="mt-3">
+        <Bullets items={project.highlights.length ? project.highlights : [project.kind]} dense />
+      </div>
+    </div>
+  );
+}
+
+function GenericPhoneScreen({ project }: { project: Project }) {
+  return (
+    <div className="flex h-full flex-col px-3 pb-3 pt-9 text-[9px]">
+      <span className="text-[#a1a1aa]">{project.kind}</span>
+      <span className="text-[11px] font-semibold">{project.name}</span>
+      <div className="mt-2.5 rounded-xl bg-[#18181b] p-2.5">
+        <div className="h-14 rounded-lg bg-[#27272a]" />
+        <p className="mt-1.5 line-clamp-3 text-[#a1a1aa]">{project.summary}</p>
+      </div>
+      <div className="mt-2">
+        <Bullets items={project.highlights} dense />
+      </div>
+      <div className="mt-auto grid grid-cols-4 gap-1.5 border-t border-[#27272a] pt-2">
+        {[0, 1, 2, 3].map((i) => (
+          <span key={i} className={"mx-auto size-3 rounded " + (i === 0 ? "bg-[#fafafa]" : "bg-[#27272a]")} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const DRAWN = ["pazimo", "pazimo-mobile", "pazimo-organizer", "oweme", "chop", "creator-workspace", "yoinker", "rust-proxy"];
+
 export function Mockup({ project, className }: { project: Project; className?: string }) {
   return (
     <div className={cn("grid min-w-0 place-items-center overflow-hidden rounded-2xl bg-[var(--surface-2)] p-4 sm:p-6", className)}>
@@ -260,6 +336,16 @@ export function Mockup({ project, className }: { project: Project; className?: s
       )}
       {project.slug === "chop" && <ChopScreen />}
       {project.platform === "tool" && !["oweme", "chop"].includes(project.slug) && <CodeScreen project={project} />}
+      {!DRAWN.includes(project.slug) && project.platform === "web" && (
+        <Browser className="w-full max-w-[460px]" url={host(project)}>
+          <GenericWebScreen project={project} />
+        </Browser>
+      )}
+      {!DRAWN.includes(project.slug) && project.platform === "mobile" && (
+        <Phone>
+          <GenericPhoneScreen project={project} />
+        </Phone>
+      )}
     </div>
   );
 }

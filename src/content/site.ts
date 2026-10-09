@@ -40,6 +40,11 @@ export type Project = {
   featured?: boolean;
 };
 
+/** Just enough of a project to link to it (terminal, command palette). */
+export type ProjectLink = Pick<Project, "slug" | "name" | "kind">;
+
+// Built-in projects. The admin (/admin/projects) can add more, edit these,
+// hide them or reorder them; see lib/projects.ts.
 export const projects: Project[] = [
   {
     slug: "pazimo",

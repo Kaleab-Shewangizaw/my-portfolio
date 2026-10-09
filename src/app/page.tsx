@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { ArrowUpRight, Download } from "lucide-react";
-import { now, projects, site, stack, timeline } from "@/content/site";
+import { now, site, stack, timeline } from "@/content/site";
 import { getGitHub } from "@/lib/github";
 import { getApproved } from "@/lib/testimonials";
 import { getProjectImages } from "@/lib/projectImages";
+import { getProjects } from "@/lib/projects";
 import { TestimonialCard } from "@/components/testimonials/TestimonialCard";
 import { Terminal } from "@/components/Terminal";
 import { Architecture } from "@/components/Architecture";
@@ -39,7 +40,7 @@ function SectionHead({ index, title, action }: { index: string; title: string; a
 export const revalidate = 3600;
 
 export default async function Home() {
-  const [gh, kind, images] = await Promise.all([getGitHub(), getApproved(6), getProjectImages()]);
+  const [gh, kind, images, projects] = await Promise.all([getGitHub(), getApproved(6), getProjectImages(), getProjects()]);
   let n = 2;
   const next = () => String(++n).padStart(2, "0");
   const pazimo = projects.filter((p) => p.slug.startsWith("pazimo"));
@@ -74,7 +75,7 @@ export default async function Home() {
           <CopyEmail className="mt-6 text-sm text-[var(--muted)]" />
         </Reveal>
         <Reveal delay={0.15}>
-          <Terminal />
+          <Terminal projects={projects.map(({ slug, name, kind }) => ({ slug, name, kind }))} />
         </Reveal>
       </section>
 
@@ -101,7 +102,7 @@ export default async function Home() {
               Pazimo is a ticketing, invitation and RSVP platform for Ethiopia. I&apos;m the CTO. I lead the engineering team and own the API, the web app, both mobile apps, and the servers and deploys that keep them running.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-[var(--muted)]">
-              {pazimo[0].highlights.map((h) => (
+              {pazimo[0]?.highlights.map((h) => (
                 <li key={h} className="flex gap-3">
                   <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-[var(--faint)]" />
                   {h}

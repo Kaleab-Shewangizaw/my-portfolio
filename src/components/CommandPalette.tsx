@@ -5,14 +5,14 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { ArrowUpRight, CornerDownLeft, Search } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { projects, site } from "@/content/site";
+import { site, type ProjectLink } from "@/content/site";
 import { LiquidGlass } from "./LiquidGlass";
 import { SECRETS, unlock, useSecrets } from "@/lib/secrets";
 import { openReward } from "./Reward";
 
 type Item = { group: string; label: string; hint?: string; run: () => void };
 
-export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function CommandPalette({ projects, open, onClose }: { projects: ProjectLink[]; open: boolean; onClose: () => void }) {
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
   const [query, setQuery] = useState("");
@@ -57,7 +57,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
         run: () => {},
       })),
     ];
-  }, [router, resolvedTheme, setTheme, found]);
+  }, [router, resolvedTheme, setTheme, found, projects]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
