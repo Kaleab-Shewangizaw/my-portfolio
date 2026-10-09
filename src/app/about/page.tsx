@@ -5,6 +5,7 @@ import { site, stack, timeline } from "@/content/site";
 import { Reveal } from "@/components/Reveal";
 import { Builds } from "@/components/Builds";
 import { ToolChip } from "@/components/ToolChip";
+import { OrgLogo } from "@/components/OrgLogo";
 
 export const metadata: Metadata = {
   title: "About",
@@ -60,7 +61,7 @@ export default function AboutPage() {
               loading and code the next person can read.
             </p>
             <p>
-              I also study Computer Science at AAiT, I went through A2SV&apos;s problem-solving track, and I taught web development at
+              I&apos;m also studying engineering at AAiT, I went through A2SV&apos;s problem-solving track, and I taught web development at
               GDG. Teaching taught me that if I can&apos;t explain something simply, I don&apos;t really understand it yet.
             </p>
             <p className="text-[var(--fg)]">
@@ -81,10 +82,15 @@ export default function AboutPage() {
             {timeline.map((t, i) => (
               <li key={t.title + t.org} className="relative">
                 <span className={"absolute -left-[25px] top-1.5 size-2.5 rounded-full border-2 border-[var(--surface)] " + (i === 0 ? "bg-[var(--fg)]" : "bg-[var(--faint)]")} />
-                <p className="mono text-xs text-[var(--muted)]">{t.period}</p>
-                <p className="mt-0.5 font-medium">
-                  {t.title} <span className="text-[var(--muted)]">· {t.org}</span>
-                </p>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="mono text-xs text-[var(--muted)]">{t.period}</p>
+                    <p className="mt-0.5 font-medium">
+                      {t.title} <span className="text-[var(--muted)]">· {t.org}</span>
+                    </p>
+                  </div>
+                  <OrgLogo org={t.org} logo={t.logo} />
+                </div>
                 <p className="mt-0.5 text-sm text-[var(--muted)]">{t.note}</p>
                 {t.builds && <Builds items={t.builds} />}
               </li>

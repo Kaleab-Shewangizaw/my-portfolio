@@ -14,6 +14,7 @@ import { CountUp } from "@/components/CountUp";
 import { Reveal } from "@/components/Reveal";
 import { CopyEmail } from "@/components/CopyEmail";
 import { ToolChip } from "@/components/ToolChip";
+import { OrgLogo } from "@/components/OrgLogo";
 
 function Headline({ as: Tag }: { as: "h1" }) {
   return (
@@ -206,10 +207,15 @@ export default async function Home() {
               {timeline.slice(0, 4).map((t, i) => (
                 <li key={t.title + t.org} className="relative">
                   <span className={"absolute -left-[25px] top-1.5 size-2.5 rounded-full border-2 border-[var(--surface)] " + (i === 0 ? "bg-[var(--fg)]" : "bg-[var(--faint)]")} />
-                  <p className="mono text-xs text-[var(--muted)]">{t.period}</p>
-                  <p className="mt-0.5 font-medium">
-                    {t.title} <span className="text-[var(--muted)]">· {t.org}</span>
-                  </p>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="mono text-xs text-[var(--muted)]">{t.period}</p>
+                      <p className="mt-0.5 font-medium">
+                        {t.title} <span className="text-[var(--muted)]">· {t.org}</span>
+                      </p>
+                    </div>
+                    <OrgLogo org={t.org} logo={t.logo} />
+                  </div>
                   <p className="mt-0.5 text-sm text-[var(--muted)]">{t.note}</p>
                 </li>
               ))}

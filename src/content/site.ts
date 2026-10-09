@@ -284,12 +284,14 @@ export const stack = [
 
 export type Build = { name: string; client: string; href: string; label?: string; body: string; stack: string[] };
 
-export const timeline: { period: string; title: string; org: string; note: string; builds?: Build[] }[] = [
-  { period: "2025 — now", title: "CTO", org: "Pazimo", note: "Pazimo is a ticketing startup in Addis Ababa. I lead engineering and own infrastructure and deployment for the web app, both mobile apps and the API." },
+// logo: a file in public/logos. Entries without one show the org's initials.
+export const timeline: { period: string; title: string; org: string; logo?: string; note: string; builds?: Build[] }[] = [
+  { period: "2025 — now", title: "CTO", org: "Pazimo", logo: "/logos/pazimo.png", note: "Pazimo is a ticketing startup in Addis Ababa. I lead engineering and own infrastructure and deployment for the web app, both mobile apps and the API." },
   {
     period: "2024 — 2025",
     title: "Full-stack Developer",
     org: "Prime Software",
+    logo: "/logos/prime-software.jpg",
     note: "Built client products end to end, from database design to deployment.",
     builds: [
       {
@@ -317,8 +319,9 @@ export const timeline: { period: string; title: string; org: string; note: strin
     ],
   },
   { period: "2023 — 2024", title: "Bootcamp Instructor", org: "GDG · AAU", note: "Taught web development to new engineers. Teaching made me a better engineer." },
-  { period: "2023", title: "Problem Solving Track", org: "A2SV", note: "Africa to Silicon Valley: data structures, algorithms and a lot of LeetCode." },
-  { period: "2022 — now", title: "BSc Computer Science & Engineering", org: "Addis Ababa University", note: "Addis Ababa Institute of Technology (AAiT)." },
+  { period: "2023", title: "Problem Solving Track", org: "A2SV", logo: "/logos/a2sv.svg", note: "Africa to Silicon Valley: data structures, algorithms and a lot of LeetCode." },
+  { period: "2022 — now", title: "BSc Engineering", org: "Addis Ababa University", logo: "/logos/aau.png", note: "Addis Ababa Institute of Technology (AAiT)." },
+  { period: "2022", title: "Learned to code", org: "Scrimba", logo: "/logos/scrimba.svg", note: "Where it started: Scrimba's interactive web development courses, then building every day since." },
 ];
 
 export const now = [
