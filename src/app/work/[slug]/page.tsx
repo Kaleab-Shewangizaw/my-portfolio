@@ -65,9 +65,9 @@ export default async function CaseStudy({ params }: Params) {
       </Reveal>
 
       {screenshots.length > 0 && (
-        <Reveal className="card mt-3 p-2">
-          <h2 className="px-4 pb-3 pt-3 text-lg font-semibold tracking-tight">A closer look</h2>
-          <Slideshow images={screenshots.map((s) => s.url)} name={p.name} className="h-[280px] sm:h-[480px]" />
+        <Reveal className="card mt-3 p-5 sm:p-8">
+          <h2 className="text-lg font-semibold tracking-tight">A closer look</h2>
+          <Slideshow images={screenshots.map((s) => s.url)} name={p.name} className="mx-auto mt-5 max-w-4xl" />
         </Reveal>
       )}
 

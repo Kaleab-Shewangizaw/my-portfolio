@@ -43,7 +43,7 @@ export function Slideshow({ images, name, className }: { images: string[]; name:
 
   return (
     <div
-      className={cn("group relative overflow-hidden rounded-2xl bg-[var(--surface-2)]", className)}
+      className={cn("group", className)}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -58,60 +58,61 @@ export function Slideshow({ images, name, className }: { images: string[]; name:
       aria-roledescription="carousel"
       aria-label={`${name} screenshots`}
     >
-      <AnimatePresence initial={false} custom={dir}>
-        <motion.img
-          key={i}
-          src={images[i]}
-          alt={`${name} screenshot ${i + 1} of ${images.length}`}
-          custom={dir}
-          variants={{
-            enter: (d: number) => ({ opacity: 0, x: reduce ? 0 : d * 40 }),
-            center: { opacity: 1, x: 0 },
-            exit: (d: number) => ({ opacity: 0, x: reduce ? 0 : d * -40 }),
-          }}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
-          drag={many ? "x" : false}
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.2}
-          onTap={() => setOpen(true)}
-          onDragEnd={(_, info) => {
-            if (info.offset.x < -50) go(1);
-            else if (info.offset.x > 50) go(-1);
-          }}
-          draggable={false}
-          className="absolute inset-0 size-full cursor-zoom-in select-none object-cover object-top"
-        />
-      </AnimatePresence>
+      {/* Each screenshot shows whole, at its own shape, centred in the frame. */}
+      <div className="relative h-[260px] overflow-hidden sm:h-[400px]">
+        <AnimatePresence initial={false} custom={dir}>
+          <motion.div
+            key={i}
+            custom={dir}
+            variants={{
+              enter: (d: number) => ({ opacity: 0, x: reduce ? 0 : d * 40 }),
+              center: { opacity: 1, x: 0 },
+              exit: (d: number) => ({ opacity: 0, x: reduce ? 0 : d * -40 }),
+            }}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
+            drag={many ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onTap={(e) => (e.target as HTMLElement).tagName === "IMG" && setOpen(true)}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -50) go(1);
+              else if (info.offset.x > 50) go(-1);
+            }}
+            className="absolute inset-0 flex items-center justify-center px-12 sm:px-16"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={images[i]}
+              alt={`${name} screenshot ${i + 1} of ${images.length}`}
+              draggable={false}
+              className="max-h-full max-w-full cursor-zoom-in select-none rounded-xl border border-[var(--line)] object-contain shadow-lg"
+            />
+          </motion.div>
+        </AnimatePresence>
 
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label="See full size"
-        className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-black/45 text-white backdrop-blur transition-opacity hover:bg-black/60 sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100"
-      >
-        <Maximize2 size={15} />
-      </button>
-
-      {many && (
-        <>
-          {[-1, 1].map((by) => (
+        {many &&
+          [-1, 1].map((by) => (
             <button
               key={by}
               type="button"
               onClick={() => go(by)}
               aria-label={by < 0 ? "Previous screenshot" : "Next screenshot"}
               className={cn(
-                "absolute top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/45 text-white backdrop-blur transition-opacity hover:bg-black/60 sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100",
-                by < 0 ? "left-3" : "right-3",
+                "absolute top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-[var(--line)] bg-[var(--surface-2)] text-[var(--muted)] transition-colors hover:text-[var(--fg)]",
+                by < 0 ? "left-1 sm:left-2" : "right-1 sm:right-2",
               )}
             >
-              {by < 0 ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+              {by < 0 ? <ChevronLeft size={17} /> : <ChevronRight size={17} />}
             </button>
           ))}
-          <div className="absolute inset-x-0 bottom-3 flex justify-center gap-1.5">
+      </div>
+
+      <div className="relative mt-4 flex h-8 items-center justify-center">
+        {many && (
+          <div className="flex gap-1.5">
             {images.map((_, n) => (
               <button
                 key={n}
@@ -119,12 +120,19 @@ export function Slideshow({ images, name, className }: { images: string[]; name:
                 onClick={() => setState([n, n > i ? 1 : -1])}
                 aria-label={`Show screenshot ${n + 1}`}
                 aria-current={n === i}
-                className={cn("h-1.5 rounded-full bg-white shadow transition-all", n === i ? "w-5 opacity-100" : "w-1.5 opacity-55 hover:opacity-80")}
+                className={cn("h-1.5 rounded-full bg-[var(--fg)] transition-all", n === i ? "w-5 opacity-100" : "w-1.5 opacity-25 hover:opacity-50")}
               />
             ))}
           </div>
-        </>
-      )}
+        )}
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="absolute right-0 inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--fg)]"
+        >
+          <Maximize2 size={13} /> Full size
+        </button>
+      </div>
 
       {open &&
         createPortal(
