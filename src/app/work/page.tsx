@@ -16,10 +16,9 @@ export default async function WorkPage() {
   return (
     <section className="shell pt-24 lg:pt-28">
       <Reveal className="mb-8 max-w-2xl">
-        <p className="label">~/work</p>
-        <h1 className="mt-3 text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">Everything I&apos;ve shipped</h1>
+        <h1 className="text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">My work</h1>
         <p className="mt-4 text-[17px] leading-relaxed text-[var(--muted)]">
-          Production apps for Pazimo, plus the side projects I build to scratch my own itch. Each page covers the problem, what I built and what I learned.
+          Apps I built for Pazimo, plus small side projects. Tap any project to learn more.
         </p>
       </Reveal>
       <WorkGrid items={projects} images={images}>

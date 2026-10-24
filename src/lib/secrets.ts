@@ -15,7 +15,6 @@ export const SECRETS = [
   { id: "reader", title: "Bookworm", hint: "Read the About page all the way to the end." },
   { id: "regular", title: "Regular", hint: "Come back a third time." },
   { id: "lost", title: "Lost", hint: "Get lost. Literally." },
-  { id: "architect", title: "Architect", hint: "Inspect every box in the Pazimo diagram." },
   { id: "rust", title: "Rustacean", hint: "Build and run something in the terminal, the Rust way." },
   { id: "console", title: "Inspector", hint: "Developers always check the console first." },
 ] as const;

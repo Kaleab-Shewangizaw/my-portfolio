@@ -28,20 +28,20 @@ export function Contributions({ days }: { days: Day[] }) {
   return (
     <div ref={ref}>
       <div ref={scroller} className="overflow-x-auto pb-1">
-        <div className={"flex w-max gap-[3px] " + (inView ? "" : "paused")}>
+        <div className={"flex w-full min-w-[640px] gap-[3px] " + (inView ? "" : "paused")}>
           {weeks.map((w, wi) => (
-            <div key={wi} className="flex flex-col gap-[3px]">
+            <div key={wi} className="flex flex-1 flex-col gap-[3px]">
               {w.map((d, di) =>
                 d ? (
                   <span
                     key={di}
-                    className="cell size-[11px] rounded-[3px]"
+                    className="cell aspect-square w-full rounded-[3px]"
                     style={{ background: shade[d.level], animationDelay: `${wi * 14}ms` }}
                     onMouseEnter={() => setHover(d)}
                     onMouseLeave={() => setHover(null)}
                   />
                 ) : (
-                  <span key={di} className="size-[11px]" />
+                  <span key={di} className="aspect-square w-full" />
                 ),
               )}
             </div>
