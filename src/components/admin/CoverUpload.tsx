@@ -6,7 +6,10 @@ import { ImagePlus, Loader2, Trash2 } from "lucide-react";
 
 export const IMAGE_ACCEPT = "image/jpeg,image/png,image/webp";
 export const LOGO_ACCEPT = `${IMAGE_ACCEPT},image/svg+xml`;
-const MAX_BYTES = 4 * 1024 * 1024;
+// You can pick up to 15 MB; anything over 4 MB is shrunk in the browser first,
+// since Vercel rejects request bodies over about 4.5 MB.
+const MAX_PICK_BYTES = 15 * 1024 * 1024;
+const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
 
 type Kind = "image" | "logo";
 
@@ -14,14 +17,41 @@ type Kind = "image" | "logo";
 export function checkImage(file: File, kind: Kind = "image") {
   if (kind === "logo" && !LOGO_ACCEPT.split(",").includes(file.type)) return "Use an SVG, PNG, WebP or JPG image.";
   if (kind === "image" && !IMAGE_ACCEPT.split(",").includes(file.type)) return "Use a JPG, PNG or WebP image.";
-  if (file.size > MAX_BYTES) return "Image must be under 4 MB.";
+  if (file.size > MAX_PICK_BYTES) return "Image must be under 15 MB.";
   return null;
+}
+
+/** Scales and re-encodes an image until it fits the upload limit. Small files and SVGs pass through untouched. */
+export async function shrinkImage(file: File): Promise<File> {
+  if (file.size <= MAX_UPLOAD_BYTES || file.type === "image/svg+xml") return file;
+  const bitmap = await createImageBitmap(file);
+  const canvas = document.createElement("canvas");
+  try {
+    for (const side of [3200, 2560, 1920, 1280]) {
+      const scale = Math.min(1, side / Math.max(bitmap.width, bitmap.height));
+      canvas.width = Math.round(bitmap.width * scale);
+      canvas.height = Math.round(bitmap.height * scale);
+      canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      for (const quality of [0.9, 0.8, 0.7]) {
+        let blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, "image/webp", quality));
+        // Older Safari can't encode WebP and hands back a PNG; JPEG is the next best.
+        if (blob?.type !== "image/webp") blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, "image/jpeg", quality));
+        if (blob && blob.size <= MAX_UPLOAD_BYTES) {
+          const ext = blob.type === "image/webp" ? "webp" : "jpg";
+          return new File([blob], file.name.replace(/\.\w+$/, "") + "." + ext, { type: blob.type });
+        }
+      }
+    }
+  } finally {
+    bitmap.close();
+  }
+  throw new Error("Couldn't shrink this image enough. Try a smaller one.");
 }
 
 /** Uploads a cover or logo for a saved project. Resolves to the new image URL, or throws with a message. */
 export async function uploadImage(slug: string, file: File, kind: Kind = "image"): Promise<string> {
   const body = new FormData();
-  body.append("file", file);
+  body.append("file", await shrinkImage(file));
   const res = await fetch(`/api/admin/projects/${slug}/${kind}`, { method: "PUT", body });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(res.status === 401 ? "Signed out. Refresh and sign in again." : (data.error ?? "Upload failed."));

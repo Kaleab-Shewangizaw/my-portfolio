@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, ImagePlus, Loader2, X } from "lucide-react";
-import { IMAGE_ACCEPT, checkImage } from "./CoverUpload";
+import { IMAGE_ACCEPT, checkImage, shrinkImage } from "./CoverUpload";
 
 type Screenshot = { id: string; url: string };
 
@@ -33,7 +33,13 @@ export function ScreenshotsUpload({ slug, initial }: { slug: string; initial: Sc
       const bad = checkImage(file);
       if (bad) return setErr(bad);
       const body = new FormData();
-      body.append("file", file);
+      setBusy(true);
+      try {
+        body.append("file", await shrinkImage(file));
+      } catch (e) {
+        setBusy(false);
+        return setErr((e as Error).message);
+      }
       if (!(await call(`/api/admin/projects/${slug}/screenshots`, { method: "POST", body }))) return;
     }
   }
