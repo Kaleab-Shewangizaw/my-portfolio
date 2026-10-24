@@ -56,12 +56,12 @@ export default async function AboutPage() {
           </h1>
           <div className="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-[var(--muted)]">
             <p>
-              I&apos;m Kaleab, a software engineer from Addis Ababa. I taught myself to code in {site.startedCoding}, and today I lead the
-              team at Pazimo, where we make a ticketing website and two phone apps.
+              I&apos;m Kaleab, a self-taught software engineer from Addis Ababa, writing code since {site.startedCoding}. Today I&apos;m CTO and solo
+              engineer at Pazimo, responsible for its ticketing website and both phone apps, from first design to launch.
             </p>
             <p>
-              I&apos;m also studying engineering at Addis Ababa University. I care about the small things that make an app feel easy to
-              use.
+              Alongside that, I&apos;m studying engineering at Addis Ababa University, and care most about the small details that make an
+              app feel easy to use.
             </p>
           </div>
           <a href={site.cv} target="_blank" rel="noopener" className="mt-8 inline-flex h-11 items-center gap-2 rounded-full bg-[var(--fg)] px-5 text-sm font-medium text-[var(--bg)]">

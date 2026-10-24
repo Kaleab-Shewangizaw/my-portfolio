@@ -18,7 +18,7 @@ export default async function WorkPage() {
       <Reveal className="mb-8 max-w-2xl">
         <h1 className="text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">My work</h1>
         <p className="mt-4 text-[17px] leading-relaxed text-[var(--muted)]">
-          Apps I built for Pazimo, plus small side projects. Tap any project to learn more.
+          Pazimo&apos;s website and apps, plus small side projects. Tap any project to learn more.
         </p>
       </Reveal>
       <WorkGrid items={projects} images={images} logos={logos}>

@@ -61,7 +61,7 @@ export default async function Home() {
       <section className="shell mt-16">
         <SectionHead
           title="Pazimo"
-          sub="An event ticketing startup. I'm the CTO, and I built these."
+          sub="An event ticketing startup, where I'm CTO and solo engineer."
           action={
             <a href="https://pazimo.com" target="_blank" rel="noopener noreferrer" className="label link-underline hover:text-[var(--fg)]">
               pazimo.com ↗
