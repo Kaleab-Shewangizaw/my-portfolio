@@ -15,22 +15,27 @@ export function ProjectCover({ project, image, className, fit = "frame" }: { pro
     <div
       className={cn(
         "relative isolate flex items-center justify-center overflow-hidden rounded-2xl bg-[var(--surface-2)]",
-        fit === "frame" ? "p-3 sm:p-4" : "p-4 sm:p-8",
+        fit === "natural" && "p-4 sm:p-8",
         className,
       )}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={image} alt="" aria-hidden className="absolute inset-0 -z-10 size-full scale-125 object-cover opacity-50 blur-2xl" loading="lazy" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={image}
-        alt={`${project.name} screenshot`}
-        className={cn(
-          "h-auto w-auto max-w-full rounded-lg object-contain shadow-2xl shadow-black/30",
-          fit === "frame" ? "max-h-full" : "max-h-[min(560px,70vh)] sm:rounded-xl",
-        )}
-        loading="lazy"
-      />
+      {fit === "frame" ? (
+        // Positioned so the image can size against the box even when the box's height comes from a grid row.
+        <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={image} alt={`${project.name} screenshot`} className="max-h-full max-w-full rounded-lg object-contain shadow-2xl shadow-black/30" loading="lazy" />
+        </div>
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={image}
+          alt={`${project.name} screenshot`}
+          className="h-auto max-h-[min(560px,70vh)] w-auto max-w-full rounded-lg object-contain shadow-2xl shadow-black/30 sm:rounded-xl"
+          loading="lazy"
+        />
+      )}
     </div>
   );
 }

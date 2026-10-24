@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// Bundled with the project, so dev and builds never wait on Google Fonts.
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -12,8 +14,6 @@ import { Dock } from "@/components/Dock";
 import { Footer } from "@/components/Footer";
 import { getProjects } from "@/lib/projects";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 const description = `${site.name} (${site.alias}), ${site.role} in ${site.city}. ${site.intro}`;
 
@@ -63,7 +63,7 @@ const jsonLd = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const projects = (await getProjects()).map(({ slug, name, kind }) => ({ slug, name, kind }));
   return (
-    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <ThemeProvider>
