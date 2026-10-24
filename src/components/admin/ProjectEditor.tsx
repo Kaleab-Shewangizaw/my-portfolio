@@ -371,7 +371,7 @@ export function ProjectEditor({
             ) : (
               <CoverUpload slug={project.slug} name={project.name} image={image} onChange={setImage} />
             )}
-            <span className="basis-full text-xs text-[var(--faint)]">Optional. JPG, PNG or WebP up to 4 MB. Without one, a mockup is drawn from the project.</span>
+            <span className="basis-full text-xs text-[var(--faint)]">Optional. JPG, PNG or WebP up to 15 MB. Without one, a mockup is drawn from the project.</span>
           </div>
           <div className="card flex flex-wrap items-center gap-2 p-4">
             <span className="label basis-full">Logo</span>
