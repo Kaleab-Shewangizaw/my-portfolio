@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth";
 import { parseProject } from "@/lib/projectSchema";
 import { getAllProjects, isBuiltIn, projectCollection, revalidateProjects } from "@/lib/projects";
-import { projectImageCollection } from "@/lib/projectImages";
+import { projectImageCollection, screenshotCollection } from "@/lib/projectImages";
 
 type Ctx = { params: Promise<{ slug: string }> };
 
@@ -40,7 +40,7 @@ export async function PATCH(req: Request, { params }: Ctx) {
   return NextResponse.json({ ok: true });
 }
 
-/** A new project is deleted with its image. A built-in one is reset to what content/site.ts says. */
+/** A new project is deleted with its images. A built-in one is reset to what content/site.ts says. */
 export async function DELETE(_: Request, { params }: Ctx) {
   const g = await guard(params);
   if (g.error) return g.error;
@@ -48,7 +48,11 @@ export async function DELETE(_: Request, { params }: Ctx) {
   if (isBuiltIn(g.slug)) {
     await projects.updateOne({ _id: g.slug }, { $unset: { project: "" } });
   } else {
-    await Promise.all([projects.deleteOne({ _id: g.slug }), (await projectImageCollection()).deleteOne({ _id: g.slug })]);
+    await Promise.all([
+      projects.deleteOne({ _id: g.slug }),
+      (await projectImageCollection()).deleteOne({ _id: g.slug }),
+      (await screenshotCollection()).deleteMany({ slug: g.slug }),
+    ]);
   }
   revalidateProjects();
   return NextResponse.json({ ok: true });

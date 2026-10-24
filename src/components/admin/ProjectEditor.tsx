@@ -8,6 +8,7 @@ import type { Project } from "@/content/site";
 import { PLATFORMS, parseProject, slugify } from "@/lib/projectSchema";
 import { ProjectCard } from "../ProjectCard";
 import { CoverUpload, IMAGE_ACCEPT, checkImage, uploadImage } from "./CoverUpload";
+import { ScreenshotsUpload } from "./ScreenshotsUpload";
 import { cn } from "@/lib/utils";
 
 type Draft = {
@@ -91,7 +92,17 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export function ProjectEditor({ project, image: initialImage, builtIn }: { project?: Project; image?: string; builtIn?: boolean }) {
+export function ProjectEditor({
+  project,
+  image: initialImage,
+  screenshots = [],
+  builtIn,
+}: {
+  project?: Project;
+  image?: string;
+  screenshots?: { id: string; url: string }[];
+  builtIn?: boolean;
+}) {
   const router = useRouter();
   const isNew = !project;
   const [d, setD] = useState<Draft>(() => toDraft(project));
@@ -354,6 +365,14 @@ export function ProjectEditor({ project, image: initialImage, builtIn }: { proje
             )}
             <span className="basis-full text-xs text-[var(--faint)]">Optional. JPG, PNG or WebP up to 4 MB. Without one, a mockup is drawn from the project.</span>
           </div>
+          {isNew ? (
+            <p className="card p-4 text-xs text-[var(--faint)]">
+              <span className="label mb-1 block">Screenshots</span>
+              Publish the project first, then add up to five screenshots for its slideshow.
+            </p>
+          ) : (
+            <ScreenshotsUpload slug={project.slug} initial={screenshots} />
+          )}
           {err && <p className="card p-4 text-sm text-[var(--accent-text)]">{err}</p>}
           <button disabled={saving} className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[var(--fg)] text-sm font-medium text-[var(--bg)] disabled:opacity-50">
             {saving && <Loader2 size={15} className="animate-spin" />} {isNew ? "Publish project" : "Save changes"}

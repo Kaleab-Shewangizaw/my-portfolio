@@ -3,9 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { ProjectCover } from "@/components/ProjectCover";
-import { getProjectImages } from "@/lib/projectImages";
+import { getProjectImages, getProjectScreenshots } from "@/lib/projectImages";
 import { getProjects } from "@/lib/projects";
 import { Reveal } from "@/components/Reveal";
+import { Slideshow } from "@/components/Slideshow";
 
 export const revalidate = 3600;
 
@@ -29,7 +30,8 @@ export default async function CaseStudy({ params }: Params) {
   if (i === -1) notFound();
   const p = projects[i];
   const next = projects[(i + 1) % projects.length];
-  const image = (await getProjectImages())[p.slug];
+  const [images, screenshots] = await Promise.all([getProjectImages(), getProjectScreenshots(p.slug)]);
+  const image = images[p.slug];
 
   return (
     <article className="shell pt-24 lg:pt-28">
@@ -58,6 +60,13 @@ export default async function CaseStudy({ params }: Params) {
       <Reveal delay={0.1} className="card mt-8 p-2">
         <ProjectCover project={p} image={image} className="h-[300px] sm:h-[440px]" />
       </Reveal>
+
+      {screenshots.length > 0 && (
+        <Reveal className="card mt-3 p-2">
+          <h2 className="px-4 pb-3 pt-3 text-lg font-semibold tracking-tight">A closer look</h2>
+          <Slideshow images={screenshots.map((s) => s.url)} name={p.name} className="h-[280px] sm:h-[480px]" />
+        </Reveal>
+      )}
 
       <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
         {p.highlights.length > 0 && (
