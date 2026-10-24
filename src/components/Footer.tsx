@@ -9,9 +9,8 @@ export function Footer() {
     <footer className="shell mt-16 pb-28">
       <div className="card grid grid-cols-1 gap-8 p-6 sm:p-10 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
-          <p className="label">~/contact</p>
-          <h2 className="mt-3 text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
-            Always happy to talk about software.
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
+            Let&apos;s work together.
           </h2>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link href="/contact" className="inline-flex h-11 items-center gap-2 rounded-full bg-[var(--fg)] px-5 text-sm font-medium text-[var(--bg)]">
@@ -35,7 +34,7 @@ export function Footer() {
         <span className="flex items-center gap-2">
           <Logo size={16} /> © {new Date().getFullYear()} {site.name}
         </span>
-        <span className="mono hidden sm:inline">Psst. Try ⌘K, or type &apos;help&apos; in the terminal.</span>
+        <span className="mono hidden sm:inline">Psst. Try ⌘K.</span>
       </div>
     </footer>
   );

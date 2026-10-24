@@ -41,28 +41,37 @@ export function Stars({ value, className }: { value: number; className?: string 
   );
 }
 
-export function TestimonialCard({ t, className }: { t: CardData; className?: string }) {
-  const sub = [t.role, t.company].filter(Boolean).join(" · ");
+function QuoteMark() {
   return (
-    <figure className={cn("card flex flex-col p-6", className)}>
-      <div className="flex items-center justify-between gap-3">
-        <span className="mono rounded-md bg-[var(--surface-2)] px-2 py-0.5 text-[11px] text-[var(--muted)]">
-          {t.relation}
-          {t.project ? ` · ${t.project}` : ""}
-        </span>
+    <svg viewBox="0 0 32 24" className="h-6 w-8 text-[var(--fg)]" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M0 24V14.4C0 6.2 4.4 1.4 12 0l1.4 3.2C9 4.6 6.9 7.4 6.6 11H12v13H0zm18 0V14.4C18 6.2 22.4 1.4 30 0l1.4 3.2C27 4.6 24.9 7.4 24.6 11H30v13H18z"
+      />
+    </svg>
+  );
+}
+
+/** `featured` is the wide, large-type version used for the first quote on a page. */
+export function TestimonialCard({ t, className, featured }: { t: CardData; className?: string; featured?: boolean }) {
+  const sub = [t.role, t.company].filter(Boolean).join(", ");
+  // Skip the project when it only repeats the role line.
+  const context = [t.relation, t.project && !sub.includes(t.project) ? t.project : ""].filter(Boolean).join(" · ");
+  return (
+    <figure className={cn("card flex flex-col p-6 sm:p-7", featured && "sm:p-8", className)}>
+      <div className="flex items-start justify-between gap-3">
+        <QuoteMark />
         {t.rating ? <Stars value={t.rating} /> : null}
       </div>
-      <blockquote className="mt-4 flex-1 whitespace-pre-line text-[15px] leading-relaxed">
-        <span className="mr-0.5 text-[var(--accent)]">“</span>
+      <blockquote className={cn("mt-5 whitespace-pre-line text-[15px] leading-relaxed", featured && "max-w-3xl text-base sm:text-[17px]")}>
         {t.message || "Your words will appear here."}
-        <span className="ml-0.5 text-[var(--accent)]">”</span>
       </blockquote>
-      <figcaption className="mt-6 flex items-center gap-3 border-t border-[var(--line)] pt-4">
+      <figcaption className="mt-auto flex items-center gap-3 pt-7">
         {t.avatarSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={t.avatarSrc} alt="" className="size-11 shrink-0 rounded-full object-cover" loading="lazy" />
         ) : (
-          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-[var(--surface-2)] text-sm font-semibold text-[var(--fg)]">
+          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-[var(--fg)] text-sm font-semibold text-[var(--bg)]">
             {initials(t.name)}
           </span>
         )}
@@ -76,7 +85,8 @@ export function TestimonialCard({ t, className }: { t: CardData; className?: str
               t.name || "Your name"
             )}
           </span>
-          {sub && <span className="block truncate text-sm text-[var(--muted)]">{sub}</span>}
+          {sub && <span className="block text-sm text-[var(--muted)]">{sub}</span>}
+          {context && <span className="block text-xs text-[var(--faint)]">{context}</span>}
         </span>
       </figcaption>
     </figure>
