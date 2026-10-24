@@ -61,7 +61,8 @@ export default async function CaseStudy({ params }: Params) {
       </Reveal>
 
       <Reveal delay={0.1} className="card mt-8 p-2">
-        <ProjectCover project={p} image={image} className="h-[300px] sm:h-[440px]" />
+        {/* With an image the cover takes the image's own shape; the drawn mockup needs a set height. */}
+        <ProjectCover project={p} image={image} fit="natural" className={image ? undefined : "h-[300px] sm:h-[440px]"} />
       </Reveal>
 
       {screenshots.length > 0 && (
