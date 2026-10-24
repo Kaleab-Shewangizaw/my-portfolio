@@ -51,7 +51,7 @@ export const projects: Project[] = [
     year: "2025",
     platform: "web",
     kind: "Website",
-    role: "CTO",
+    role: "CTO, solo engineer",
     featured: true,
     summary: "A website for buying event tickets and sending invitations in Ethiopia.",
     stack: ["Next.js", "TypeScript", "Node.js", "MongoDB"],
@@ -67,8 +67,8 @@ export const projects: Project[] = [
         body: "Most ticketing sites don't accept the payment methods people in Ethiopia use.",
       },
       {
-        heading: "What I did",
-        body: "I lead the team that built Pazimo, and I keep the website and its servers running.",
+        heading: "The solution",
+        body: "A checkout built around local payment options, with a QR ticket for every buyer. Designed, built and maintained end to end, from the website to the servers behind it.",
       },
     ],
   },
@@ -78,7 +78,7 @@ export const projects: Project[] = [
     year: "2026",
     platform: "mobile",
     kind: "Phone app",
-    role: "Lead developer",
+    role: "Solo engineer",
     featured: true,
     summary: "Find events, buy tickets and keep them on your phone.",
     stack: ["React Native", "Expo", "TypeScript"],
@@ -94,8 +94,8 @@ export const projects: Project[] = [
         body: "The old app was slow to change, so new features took a long time to reach users.",
       },
       {
-        heading: "What I did",
-        body: "I rebuilt it from scratch so the same team can update the website and the app together.",
+        heading: "The solution",
+        body: "A ground-up rebuild in the same language as the website, so new features now reach the website and the app at the same time.",
       },
     ],
   },
@@ -105,7 +105,7 @@ export const projects: Project[] = [
     year: "2026",
     platform: "mobile",
     kind: "Phone app",
-    role: "Built it alone",
+    role: "Solo engineer",
     featured: true,
     summary: "The app event staff use to scan tickets and track sales.",
     stack: ["React Native", "Expo", "TypeScript"],
@@ -121,8 +121,8 @@ export const projects: Project[] = [
         body: "Organizers, door staff and cashiers each need different tools, and the wrong access costs money.",
       },
       {
-        heading: "What I did",
-        body: "I built one app that shows each person the right screens after they sign in.",
+        heading: "The solution",
+        body: "One app with role-based access: after signing in, each person sees only the screens their job needs.",
       },
     ],
   },
@@ -238,7 +238,7 @@ export type Build = { name: string; client: string; href: string; label?: string
 
 // logo: a file in public/logos. Entries without one show the org's initials.
 export const timeline: { period: string; title: string; org: string; logo?: string; note: string; builds?: Build[] }[] = [
-  { period: "2025 — now", title: "CTO", org: "Pazimo", logo: "/logos/pazimo.png", note: "I lead the team building Pazimo's website and apps." },
+  { period: "2025 — now", title: "CTO", org: "Pazimo", logo: "/logos/pazimo.png", note: "Solo engineer behind the website, both phone apps and the servers they run on, from first design to launch." },
   {
     period: "2025 — now",
     title: "Full-stack Developer",
