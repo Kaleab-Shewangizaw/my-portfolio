@@ -4,6 +4,7 @@ import { ArrowUpRight, Download } from "lucide-react";
 import { site } from "@/content/site";
 import { getApproved } from "@/lib/testimonials";
 import { getProjectImages, getProjectLogos } from "@/lib/projectImages";
+import { DEFAULT_PORTRAIT, getUploadedPortrait } from "@/lib/portrait";
 import { getProjects } from "@/lib/projects";
 import { TestimonialCard } from "@/components/testimonials/TestimonialCard";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -25,7 +26,7 @@ function SectionHead({ title, sub, action }: { title: string; sub?: string; acti
 export const revalidate = 3600;
 
 export default async function Home() {
-  const [kind, images, logos, projects] = await Promise.all([getApproved(3), getProjectImages(), getProjectLogos(), getProjects()]);
+  const [kind, images, logos, projects, portrait] = await Promise.all([getApproved(3), getProjectImages(), getProjectLogos(), getProjects(), getUploadedPortrait()]);
   const pazimo = projects.filter((p) => p.slug.startsWith("pazimo"));
   const others = projects.filter((p) => !p.slug.startsWith("pazimo")).slice(0, 3);
 
@@ -52,7 +53,8 @@ export default async function Home() {
         </Reveal>
         <Reveal delay={0.15} className="hidden md:block">
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-[var(--surface-2)]">
-            <Image src="/me.jpg" alt={`Portrait of ${site.name}`} fill sizes="300px" priority className="object-cover" />
+            {/* An uploaded portrait was already resized in the admin, so it's served as is. */}
+            <Image src={portrait ?? DEFAULT_PORTRAIT} unoptimized={!!portrait} alt={`Portrait of ${site.name}`} fill sizes="300px" priority className="object-cover" />
           </div>
         </Reveal>
       </section>

@@ -21,13 +21,20 @@ export function checkImage(file: File, kind: Kind = "image") {
   return null;
 }
 
-/** Scales and re-encodes an image until it fits the upload limit. Small files and SVGs pass through untouched. */
-export async function shrinkImage(file: File): Promise<File> {
-  if (file.size <= MAX_UPLOAD_BYTES || file.type === "image/svg+xml") return file;
+/**
+ * Scales and re-encodes an image until it fits the upload limit, and no side is over maxSide when given.
+ * Files that already fit, and SVGs, pass through untouched.
+ */
+export async function shrinkImage(file: File, maxSide?: number): Promise<File> {
+  if (file.type === "image/svg+xml" || (!maxSide && file.size <= MAX_UPLOAD_BYTES)) return file;
   const bitmap = await createImageBitmap(file);
+  if (maxSide && file.size <= MAX_UPLOAD_BYTES && Math.max(bitmap.width, bitmap.height) <= maxSide) {
+    bitmap.close();
+    return file;
+  }
   const canvas = document.createElement("canvas");
   try {
-    for (const side of [3200, 2560, 1920, 1280]) {
+    for (const side of maxSide ? [maxSide, Math.round(maxSide * 0.75)] : [3200, 2560, 1920, 1280]) {
       const scale = Math.min(1, side / Math.max(bitmap.width, bitmap.height));
       canvas.width = Math.round(bitmap.width * scale);
       canvas.height = Math.round(bitmap.height * scale);

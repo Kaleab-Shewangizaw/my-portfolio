@@ -10,6 +10,7 @@ import { Terminal } from "@/components/Terminal";
 import { Contributions } from "@/components/Contributions";
 import { getGitHub } from "@/lib/github";
 import { getProjects } from "@/lib/projects";
+import { DEFAULT_PORTRAIT, getUploadedPortrait } from "@/lib/portrait";
 
 export const metadata: Metadata = {
   title: "About",
@@ -25,14 +26,15 @@ const facts = [
 export const revalidate = 3600;
 
 export default async function AboutPage() {
-  const [projects, gh] = await Promise.all([getProjects(), getGitHub()]);
+  const [projects, gh, portrait] = await Promise.all([getProjects(), getGitHub(), getUploadedPortrait()]);
   return (
     <section className="shell pt-24 lg:pt-28">
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-[340px_1fr]">
         <Reveal className="card overflow-hidden p-2">
           <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--surface-2)]">
             <Image
-              src="/me.jpg"
+              src={portrait ?? DEFAULT_PORTRAIT}
+              unoptimized={!!portrait}
               alt={`Portrait of ${site.name}`}
               fill
               sizes="340px"
