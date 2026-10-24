@@ -1,5 +1,5 @@
 import "server-only";
-import type { Binary } from "mongodb";
+import type { Binary, ObjectId } from "mongodb";
 import { db } from "./db";
 
 export type ProjectImageDoc = {
@@ -16,6 +16,23 @@ export async function projectImageCollection() {
   return (await db()).collection<ProjectImageDoc>("project_images");
 }
 
+/** Logos may also be SVG; they're served with a CSP that blocks scripts. */
+export const LOGO_TYPES = [...IMAGE_TYPES, "image/svg+xml"];
+
+export async function projectLogoCollection() {
+  return (await db()).collection<ProjectImageDoc>("project_logos");
+}
+
+/** Slug → public logo URL for every project that has an uploaded logo. Empty if the database is unreachable. */
+export async function getProjectLogos(): Promise<Record<string, string>> {
+  try {
+    const docs = await (await projectLogoCollection()).find({}, { projection: { data: 0 } }).toArray();
+    return Object.fromEntries(docs.map((d) => [d._id, `/api/projects/${d._id}/logo?v=${d.updatedAt.getTime()}`]));
+  } catch {
+    return {};
+  }
+}
+
 /** Slug → public image URL for every project that has an uploaded cover. Empty if the database is unreachable. */
 export async function getProjectImages(): Promise<Record<string, string>> {
   try {
@@ -24,5 +41,33 @@ export async function getProjectImages(): Promise<Record<string, string>> {
     return Object.fromEntries(docs.map((d) => [d._id, `/api/projects/${d._id}/image?v=${d.updatedAt.getTime()}`]));
   } catch {
     return {};
+  }
+}
+
+export const MAX_SCREENSHOTS = 5;
+
+export type ScreenshotDoc = {
+  _id: ObjectId;
+  slug: string;
+  data: Binary;
+  type: string;
+  order: number;
+  createdAt: Date;
+};
+
+export type Screenshot = { id: string; url: string };
+
+export async function screenshotCollection() {
+  return (await db()).collection<ScreenshotDoc>("project_screenshots");
+}
+
+/** A project's screenshots in display order. Empty if the database is unreachable. */
+export async function getProjectScreenshots(slug: string): Promise<Screenshot[]> {
+  try {
+    const docs = await (await screenshotCollection()).find({ slug }, { projection: { data: 0 } }).sort({ order: 1, createdAt: 1 }).toArray();
+    // Ids are never reused, so the URL can be cached forever.
+    return docs.map((d) => ({ id: d._id.toHexString(), url: `/api/projects/${slug}/screenshots/${d._id.toHexString()}` }));
+  } catch {
+    return [];
   }
 }

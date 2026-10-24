@@ -7,7 +7,8 @@ import { ArrowLeft, Github, ImagePlus, Loader2, Plus, X } from "lucide-react";
 import type { Project } from "@/content/site";
 import { PLATFORMS, parseProject, slugify } from "@/lib/projectSchema";
 import { ProjectCard } from "../ProjectCard";
-import { CoverUpload, IMAGE_ACCEPT, checkImage, uploadImage } from "./CoverUpload";
+import { CoverUpload, IMAGE_ACCEPT, LOGO_ACCEPT, checkImage, uploadImage } from "./CoverUpload";
+import { ScreenshotsUpload } from "./ScreenshotsUpload";
 import { cn } from "@/lib/utils";
 
 type Draft = {
@@ -91,19 +92,34 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export function ProjectEditor({ project, image: initialImage, builtIn }: { project?: Project; image?: string; builtIn?: boolean }) {
+export function ProjectEditor({
+  project,
+  image: initialImage,
+  logo: initialLogo,
+  screenshots = [],
+  builtIn,
+}: {
+  project?: Project;
+  image?: string;
+  logo?: string;
+  screenshots?: { id: string; url: string }[];
+  builtIn?: boolean;
+}) {
   const router = useRouter();
   const isNew = !project;
   const [d, setD] = useState<Draft>(() => toDraft(project));
   const [slugTouched, setSlugTouched] = useState(!isNew);
   const [image, setImage] = useState(initialImage);
   const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [logo, setLogo] = useState(initialLogo);
+  const [pendingLogo, setPendingLogo] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [repo, setRepo] = useState("");
   const [importing, setImporting] = useState(false);
   const [dirty, setDirty] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
+  const logoInput = useRef<HTMLInputElement>(null);
 
   const set = <K extends keyof Draft>(k: K, v: Draft[K]) => {
     setDirty(true);
@@ -113,6 +129,8 @@ export function ProjectEditor({ project, image: initialImage, builtIn }: { proje
   // A local preview of an image picked before the project exists.
   const pendingUrl = useMemo(() => (pendingFile ? URL.createObjectURL(pendingFile) : undefined), [pendingFile]);
   useEffect(() => () => void (pendingUrl && URL.revokeObjectURL(pendingUrl)), [pendingUrl]);
+  const pendingLogoUrl = useMemo(() => (pendingLogo ? URL.createObjectURL(pendingLogo) : undefined), [pendingLogo]);
+  useEffect(() => () => void (pendingLogoUrl && URL.revokeObjectURL(pendingLogoUrl)), [pendingLogoUrl]);
 
   useEffect(() => {
     if (!dirty) return;
@@ -180,9 +198,10 @@ export function ProjectEditor({ project, image: initialImage, builtIn }: { proje
       setSaving(false);
       return setErr(data?.error ?? "Couldn't save. Is the database reachable?");
     }
-    if (isNew && pendingFile) {
+    if (isNew && (pendingFile || pendingLogo)) {
       try {
-        await uploadImage(data.slug, pendingFile);
+        if (pendingFile) await uploadImage(data.slug, pendingFile);
+        if (pendingLogo) await uploadImage(data.slug, pendingLogo, "logo");
       } catch (e) {
         // The project is saved; send them to it so they can retry the image.
         setSaving(false);
@@ -319,7 +338,7 @@ export function ProjectEditor({ project, image: initialImage, builtIn }: { proje
           <div>
             <p className="label mb-2">Preview</p>
             <div className="pointer-events-none" aria-hidden>
-              <ProjectCard project={preview} image={pendingUrl ?? image} />
+              <ProjectCard project={preview} image={pendingUrl ?? image} logo={pendingLogoUrl ?? logo} />
             </div>
           </div>
           <div className="card flex flex-wrap items-center gap-2 p-4">
@@ -354,6 +373,48 @@ export function ProjectEditor({ project, image: initialImage, builtIn }: { proje
             )}
             <span className="basis-full text-xs text-[var(--faint)]">Optional. JPG, PNG or WebP up to 4 MB. Without one, a mockup is drawn from the project.</span>
           </div>
+          <div className="card flex flex-wrap items-center gap-2 p-4">
+            <span className="label basis-full">Logo</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            {(pendingLogoUrl ?? logo) && <img src={pendingLogoUrl ?? logo} alt="" className="size-9 rounded-lg object-contain" />}
+            {isNew ? (
+              <>
+                <input
+                  ref={logoInput}
+                  type="file"
+                  accept={LOGO_ACCEPT}
+                  className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    e.target.value = "";
+                    if (!f) return;
+                    const bad = checkImage(f, "logo");
+                    if (bad) return setErr(bad);
+                    setPendingLogo(f);
+                  }}
+                />
+                <button type="button" onClick={() => logoInput.current?.click()} className="inline-flex h-9 items-center gap-1.5 rounded-full border border-[var(--line)] px-3 text-sm text-[var(--muted)] hover:text-[var(--fg)]">
+                  <ImagePlus size={15} /> {pendingLogo ? "Change" : "Choose logo"}
+                </button>
+                {pendingLogo && (
+                  <button type="button" onClick={() => setPendingLogo(null)} className="text-sm text-[var(--muted)] hover:text-[var(--fg)]">
+                    No logo
+                  </button>
+                )}
+              </>
+            ) : (
+              <CoverUpload kind="logo" slug={project.slug} name={project.name} image={logo} onChange={setLogo} />
+            )}
+            <span className="basis-full text-xs text-[var(--faint)]">Optional. SVG, PNG, WebP or JPG. A square image with a transparent background looks best.</span>
+          </div>
+          {isNew ? (
+            <p className="card p-4 text-xs text-[var(--faint)]">
+              <span className="label mb-1 block">Screenshots</span>
+              Publish the project first, then add up to five screenshots for its slideshow.
+            </p>
+          ) : (
+            <ScreenshotsUpload slug={project.slug} initial={screenshots} />
+          )}
           {err && <p className="card p-4 text-sm text-[var(--accent-text)]">{err}</p>}
           <button disabled={saving} className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[var(--fg)] text-sm font-medium text-[var(--bg)] disabled:opacity-50">
             {saving && <Loader2 size={15} className="animate-spin" />} {isNew ? "Publish project" : "Save changes"}
