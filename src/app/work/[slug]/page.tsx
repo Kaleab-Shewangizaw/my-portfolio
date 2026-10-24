@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { ProjectCover } from "@/components/ProjectCover";
-import { getProjectImages, getProjectScreenshots } from "@/lib/projectImages";
+import { getProjectImages, getProjectLogos, getProjectScreenshots } from "@/lib/projectImages";
 import { getProjects } from "@/lib/projects";
 import { Reveal } from "@/components/Reveal";
 import { Slideshow } from "@/components/Slideshow";
@@ -30,8 +30,9 @@ export default async function CaseStudy({ params }: Params) {
   if (i === -1) notFound();
   const p = projects[i];
   const next = projects[(i + 1) % projects.length];
-  const [images, screenshots] = await Promise.all([getProjectImages(), getProjectScreenshots(p.slug)]);
+  const [images, logos, screenshots] = await Promise.all([getProjectImages(), getProjectLogos(), getProjectScreenshots(p.slug)]);
   const image = images[p.slug];
+  const logo = logos[p.slug];
 
   return (
     <article className="shell pt-24 lg:pt-28">
@@ -40,6 +41,8 @@ export default async function CaseStudy({ params }: Params) {
       </Link>
 
       <Reveal className="mt-6 max-w-2xl">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {logo && <img src={logo} alt={`${p.name} logo`} className="mb-5 size-16 rounded-2xl object-contain" />}
         <p className="text-sm text-[var(--faint)]">{p.kind}</p>
         <h1 className="mt-2 text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">{p.name}</h1>
         <p className="mt-4 text-lg leading-relaxed text-[var(--muted)]">{p.summary}</p>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight, Download } from "lucide-react";
 import { site } from "@/content/site";
 import { getApproved } from "@/lib/testimonials";
-import { getProjectImages } from "@/lib/projectImages";
+import { getProjectImages, getProjectLogos } from "@/lib/projectImages";
 import { getProjects } from "@/lib/projects";
 import { TestimonialCard } from "@/components/testimonials/TestimonialCard";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -25,7 +25,7 @@ function SectionHead({ title, sub, action }: { title: string; sub?: string; acti
 export const revalidate = 3600;
 
 export default async function Home() {
-  const [kind, images, projects] = await Promise.all([getApproved(3), getProjectImages(), getProjects()]);
+  const [kind, images, logos, projects] = await Promise.all([getApproved(3), getProjectImages(), getProjectLogos(), getProjects()]);
   const pazimo = projects.filter((p) => p.slug.startsWith("pazimo"));
   const others = projects.filter((p) => !p.slug.startsWith("pazimo")).slice(0, 3);
 
@@ -71,7 +71,7 @@ export default async function Home() {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {pazimo.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.08} className="h-full">
-              <ProjectCard project={p} image={images[p.slug]} className="h-full" />
+              <ProjectCard project={p} image={images[p.slug]} logo={logos[p.slug]} className="h-full" />
             </Reveal>
           ))}
         </div>
@@ -83,7 +83,7 @@ export default async function Home() {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {others.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.08} className="h-full">
-              <ProjectCard project={p} image={images[p.slug]} className="h-full" />
+              <ProjectCard project={p} image={images[p.slug]} logo={logos[p.slug]} className="h-full" />
             </Reveal>
           ))}
         </div>

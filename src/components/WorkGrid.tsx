@@ -12,7 +12,17 @@ const filters = [
   { id: "tool", label: "Side projects" },
 ] as const;
 
-export function WorkGrid({ items, images = {}, children }: { items: Project[]; images?: Record<string, string>; children?: React.ReactNode }) {
+export function WorkGrid({
+  items,
+  images = {},
+  logos = {},
+  children,
+}: {
+  items: Project[];
+  images?: Record<string, string>;
+  logos?: Record<string, string>;
+  children?: React.ReactNode;
+}) {
   const [filter, setFilter] = useState<(typeof filters)[number]["id"]>("all");
   const shown = filter === "all" ? items : items.filter((p) => p.platform === filter);
 
@@ -40,7 +50,7 @@ export function WorkGrid({ items, images = {}, children }: { items: Project[]; i
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-              <ProjectCard project={p} image={images[p.slug]} className="h-full" />
+              <ProjectCard project={p} image={images[p.slug]} logo={logos[p.slug]} className="h-full" />
             </motion.div>
           ))}
         </AnimatePresence>

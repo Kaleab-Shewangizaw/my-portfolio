@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { WorkGrid } from "@/components/WorkGrid";
 import { Reveal } from "@/components/Reveal";
-import { getProjectImages } from "@/lib/projectImages";
+import { getProjectImages, getProjectLogos } from "@/lib/projectImages";
 import { getProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function WorkPage() {
-  const [images, projects] = await Promise.all([getProjectImages(), getProjects()]);
+  const [images, logos, projects] = await Promise.all([getProjectImages(), getProjectLogos(), getProjects()]);
   return (
     <section className="shell pt-24 lg:pt-28">
       <Reveal className="mb-8 max-w-2xl">
@@ -21,7 +21,7 @@ export default async function WorkPage() {
           Apps I built for Pazimo, plus small side projects. Tap any project to learn more.
         </p>
       </Reveal>
-      <WorkGrid items={projects} images={images}>
+      <WorkGrid items={projects} images={images} logos={logos}>
         <span className="label">{projects.length} projects</span>
       </WorkGrid>
     </section>

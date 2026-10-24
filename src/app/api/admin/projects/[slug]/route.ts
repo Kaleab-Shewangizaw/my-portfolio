@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth";
 import { parseProject } from "@/lib/projectSchema";
 import { getAllProjects, isBuiltIn, projectCollection, revalidateProjects } from "@/lib/projects";
-import { projectImageCollection, screenshotCollection } from "@/lib/projectImages";
+import { projectImageCollection, projectLogoCollection, screenshotCollection } from "@/lib/projectImages";
 
 type Ctx = { params: Promise<{ slug: string }> };
 
@@ -51,6 +51,7 @@ export async function DELETE(_: Request, { params }: Ctx) {
     await Promise.all([
       projects.deleteOne({ _id: g.slug }),
       (await projectImageCollection()).deleteOne({ _id: g.slug }),
+      (await projectLogoCollection()).deleteOne({ _id: g.slug }),
       (await screenshotCollection()).deleteMany({ slug: g.slug }),
     ]);
   }

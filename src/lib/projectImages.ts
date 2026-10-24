@@ -16,6 +16,23 @@ export async function projectImageCollection() {
   return (await db()).collection<ProjectImageDoc>("project_images");
 }
 
+/** Logos may also be SVG; they're served with a CSP that blocks scripts. */
+export const LOGO_TYPES = [...IMAGE_TYPES, "image/svg+xml"];
+
+export async function projectLogoCollection() {
+  return (await db()).collection<ProjectImageDoc>("project_logos");
+}
+
+/** Slug → public logo URL for every project that has an uploaded logo. Empty if the database is unreachable. */
+export async function getProjectLogos(): Promise<Record<string, string>> {
+  try {
+    const docs = await (await projectLogoCollection()).find({}, { projection: { data: 0 } }).toArray();
+    return Object.fromEntries(docs.map((d) => [d._id, `/api/projects/${d._id}/logo?v=${d.updatedAt.getTime()}`]));
+  } catch {
+    return {};
+  }
+}
+
 /** Slug → public image URL for every project that has an uploaded cover. Empty if the database is unreachable. */
 export async function getProjectImages(): Promise<Record<string, string>> {
   try {
