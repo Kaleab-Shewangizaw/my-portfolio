@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ArrowDown, ArrowUp, Eye, EyeOff, MessageSquareQuote, Pencil, Plus, RotateCcw, Trash2, UserRound } from "lucide-react";
+import { ArrowDown, ArrowUp, Eye, EyeOff, Mail, MessageSquareQuote, Pencil, Plus, RotateCcw, Trash2, UserRound } from "lucide-react";
 import type { ManagedProject } from "@/lib/projects";
 import { ProjectCover } from "../ProjectCover";
 import { CoverUpload } from "./CoverUpload";
@@ -85,6 +85,9 @@ export function ProjectList({ projects, images: initialImages }: { projects: Man
           </Link>
           <Link href="/admin/testimonials" className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--line)] px-4 text-sm text-[var(--muted)] hover:text-[var(--fg)]">
             <MessageSquareQuote size={15} /> Testimonials
+          </Link>
+          <Link href="/admin/messages" className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--line)] px-4 text-sm text-[var(--muted)] hover:text-[var(--fg)]">
+            <Mail size={15} /> Messages
           </Link>
           <Link href="/admin/projects/new" className="inline-flex h-10 items-center gap-2 rounded-full bg-[var(--fg)] px-4 text-sm font-medium text-[var(--bg)]">
             <Plus size={15} /> New project
