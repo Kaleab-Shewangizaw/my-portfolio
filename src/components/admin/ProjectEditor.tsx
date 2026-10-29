@@ -23,6 +23,8 @@ type Draft = {
   live: string;
   liveLabel: string;
   code: string;
+  playStore: string;
+  appStore: string;
   highlights: string;
   story: { heading: string; body: string }[];
   featured: boolean;
@@ -47,6 +49,8 @@ function toDraft(p?: Project): Draft {
     live: p?.links.live ?? "",
     liveLabel: p?.links.liveLabel ?? "",
     code: p?.links.code ?? "",
+    playStore: p?.links.playStore ?? "",
+    appStore: p?.links.appStore ?? "",
     highlights: p?.highlights.join("\n") ?? "",
     story: p?.story.length ? p.story : DEFAULT_STORY,
     featured: !!p?.featured,
@@ -63,7 +67,7 @@ function fromDraft(d: Draft) {
     role: d.role,
     summary: d.summary,
     stack: d.stack.split(","),
-    links: { live: d.live, liveLabel: d.liveLabel, code: d.code },
+    links: { live: d.live, liveLabel: d.liveLabel, code: d.code, playStore: d.playStore, appStore: d.appStore },
     highlights: d.highlights.split("\n"),
     story: d.story,
     featured: d.featured,
@@ -305,6 +309,16 @@ export function ProjectEditor({
             <Field label="Code link">
               <input className={input} type="url" value={d.code} onChange={(e) => set("code", e.target.value)} placeholder="https://github.com/…" />
             </Field>
+            {d.platform === "mobile" && (
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Google Play link" hint="Leave empty if it isn't on Google Play.">
+                  <input className={input} type="url" value={d.playStore} onChange={(e) => set("playStore", e.target.value)} placeholder="https://play.google.com/store/apps/details?id=…" />
+                </Field>
+                <Field label="App Store link" hint="Leave empty if it isn't on the App Store.">
+                  <input className={input} type="url" value={d.appStore} onChange={(e) => set("appStore", e.target.value)} placeholder="https://apps.apple.com/app/…" />
+                </Field>
+              </div>
+            )}
           </Section>
 
           <Section title="Case study">

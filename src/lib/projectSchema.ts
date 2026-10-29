@@ -39,6 +39,13 @@ function url(v: unknown) {
   }
 }
 
+/** A store link must be an https URL on that store's own host. */
+function storeUrl(v: unknown, host: string) {
+  const u = url(v);
+  if (!u) return u;
+  return new URL(u).hostname === host ? u : null;
+}
+
 /** Cleans untrusted input into a Project, or returns an error message. */
 export function parseProject(input: unknown): Project | string {
   const o = (input ?? {}) as Record<string, unknown>;
@@ -50,6 +57,9 @@ export function parseProject(input: unknown): Project | string {
   const summary = str(o.summary, 600);
   const live = url(links.live);
   const code = url(links.code);
+  // Store links only mean something for phone apps.
+  const playStore = platform === "mobile" ? storeUrl(links.playStore, "play.google.com") : undefined;
+  const appStore = platform === "mobile" ? storeUrl(links.appStore, "apps.apple.com") : undefined;
   const story = (Array.isArray(o.story) ? o.story : [])
     .map((s) => ({ heading: str((s as Record<string, unknown>)?.heading, 80), body: str((s as Record<string, unknown>)?.body, 1500) }))
     .filter((s) => s.heading && s.body)
@@ -62,6 +72,8 @@ export function parseProject(input: unknown): Project | string {
   if (!summary) return "Write a short summary.";
   if (live === null) return "The live link must be a full http(s) URL.";
   if (code === null) return "The code link must be a full http(s) URL.";
+  if (playStore === null) return "The Google Play link must be a play.google.com URL.";
+  if (appStore === null) return "The App Store link must be an apps.apple.com URL.";
   if (story.length === 0) return "Add at least one story section (the case study needs it).";
 
   return {
@@ -77,6 +89,8 @@ export function parseProject(input: unknown): Project | string {
       ...(live ? { live } : {}),
       ...(live && str(links.liveLabel, 40) ? { liveLabel: str(links.liveLabel, 40) } : {}),
       ...(code ? { code } : {}),
+      ...(playStore ? { playStore } : {}),
+      ...(appStore ? { appStore } : {}),
     },
     highlights: list(o.highlights, 8, 200),
     story,
