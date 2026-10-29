@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, Copy, Image as ImageIcon, Loader2, LogOut, RotateCcw, Trash2, UserRound, X } from "lucide-react";
+import { Check, Copy, Image as ImageIcon, Loader2, LogOut, Mail, RotateCcw, Trash2, UserRound, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -163,6 +163,9 @@ export function AdminDashboard({ items: initial, champions: initialChampions }: 
           </Link>
           <Link href="/admin/portrait" className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--line)] px-4 text-sm text-[var(--muted)] hover:text-[var(--fg)]">
             <UserRound size={15} /> Portrait
+          </Link>
+          <Link href="/admin/messages" className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--line)] px-4 text-sm text-[var(--muted)] hover:text-[var(--fg)]">
+            <Mail size={15} /> Messages
           </Link>
           <button onClick={copyInvite} className="inline-flex h-10 items-center gap-2 rounded-full bg-[var(--fg)] px-4 text-sm font-medium text-[var(--bg)]">
             {copied ? <Check size={15} /> : <Copy size={15} />} {copied ? "Copied" : "Copy invite link"}
