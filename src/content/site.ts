@@ -33,7 +33,7 @@ export type Project = {
   role: string;
   summary: string;
   stack: string[];
-  links: { live?: string; liveLabel?: string; code?: string };
+  links: { live?: string; liveLabel?: string; code?: string; playStore?: string; appStore?: string };
   highlights: string[];
   story: { heading: string; body: string }[];
   featured?: boolean;

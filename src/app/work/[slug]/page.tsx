@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { siAppstore, siGoogleplay, type SimpleIcon } from "simple-icons";
 import { ProjectCover } from "@/components/ProjectCover";
 import { getProjectImages, getProjectLogos, getProjectScreenshots } from "@/lib/projectImages";
 import { getProjects } from "@/lib/projects";
@@ -21,6 +22,17 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const project = (await getProjects()).find((p) => p.slug === slug);
   if (!project) return {};
   return { title: project.name, description: project.summary };
+}
+
+function StoreLink({ href, icon, label }: { href: string; icon: SimpleIcon; label: string }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--line)] px-4 text-sm font-medium hover:bg-[var(--surface-2)]">
+      <svg viewBox="0 0 24 24" className="size-4 shrink-0" fill="currentColor" aria-hidden>
+        <path d={icon.path} />
+      </svg>
+      {label} <ArrowUpRight size={14} />
+    </a>
+  );
 }
 
 export default async function CaseStudy({ params }: Params) {
@@ -57,6 +69,8 @@ export default async function CaseStudy({ params }: Params) {
               See the code <ArrowUpRight size={14} />
             </a>
           )}
+          {p.links.playStore && <StoreLink href={p.links.playStore} icon={siGoogleplay} label="Google Play" />}
+          {p.links.appStore && <StoreLink href={p.links.appStore} icon={siAppstore} label="App Store" />}
         </div>
       </Reveal>
 
