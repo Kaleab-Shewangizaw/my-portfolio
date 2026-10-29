@@ -1,25 +1,69 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { useState } from "react";
 import { site } from "@/content/site";
 
 const topics = ["A project", "Collaboration", "A question", "Just saying hi"];
+const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
 export function ContactForm() {
   const [topic, setTopic] = useState(topics[0]);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  // No backend to maintain: compose the email in the visitor's own client.
-  const submit = (e: React.FormEvent) => {
+  // Formspree delivers the message without the visitor leaving the page.
+  // Without a form ID configured, fall back to composing it in their mail client.
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const subject = `${topic} — from ${name || "your portfolio"}`;
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    if (!formspreeId) {
+      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+      return;
+    }
+    setStatus("sending");
+    try {
+      const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: "POST",
+        headers: { Accept: "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topic,
+          name,
+          email,
+          message,
+          _subject: subject,
+          _gotcha: new FormData(e.currentTarget).get("_gotcha") ?? "",
+        }),
+      });
+      if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
+      setStatus("sent");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const field =
     "w-full rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3.5 text-[15px] outline-none transition-colors placeholder:text-[var(--faint)] focus:border-[var(--accent)]";
+
+  if (status === "sent") {
+    return (
+      <div className="card flex flex-col items-center gap-4 p-10 text-center sm:p-12" role="status">
+        <span className="grid size-12 place-items-center rounded-full bg-[var(--fg)] text-[var(--bg)]">
+          <Check size={20} />
+        </span>
+        <p className="text-lg font-medium">Message sent</p>
+        <p className="text-[15px] text-[var(--muted)]">Thanks for reaching out — I&apos;ll get back to you soon.</p>
+        <button type="button" onClick={() => setStatus("idle")} className="text-sm text-[var(--muted)] underline underline-offset-4 hover:text-[var(--fg)]">
+          Send another
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="card p-6 sm:p-8">
@@ -47,6 +91,22 @@ export function ContactForm() {
           <span className="label mb-2 block">Your name</span>
           <input value={name} onChange={(e) => setName(e.target.value)} className={field} placeholder="Ada Lovelace" autoComplete="name" />
         </label>
+        {formspreeId && (
+          <label className="block">
+            <span className="label mb-2 block">Your email</span>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className={field}
+              placeholder="ada@example.com"
+              autoComplete="email"
+            />
+          </label>
+        )}
+        {/* Honeypot: hidden from people, filled in by bots, rejected by Formspree. */}
+        <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
         <label className="block">
           <span className="label mb-2 block">Message</span>
           <textarea
@@ -58,8 +118,17 @@ export function ContactForm() {
             placeholder="A few lines about the role, team or idea…"
           />
         </label>
-        <button type="submit" className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[var(--fg)] text-sm font-medium text-[var(--bg)]">
-          Compose email
+        {status === "error" && (
+          <p className="text-sm text-red-500" role="alert">
+            Something went wrong sending that. Please try again, or email me at {site.email}.
+          </p>
+        )}
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[var(--fg)] text-sm font-medium text-[var(--bg)] disabled:opacity-60"
+        >
+          {formspreeId ? (status === "sending" ? "Sending…" : "Send message") : "Compose email"}
           <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </button>
       </form>
